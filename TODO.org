@@ -5,3 +5,6 @@
 ** TODO Check the =lookfor= function
    - Add =@author= field
 ** TODO Add =table.multi= functions
+** TODO Translate messages with =gettext=
+** TODO Create unit tests
+** TODO Ajouter =data=
