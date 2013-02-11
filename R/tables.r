@@ -1,3 +1,24 @@
+#' Column percentages of a two-way frequency table.
+#'
+#' Return the column percentages of a two-way frequency table with formatting and printing options.
+#'
+#' @param tab frequency table
+#' @param digits number of digits to display
+#' @param total if \code{TRUE}, add a row with the sum of percentages and a column with global percentages
+#' @param percent if \code{TRUE}, add a percent sign after the values when printing
+#' @return
+#' The result is an object of class \code{table} and \code{proptab}.
+#' @seealso
+#' \code{\link{rprop}}, \code{\link{prop}}, \code{\link{table}}, \code{\link{prop.table}}
+#' @examples
+#' ## Sample table
+#' data(Titanic)
+#' tab <- apply(Titanic, c(4,1), sum)
+#' ## Column percentages
+#' cprop(tab)
+#' ## Column percentages with custom display
+#' cprop(tab, digits=2, percent=TRUE, total=FALSE)
+
 `cprop` <-
 function (tab, digits = 1, total = TRUE, percent=FALSE) {
   dn <- names(dimnames(tab))
@@ -5,6 +26,84 @@ function (tab, digits = 1, total = TRUE, percent=FALSE) {
   tab <- prop.table(tab,2)*100
   if (total) tab <- rbind(tab,Total=apply(tab,2,sum))
   result <- as.table(tab)
+  names(dimnames(result)) <- dn
+  class(result) <- c("proptab", class(result))
+  attr(result, "percent") <- percent
+  attr(result, "digits") <- digits
+  return(result)
+}
+
+#' Row percentages of a two-way frequency table.
+#'
+#' Return the row percentages of a two-way frequency table with formatting and printing options.
+#'
+#' @aliases lprop
+#' @param tab frequency table
+#' @param digits number of digits to display
+#' @param total if \code{TRUE}, add a column with the sum of percentages and a row with global percentages
+#' @param percent if \code{TRUE}, add a percent sign after the values when printing
+#' @return
+#' The result is an object of class \code{table} and \code{proptab}.
+#' @seealso
+#' \code{\link{rprop}}, \code{\link{prop}}, \code{\link{table}}, \code{\link{prop.table}}
+#' @examples
+#' ## Sample table
+#' data(Titanic)
+#' tab <- apply(Titanic, c(1,4), sum)
+#' ## Column percentages
+#' rprop(tab)
+#' ## Column percentages with custom display
+#' rprop(tab, digits=2, percent=TRUE, total=FALSE)
+
+`rprop` <-
+function(tab, digits=1, total=TRUE, percent=FALSE) {
+  dn <- names(dimnames(tab))
+  if (total) tab <- rbind(tab, Ensemble=apply(tab,2,sum))
+  tab <- prop.table(tab,1)*100
+  if (total) tab <- cbind(tab, Total=apply(tab,1,sum))
+  result <- as.table(tab)
+  names(dimnames(result)) <- dn
+  class(result) <- c("proptab", class(result))
+  attr(result, "percent") <- percent
+  attr(result, "digits") <- digits
+  return(result)
+}
+lprop <- rprop
+
+
+`prop` <-
+function (tab, digits=1, total=TRUE, percent=FALSE) {
+  dn <- names(dimnames(tab))
+  tmp <- tab/sum(tab)*100
+  if (total) {
+    tmp <- rbind(tmp,Total=apply(tmp,2,sum))
+    tmp <- cbind(tmp,Total=apply(tmp,1,sum))
+  }
+  result <- as.table(tmp)
+  names(dimnames(result)) <- dn
+  class(result) <- c("proptab", class(result))
+  attr(result, "percent") <- percent
+  attr(result, "digits") <- digits
+  return(result)
+}
+
+`residus` <-
+function (tab, digits=2) {
+  round(chisq.test(tab)$residuals, digits)
+}
+
+`theff` <-
+function (tab, digits=2) {
+  round(chisq.test(tab)$expected, digits)
+}
+
+`thprop` <-
+function (tab, digits=1, percent=FALSE) {
+  dn <- names(dimnames(tab))
+  tmp <- as.vector(apply(tab,1,sum)/sum(tab))%*%t(as.vector(apply(tab,2,sum)/sum(tab)))
+  colnames(tmp) <- colnames(tab)
+  rownames(tmp) <- rownames(tab)
+  result <- as.table(tmp*100)
   names(dimnames(result)) <- dn
   class(result) <- c("proptab", class(result))
   attr(result, "percent") <- percent
@@ -47,60 +146,6 @@ function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="") {
   names(result)[which(names(result)=="pourc")] <- "%"
   names(result)[which(names(result)=="pourc.cum")] <- "%cum"
   round(result, digits=digits)
-}
-
-`lprop` <-
-function(tab, digits=1, total=TRUE, percent=FALSE) {
-  dn <- names(dimnames(tab))
-  if (total) tab <- rbind(tab, Ensemble=apply(tab,2,sum))
-  tab <- prop.table(tab,1)*100
-  if (total) tab <- cbind(tab, Total=apply(tab,1,sum))
-  result <- as.table(tab)
-  names(dimnames(result)) <- dn
-  class(result) <- c("proptab", class(result))
-  attr(result, "percent") <- percent
-  attr(result, "digits") <- digits
-  return(result)
-}
-
-`prop` <-
-function (tab, digits=1, total=TRUE, percent=FALSE) {
-  dn <- names(dimnames(tab))
-  tmp <- tab/sum(tab)*100
-  if (total) {
-    tmp <- rbind(tmp,Total=apply(tmp,2,sum))
-    tmp <- cbind(tmp,Total=apply(tmp,1,sum))
-  }
-  result <- as.table(tmp)
-  names(dimnames(result)) <- dn
-  class(result) <- c("proptab", class(result))
-  attr(result, "percent") <- percent
-  attr(result, "digits") <- digits
-  return(result)
-}
-
-`residus` <-
-function (tab, digits=2) {
-  round(chisq.test(tab)$residuals, digits)
-}
-
-`theff` <-
-function (tab, digits=2) {
-  round(chisq.test(tab)$expected, digits)
-}
-
-`thprop` <-
-function (tab, digits=1, percent=FALSE) {
-  dn <- names(dimnames(tab))
-  tmp <- as.vector(apply(tab,1,sum)/sum(tab))%*%t(as.vector(apply(tab,2,sum)/sum(tab)))
-  colnames(tmp) <- colnames(tab)
-  rownames(tmp) <- rownames(tab)
-  result <- as.table(tmp*100)
-  names(dimnames(result)) <- dn
-  class(result) <- c("proptab", class(result))
-  attr(result, "percent") <- percent
-  attr(result, "digits") <- digits
-  return(result)
 }
 
 `wtd.table` <-
