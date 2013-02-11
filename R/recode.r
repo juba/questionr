@@ -1,4 +1,4 @@
-#' Transform a quantiative variable into a qualtitative variable
+#' Transform a quantitative variable into a qualitative variable
 #'
 #' This function transforms a quantitative variable into a qualitative
 #' one by breaking it into classes with the same frequencies.
