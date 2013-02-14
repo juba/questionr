@@ -9,7 +9,8 @@ Encoding: UTF-8
 Title: Functions to make surveys processing easier.
 Description: This package provides some convenience functions to make the
     processing and analysis of surveys easier.
-Imports: memisc
+Imports:
+    memisc
 Suggests:
     memisc,
     testthat,
