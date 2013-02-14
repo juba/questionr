@@ -1,0 +1,30 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: questionr\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2013-02-14 16:54\n"
+"PO-Revision-Date: 2013-02-14 17:11+0100\n"
+"Last-Translator: Julien Barnier <julien@nozav.org>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "there are no names to search in that object"
+msgstr "il n'y a aucun nom dans lesquels effectuer une recherche pour cet objet"
+
+msgid "Nothing found. Sorry."
+msgstr "Désolé, aucun résultat n'a été trouvé."
+
+msgid "x must be of class 'proptab'"
+msgstr "x doit être de classe 'proptab'"
+
+msgid "x and weights lengths must be the same"
+msgstr "x et weights doivent être de la même taille"
+
+msgid "x and y lengths must be the same"
+msgstr "x et y doivent être de la même taille"
+
+msgid "Object is not of class proptab"
+msgstr "l'objet doit être de la classe proptab"
+

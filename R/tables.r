@@ -199,7 +199,7 @@ residus <- chisq.residuals
 
 `format.proptab` <-
 function (x, digits=NULL, percent=NULL, justify="right", ...) {
-  if (!inherits(x, "proptab")) stop("Le tableau n'est pas de classe proptab")
+  if (!inherits(x, "proptab")) stop("x must be of class 'proptab'")
   if (is.null(digits)) digits <- attr(x, "digits")
   if (is.null(percent)) percent <- attr(x, "percent")
   if (percent) {
