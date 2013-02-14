@@ -17,6 +17,7 @@
 #' data(iris)
 #' sepal.width3cl <- quant.cut(iris$Sepal.Width,3)
 #' table(sepal.width3cl)
+#' @export
 
 `quant.cut` <-
 function (var, nbclass, include.lowest=TRUE, right=FALSE, dig.lab=5, ...) {

@@ -1,3 +1,42 @@
+#' Generate frequency tables.
+#'
+#' Generate and format frequency tables from a variable or a table, with percentages and formatting options.
+#'
+#' @param x either a vector to be tabulated, or a table object
+#' @param digits number of digits to keep for the percentages
+#' @param cum if TRUE, display cumulative percentages
+#' @param total if TRUE, add a final row with totals
+#' @param exclude vector of values to exclude from the tabulation
+#' @param sort if specified, allow to sort the table by increasing ("inc") or decreasing ("dec") frequencies
+#' @return
+#' The result is an object of class data.frame.
+#' @seealso
+#' \code{\link{table}}, \code{\link[questionr]{prop}}, \code{\link[questionr]{cprop}}, \code{\link[questionr]{rprop}}
+#' @export
+
+`freq` <-
+function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="") {
+  if (is.factor(x)) x <- factor(x, exclude=exclude)
+  if (is.table(x)) tab <- x
+  else tab <- table(x, exclude=exclude)
+  effectifs <- as.vector(tab)
+  pourc <- as.vector(effectifs/sum(effectifs)*100)
+  result <- data.frame(n=effectifs, pourc=pourc)
+  rownames(result) <- ifelse(is.na(names(tab)),"NA",names(tab))
+  if (sort=="inc") result <- result[order(result$n),]
+  if (sort=="dec") result <- result[order(result$n, decreasing=TRUE),]
+  if (total) result <- rbind(result, Total=apply(result,2,sum))
+  if (cum) {
+    pourc.cum <- cumsum(result$pourc)
+    if (total) pourc.cum[length(pourc.cum)] <- 100
+    result <- cbind(result, pourc.cum)
+  }
+  names(result)[which(names(result)=="pourc")] <- "%"
+  names(result)[which(names(result)=="pourc.cum")] <- "%cum"
+  round(result, digits=digits)
+}
+
+
 #' Column percentages of a two-way frequency table.
 #'
 #' Return the column percentages of a two-way frequency table with formatting and printing options.
@@ -9,7 +48,7 @@
 #' @return
 #' The result is an object of class \code{table} and \code{proptab}.
 #' @seealso
-#' \code{\link{rprop}}, \code{\link{prop}}, \code{\link{table}}, \code{\link{prop.table}}
+#' \code{\link[questionr]{rprop}}, \code{\link[questionr]{prop}}, \code{\link{table}}, \code{\link{prop.table}}
 #' @examples
 #' ## Sample table
 #' data(Titanic)
@@ -18,6 +57,7 @@
 #' cprop(tab)
 #' ## Column percentages with custom display
 #' cprop(tab, digits=2, percent=TRUE, total=FALSE)
+#' @export
 
 `cprop` <-
 function (tab, digits = 1, total = TRUE, percent=FALSE) {
@@ -45,7 +85,7 @@ function (tab, digits = 1, total = TRUE, percent=FALSE) {
 #' @return
 #' The result is an object of class \code{table} and \code{proptab}.
 #' @seealso
-#' \code{\link{rprop}}, \code{\link{prop}}, \code{\link{table}}, \code{\link{prop.table}}
+#' \code{\link[questionr]{cprop}}, \code{\link[questionr]{prop}}, \code{\link{table}}, \code{\link{prop.table}}
 #' @examples
 #' ## Sample table
 #' data(Titanic)
@@ -54,6 +94,7 @@ function (tab, digits = 1, total = TRUE, percent=FALSE) {
 #' rprop(tab)
 #' ## Column percentages with custom display
 #' rprop(tab, digits=2, percent=TRUE, total=FALSE)
+#' @export rprop lprop
 
 `rprop` <-
 function(tab, digits=1, total=TRUE, percent=FALSE) {
@@ -70,6 +111,27 @@ function(tab, digits=1, total=TRUE, percent=FALSE) {
 }
 lprop <- rprop
 
+#' Global percentages of a two-way frequency table.
+#'
+#' Return the percentages of a two-way frequency table with formatting and printing options.
+#'
+#' @param tab frequency table
+#' @param digits number of digits to display
+#' @param total if \code{TRUE}, add a column with the sum of percentages and a row with global percentages
+#' @param percent if \code{TRUE}, add a percent sign after the values when printing
+#' @return
+#' The result is an object of class \code{table} and \code{proptab}.
+#' @seealso
+#' \code{\link[questionr]{rprop}}, \code{\link[questionr]{cprop}}, \code{\link{table}}, \code{\link{prop.table}}
+#' @examples
+#' ## Sample table
+#' data(Titanic)
+#' tab <- apply(Titanic, c(1,4), sum)
+#' ## Percentages
+#' prop(tab)
+#' ## Percentages with custom display
+#' prop(tab, digits=2, percent=TRUE, total=FALSE)
+#' @export
 
 `prop` <-
 function (tab, digits=1, total=TRUE, percent=FALSE) {
@@ -87,29 +149,53 @@ function (tab, digits=1, total=TRUE, percent=FALSE) {
   return(result)
 }
 
-`residus` <-
-function (tab, digits=2) {
-  round(chisq.test(tab)$residuals, digits)
-}
+#' Return the chi-squared residuals of a two-way frequency table.
+#'
+#' Return the standardized or Pearson's residuals of a chi-squared test on a two-way frequency table. 
+#'
+#' @aliases residus
+#' @param tab frequency table
+#' @param digits number of digits to display
+#' @param std if \code{TRUE}, returns the standardizes residuals. Otherwise, returns the Pearson residuals.
+#' @details
+#' This function is just a wrapper around the \code{\link{chisq.test}} base R function. See this function's help page
+#' for details on the computation.
+#' @seealso
+#' \code{\link{chisq.test}}
+#' @export chisq.residuals residus
+#' @examples
+#' ## Sample table
+#' data(Titanic)
+#' tab <- apply(Titanic, c(1,4), sum)
+#' ## Pearson residuals
+#' chisq.residuals(tab)
+#' ## Standardized residuals
+#' chisq.residuals(tab, std=TRUE)
 
-`theff` <-
-function (tab, digits=2) {
-  round(chisq.test(tab)$expected, digits)
+`chisq.residuals` <-
+function (tab, digits=2, std=FALSE) {
+  if (std) { res <- chisq.test(tab)$stdres }
+  else { res <- chisq.test(tab)$residuals }
+  round(res, digits)
 }
+residus <- chisq.residuals
 
-`thprop` <-
-function (tab, digits=1, percent=FALSE) {
-  dn <- names(dimnames(tab))
-  tmp <- as.vector(apply(tab,1,sum)/sum(tab))%*%t(as.vector(apply(tab,2,sum)/sum(tab)))
-  colnames(tmp) <- colnames(tab)
-  rownames(tmp) <- rownames(tab)
-  result <- as.table(tmp*100)
-  names(dimnames(result)) <- dn
-  class(result) <- c("proptab", class(result))
-  attr(result, "percent") <- percent
-  attr(result, "digits") <- digits
-  return(result)
-}
+#' S3 format method for proptab objects.
+#'
+#' Format an object of class proptab for printing depending on its attributes.
+#'
+#' @param x object of class proptab
+#' @param digits number of digits to display
+#' @param percent if not NULL, add a percent sign after each value
+#' @param justify justification of character vectors. Passed to \code{format.default}
+#' @param ... other arguments to pass to \code{format.default}
+#' @method format proptab
+#' @S3method format proptab
+#' @details
+#' This function is designed for internal use only.
+#' @seealso
+#' \code{\link{format.default}}, \code{\link[questionr]{print.proptab}}
+#' @export
 
 `format.proptab` <-
 function (x, digits=NULL, percent=NULL, justify="right", ...) {
@@ -126,34 +212,58 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
   return(result)
 }
 
-`freq` <-
-function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="") {
-  if (is.factor(x)) x <- factor(x, exclude=exclude)
-  if (is.table(x)) tab <- x
-  else tab <- table(x, exclude=exclude)
-  effectifs <- as.vector(tab)
-  pourc <- as.vector(effectifs/sum(effectifs)*100)
-  result <- data.frame(n=effectifs, pourc=pourc)
-  rownames(result) <- ifelse(is.na(names(tab)),"NA",names(tab))
-  if (sort=="inc") result <- result[order(result$n),]
-  if (sort=="dec") result <- result[order(result$n, decreasing=TRUE),]
-  if (total) result <- rbind(result, Total=apply(result,2,sum))
-  if (cum) {
-    pourc.cum <- cumsum(result$pourc)
-    if (total) pourc.cum[length(pourc.cum)] <- 100
-    result <- cbind(result, pourc.cum)
-  }
-  names(result)[which(names(result)=="pourc")] <- "%"
-  names(result)[which(names(result)=="pourc.cum")] <- "%cum"
-  round(result, digits=digits)
+#' S3 print method for proptab objects.
+#'
+#' Print an object of class proptab.
+#'
+#' @param x object of class proptab
+#' @param digits number of digits to display
+#' @param percent if not NULL, add a percent sign after each value
+#' @param justify justification of character vectors. Passed to \code{format.default}
+#' @param ... other arguments to pass to \code{format.default}
+#' @method print proptab
+#' @seealso
+#' \code{\link[questionr]{format.proptab}}
+#' @export
+
+`print.proptab` <-
+function (x, digits=NULL, percent=NULL, justify="right", ...) {
+  if (!inherits(x, "proptab")) stop("x must be of class 'proptab'")
+  x <- format.proptab(x, digits=digits, percent=percent, justify=justify)
+  print.table(x, ...)
 }
+
+#' Weighted one-way and two-way frequency tables.
+#'
+#' Generate weighted frequency tables, both for one-way and two-way tables.
+#'
+#' @param x a vector
+#' @param y another optional vector for a two-way frequency table. Must be the same length as \code{x}
+#' @param weights vector of weights, must be the same length as \code{x}
+#' @param normwt if TRUE, normalize weights so that the total weighted count is the same as the unweighted one
+#' @param na.rm if TRUE, remove NA values before computation
+#' @details
+#' If \code{weights} is not provided, an uniform weghting is used.
+#' @return
+#' If \code{y} is provided, returns a weighted one-way frequency table
+#' of \code{x}. Otherwise, returns a weighted two-way frequency table of
+#' \code{x} and \code{y}
+#' @seealso
+#' \code{\link[Hmisc]{wtd.table}}, \command{\link{table}}, and the \link{survey} extension.
+#' @examples
+#' data(hdv2003)
+#' wtd.table(hdv2003$sexe, weights=hdv2003$poids)
+#' wtd.table(hdv2003$sexe, weights=hdv2003$poids, normwt=TRUE)
+#' table(hdv2003$sexe, hdv2003$hard.rock)
+#' wtd.table(hdv2003$sexe, hdv2003$hard.rock, weights=hdv2003$poids)
+#' @export
 
 `wtd.table` <-
 function (x, y = NULL, weights = NULL, normwt = FALSE, na.rm = TRUE) 
 {
   if (is.null(weights)) weights <- rep(1, length(x))  
-  if (length(x) != length(weights)) stop("x et weights doivent etre de meme longueur")
-  if (!is.null(y) & (length(x) != length(y))) stop("x et y doivent etre de meme longueur")
+  if (length(x) != length(weights)) stop("x and weights lengths must be the same")
+  if (!is.null(y) & (length(x) != length(y))) stop("x and y lengths must be the same")
   if (na.rm) {
      s <- !is.na(x) & !is.na(weights)
      if (!is.null(y)) s <- s & !is.na(y)
@@ -173,4 +283,3 @@ function (x, y = NULL, weights = NULL, normwt = FALSE, na.rm = TRUE)
   result[is.na(result)] <- 0
   as.table(result)
 }
-

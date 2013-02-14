@@ -1,12 +1,27 @@
 Package: questionr
 Maintainer: Julien Barnier <julien.barnier@ens-lyon.fr>
-Author: Julien Barnier <julien.barnier@ens-lyon.fr>
+Author: Julien Barnier <julien.barnier@ens-lyon.fr>, François Briatte
+    <f.briatte@ed.ac.uk>
 Version: 0.1
+Date: 2013-02-14
 License: MIT
+Encoding: UTF-8
 Title: Functions to make surveys processing easier.
-Description: This package include some convenience functions to make the processing of surveys easier.
+Description: This package provides some convenience functions to make the
+    processing and analysis of surveys easier.
+Imports: memisc
 Suggests:
+    memisc,
     testthat,
-    roxygen2
+    roxygen2,
+    R2HTML
+SystemRequirements: xclip (Linux)
+URL: https://github.com/juba/questionr
 Collate:
     'questionr-package.r'
+    'lookfor.r'
+    'recode.r'
+    'stats.r'
+    'tables.r'
+    'tools.r'
+    'datasets.r'

@@ -3,13 +3,12 @@
 #' This function computes Cramer's V for a two-way frequency table
 #'
 #' @param tab table on which to compute the statistic
-#' @keyword univar
+#' @keywords univar
 #' @export
 #' @examples
-#' data(hdv2003)
-#' 
-#' tab <- table(hdv2003$sexe, hdv2003$peche.chasse))
-#' print(tab)
+#' data(Titanic)
+#' tab <- apply(Titanic, c(4,1), sum)
+#' #' print(tab)
 #' cramer.v(tab)
 
 `cramer.v` <-

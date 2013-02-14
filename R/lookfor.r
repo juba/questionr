@@ -12,6 +12,7 @@
 #' @param ignore.case whether or not to make the keywords case sensitive; \code{TRUE} by default (case is ignored during matching)
 #' @return a data frame featuring the variable position, name and description (if it exists) in the original data frame
 #' @details The function looks into the variable names for matches to the keywords. If the data frame has been read into R with a method that provides variable labels (\code{read.dta} or \code{read.spss} in the \code{foreign} package, or any of the importer methods of the \code{memisc} package), then variable labels are included in the search scope.
+#' @author François Briatte <f.briatte@@ed.ac.uk>
 #' @examples
 #' # Look for a single keyword.
 #' lookfor(iris, "petal")
