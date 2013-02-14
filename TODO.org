@@ -1,10 +1,18 @@
 #+TITLE: questionr - Development file
 
 * Todo-list
-** TODO Roxygenize documentation
+** TODO Bug S4 version of format
 ** TODO Check the =lookfor= function
-   - Add =@author= field
 ** TODO Add =table.multi= functions
-** TODO Translate messages with =gettext=
 ** TODO Create unit tests
-** TODO Ajouter =data=
+** DONE Translate messages with =gettext=
+   CLOSED: [2013-02-14 jeu. 17:24]
+- Generate the =.pot= file with =tools::xgettext2pot=
+- Open it with =poedit=, trnaslate and export to =po/R-en.po= and =po/R-fr.po=
+- Run :
+: msgfmt -c --statistics -o inst/po/en/LC_MESSAGES/R-questionr.mo po/R-en.po
+: msgfmt -c --statistics -o inst/po/fr/LC_MESSAGES/R-questionr.mo po/R-fr.po
+** DONE Roxygenize documentation
+   CLOSED: [2013-02-14 jeu. 15:30]
+** DONE Ajouter =data=
+   CLOSED: [2013-02-14 jeu. 16:37]
