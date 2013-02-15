@@ -51,6 +51,6 @@ multi.table(df, c("jazz", "rock","electronic"), true.codes=list("Y"), weights="w
 }
 \seealso{
   \code{\link[questionr]{cross.multi.table}},
-  \code{\link{table}}
+  \code{\link[questionr]{multi.split}}, \code{\link{table}}
 }
 

@@ -41,6 +41,7 @@ df <- data.frame(sex,jazz,rock,electronic,weights)
 cross.multi.table(df, c("jazz", "rock","electronic"), df$sex, true.codes=list("Y"))
 }
 \seealso{
-  \code{\link[questionr]{multi.table}}, \code{\link{table}}
+  \code{\link[questionr]{multi.table}},
+  \code{\link[questionr]{multi.split}}, \code{\link{table}}
 }
 

@@ -26,7 +26,7 @@
 ##' with the \code{true.codes} argument.
 ##'
 ##' @return Object of class table.
-##' @seealso \code{\link[questionr]{cross.multi.table}}, \code{\link{table}}
+##' @seealso \code{\link[questionr]{cross.multi.table}}, \code{\link[questionr]{multi.split}}, \code{\link{table}}
 ##' @examples
 ##' ## Sample data frame
 ##' sex <- sample(c("Man","Woman"),100,replace=TRUE)
@@ -64,7 +64,7 @@ multi.table <- function(df, vars, true.codes=NULL, weights=NULL) {
 ##' choices question and corresponding binary variables.
 ##'
 ##' @return Object of class table.
-##' @seealso \code{\link[questionr]{multi.table}}, \code{\link{table}}
+##' @seealso \code{\link[questionr]{multi.table}}, \code{\link[questionr]{multi.split}}, \code{\link{table}}
 ##' @examples
 ##' ## Sample data frame
 ##' sex <- sample(c("Man","Woman"),100,replace=TRUE)
@@ -82,3 +82,40 @@ cross.multi.table <- function(df, vars, crossvar, ...) {
   simplify2array(by(df, tmp, multi.table, vars, ...))
 }
 
+
+##' Split a multiple choices variable in a series of binary variables
+##'
+##' 
+##' @param var variable to split
+##' @param split.char character to split at
+##' @param mnames names to give to the produced variabels. If NULL, the name are computed from the original variable name and the answers.
+##' @details
+##' This function takes as input a multiple choices variable where choices
+##' are recorded as a string and separated with a fixed character. For example,
+##' if the question is about the favourite colors, answers could be "red/blue",
+##' "red/green/yellow", etc. This function splits the variable into as many variables
+##' as the number of different choices. Each of these variables as a 1 or 0 value
+##' corresponding to the choice of this answer. They are returned as a data frame.
+##' ##' @return Returns a data frame.
+##' @seealso \code{\link[questionr]{multi.table}}
+##' @examples
+##' v <- c("red/blue","green","red/green","blue/red")
+##' multi.split(v)
+##' @export
+
+multi.split <- function (var, split.char="/", mnames = NULL) {
+  vname <- deparse(substitute(var))
+  lev <- levels(factor(var))
+  lev <- unique(unlist(strsplit(lev, split.char)))
+  if (is.null(mnames)) 
+    mnames <- gsub(" ", "_", paste(vname, lev, sep = "."))
+  else mnames <- paste(vname, mnames, sep = ".")
+  result <- matrix(data = 0, nrow = length(var), ncol = length(lev))
+  char.var <- as.character(var)
+  for (i in 1:length(lev)) {
+    result[grep(lev[i], char.var, fixed = TRUE), i] <- 1
+  }
+  result <- data.frame(result)
+  colnames(result) <- mnames
+  result
+}
