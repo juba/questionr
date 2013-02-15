@@ -1,10 +1,10 @@
 #+TITLE: questionr - Development file
 
 * Todo-list
-** TODO Bug S4 version of format
 ** TODO Check the =lookfor= function
-** TODO Add =table.multi= functions
 ** TODO Create unit tests
+** DONE Add =table.multi= functions
+   CLOSED: [2013-02-15 ven. 17:03]
 ** DONE Translate messages with =gettext=
    CLOSED: [2013-02-14 jeu. 17:24]
 - Generate the =.pot= file with =tools::xgettext2pot=
@@ -16,3 +16,5 @@
    CLOSED: [2013-02-14 jeu. 15:30]
 ** DONE Ajouter =data=
    CLOSED: [2013-02-14 jeu. 16:37]
+** DONE Bug S4 version of format
+   CLOSED: [2013-02-15 ven. 15:37]
