@@ -1,0 +1,15 @@
+\docType{data}
+\name{hdv2003}
+\alias{hdv2003}
+\title{Histoire de vie 2003}
+\format{A data frame with 2000 rows and 20 variables}
+\source{
+  \url{http://www.insee.fr/fr/themes/detail.asp?ref_id=fd-HDV03}
+}
+\description{
+  Sample from 2000 people and 20 variables taken from the
+  \emph{Histoire de Vie} survey, produced in France in 2003
+  by INSEE.
+}
+\keyword{datasets}
+

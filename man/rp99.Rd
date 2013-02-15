@@ -1,0 +1,14 @@
+\docType{data}
+\name{rp99}
+\alias{rp99}
+\title{1999 French Census - Cities from the Rhône state}
+\format{A data frame with 301 rows and 21 variables}
+\source{
+  \url{http://www.insee.fr/fr/bases-de-donnees/default.asp?page=recensements.htm}
+}
+\description{
+  Sample from the 1999 french census for the cities of the
+  Rhône state.
+}
+\keyword{datasets}
+

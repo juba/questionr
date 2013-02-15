@@ -1,0 +1,36 @@
+\name{quant.cut}
+\alias{quant.cut}
+\title{Transform a quantitative variable into a qualitative variable}
+\usage{
+  quant.cut(var, nbclass, include.lowest = TRUE,
+    right = FALSE, dig.lab = 5, ...)
+}
+\arguments{
+  \item{var}{variable to transform}
+
+  \item{nbclass}{number of classes}
+
+  \item{include.lowest,right,dig.lab,...}{arguments to the
+  \code{cut} function}
+}
+\value{
+  The result is a factor.
+}
+\description{
+  This function transforms a quantitative variable into a
+  qualitative one by breaking it into classes with the same
+  frequencies.
+}
+\details{
+  This is just a simple wrapper around the \code{cut} and
+  \code{quantile} functions.
+}
+\examples{
+data(iris)
+sepal.width3cl <- quant.cut(iris$Sepal.Width,3)
+table(sepal.width3cl)
+}
+\seealso{
+  \code{\link{cut}}, \code{\link{quantile}}
+}
+

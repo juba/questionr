@@ -1,0 +1,47 @@
+\name{wtd.table}
+\alias{wtd.table}
+\title{Weighted one-way and two-way frequency tables.}
+\usage{
+  wtd.table(x, y = NULL, weights = NULL, normwt = FALSE,
+    na.rm = TRUE)
+}
+\arguments{
+  \item{x}{a vector}
+
+  \item{y}{another optional vector for a two-way frequency
+  table. Must be the same length as \code{x}}
+
+  \item{weights}{vector of weights, must be the same length
+  as \code{x}}
+
+  \item{normwt}{if TRUE, normalize weights so that the
+  total weighted count is the same as the unweighted one}
+
+  \item{na.rm}{if TRUE, remove NA values before
+  computation}
+}
+\value{
+  If \code{y} is provided, returns a weighted one-way
+  frequency table of \code{x}. Otherwise, returns a
+  weighted two-way frequency table of \code{x} and \code{y}
+}
+\description{
+  Generate weighted frequency tables, both for one-way and
+  two-way tables.
+}
+\details{
+  If \code{weights} is not provided, an uniform weghting is
+  used.
+}
+\examples{
+data(hdv2003)
+wtd.table(hdv2003$sexe, weights=hdv2003$poids)
+wtd.table(hdv2003$sexe, weights=hdv2003$poids, normwt=TRUE)
+table(hdv2003$sexe, hdv2003$hard.rock)
+wtd.table(hdv2003$sexe, hdv2003$hard.rock, weights=hdv2003$poids)
+}
+\seealso{
+  \code{\link[Hmisc]{wtd.table}}, \command{\link{table}},
+  and the \link{survey} extension.
+}
+
