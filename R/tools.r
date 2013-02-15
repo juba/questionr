@@ -18,6 +18,7 @@ copie <- copy
 #' @param clipboard.size under Windows, size of the clipboard in kB
 #' @param ... arguments passed to \code{R2HTML::HTML}
 #' @method copy default
+#' @S3method copy default
 #' @details
 #' Under linux, this function requires that \code{xclip} is
 #' installed on the system to copy to the clipboard.
@@ -60,6 +61,7 @@ copie.default <- copy.default
 #' @param digits number of digits to display
 #' @param justify justification
 #' @param ... arguments passed to the \code{copy} function
+#' @S3method copy proptab
 #' @method copy proptab
 #' @details
 #' For more informations on arguments, look at the

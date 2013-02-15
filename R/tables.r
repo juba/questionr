@@ -222,6 +222,7 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
 #' @param justify justification of character vectors. Passed to \code{format.default}
 #' @param ... other arguments to pass to \code{format.default}
 #' @method print proptab
+#' @S3method print proptab
 #' @seealso
 #' \code{\link[questionr]{format.proptab}}
 #' @export
