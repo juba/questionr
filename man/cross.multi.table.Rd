@@ -2,13 +2,10 @@
 \alias{cross.multi.table}
 \title{Two-way frequency table between a multiple choices question and a factor}
 \usage{
-  cross.multi.table(df, vars, crossvar, ...)
+  cross.multi.table(df, crossvar, ...)
 }
 \arguments{
-  \item{df}{data frame}
-
-  \item{vars}{index vector or character vector of the names
-  of the binary variables}
+  \item{df}{data frame with the binary variables}
 
   \item{crossvar}{factor to cross the multiple choices
   question with}
@@ -38,7 +35,7 @@ electronic <- sample(c("Y","N"),100,replace=TRUE)
 weights <- runif(100)*2
 df <- data.frame(sex,jazz,rock,electronic,weights)
 ## Two-way frequency table on 'music' variables by sex
-cross.multi.table(df, c("jazz", "rock","electronic"), df$sex, true.codes=list("Y"))
+cross.multi.table(df[,c("jazz", "rock","electronic")], df$sex, true.codes=list("Y"))
 }
 \seealso{
   \code{\link[questionr]{multi.table}},

@@ -1,20 +1,11 @@
-## Fonction pour le tri à plat "combiné" d'une série de variables binaires
-## Arguments :
-## - df : data frame
-## - varnames : vecteur contenant le nom des variables binaires
-## - true.codes : liste contenant des valeurs supplémentaires considérées comme "vraies"
-##   (par défaut TRUE et 1 sont considérées comme vraies)
-## - weights: nom de la variable de pondération des lignes (facultatif)
- 
 ##' One-way frequency table for multiple choices question
 ##'
 ##' This function allows to generate a frequency table from a multiple choices question.
 ##' The question's answers must be stored in a series of binary variables.
 ##' 
-##' @param df data frame
-##' @param vars index vector or character vector of the names of the binary variables
+##' @param df data frame with the binary variables
 ##' @param true.codes optional list of values considered as 'true' for the tabulation
-##' @param weights optional weighting variable
+##' @param weights optional weighting vector
 ##' @details
 ##' The function is applied to a series of binary variables, each one corresponding to a
 ##' choice of the question. For example, if the question is about seen movies among a movies
@@ -36,15 +27,16 @@
 ##' weights <- runif(100)*2
 ##' df <- data.frame(sex,jazz,rock,electronic,weights)
 ##' ## Frequency table on 'music' variables
-##' multi.table(df, c("jazz", "rock","electronic"), true.codes=list("Y"))
+##' multi.table(df[,c("jazz", "rock","electronic")], true.codes=list("Y"))
 ##' ## Weighted frequency table on 'music' variables
-##' multi.table(df, c("jazz", "rock","electronic"), true.codes=list("Y"), weights="weights")
+##' multi.table(df[,c("jazz", "rock","electronic")], true.codes=list("Y"), weights=df$weights)
 ##' @export
-multi.table <- function(df, vars, true.codes=NULL, weights=NULL) {
+
+multi.table <- function(df, true.codes=NULL, weights=NULL) {
   true.codes <- c(as.list(true.codes), TRUE, 1)
-  as.table(sapply(df[,vars], function(v) {
+  as.table(sapply(df, function(v) {
     sel <- as.numeric(v %in% true.codes)
-    if (!is.null(weights)) sel <- sel * df[,weights]
+    if (!is.null(weights)) sel <- sel * weights
     sum(sel)
   }))
 }
@@ -55,8 +47,7 @@ multi.table <- function(df, vars, true.codes=NULL, weights=NULL) {
 ##' choices question and a factor. The question's answers must be stored in a
 ##' series of binary variables.
 ##' 
-##' @param df data frame
-##' @param vars index vector or character vector of the names of the binary variables
+##' @param df data frame with the binary variables
 ##' @param crossvar factor to cross the multiple choices question with
 ##' @param ... arguments passed to \code{multi.table}
 ##' @details
@@ -74,14 +65,13 @@ multi.table <- function(df, vars, true.codes=NULL, weights=NULL) {
 ##' weights <- runif(100)*2
 ##' df <- data.frame(sex,jazz,rock,electronic,weights)
 ##' ## Two-way frequency table on 'music' variables by sex
-##' cross.multi.table(df, c("jazz", "rock","electronic"), df$sex, true.codes=list("Y"))
+##' cross.multi.table(df[,c("jazz", "rock","electronic")], df$sex, true.codes=list("Y"))
 ##' @export
  
-cross.multi.table <- function(df, vars, crossvar, ...) {
+cross.multi.table <- function(df, crossvar, ...) {
   tmp <- factor(crossvar)
-  simplify2array(by(df, tmp, multi.table, vars, ...))
+  simplify2array(by(df, tmp, multi.table, ...))
 }
-
 
 ##' Split a multiple choices variable in a series of binary variables
 ##'
@@ -101,6 +91,8 @@ cross.multi.table <- function(df, vars, crossvar, ...) {
 ##' @examples
 ##' v <- c("red/blue","green","red/green","blue/red")
 ##' multi.split(v)
+##' ## One-way frequency table of the result
+##' multi.table(multi.split(v))
 ##' @export
 
 multi.split <- function (var, split.char="/", mnames = NULL) {

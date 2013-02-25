@@ -34,6 +34,8 @@
 \examples{
 v <- c("red/blue","green","red/green","blue/red")
 multi.split(v)
+## One-way frequency table of the result
+multi.table(multi.split(v))
 }
 \seealso{
   \code{\link[questionr]{multi.table}}

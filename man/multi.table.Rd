@@ -2,18 +2,15 @@
 \alias{multi.table}
 \title{One-way frequency table for multiple choices question}
 \usage{
-  multi.table(df, vars, true.codes = NULL, weights = NULL)
+  multi.table(df, true.codes = NULL, weights = NULL)
 }
 \arguments{
-  \item{df}{data frame}
-
-  \item{vars}{index vector or character vector of the names
-  of the binary variables}
+  \item{df}{data frame with the binary variables}
 
   \item{true.codes}{optional list of values considered as
   'true' for the tabulation}
 
-  \item{weights}{optional weighting variable}
+  \item{weights}{optional weighting vector}
 }
 \value{
   Object of class table.
@@ -45,9 +42,9 @@ electronic <- sample(c("Y","N"),100,replace=TRUE)
 weights <- runif(100)*2
 df <- data.frame(sex,jazz,rock,electronic,weights)
 ## Frequency table on 'music' variables
-multi.table(df, c("jazz", "rock","electronic"), true.codes=list("Y"))
+multi.table(df[,c("jazz", "rock","electronic")], true.codes=list("Y"))
 ## Weighted frequency table on 'music' variables
-multi.table(df, c("jazz", "rock","electronic"), true.codes=list("Y"), weights="weights")
+multi.table(df[,c("jazz", "rock","electronic")], true.codes=list("Y"), weights=df$weights)
 }
 \seealso{
   \code{\link[questionr]{cross.multi.table}},
