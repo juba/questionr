@@ -3,7 +3,7 @@ Maintainer: Julien Barnier <julien.barnier@ens-lyon.fr>
 Author: Julien Barnier <julien.barnier@ens-lyon.fr>, François Briatte
     <f.briatte@ed.ac.uk>
 Version: 0.1
-Date: 2013-02-14
+Date: 2013-02-25
 License: MIT
 Encoding: UTF-8
 Title: Functions to make surveys processing easier.
