@@ -3,7 +3,8 @@
 \alias{rprop}
 \title{Row percentages of a two-way frequency table.}
 \usage{
-  rprop(tab, digits = 1, total = TRUE, percent = FALSE)
+  rprop(tab, digits = 1, total = TRUE, percent = FALSE,
+    drop = TRUE)
 }
 \arguments{
   \item{tab}{frequency table}

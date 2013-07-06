@@ -2,7 +2,8 @@
 \alias{prop}
 \title{Global percentages of a two-way frequency table.}
 \usage{
-  prop(tab, digits = 1, total = TRUE, percent = FALSE)
+  prop(tab, digits = 1, total = TRUE, percent = FALSE,
+    drop = TRUE)
 }
 \arguments{
   \item{tab}{frequency table}

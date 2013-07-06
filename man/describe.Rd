@@ -8,8 +8,8 @@
   \item{data}{dataset}
 
   \item{...}{variable names as character strings. Using the
-  "*" or "|" wildcards in variable name will perform a
-  regular expression search.}
+  "*" or "|" wildcards in a variable name will search for
+  it using a regex match.}
 }
 \description{
   This function describes the variables of a dataset that
@@ -35,7 +35,7 @@ nes1948 <- spss.portable.file(nes1948.por)
 describe(nes1948, "v480050", "version|set", "v48004*")
 }
 \seealso{
-  \code{\link{description}} in the \code{\link{memisc}}
-  package
+  \code{\link{regex}}, \code{\link{description}} in the
+  \code{\link{memisc}} package
 }
 
