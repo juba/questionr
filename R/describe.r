@@ -4,13 +4,13 @@
 #' include labels imported with the foreign or memisc packages.
 #'
 #' @param data dataset
-#' @param ... variable names as character strings. Using the "*" or "|" wildcards in variable name will perform a regular expression search.
+#' @param ... variable names as character strings. Using the "*" or "|" wildcards in a variable name will search for it using a regex match.
 #' @details
 #' This function wraps around the \code{description} function of the 
 #' \code{memisc} package and fetches the variable labels in datasets
 #' imported with the \code{foreign} package.
 #' @seealso
-#' \code{\link{description}} in the \code{\link{memisc}} package
+#' \code{\link{regex}}, \code{\link{description}} in the \code{\link{memisc}} package
 #' @examples
 #' # Variables in a standard R data frame.
 #' data(hdv2003)
