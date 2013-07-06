@@ -27,3 +27,4 @@ Collate:
     'tools.r'
     'datasets.r'
     'table.multi.r'
+    'describe.r'
