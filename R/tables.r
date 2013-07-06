@@ -151,12 +151,13 @@ function (tab, digits=1, total=TRUE, percent=FALSE) {
 
 #' Return the chi-squared residuals of a two-way frequency table.
 #'
-#' Return the standardized or Pearson's residuals of a chi-squared test on a two-way frequency table. 
+#' Return the raw, standardized or Pearson's residuals (the default) of a chi-squared test on a two-way frequency table. 
 #'
 #' @aliases residus
 #' @param tab frequency table
 #' @param digits number of digits to display
-#' @param std if \code{TRUE}, returns the standardizes residuals. Otherwise, returns the Pearson residuals.
+#' @param std if \code{TRUE}, returns the standardized residuals. Otherwise, returns the Pearson residuals. Incompatible with \code{raw}.
+#' @param raw if \code{TRUE}, returns the raw (\code{observed - expected}) residuals. Otherwise, returns the Pearson residuals. Incompatible with \code{std}.
 #' @details
 #' This function is just a wrapper around the \code{\link{chisq.test}} base R function. See this function's help page
 #' for details on the computation.
@@ -170,12 +171,28 @@ function (tab, digits=1, total=TRUE, percent=FALSE) {
 #' ## Pearson residuals
 #' chisq.residuals(tab)
 #' ## Standardized residuals
-#' chisq.residuals(tab, std=TRUE)
+#' chisq.residuals(tab, std = TRUE)
+#' ## Raw residuals
+#' chisq.residuals(tab, raw = TRUE)
 
 `chisq.residuals` <-
-function (tab, digits=2, std=FALSE) {
-  if (std) { res <- chisq.test(tab)$stdres }
-  else { res <- chisq.test(tab)$residuals }
+function (tab, digits = 2, std = FALSE, raw = FALSE) {
+  if(all(std, raw))
+    stop("Choose between standardized and raw residuals.")
+
+  k = chisq.test(tab)
+  if (raw) {
+    # raw residuals
+    res <- k$observed - k$expected
+  }
+  else if (std) {
+    # standardized residuals
+    res <- k$stdres
+  }
+  else {
+    # Pearson residuals
+    res <- k$residuals
+  }
   round(res, digits)
 }
 residus <- chisq.residuals
