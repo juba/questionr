@@ -21,7 +21,9 @@
 }
 \value{
   The result is a factor with properly encoded missing
-  values.
+  values. If the recoded variable contains only numeric
+  values, it is converted to an object of class
+  \code{numeric}.
 }
 \description{
   This function recodes selected values of a quantitative

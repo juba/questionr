@@ -28,3 +28,4 @@ Collate:
     'datasets.r'
     'table.multi.r'
     'describe.r'
+    'utils.r'
