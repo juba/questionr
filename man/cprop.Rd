@@ -2,7 +2,8 @@
 \alias{cprop}
 \title{Column percentages of a two-way frequency table.}
 \usage{
-  cprop(tab, digits = 1, total = TRUE, percent = FALSE)
+  cprop(tab, digits = 1, total = TRUE, percent = FALSE,
+    drop = TRUE)
 }
 \arguments{
   \item{tab}{frequency table}

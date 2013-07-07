@@ -1,0 +1,40 @@
+\name{qload}
+\alias{qload}
+\title{Load one or more packages, installing them first if necessary}
+\usage{
+  qload(..., load = TRUE, silent = TRUE)
+}
+\arguments{
+  \item{...}{the packages to load/install. Packages are
+  loaded with \code{library} and installed first with
+  \code{install.packages} if necessary.}
+
+  \item{load}{load the packages. Set to \code{FALSE} to
+  just install any missing packages. Defaults to
+  \code{TRUE}.}
+
+  \item{silent}{keep output as silent as possible. Defaults
+  to \code{TRUE}.}
+}
+\value{
+  The result is a list of packages cited in the scripts.
+}
+\description{
+  This function quickly loads one or more packages,
+  installing them quietly if necessary.
+}
+\details{
+  The function probably requires R 3.0.0 or above to make
+  use of the \code{quiet} argument when calling
+  \code{install.packages}. It is not clear what the
+  argument previously achieved in older versions of R.
+}
+\examples{
+qload("questionr")
+qload("questionr", silent = FALSE)
+}
+\seealso{
+  \code{\link[questionr]{qscan}},
+  \code{\link{install.packages}}, \code{\link{library}}
+}
+
