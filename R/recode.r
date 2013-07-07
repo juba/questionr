@@ -35,7 +35,7 @@ function (var, nbclass, include.lowest=TRUE, right=FALSE, dig.lab=5, ...) {
 #' @param verbose print a table of missing levels before rencoding them as missing. Defaults to \code{FALSE}.
 #' @param regex use regular expressions to match values that include the "*" or "|" wildcards. Defaults to \code{TRUE}.
 #' @return
-#' The result is a factor with properly encoded missing values.
+#' The result is a factor with properly encoded missing values. If the recoded variable contains only numeric values, it is converted to an object of class \code{numeric}.
 #' @seealso
 #' \code{\link{regex}}
 #' @examples
@@ -81,9 +81,14 @@ recode.na <- function(x, ..., verbose = FALSE, regex = TRUE) {
   r = matrix(table(m))
   rownames(r) = levels(m)
   colnames(r) = "n"
-  cat("Recoded", sum(r), "values to NA.\n")
+  cat("Recoded", sum(r), "values to NA.")
   if(sum(r) & verbose) print(r)
   x[which(x %in% q)] = NA
   x = factor(x)
+  if(all(!is.na(suppressWarnings(as.numeric(na.omit(x)))))) x = as.numeric(x)
+  cat(ifelse(is.numeric(x), 
+             "\nRecoded variable is numeric.", 
+             ""), 
+      "\n")
   return(x)
 }
