@@ -60,7 +60,9 @@ function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="") {
 #' @export
 
 `cprop` <-
-function (tab, digits = 1, total = TRUE, percent=FALSE) {
+function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE) {
+  # subset to non-empty rows/columns
+  if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0]
   dn <- names(dimnames(tab))
   if (total) tab <- cbind(tab, Ensemble=apply(tab,1,sum))
   tab <- prop.table(tab,2)*100
@@ -97,7 +99,9 @@ function (tab, digits = 1, total = TRUE, percent=FALSE) {
 #' @export rprop lprop
 
 `rprop` <-
-function(tab, digits=1, total=TRUE, percent=FALSE) {
+function(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE) {
+  # subset to non-empty rows/columns
+  if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0]
   dn <- names(dimnames(tab))
   if (total) tab <- rbind(tab, Ensemble=apply(tab,2,sum))
   tab <- prop.table(tab,1)*100
@@ -134,7 +138,9 @@ lprop <- rprop
 #' @export
 
 `prop` <-
-function (tab, digits=1, total=TRUE, percent=FALSE) {
+function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE) {
+  # subset to non-empty rows/columns
+  if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0]
   dn <- names(dimnames(tab))
   tmp <- tab/sum(tab)*100
   if (total) {
@@ -151,12 +157,13 @@ function (tab, digits=1, total=TRUE, percent=FALSE) {
 
 #' Return the chi-squared residuals of a two-way frequency table.
 #'
-#' Return the standardized or Pearson's residuals of a chi-squared test on a two-way frequency table. 
+#' Return the raw, standardized or Pearson's residuals (the default) of a chi-squared test on a two-way frequency table. 
 #'
 #' @aliases residus
 #' @param tab frequency table
 #' @param digits number of digits to display
-#' @param std if \code{TRUE}, returns the standardizes residuals. Otherwise, returns the Pearson residuals.
+#' @param std if \code{TRUE}, returns the standardized residuals. Otherwise, returns the Pearson residuals. Incompatible with \code{raw}.
+#' @param raw if \code{TRUE}, returns the raw (\code{observed - expected}) residuals. Otherwise, returns the Pearson residuals. Incompatible with \code{std}.
 #' @details
 #' This function is just a wrapper around the \code{\link{chisq.test}} base R function. See this function's help page
 #' for details on the computation.
@@ -170,12 +177,28 @@ function (tab, digits=1, total=TRUE, percent=FALSE) {
 #' ## Pearson residuals
 #' chisq.residuals(tab)
 #' ## Standardized residuals
-#' chisq.residuals(tab, std=TRUE)
+#' chisq.residuals(tab, std = TRUE)
+#' ## Raw residuals
+#' chisq.residuals(tab, raw = TRUE)
 
 `chisq.residuals` <-
-function (tab, digits=2, std=FALSE) {
-  if (std) { res <- chisq.test(tab)$stdres }
-  else { res <- chisq.test(tab)$residuals }
+function (tab, digits = 2, std = FALSE, raw = FALSE) {
+  if(all(std, raw))
+    stop("Choose between standardized and raw residuals.")
+
+  k = chisq.test(tab)
+  if (raw) {
+    # raw residuals
+    res <- k$observed - k$expected
+  }
+  else if (std) {
+    # standardized residuals
+    res <- k$stdres
+  }
+  else {
+    # Pearson residuals
+    res <- k$residuals
+  }
   round(res, digits)
 }
 residus <- chisq.residuals
