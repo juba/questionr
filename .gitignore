@@ -6,3 +6,5 @@
 
 # Mac OS X annoyance.
 .DS_Store
+
+.projectile
