@@ -45,6 +45,7 @@ function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="") {
 #' @param digits number of digits to display
 #' @param total if \code{TRUE}, add a row with the sum of percentages and a column with global percentages
 #' @param percent if \code{TRUE}, add a percent sign after the values when printing
+#' @param drop if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped.
 #' @return
 #' The result is an object of class \code{table} and \code{proptab}.
 #' @seealso
@@ -84,6 +85,7 @@ function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE) {
 #' @param digits number of digits to display
 #' @param total if \code{TRUE}, add a column with the sum of percentages and a row with global percentages
 #' @param percent if \code{TRUE}, add a percent sign after the values when printing
+#' @param drop if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped.
 #' @return
 #' The result is an object of class \code{table} and \code{proptab}.
 #' @seealso
@@ -123,6 +125,7 @@ lprop <- rprop
 #' @param digits number of digits to display
 #' @param total if \code{TRUE}, add a column with the sum of percentages and a row with global percentages
 #' @param percent if \code{TRUE}, add a percent sign after the values when printing
+#' @param drop if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped.
 #' @return
 #' The result is an object of class \code{table} and \code{proptab}.
 #' @seealso
