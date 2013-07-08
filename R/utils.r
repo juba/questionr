@@ -15,6 +15,7 @@
 #' The result is a list of packages cited in the scripts.
 #' @seealso
 #' \code{\link[questionr]{qload}}, \code{\link{library}}
+#' @author François Briatte <f.briatte@@ed.ac.uk>
 #' @examples
 #' ## Scan the working directory.
 #' qscan()
@@ -62,6 +63,7 @@ qscan <- function(..., load = TRUE, detail = TRUE) {
 #' The result is a list of packages cited in the scripts.
 #' @seealso
 #' \code{\link[questionr]{qscan}}, \code{\link{install.packages}}, \code{\link{library}}
+#' @author François Briatte <f.briatte@@ed.ac.uk>
 #' @examples
 #' qload("questionr")
 #' qload("questionr", silent = FALSE)

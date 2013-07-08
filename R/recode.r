@@ -32,12 +32,13 @@ function (var, nbclass, include.lowest=TRUE, right=FALSE, dig.lab=5, ...) {
 #'
 #' @param x variable to recode. The variable is coerced to a factor if necessary.
 #' @param ... levels to recode as missing in the variable. The values are coerced to character strings, meaning that you can pass numeric values to the function.
-#' @param verbose print a table of missing levels before rencoding them as missing. Defaults to \code{FALSE}.
+#' @param verbose print a table of missing levels before recoding them as missing. Defaults to \code{FALSE}.
 #' @param regex use regular expressions to match values that include the "*" or "|" wildcards. Defaults to \code{TRUE}.
 #' @return
 #' The result is a factor with properly encoded missing values. If the recoded variable contains only numeric values, it is converted to an object of class \code{numeric}.
 #' @seealso
 #' \code{\link{regex}}
+#' @author François Briatte <f.briatte@@ed.ac.uk>
 #' @examples
 #' data(hdv2003)
 #' ## With exact string matches.
