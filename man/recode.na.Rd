@@ -13,7 +13,7 @@
   you can pass numeric values to the function.}
 
   \item{verbose}{print a table of missing levels before
-  rencoding them as missing. Defaults to \code{FALSE}.}
+  recoding them as missing. Defaults to \code{FALSE}.}
 
   \item{regex}{use regular expressions to match values that
   include the "*" or "|" wildcards. Defaults to
@@ -42,6 +42,9 @@ hdv2003$clso = recode.na(hdv2003$clso, "Ne sait pas", verbose = TRUE)
 freq(recode.na(hdv2003$trav.satisf, "Equilibre"))
 ## Truncate a count variable.
 freq(recode.na(hdv2003$freres.soeurs, 5:22))
+}
+\author{
+  François Briatte <f.briatte@ed.ac.uk>
 }
 \seealso{
   \code{\link{regex}}

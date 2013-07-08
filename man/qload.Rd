@@ -33,6 +33,9 @@
 qload("questionr")
 qload("questionr", silent = FALSE)
 }
+\author{
+  François Briatte <f.briatte@ed.ac.uk>
+}
 \seealso{
   \code{\link[questionr]{qscan}},
   \code{\link{install.packages}}, \code{\link{library}}

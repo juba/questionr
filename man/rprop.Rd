@@ -16,6 +16,10 @@
 
   \item{percent}{if \code{TRUE}, add a percent sign after
   the values when printing}
+
+  \item{drop}{if \code{TRUE}, lines or columns with a sum
+  of zero, which would generate \code{NaN} percentages, are
+  dropped.}
 }
 \value{
   The result is an object of class \code{table} and

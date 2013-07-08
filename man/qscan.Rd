@@ -30,6 +30,9 @@
 ## Scan the working directory.
 qscan()
 }
+\author{
+  François Briatte <f.briatte@ed.ac.uk>
+}
 \seealso{
   \code{\link[questionr]{qload}}, \code{\link{library}}
 }
