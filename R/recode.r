@@ -94,7 +94,7 @@ recode.na <- function(x, ..., verbose = FALSE, regex = TRUE, as.numeric = FALSE)
   }
 
   # detect numeric strings
-  numbers = !grepl("\\D", gsub("\\.", "", paste0(levels(x), collapse = "")))
+  numbers = !grepl("\\D", gsub("\\.\\s", "", paste0(levels(x), collapse = "")))
   if(numbers & !as.numeric)
     message("Recoded variable contains only numeric characters. ", 
             "Consider using as.numeric = TRUE.")
