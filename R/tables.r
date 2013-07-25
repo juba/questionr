@@ -36,6 +36,60 @@ function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="") {
   round(result, digits=digits)
 }
 
+#' Generate frequency table of missing values.
+#'
+#' Generate a frequency table of missing values as raw counts and percentages.
+#'
+#' @param data either a vector or a data frame object
+#' @param ... if \code{x} is a data frame, the names of the variables to examine. When no variable names are provided, the function examines the full data frame and returns the five variables with most missing values.
+#' @return
+#' The result is an object of class data.frame.
+#' @seealso
+#' \code{\link{table}}, \code{\link{is.na}}
+#' @examples
+#' data(hdv2003)
+#' ## Examine a single vector.
+#' freq.na(hdv2003$qualif)
+#' ## Examine a data frame.
+#' freq.na(hdv2003)
+#' ## Examine several variables.
+#' freq.na(hdv2003, "nivetud", "trav.satisf")
+#' ## Examine all variables.
+#' freq.na(hdv2003, names(hdv2003))
+#' @export
+
+freq.na <- function(data, ...) {
+  d = NULL
+  if (class(data) == "data.frame") {
+    if (length(c(...)) < 1) d = names(data)
+    d = data[, c(d, ...)]
+  }
+  else {
+    d = as.data.frame(data)
+  }
+  if (is.null(dim(d))) {
+    c = length(d)  
+  }
+  else {
+    c = nrow(d)    
+  }
+  d = is.na(as.matrix(d))
+  d = as.matrix(colSums(d))
+  d = cbind(d, 100 * round(d / c, 2))
+  d = d[order(d[, 1], decreasing = TRUE), ]
+  n = c("missing", "%")
+  if(is.null(dim(d)))
+    names(d) = n
+  else
+    colnames(d) = n
+  if (length(c(...)) < 1 & class(data) == "data.frame") {
+    warning("No variables specified; showing top five results.")
+    return(head(d))
+  }
+  else {
+    return(d)
+  }
+}
 
 #' Column percentages of a two-way frequency table.
 #'
