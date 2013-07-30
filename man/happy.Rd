@@ -4,7 +4,8 @@
 \title{Data related to happiness from the General Social Survey, 1972-2006.}
 \format{A data frame with 51020 rows and 10 variables}
 \description{
-  This data extract is taken from Hadley Wickham's \code{productplots} package. The original description follows, with minor edits.
+  This data extract is taken from Hadley Wickham's \code{productplots} package. 
+  The original description follows, with minor edits.
 
   The data is a small sample of variables related to
   happiness from the General Social Survey (GSS). The GSS
@@ -15,9 +16,9 @@
 }
 \details{
   \itemize{ 
-  	\item age. age in years: 18--89.
-  	\item degree. highest education: lt high school, high school, junior college, bachelor, graduate.  
-  	\item finrela. relative financial status: far above, above average, average, below average, far below.
+    \item age. age in years: 18--89.
+    \item degree. highest education: lt high school, high school, junior college, bachelor, graduate.  
+    \item finrela. relative financial status: far above, above average, average, below average, far below.
     \item happy. happiness: very happy, pretty happy, not too happy.
     \item health. health: excellent, good, fair, poor.
     \item marital. marital status: married, never married, divorced, widowed, separated.
