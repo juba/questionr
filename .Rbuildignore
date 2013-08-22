@@ -1,2 +1,4 @@
 TODO.org
 .projectile
+^.*\.Rproj$
+^\.Rproj\.user$
