@@ -268,6 +268,7 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
 #' @param y another optional vector for a two-way frequency table. Must be the same length as \code{x}
 #' @param weights vector of weights, must be the same length as \code{x}
 #' @param normwt if TRUE, normalize weights so that the total weighted count is the same as the unweighted one
+#' @param na.show if TRUE, show NA count in table output
 #' @param na.rm if TRUE, remove NA values before computation
 #' @details
 #' If \code{weights} is not provided, an uniform weghting is used.
@@ -286,11 +287,15 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
 #' @export
 
 `wtd.table` <-
-function (x, y = NULL, weights = NULL, normwt = FALSE, na.rm = TRUE) 
+function (x, y = NULL, weights = NULL, normwt = FALSE, na.rm = TRUE, na.show = FALSE) 
 {
   if (is.null(weights)) weights <- rep(1, length(x))  
   if (length(x) != length(weights)) stop("x and weights lengths must be the same")
   if (!is.null(y) & (length(x) != length(y))) stop("x and y lengths must be the same")
+  if (na.show) {
+      x <- addNA(x)
+      if (!is.null(y)) y <- addNA(y)
+  }
   if (na.rm) {
      s <- !is.na(x) & !is.na(weights)
      if (!is.null(y)) s <- s & !is.na(y)
