@@ -272,7 +272,7 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
 #' @details
 #' If \code{weights} is not provided, an uniform weghting is used.
 #' @return
-#' If \code{y} is provided, returns a weighted one-way frequency table
+#' If \code{y} is not provided, returns a weighted one-way frequency table
 #' of \code{x}. Otherwise, returns a weighted two-way frequency table of
 #' \code{x} and \code{y}
 #' @seealso
