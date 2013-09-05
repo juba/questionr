@@ -3,8 +3,8 @@ Maintainer: Julien Barnier <julien.barnier@ens-lyon.fr>
 Author: Julien Barnier <julien.barnier@ens-lyon.fr>, François Briatte
     <f.briatte@ed.ac.uk>
 Version: 0.2
-Date: 2013-02-25
-License: MIT
+Date: 2013-09-05
+License: GPL (>= 2) | BSD
 Encoding: UTF-8
 Title: Functions to make surveys processing easier.
 Description: This package provides some convenience functions to make the
@@ -29,3 +29,4 @@ Collate:
     'table.multi.r'
     'describe.r'
     'utils.r'
+    'weighting.r'

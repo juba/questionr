@@ -3,7 +3,7 @@
 \title{Weighted one-way and two-way frequency tables.}
 \usage{
   wtd.table(x, y = NULL, weights = NULL, normwt = FALSE,
-    na.rm = TRUE)
+    na.rm = TRUE, na.show = FALSE)
 }
 \arguments{
   \item{x}{a vector}
@@ -17,11 +17,13 @@
   \item{normwt}{if TRUE, normalize weights so that the
   total weighted count is the same as the unweighted one}
 
+  \item{na.show}{if TRUE, show NA count in table output}
+
   \item{na.rm}{if TRUE, remove NA values before
   computation}
 }
 \value{
-  If \code{y} is provided, returns a weighted one-way
+  If \code{y} is not provided, returns a weighted one-way
   frequency table of \code{x}. Otherwise, returns a
   weighted two-way frequency table of \code{x} and \code{y}
 }
