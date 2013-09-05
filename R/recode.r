@@ -5,7 +5,7 @@
 #'
 #' @param var variable to transform
 #' @param nbclass number of classes
-#' @param include.lowest,right,dig.lab,... arguments to the \code{cut} function
+#' @param include.lowest, right, dig.lab, ... arguments to the \code{cut} function
 #' @details
 #' This is just a simple wrapper around the \code{cut} and \code{quantile}
 #' functions.
@@ -34,6 +34,7 @@ function (var, nbclass, include.lowest=TRUE, right=FALSE, dig.lab=5, ...) {
 #' @param ... levels to recode as missing in the variable. The values are coerced to character strings, meaning that you can pass numeric values to the function.
 #' @param verbose print a table of missing levels before recoding them as missing. Defaults to \code{FALSE}.
 #' @param regex use regular expressions to match values that include the "*" or "|" wildcards. Defaults to \code{TRUE}.
+#' @param as.numeric coerce the recoded variable to \code{numeric}. The function recommends the option when the recode returns only numeric values. Defaults to FALSE.
 #' @return
 #' The result is a factor with properly encoded missing values. If the recoded variable contains only numeric values, it is converted to an object of class \code{numeric}.
 #' @seealso
@@ -49,11 +50,11 @@ function (var, nbclass, include.lowest=TRUE, right=FALSE, dig.lab=5, ...) {
 #' hdv2003$clso = recode.na(hdv2003$clso, "Ne sait pas", verbose = TRUE)
 #' ## Test results with freq.
 #' freq(recode.na(hdv2003$trav.satisf, "Equilibre"))
-#' ## Truncate a count variable.
+#' ## Truncate a count variable (recommends numeric conversion).
 #' freq(recode.na(hdv2003$freres.soeurs, 5:22))
 #' @export
 
-recode.na <- function(x, ..., verbose = FALSE, regex = TRUE) {
+recode.na <- function(x, ..., verbose = FALSE, regex = TRUE, as.numeric = FALSE) {
   if(!is.factor(x)) x = factor(x)
   m = as.character(c(...))
   r = which(grepl("\\*|\\|", m))
@@ -76,20 +77,31 @@ recode.na <- function(x, ..., verbose = FALSE, regex = TRUE) {
     r2 = unlist(r2)
   }
 
+  # match missing levels
   q = levels(x)[unique(c(r1, r2))]
   m = factor(x[x %in% q])
 
+  # missing counts
   r = matrix(table(m))
   rownames(r) = levels(m)
   colnames(r) = "n"
-  cat("Recoded", sum(r), "values to NA.")
+  message("Recoded ", sum(r), " values to NA.")
   if(sum(r) & verbose) print(r)
-  x[which(x %in% q)] = NA
-  x = factor(x)
-  if(all(!is.na(suppressWarnings(as.numeric(na.omit(x)))))) x = as.numeric(x)
-  cat(ifelse(is.numeric(x), 
-             "\nRecoded variable is numeric.", 
-             ""), 
-      "\n")
+
+  # subset and relevel
+  if(sum(r)) {
+    x[which(x %in% q)] = NA
+    x = factor(x, levels = levels(x)[-which(levels(x) %in% levels(m))])
+  }
+
+  # detect numeric strings
+  numbers = !grepl("\\D", gsub("\\.\\s", "", paste0(levels(x), collapse = "")))
+  if(numbers & !as.numeric)
+    message("Recoded variable contains only numeric characters. ", 
+            "Consider using as.numeric = TRUE.")
+
+  # numeric coercion
+  if(as.numeric) x = as.numeric(x)
+
   return(x)
 }
