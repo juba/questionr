@@ -10,8 +10,15 @@
 
   \item{nbclass}{number of classes}
 
-  \item{include.lowest,right,dig.lab,...}{arguments to the
-  \code{cut} function}
+  \item{include.lowest}{argument passed to the \code{cut}
+  function}
+
+  \item{right}{argument passed to the \code{cut} function}
+
+  \item{dig.lab}{argument passed to the \code{cut}
+  function}
+
+  \item{...}{arguments passed to the \code{cut} function}
 }
 \value{
   The result is a factor.

@@ -5,7 +5,10 @@
 #'
 #' @param var variable to transform
 #' @param nbclass number of classes
-#' @param include.lowest, right, dig.lab, ... arguments to the \code{cut} function
+#' @param include.lowest argument passed to the \code{cut} function
+#' @param right argument passed to the \code{cut} function
+#' @param dig.lab argument passed to the \code{cut} function
+#' @param ... arguments passed to the \code{cut} function
 #' @details
 #' This is just a simple wrapper around the \code{cut} and \code{quantile}
 #' functions.

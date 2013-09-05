@@ -2,7 +2,8 @@
 \alias{recode.na}
 \title{Recode values of a variable to missing values, using exact or regular expression matching.}
 \usage{
-  recode.na(x, ..., verbose = FALSE, regex = TRUE)
+  recode.na(x, ..., verbose = FALSE, regex = TRUE,
+    as.numeric = FALSE)
 }
 \arguments{
   \item{x}{variable to recode. The variable is coerced to a
@@ -18,6 +19,11 @@
   \item{regex}{use regular expressions to match values that
   include the "*" or "|" wildcards. Defaults to
   \code{TRUE}.}
+
+  \item{as.numeric}{coerce the recoded variable to
+  \code{numeric}. The function recommends the option when
+  the recode returns only numeric values. Defaults to
+  FALSE.}
 }
 \value{
   The result is a factor with properly encoded missing
@@ -40,7 +46,7 @@ hdv2003$relig = recode.na(hdv2003$relig, "[A|a]ppartenance", "Rejet|NSP")
 hdv2003$clso = recode.na(hdv2003$clso, "Ne sait pas", verbose = TRUE)
 ## Test results with freq.
 freq(recode.na(hdv2003$trav.satisf, "Equilibre"))
-## Truncate a count variable.
+## Truncate a count variable (recommends numeric conversion).
 freq(recode.na(hdv2003$freres.soeurs, 5:22))
 }
 \author{
