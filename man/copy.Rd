@@ -1,16 +1,25 @@
-\name{copy.default}
+\name{copy}
 \alias{copie}
 \alias{copie.default}
+\alias{copie.proptab}
 \alias{copy}
 \alias{copy.default}
+\alias{copy.proptab}
 \title{Transform an object into HTML and copy it for export}
 \usage{
+  copy(obj, ...)
+
   \method{copy}{default} (obj, append = FALSE,
     file = FALSE, filename = "temp.html",
     clipboard.size = 4096, ...)
+
+  \method{copy}{proptab} (obj, percent = NULL,
+    digits = NULL, justify = "right", ...)
 }
 \arguments{
   \item{obj}{object to be copied}
+
+  \item{...}{arguments passed to \code{R2HTML::HTML}}
 
   \item{append}{if TRUE, append to the file instead of
   replacing it}
@@ -23,7 +32,17 @@
   \item{clipboard.size}{under Windows, size of the
   clipboard in kB}
 
-  \item{...}{arguments passed to \code{R2HTML::HTML}}
+  \item{percent}{whether to add a percent sign in each
+  cell}
+
+  \item{digits}{number of digits to display}
+
+  \item{justify}{justification}
+}
+\value{
+  \code{NULL}
+
+  \code{NULL}
 }
 \description{
   This function transforms its argument to HTML and then
@@ -38,10 +57,15 @@
 data(iris)
 tab <- table(cut(iris$Sepal.Length,8),cut(iris$Sepal.Width,4))
 \dontrun{copie(tab)}
+ptab <- rprop(tab, percent=TRUE)
+\dontrun{copy(ptab)}
 }
 \seealso{
   \code{\link[R2HTML]{HTML}},
-  \code{\link[questionr]{copy.proptab}}
+  \code{\link[questionr]{format.proptab}}
+
+  \code{\link[questionr]{copy}},
+  \code{\link[questionr]{format.proptab}}
 }
 \keyword{connection}
 
