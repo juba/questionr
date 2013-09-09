@@ -1,4 +1,8 @@
+questionr 0.2
+-------------
 
+* New functions : describe, freq.na, qload, qscan, recode.na
+* Finish transition from rgrs
 
 
 questionr 0.1
