@@ -2,7 +2,7 @@ Package: questionr
 Maintainer: Julien Barnier <julien.barnier@ens-lyon.fr>
 Author: Julien Barnier <julien.barnier@ens-lyon.fr>, François Briatte
     <f.briatte@ed.ac.uk>
-Version: 0.2
+Version: 0.3
 Date: 2013-09-05
 License: GPL (>= 2) | BSD
 Encoding: UTF-8
