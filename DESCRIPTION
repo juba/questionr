@@ -2,9 +2,9 @@ Package: questionr
 Maintainer: Julien Barnier <julien.barnier@ens-lyon.fr>
 Author: Julien Barnier <julien.barnier@ens-lyon.fr>, François Briatte
     <f.briatte@ed.ac.uk>
-Version: 0.3
+Version: 0.2
 Date: 2013-09-05
-License: GPL (>= 2) | BSD
+License: GPL (>= 2)
 Encoding: UTF-8
 Title: Functions to make surveys processing easier.
 Description: This package provides some convenience functions to make the
@@ -12,7 +12,6 @@ Description: This package provides some convenience functions to make the
 Imports:
     memisc
 Suggests:
-    memisc,
     testthat,
     roxygen2,
     R2HTML
