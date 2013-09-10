@@ -18,11 +18,11 @@
 #' # Find the names of selected variables.
 #' describe(hdv2003, "age", "sexe", "lecture*", "frere|soeur")
 #' # Load memisc package and example data.
-#' require(memisc)
+#' \dontrun{require(memisc)
 #' nes1948.por <- UnZip("anes/NES1948.ZIP","NES1948.POR", package="memisc")
 #' nes1948 <- spss.portable.file(nes1948.por)
 #' # Get the labels of selected variables.
-#' describe(nes1948, "v480050", "version|set", "v48004*")
+#' describe(nes1948, "v480050", "version|set", "v48004*")}
 #' @export
 
 describe <- function(data, ...) {
@@ -38,8 +38,8 @@ describe <- function(data, ...) {
   }
   # memisc objects
   if(grepl("data.set|importer", class(data))) {
-    suppressMessages(suppressWarnings(require(memisc)))
-    l <- description(data[, x])
+    #suppressMessages(suppressWarnings(require(memisc)))
+    l <- memisc::description(data[, x])
   }
   else {
     # foreign objects

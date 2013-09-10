@@ -275,7 +275,7 @@ residus <- chisq.residuals
 #' This function is designed for internal use only.
 #' @seealso
 #' \code{\link{format.default}}, \code{\link[questionr]{print.proptab}}
-#' @export
+#' @export format.proptab
 
 `format.proptab` <-
 function (x, digits=NULL, percent=NULL, justify="right", ...) {
@@ -305,7 +305,7 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
 #' @S3method print proptab
 #' @seealso
 #' \code{\link[questionr]{format.proptab}}
-#' @export
+#' @export print.proptab
 
 `print.proptab` <-
 function (x, digits=NULL, percent=NULL, justify="right", ...) {

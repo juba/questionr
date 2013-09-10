@@ -68,6 +68,7 @@ copie.default <- copy.default
 #' @param digits number of digits to display
 #' @param justify justification
 #' @seealso \code{\link[questionr]{copy}}, \code{\link[questionr]{format.proptab}}
+#' @export copy.proptab copie.proptab
 
 `copy.proptab` <-
 function (obj, percent=NULL, digits=NULL, justify="right", ...) {

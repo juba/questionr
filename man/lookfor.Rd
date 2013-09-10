@@ -53,7 +53,7 @@
 # Look for a single keyword.
 lookfor(iris, "petal")
 # Load memisc package and example data.
-require(memisc)
+\dontrun{require(memisc)
 nes1948.por <- UnZip("anes/NES1948.ZIP","NES1948.POR", package="memisc")
 nes1948 <- spss.portable.file(nes1948.por)
 # Look for a vector of keywords.
@@ -61,7 +61,7 @@ lookfor(nes1948, c("Truman", "Dewey"))
 # Look for a regular expression.
 lookfor(nes1948, "truman|dewey")
 # Look for a phrase.
-lookfor(nes1948, "personal attribute")
+lookfor(nes1948, "personal attribute")}
 }
 \author{
   François Briatte <f.briatte@ed.ac.uk>
