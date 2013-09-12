@@ -18,7 +18,7 @@
 #' @author François Briatte <f.briatte@@ed.ac.uk>
 #' @examples
 #' ## Scan the working directory.
-#' qscan()
+#' \dontrun{qscan()}
 #' @export
 
 qscan <- function(..., load = TRUE, detail = TRUE) {
