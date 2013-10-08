@@ -1,21 +1,39 @@
 library(shiny)
 
-df <- get("*questionr_grec_tmp_df*")
-oldvar <- (df[,`*questionr_grec_tmp_oldvar*`])
+#shinyUI(pageWithSidebar(
+shinyUI(bootstrapPage(
+##    HTML('<link rel="stylesheet" href="highlight.js/styles/tomorrow-night.css">'),
+##    HTML('<script src="highlight.js/highlight.pack.js"></script>'),
+##    HTML('<script>hljs.highlightBlock($("#codeout"));</script>'),
 
-# Define UI for application that plots random distributions 
-shinyUI(pageWithSidebar(
+    HTML('<link href="http://yandex.st/highlightjs/7.3/styles/default.min.css" rel="stylesheet">'),
+    HTML('<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min.js"></script>'),
+    HTML('<script src="http://yandex.st/highlightjs/7.3/languages/r.min.js"></script>'),
 
-  # Application title
-  headerPanel("Graphical recoding"),
-
-  # Sidebar with a slider input for number of observations
-  sidebarPanel(
-    uiOutput("levelsInput")
-   ),
-
-  # Show a plot of the generated distribution
-  mainPanel(
-    textOutput("recodeOut")
-  )
-))
+    div(class="container-fluid",
+        div(class="row",
+            ## Application title
+            headerPanel("Interactive recoding")),
+        div(class="row-fluid",
+            div(class="span12",
+                div(class="alert alert-dismissable",
+                    HTML('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'),
+                    HTML('<strong>Attention :</strong> Pensez à copier/coller le code.')
+                    ))),
+        
+        div(class="row-fluid",
+            div(class="span12",
+                tags$form(class="well",
+                          uiOutput("levelsInput")))),
+        mainPanel(
+            tabsetPanel(
+                tabPanel("Code", htmlOutput("recodeOut")),
+                tabPanel("Table", tableOutput("tableOut"))
+                )
+            )),
+        
+    HTML('<script>'),
+    HTML("$('.shiny-bound-input').change(function() { $('#codeout').each(function(i, e) {hljs.highlightBlock(e)});});"),
+    HTML('</script>')
+    
+    ))

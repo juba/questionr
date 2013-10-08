@@ -1,33 +1,33 @@
 library(shiny)
 
-df <- get("*questionr_grec_tmp_df*", inherits=TRUE)
-oldvar <- (df[,get("*questionr_grec_tmp_oldvar*", inherits=TRUE)])
+df <- get(get("*questionr_grec_df*", .GlobalEnv))
+oldvar_name <- get("*questionr_grec_oldvar*", .GlobalEnv)
+print(oldvar_name)
+oldvar <- df[,oldvar_name]
 
-# Define server logic required to generate and plot a random distribution
 shinyServer(function(input, output) {
 
-  # Expression that generates a plot of the distribution. The expression
-  # is wrapped in a call to renderPlot to indicate that:
-  #
-  #  1) It is "reactive" and therefore should be automatically 
-  #     re-executed when inputs change
-  #  2) Its output type is a plot 
-  #
   output$recodeOut <- renderText({
-      out <- NULL
+      out <- "<pre class='r'><code class='r' id='codeout'>"
       for (l in levels(oldvar)) {
-          out <- paste0(out, l, " -> ", input[[l]],"<br />")
+          out <- paste0(out, 'for (i in c(1:10, TRUE)) ', l, " <- \"", input[[l]],"\"\n")
       }
-      attr(out, "html") <- TRUE
+      out <- paste0(out, "</code></pre>")
       out
   })
 
+  output$tableOut <- renderTable({
+      table(oldvar)
+  })
+  
   output$levelsInput <- renderUI({
-      out <- NULL
+      out <- "<table>"
       for (l in levels(oldvar)) {
-          out <- paste0(out,(textInput(l, paste0('"',l,'" devient :'), l)))
+#          out <- paste0(out,(textInput(l, paste0('"',l,'" devient :'), l)))
+          out <- paste0(out,'<tr><td>',l,'&nbsp;<i class="icon-arrow-right"></i>&nbsp;</td><td>',textInput(l,"",l),'</td></tr>')
       }
       attr(out, "html") <- TRUE
-      out
+      out <- paste0(out, "</table>");
+      HTML(out)
   })
 })
