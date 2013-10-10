@@ -2,14 +2,13 @@ library(shiny)
 
 #shinyUI(pageWithSidebar(
 shinyUI(bootstrapPage(
-##    HTML('<link rel="stylesheet" href="highlight.js/styles/tomorrow-night.css">'),
-##    HTML('<script src="highlight.js/highlight.pack.js"></script>'),
-##    HTML('<script>hljs.highlightBlock($("#codeout"));</script>'),
 
-    HTML('<link href="http://yandex.st/highlightjs/7.3/styles/default.min.css" rel="stylesheet">'),
-    HTML('<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min.js"></script>'),
-    HTML('<script src="http://yandex.st/highlightjs/7.3/languages/r.min.js"></script>'),
-
+    HTML('<style type="text/css">'),
+    HTML('span.hl.str { color: #d14;}'),
+    HTML('span.hl.kwa { color: #099;}'),
+    HTML('span.hl.kwd { color: #333;}'),
+    HTML('</style>'),
+    
     div(class="container-fluid",
         div(class="row",
             ## Application title
@@ -30,10 +29,6 @@ shinyUI(bootstrapPage(
                 tabPanel("Code", htmlOutput("recodeOut")),
                 tabPanel("Table", tableOutput("tableOut"))
                 )
-            )),
+            ))
         
-    HTML('<script>'),
-    HTML("$('.shiny-bound-input').change(function() { $('#codeout').each(function(i, e) {hljs.highlightBlock(e)});});"),
-    HTML('</script>')
-    
     ))
