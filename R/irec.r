@@ -17,5 +17,5 @@ irec <- function(df, oldvar) {
     if (!is_char) oldvar <- deparse(substitute(oldvar))
     if (!(oldvar %in% names(get(df)))) stop(sQuote(paste0(oldvar, ' must be a column of ', df, '.')))    
     assign(".questionr_irec_oldvar", oldvar, envir=.GlobalEnv)
-    shiny::runApp(system.file("irec", package="questionr"))
+    invisible(shiny::runApp(system.file("irec", package="questionr")))
 }

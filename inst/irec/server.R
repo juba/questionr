@@ -1,9 +1,9 @@
 library(shiny)
 library(highr)
 
-df_name <- get("*questionr_irec_df*", .GlobalEnv)
+df_name <- get(".questionr_irec_df", .GlobalEnv)
 df <- get(df_name)
-oldvar_name <- get("*questionr_irec_oldvar*", .GlobalEnv)
+oldvar_name <- get(".questionr_irec_oldvar", .GlobalEnv)
 oldvar <- df[,oldvar_name]
 src_var <- ifelse(grepl(" ", oldvar_name),
                   sprintf('%s[,"%s"]', df_name, oldvar_name),
@@ -13,7 +13,9 @@ src_var <- ifelse(grepl(" ", oldvar_name),
 shinyServer(function(input, output) {
 
 
-    get_value_character<- function(val) {
+    
+    get_value <- function(val) {
+        if (is.null(val)) return()
         if (val %in% c("NA", "TRUE", "FALSE")) return(val)
         ## TODO : find a way to escape double quotes
         val <- gsub('"', "", val)
@@ -21,31 +23,8 @@ shinyServer(function(input, output) {
         val
     }
 
-    get_value_factor<- function(val) {
-        if (val=="NA") return(NA)
-        if (val=="TRUE") return(TRUE)
-        if (val=="FALSE") return(FALSE)
-        val
-    }
-    
-    generate_code_factor <- function(newvar_name, dest_var) {
-        out <- NULL
-        oldfac <- factor(oldvar, exclude=NULL)
-        levs <- levels(oldfac)
-        labels <- NULL
-        for (l in levs) {
-            if (is.na(l)) l <- "*irec_NA_id*"
-            value <- get_value_factor(input[[l]])
-            labels <- c(labels, value)
-        }
-        out <- paste0(out, sprintf("%s <- factor(%s, exclude=NULL,\n", dest_var, src_var))
-        out <- paste0(out, sprintf("           levels=%s,\n", capture.output(dput(levs))))
-        out <- paste0(out, sprintf("           labels=%s)\n", capture.output(dput(labels))))
-        out
-    }
-
     generate_code_character <- function(newvar_name, dest_var, style) {
-        out <- NULL
+        out <- sprintf("## Recoding %s into %s\n", src_var, dest_var)
         if (!is.character(oldvar))
             out <- paste0(out, sprintf("%s <- as.character(%s)\n", dest_var, src_var))
         else
@@ -55,7 +34,7 @@ shinyServer(function(input, output) {
         if (any(is.na(oldvar))) levs <- c(levs, NA)
         for (l in levs) {
             if (is.na(l)) l <- "*irec_NA_id*"
-            value <- get_value_character(input[[l]])
+            value <- get_value(input[[l]])
             if (style=="min") {
                 if (l==input[[l]]) next
                 if (l=="*irec_NA_id*" && value=="NA") next
@@ -65,6 +44,7 @@ shinyServer(function(input, output) {
             else
                 out <- paste0(out, sprintf('%s[is.na(%s)] <- %s\n', dest_var, src_var, value))
         }
+        if (input$facconv) out <- paste0(out, sprintf("%s <- factor(%s)\n", dest_var, dest_var))
         out
     }
 
@@ -75,11 +55,6 @@ shinyServer(function(input, output) {
                                sprintf('%s[,"%s"]', df_name, newvar_name),
                                sprintf('%s$%s', df_name, newvar_name))
         recstyle <- input$recstyle
-        if(recstyle=="default") {
-            if(is.factor(oldvar)) return(generate_code_factor(newvar_name, dest_var))
-            else return(generate_code_character(newvar_name, dest_var, style="comp"))
-        }
-        if(recstyle=="factor") return(generate_code_factor(newvar_name, dest_var))
         if(recstyle=="charcomp") return(generate_code_character(newvar_name, dest_var, style="comp"))
         if(recstyle=="charmin") return(generate_code_character(newvar_name, dest_var, style="min"))
     }
@@ -87,12 +62,19 @@ shinyServer(function(input, output) {
 
     
     output$recodeOut <- renderText({
+        header <- HTML(paste0("<p style='font-size: 11px;'>Recoding <tt>", oldvar_name, "</tt> from <tt>", df_name, "</tt> of class <tt>", class(oldvar), "</tt>.</p>"))
         out <- generate_code(input$newvarname)
+        if (input$closebutton > 0) {
+            cat("\n-------- Start recoding code --------\n\n")
+            cat(out)
+            cat("\n--------- End recoding code ---------\n")
+            shiny::stopApp()
+        }
         ## for (l in levels(oldvar)) {
         ##     out <- paste0(out, 'for (i in c(1:10, TRUE)) ', l, " <- \"", input[[l]],"\"\n")
         ## }
         out <- paste(hi_html(out), collapse="\n")
-        out <- paste0("<pre class='r'><code class='r' id='codeout'>",out,"</code></pre>")
+        out <- paste0(header, "<pre class='r'><code class='r' id='codeout'>",out,"</code></pre>")
         out
     })
 
@@ -114,8 +96,6 @@ shinyServer(function(input, output) {
             out <- paste0(out,'<tr><td style="text-align: right;">',l,'</td>')
             out <- paste0(out,'<td>&nbsp;<i class="icon-arrow-right"></i>&nbsp;</td>')
             out <- paste0(out,'<td>',textInput(ifelse(is.na(l), "*irec_NA_id*",l),"", ifelse(is.na(l), "NA",l)),'</td>')
-            ## out <- paste0(out,'<td class="checkquote">')
-            ## out <- paste0(out, checkboxInput(paste0(l,'-quote')," disable quotes",FALSE),'</td>')
             out <- paste0(out,'</tr>')
         }
         out <- paste0(out, "</table>")
