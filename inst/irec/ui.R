@@ -10,6 +10,8 @@ if (display_alert) assign(".questionr_displayed_alert", FALSE, envir=.GlobalEnv)
 
 shinyUI(bootstrapPage(
 
+    HTML('<script type="text/javascript" src="ZeroClipboard.min.js"></script>'),
+    
     HTML('<style type="text/css">'),
     HTML('span.hl.str { color: #d14;}'),
     HTML('span.hl.kwa { color: #099;}'),
@@ -55,9 +57,16 @@ shinyUI(bootstrapPage(
         mainPanel(
             tabsetPanel(
                 tabPanel("Code", htmlOutput("recodeOut")),
-                tabPanel("Table", tableOutput("tableOut"))
+                tabPanel("Check",
+                         HTML("<p style='font-size: 11px;'>Old variable as rows, new variable as columns.</p>"),
+                         tableOutput("tableOut"))
                 ),
-            HTML('<p style="margin-top:15px;"><button id="closebutton" type="button" class="btn btn-success action-button shiny-bound-input" onclick="window.close();">Done, close this interface</button></p>')
-            ))
-        
-    ))
+            HTML('<p style="margin-top:15px;"><button id="copy-button" class="btn btn-primary" data-clipboard-target="codeout"><i class="icon-share icon-white"></i> Copy code to Clipboard</button> <button id="closebutton" type="button" class="btn btn-success action-button shiny-bound-input" onclick="window.close();"><i class="icon-ok icon-white"></i> Done, close this interface</button></p>')
+            ),
+
+        HTML('<script type="text/javascript">'),
+        HTML(' var clip = new ZeroClipboard($("#copy-button"));'),
+        HTML("clip.on( 'mouseup', function ( client, args ) { alert( \"Code copied to clipboard\" );} );"),
+        HTML('</script>')
+
+        )))
