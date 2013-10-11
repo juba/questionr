@@ -28,7 +28,7 @@
 }
 \examples{
 ## Scan the working directory.
-qscan()
+\dontrun{qscan()}
 }
 \author{
   François Briatte <f.briatte@ed.ac.uk>

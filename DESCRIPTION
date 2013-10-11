@@ -1,7 +1,8 @@
 Package: questionr
 Maintainer: Julien Barnier <julien.barnier@ens-lyon.fr>
-Authors@R: c(person("Julien", "Barnier", email="julien.barnier@ens-lyon.fr", role=c("aut","cre")),
-	     person("François", "Briatte", email="f.briatte@ed.ac.uk", role="aut"))
+Authors@R: c(person("Julien", "Barnier", email="julien.barnier@ens-lyon.fr",
+    role=c("aut","cre")), person("François", "Briatte",
+    email="f.briatte@ed.ac.uk", role="aut"))
 Version: 0.3
 Date: 2013-10-11
 License: GPL (>= 2)
@@ -31,3 +32,4 @@ Collate:
     'describe.r'
     'utils.r'
     'weighting.r'
+    'irec.r'
