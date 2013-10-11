@@ -1,3 +1,8 @@
+questionr 0.3
+-------------
+
+* New function : irec, interactive shiny interface for recoding a variable
+
 questionr 0.2
 -------------
 
