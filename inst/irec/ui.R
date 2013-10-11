@@ -18,9 +18,10 @@ shinyUI(bootstrapPage(
     HTML('span.hl.num { color: #099;}'),
     HTML('span.hl.kwd { color: #333; font-weight: bold;}'),
     HTML('span.hl.com { color: #888; font-style: italic;}'),
-    ## HTML('td.checkquote { padding-left: 1em;}'),
-    ## HTML('td.checkquote label { font-size:10px;}'),
     HTML('td.selstyle { padding-left: 2em;}'),
+    HTML('td.right { text-align: right;}'),
+    HTML('p.header { font-size: 11px;}'),
+    HTML('p.bottom-buttons { margin-top: 15px;}'),
     HTML('</style>'),
     
     div(class="container-fluid",
@@ -56,17 +57,19 @@ shinyUI(bootstrapPage(
                           uiOutput("levelsInput")))),
         mainPanel(
             tabsetPanel(
-                tabPanel("Code", htmlOutput("recodeOut")),
-                tabPanel("Check",
-                         HTML("<p style='font-size: 11px;'>Old variable as rows, new variable as columns.</p>"),
+                tabPanel(HTML("Code"), htmlOutput("recodeOut")),
+                tabPanel(HTML("Check"),
+                         HTML("<p class='header'>Old variable as rows, new variable as columns.</p>"),
                          tableOutput("tableOut"))
                 ),
-            HTML('<p style="margin-top:15px;"><button id="copy-button" class="btn btn-primary" data-clipboard-target="codeout"><i class="icon-share icon-white"></i> Copy code to Clipboard</button> <button id="closebutton" type="button" class="btn btn-success action-button shiny-bound-input" onclick="window.close();"><i class="icon-ok icon-white"></i> Done, close this interface</button></p>')
+            HTML('<p class="bottom-buttons"><button id="copy-button" class="btn btn-primary" data-clipboard-target="codeout"><i class="icon-share icon-white"></i> Copy code to clipboard</button>'),
+            HTML('<button id="closebutton" type="button" class="btn btn-success action-button shiny-bound-input"><i class="icon-ok icon-white"></i> Done, close this interface</button></p>')
             ),
 
         HTML('<script type="text/javascript">'),
         HTML(' var clip = new ZeroClipboard($("#copy-button"));'),
-        HTML("clip.on( 'mouseup', function ( client, args ) { alert( \"Code copied to clipboard\" );} );"),
+        HTML(" clip.on( 'mouseup', function ( client, args ) { alert( \"Code copied to clipboard\" );} );"),
+        HTML(" $('#closebutton').click(function() { window.close();});"),
         HTML('</script>')
 
         )))
