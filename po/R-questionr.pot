@@ -1,8 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.15.2\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2013-02-14 16:54\n"
+"Project-Id-Version: questionr 0.3\n"
+"POT-Creation-Date: 2013-10-11 14:53\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11,20 +10,56 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 
+msgid "must be a data frame."
+msgstr ""
+
+msgid "must be a column of"
+msgstr ""
+
+msgid "."
+msgstr ""
+
 msgid "there are no names to search in that object"
 msgstr ""
 
 msgid "Nothing found. Sorry."
 msgstr ""
 
+msgid "Recoded"
+msgstr ""
+
+msgid "values to NA."
+msgstr ""
+
+msgid "Recoded variable contains only numeric characters."
+msgstr ""
+
+msgid "Consider using as.numeric = TRUE."
+msgstr ""
+
+msgid "No variables specified; showing top five results."
+msgstr ""
+
+msgid "Choose between standardized and raw residuals."
+msgstr ""
+
 msgid "x must be of class 'proptab'"
+msgstr ""
+
+msgid "Object is not of class proptab"
+msgstr ""
+
+msgid "The package"
+msgstr ""
+
+msgid "could not be downloaded."
+msgstr ""
+
+msgid "Loaded package:"
 msgstr ""
 
 msgid "x and weights lengths must be the same"
 msgstr ""
 
 msgid "x and y lengths must be the same"
-msgstr ""
-
-msgid "Object is not of class proptab"
 msgstr ""

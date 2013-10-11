@@ -1,30 +1,66 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: questionr\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2013-02-14 16:54\n"
-"PO-Revision-Date: 2013-02-14 17:10+0100\n"
+"Project-Id-Version: questionr 0.3\n"
+"POT-Creation-Date: 2013-10-11 14:53\n"
+"PO-Revision-Date: 2013-10-11 15:02+0100\n"
 "Last-Translator: Julien Barnier <julien@nozav.org>\n"
 "Language-Team: \n"
+"Language: en-EN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+msgid "must be a data frame."
+msgstr ""
+
+msgid "must be a column of"
+msgstr ""
+
+msgid "."
+msgstr ""
 
 msgid "there are no names to search in that object"
-msgstr "il n'y a aucun nom dans lesquels effectuer une recherche pour cet objet"
+msgstr ""
 
 msgid "Nothing found. Sorry."
-msgstr "Désolé, aucun résultat n'a été trouvé."
+msgstr ""
+
+msgid "Recoded"
+msgstr ""
+
+msgid "values to NA."
+msgstr ""
+
+msgid "Recoded variable contains only numeric characters."
+msgstr ""
+
+msgid "Consider using as.numeric = TRUE."
+msgstr ""
+
+msgid "No variables specified; showing top five results."
+msgstr ""
+
+msgid "Choose between standardized and raw residuals."
+msgstr ""
 
 msgid "x must be of class 'proptab'"
-msgstr "x doit être de classe 'proptab'"
-
-msgid "x and weights lengths must be the same"
-msgstr "x et weights doivent être de la même taille"
-
-msgid "x and y lengths must be the same"
-msgstr "x et y doivent être de la même taille"
+msgstr ""
 
 msgid "Object is not of class proptab"
-msgstr "l'objet doit être de la classe proptab"
+msgstr ""
 
+msgid "The package"
+msgstr ""
+
+msgid "could not be downloaded."
+msgstr ""
+
+msgid "Loaded package:"
+msgstr ""
+
+msgid "x and weights lengths must be the same"
+msgstr ""
+
+msgid "x and y lengths must be the same"
+msgstr ""

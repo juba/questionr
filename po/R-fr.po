@@ -2,29 +2,67 @@ msgid ""
 msgstr ""
 "Project-Id-Version: questionr\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2013-02-14 16:54\n"
-"PO-Revision-Date: 2013-02-14 17:11+0100\n"
+"POT-Creation-Date: 2013-10-11 14:53\n"
+"PO-Revision-Date: 2013-10-11 15:08+0100\n"
 "Last-Translator: Julien Barnier <julien@nozav.org>\n"
 "Language-Team: \n"
+"Language: fr-FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+msgid "must be a data frame."
+msgstr "doit être un data frame."
+
+msgid "must be a column of"
+msgstr "doit être une colonne de"
+
+msgid "."
+msgstr "."
 
 msgid "there are no names to search in that object"
-msgstr "il n'y a aucun nom dans lesquels effectuer une recherche pour cet objet"
+msgstr ""
+"il n'y a aucun nom dans lesquels effectuer une recherche pour cet objet"
 
 msgid "Nothing found. Sorry."
 msgstr "Désolé, aucun résultat n'a été trouvé."
 
+msgid "Recoded"
+msgstr "Recodage de "
+
+msgid "values to NA."
+msgstr "valeurs en NA."
+
+msgid "Recoded variable contains only numeric characters."
+msgstr "La variable recodée ne contient que des valeurs numériques."
+
+msgid "Consider using as.numeric = TRUE."
+msgstr "Pensez à utiliser as.numeric = TRUE."
+
+msgid "No variables specified; showing top five results."
+msgstr "Aucune variable spécifiée; les cinq premiers résultats sont affichés."
+
+msgid "Choose between standardized and raw residuals."
+msgstr "Vous devez choisir entre résidus bruts et résidus standardisés."
+
 msgid "x must be of class 'proptab'"
 msgstr "x doit être de classe 'proptab'"
+
+msgid "Object is not of class proptab"
+msgstr "l'objet doit être de la classe proptab"
+
+msgid "The package"
+msgstr "L'extension"
+
+msgid "could not be downloaded."
+msgstr "ne peut pas être téléchargée."
+
+msgid "Loaded package:"
+msgstr "Extension chargée :"
 
 msgid "x and weights lengths must be the same"
 msgstr "x et weights doivent être de la même taille"
 
 msgid "x and y lengths must be the same"
 msgstr "x et y doivent être de la même taille"
-
-msgid "Object is not of class proptab"
-msgstr "l'objet doit être de la classe proptab"
-
