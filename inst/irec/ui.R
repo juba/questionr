@@ -18,17 +18,7 @@ shinyUI(bootstrapPage(
     HTML('<script type="text/javascript" src="ZeroClipboard.min.js"></script>'),
 
     ## Custom CSS
-    HTML('<style type="text/css">'),
-    HTML('span.hl.str { color: #d14;}'),
-    HTML('span.hl.kwa { color: #099;}'),
-    HTML('span.hl.num { color: #099;}'),
-    HTML('span.hl.kwd { color: #333; font-weight: bold;}'),
-    HTML('span.hl.com { color: #888; font-style: italic;}'),
-    HTML('td.selstyle { padding-left: 2em;}'),
-    HTML('td.right { text-align: right;}'),
-    HTML('p.header { font-size: 11px;}'),
-    HTML('p.bottom-buttons { margin-top: 15px;}'),
-    HTML('</style>'),
+    HTML('<link href="main.css" rel="stylesheet" />'),
 
     ## Page title
     div(class="container-fluid",
@@ -80,12 +70,6 @@ shinyUI(bootstrapPage(
             ),
 
         ## Custom javascript
-        HTML('<script type="text/javascript">'),
-        ## Zeroclipboard settings
-        HTML(' var clip = new ZeroClipboard($("#copy-button"));'),
-        HTML(" clip.on( 'mouseup', function ( client, args ) { alert( \"Code copied to clipboard\" );} );"),
-        ## Close window on "Done"
-        HTML(" $('#closebutton').click(function() { window.close();});"),
-        HTML('</script>')
+        HTML('<script type="text/javascript" src="main.js"></script>')
 
         )))
