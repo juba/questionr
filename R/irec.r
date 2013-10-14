@@ -11,7 +11,7 @@
 ##' @author Julien Barnier <julien.barnier@@ens-lyon.fr>
 ##' @examples
 ##' \dontrun{data(hdv2003)
-##' irec(hdv2003, "quelif")
+##' irec(hdv2003, "qualif")
 ##' irec(hdv2003, sexe) ## this also works}
 ##' @importFrom shiny runApp
 ##' @export
