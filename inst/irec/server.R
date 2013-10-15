@@ -20,9 +20,7 @@ shinyServer(function(input, output) {
     get_value <- function(val) {
         if (is.null(val)) return()
         if (val %in% c("NA", "TRUE", "FALSE")) return(val)
-        ## TODO : find a way to escape double quotes
-        val <- gsub('"', "", val)
-        val <- paste0('"',val,'"')
+        val <- capture.output(dput(val))
         val
     }
 
@@ -50,7 +48,7 @@ shinyServer(function(input, output) {
             }
             ## Normal values
             if (l!="*irec_NA_id*")
-                out <- paste0(out, sprintf('%s[%s == "%s"] <- %s\n', dest_var, src_var, l, value))
+                out <- paste0(out, sprintf('%s[%s == %s] <- %s\n', dest_var, src_var, capture.output(dput(l)), value))
             ## NA values
             else
                 out <- paste0(out, sprintf('%s[is.na(%s)] <- %s\n', dest_var, src_var, value))
