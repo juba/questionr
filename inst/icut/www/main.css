@@ -13,10 +13,15 @@ p.bottom-buttons { margin-top: 15px;}
 /* Summary table */
 
 #sumtable {
-    width: 49em;
+    max-width: 49em;
 }
 
 #sumtable td {
-    width: 7em;
+    max-width: 7em;
 }
 
+
+.row-fluid .inner {
+    margin-left: 0px;
+}
+    

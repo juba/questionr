@@ -61,7 +61,7 @@ shinyUI(bootstrapPage(
                                   HTML("<td>New variable : </td><td>"), textInput("newvarname","", paste0(oldvar_name,".rec")),HTML("</td>"),
                                   HTML("</tr></table>")
                                   )),
-                    div(class="span12",
+                    div(class="span12 inner",
                         tags$form(class="well",
                                   HTML(sprintf("<p>Statistics of <tt>%s</tt> :</p>", oldvar_name)),
                                   HTML(summary_table(oldvar)),
