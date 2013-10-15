@@ -26,7 +26,9 @@ shinyServer(function(input, output) {
                                sprintf('%s[,"%s"]', df_name, newvar_name),
                                sprintf('%s$%s', df_name, newvar_name))
         newlevels <- paste0(capture.output(dput(input$sortable)), collapse="")
-        out <- sprintf("%s <- factor(%s, levels=", dest_var, src_var)
+	out <- sprintf("## Reordering %s", src_var)
+	if (src_var != dest_var) out <- paste0(out, sprintf(" into %s", dest_var))
+        out <- paste0(out, sprintf("\n%s <- factor(%s, levels=", dest_var, src_var))
         out <- paste0(out, newlevels, ')')
         out
     }
