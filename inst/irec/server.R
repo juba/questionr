@@ -63,7 +63,7 @@ shinyServer(function(input, output) {
     ## Call recoding code generation function based on style
     generate_code <- function(newvar_name) {
         ## if null, create temporary variable for check table
-        if (is.null(newvar_name)) dest_var <- "irec_tmp"
+        if (is.null(newvar_name)) dest_var <- ".irec_tmp"
         ## else, format new variable for code
         else
             dest_var <- ifelse(grepl(" ", newvar_name),
@@ -102,7 +102,7 @@ shinyServer(function(input, output) {
         ## Eval generated code
         eval(parse(text=code))
         ## Display table
-        tab <- table(oldvar, irec_tmp, useNA="always")
+        tab <- table(oldvar, .irec_tmp, useNA="always")
         rownames(tab)[is.na(rownames(tab))] <- "NA"
         colnames(tab)[is.na(colnames(tab))] <- "NA"
         tab
@@ -118,7 +118,7 @@ shinyServer(function(input, output) {
         if (any(is.na(oldvar))) levs <- c(levs, NA)
         ## Generate fields
         for (l in levs) {
-            out <- paste0(out,'<tr><td class="right">',l,'</td>')
+            out <- paste0(out,'<tr><td class="right">',shiny:::htmlEscape(l),'</td>')
             out <- paste0(out,'<td>&nbsp;<i class="icon-arrow-right"></i>&nbsp;</td>')
             ## If the level is NA, replace by the NA value placeholder
             out <- paste0(out,'<td>',textInput(ifelse(is.na(l), "*irec_NA_id*",l),"", ifelse(is.na(l), "NA",l)),'</td>')
