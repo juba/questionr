@@ -1,31 +1,43 @@
 \name{odds.ratio}
 \alias{odds.ratio}
-\title{Odds Ratios for logistic regression}
+\alias{odds.ratio.glm}
+\alias{odds.ratio.multinom}
+\title{Odds Ratio}
 \usage{
-  odds.ratio(reg, level = 0.95, digits = 3)
+  odds.ratio(x, ...)
+
+  \method{odds.ratio}{glm} (x, level = 0.95, digits = 3)
+
+  \method{odds.ratio}{multinom} (x, level = 0.95,
+    digits = 3)
 }
 \arguments{
-  \item{reg}{an object of class \code{"glm"} (with
-  \code{family=binomial}) or \code{"multinom"}}
+  \item{x}{object from whom odds ratio will be computed}
+
+  \item{...}{additional parameters}
 
   \item{level}{the confidence level required}
 
   \item{digits}{number of decimal to display}
 }
+\value{
+  For \code{glm} or \code{multinom} objects, returns odds
+  ratios, their confidence interval and tests if they
+  differ from 1.
+}
 \description{
-  Computes odds ratios (the exponential of model
-  coefficients), their confidence intervals and tests if
-  they differ from 1.
+  S3 method for odds ratio
 }
 \details{
   Odds ratio could also be obtained with
-  \code{exp(coef(reg))} and confidence intervals with
-  \code{exp(confint(reg))}.
+  \code{exp(coef(x))} and confidence intervals with
+  \code{exp(confint(x))}.
 
   For models calculated with \code{glm}, p-value are the
-  same as \code{summary(reg)$coefficients[,4]}. For models
-  calculated with \code{multinom} (nnet), p-value are
-  calculated according to
+  same as \code{summary(x)$coefficients[,4]}.
+
+  For models calculated with \code{multinom} (nnet),
+  p-value are calculated according to
   \url{http://www.ats.ucla.edu/stat/r/dae/mlogit.htm}.
 }
 \examples{
@@ -34,10 +46,11 @@ reg <- glm(cinema ~ sexe + age, data=hdv2003, family=binomial)
 odds.ratio(reg)
 }
 \author{
-  Joseph Larmarange <joseph
+  Joseph Larmarange <joseph@larmarange.net>
 }
 \seealso{
-  \code{\link{glm}} in the \link{stats} package and
+  \code{\link{glm}} in the \link{stats} package.
+
   \code{\link[nnet]{multinom}} in the \link[nnet]{nnet}
   package.
 }
