@@ -4,7 +4,6 @@
 #' 
 #' @aliases odds.ratio odds.ratio.glm odds.ratio.multinom
 #' @param x object from whom odds ratio will be computed
-#' @param ... additional parameters
 #' @author Joseph Larmarange <joseph@@larmarange.net>
 #' @export odds.ratio
 
@@ -21,11 +20,12 @@ odds.ratio <-
 #' @param level the confidence level required
 #' @param digits number of decimal to display
 #' @details
-#' Odds ratio could also be obtained with \code{exp(coef(x))} and confidence
-#' intervals with \code{exp(confint(x))}.
-#' 
-#' For models calculated with \code{glm}, p-value are the same as
-#' \code{summary(x)$coefficients[,4]}.
+#' For models calculated with \code{glm}, \code{x} should have
+#' been calculated with \code{family=binomial}.
+#' p-value are the same as \code{summary(x)$coefficients[,4]}. 
+#' Odds ratio could also be obtained with \code{exp(coef(x))} and 
+#' confidence intervals with \code{exp(confint(x))}.
+
 #' @return
 #' For \code{glm} or \code{multinom} objects, returns odds ratios, 
 #' their confidence interval and tests if they differ from 1.
@@ -83,3 +83,39 @@ odds.ratio.multinom <-
   	colnames(r) <- c("OR",dimnames(ci)[[2]],"p")
   	printCoefmat(r,signif.stars=TRUE,has.Pvalue=TRUE)
   }
+
+#' @rdname odds.ratio
+#' @method odds.ratio factor
+#' @S3method odds.ratio factor
+#' @aliases odds.ratio.factor
+#' @param y a second factor object
+#' @param ... additional parameters sent to \code{fisher.test}
+#' @return
+#' For 2x2 \code{table} or \code{factor} objects, \code{odds.ratio}
+#' is a wrapper for \code{fisher.test}.
+#' @examples
+#' odds.ratio(hdv2003$sport, hdv2003$cuisine)
+#' @export odds.ratio.factor
+
+odds.ratio.factor <- 
+	function(x, y, level=0.95, ...) {
+		if (!inherits(x, "factor")) stop("x must be of class 'factor'.")
+		fisher.test(x, y, conf.level=level, ...)
+	}
+
+#' @rdname odds.ratio
+#' @method odds.ratio table
+#' @S3method odds.ratio table
+#' @aliases odds.ratio.table
+#' @examples
+#' odds.ratio(table(hdv2003$sport, hdv2003$cuisine))
+#' @seealso 
+#' \code{\link{fisher.test}} in the \link{stats} package.
+#' @export odds.ratio.table
+
+odds.ratio.table <- 
+	function(x, level=0.95, ...) {
+		if (!inherits(x, "table")) stop("x must be of class 'table'.")
+		fisher.test(x, conf.level=level, ...)
+	}
+
