@@ -32,6 +32,7 @@ Collate:
     'table.multi.r'
     'describe.r'
     'utils.r'
+    'odds.ratio.r'
     'weighting.r'
     'irec.r'
     'iorder.R'
