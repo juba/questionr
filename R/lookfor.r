@@ -28,7 +28,6 @@
 #' lookfor(nes1948, "personal attribute")}
 #' @source Based on the behaviour of the \code{lookfor} command in Stata. Future versions might include fuzzey search as featured by the \code{query} function of the \code{memisc} package, which also searches value labels and therefore offers a wider search scope.
 #' @seealso \code{\link{query}} in the \link{memisc} package
-#' @importFrom memisc description
 #' @export
 
 lookfor <- function(data, 
@@ -48,8 +47,8 @@ lookfor <- function(data,
   if(is.null(l)) l <- attr(data, "var.labels")
   # memisc objects
   if(grepl("data.set|importer", class(data))) {
-    #suppressMessages(suppressWarnings(require(memisc)))
-    l <- as.vector(memisc::description(data))
+      suppressMessages(suppressWarnings(require(memisc)))
+      l <- as.vector(description(data))
   }
   if(length(l) & labels) {
     # search labels

@@ -38,8 +38,8 @@ describe <- function(data, ...) {
   }
   # memisc objects
   if(grepl("data.set|importer", class(data))) {
-    #suppressMessages(suppressWarnings(require(memisc)))
-    l <- memisc::description(data[, x])
+      suppressMessages(suppressWarnings(require(memisc)))
+      l <- description(data[, x])
   }
   else {
     # foreign objects
