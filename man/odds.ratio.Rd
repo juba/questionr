@@ -8,10 +8,11 @@
 \usage{
   odds.ratio(x, ...)
 
-  \method{odds.ratio}{glm} (x, level = 0.95, digits = 3)
+  \method{odds.ratio}{glm} (x, level = 0.95, digits = 3,
+    ...)
 
   \method{odds.ratio}{multinom} (x, level = 0.95,
-    digits = 3)
+    digits = 3, ...)
 
   \method{odds.ratio}{factor} (x, y, level = 0.95, ...)
 
@@ -20,14 +21,14 @@
 \arguments{
   \item{x}{object from whom odds ratio will be computed}
 
+  \item{...}{additional parameters sent to
+  \code{fisher.test}}
+
   \item{level}{the confidence level required}
 
   \item{digits}{number of decimal to display}
 
   \item{y}{a second factor object}
-
-  \item{...}{additional parameters sent to
-  \code{fisher.test}}
 }
 \value{
   For \code{glm} or \code{multinom} objects, returns odds
