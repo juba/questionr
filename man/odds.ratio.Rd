@@ -29,8 +29,6 @@
   \item{digits}{number of decimal to display}
 
   \item{y}{a second factor object}
-
-  \item{...}{a second factor object}
 }
 \value{
   For \code{glm} or \code{multinom} objects, returns odds

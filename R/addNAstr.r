@@ -3,11 +3,11 @@
 #' This function modifies a factor by turning \code{NA} into an extra level 
 #' (so that \code{NA} values are counted in tables, for instance).
 #' This version of \code{addNA} extends the same function provided in \R by
-#' allowing to ask for a string name for the extra level (see examples).
+#' allowing to specify a string name for the extra level (see examples).
 #' 
 #' @param x a vector of data, usually taking a small number of distinct values.
-#' @param ifany only add an \code{NA} level if it is used, i.e. if \code{any(is.na(x)}.
-#' @param as.string should the extra level name be a string (\code{"NA"}) instead of \code{NA} itself. Could also be a string to use for the name of this extra level
+#' @param value string to use for the extra level name. If NULL, the extra level is created as NA, and the result is the same as the one of the \code{addNA} function.
+#' @param ... arguments passed to \code{addNA}.
 #' @return 
 #' an object of class \code{"factor"}, original missing values being coded as an
 #' extra level named \code{NA} if \code{as.string=FALSE}, \code{"NA"} if 
@@ -17,28 +17,16 @@
 #' @examples
 #' f <- as.factor(c("a","b",NA,"a","b"))
 #' f
-#' addNA(f)
-#' addNA(f, as.string=TRUE)
-#' addNA(f, as.string="missing")
+#' addNAstr(f)
+#' addNAstr(f, value="missing")
+#' addNAstr(f, value=NULL)
 #' @source Adapted from James (\url{http://stackoverflow.com/a/5817181}) 
 #' by Joseph Larmarange <joseph@@larmarange.net>
-#' @export addNA
+#' @export addNAstr
 
-addNA <- function (x, ifany = FALSE, as.string = FALSE)
-{
-	if (!is.factor(x)) 
-		x <- factor(x)
-	if (ifany & !any(is.na(x))) 
-		return(x)
-	ll <- levels(x)
-	if (!any(is.na(ll))) 
-		ll <- c(ll, NA)
-	x <- factor(x, levels = ll, exclude = NULL)
-	if (is.character(as.string)) {
-		s <- as.string
-		as.string <- TRUE
-	} else
-		s <- "NA"
-	if(as.string) levels(x)[is.na(levels(x))] <- s
-	x
+addNAstr <- function(x, value="NA", ...) {
+   x <- addNA(x, ...)
+   if (!is.null(value)) levels(x)[is.na(levels(x))] <- value
+   x
 }
+
