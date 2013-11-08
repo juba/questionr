@@ -3,7 +3,7 @@
 #' S3 method for odds ratio
 #' 
 #' @param x object from whom odds ratio will be computed
-#' @param ... additional parameters sent to \code{fisher.test}
+#' @param ... further arguments passed to or from other methods
 #' @author Joseph Larmarange <joseph@@larmarange.net>
 #' @export odds.ratio
 
@@ -98,7 +98,7 @@ function(x, level=0.95, digits=3, ...) {
 `odds.ratio.factor` <- 
 function(x, y, level=0.95, ...) {
     if (!inherits(x, "factor")) stop("x must be of class 'factor'.")
-    fisher.test(x, y, conf.level=level, ...)
+    fisher.test(x, y, conf.level=level)
 }
 
 #' @rdname odds.ratio
@@ -114,6 +114,5 @@ function(x, y, level=0.95, ...) {
 `odds.ratio.table` <- 
 function(x, level=0.95, ...) {
     if (!inherits(x, "table")) stop("x must be of class 'table'.")
-    fisher.test(x, conf.level=level, ...)
+    fisher.test(x, conf.level=level)
 }
-

@@ -21,14 +21,16 @@
 \arguments{
   \item{x}{object from whom odds ratio will be computed}
 
-  \item{...}{additional parameters sent to
-  \code{fisher.test}}
+  \item{...}{further arguments passed to or from other
+  methods}
 
   \item{level}{the confidence level required}
 
   \item{digits}{number of decimal to display}
 
   \item{y}{a second factor object}
+
+  \item{...}{a second factor object}
 }
 \value{
   For \code{glm} or \code{multinom} objects, returns odds
