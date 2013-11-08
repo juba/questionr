@@ -38,7 +38,7 @@ describe(nes1948, "v480050", "version|set", "v48004*")}
   François Briatte <f.briatte@ed.ac.uk>
 }
 \seealso{
-  \code{\link{regex}}, \code{\link{description}} in the
-  \code{\link{memisc}} package
+  \code{\link{regex}}, \code{description} in the
+  \code{memisc} package
 }
 

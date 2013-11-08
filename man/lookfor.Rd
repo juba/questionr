@@ -67,6 +67,6 @@ lookfor(nes1948, "personal attribute")}
   François Briatte <f.briatte@ed.ac.uk>
 }
 \seealso{
-  \code{\link{query}} in the \link{memisc} package
+  \code{query} in the \code{memisc} package
 }
 

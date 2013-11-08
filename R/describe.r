@@ -10,7 +10,7 @@
 #' \code{memisc} package and fetches the variable labels in datasets
 #' imported with the \code{foreign} package.
 #' @seealso
-#' \code{\link{regex}}, \code{\link{description}} in the \code{\link{memisc}} package
+#' \code{\link{regex}}, \code{description} in the \code{memisc} package
 #' @author François Briatte <f.briatte@@ed.ac.uk>
 #' @examples
 #' # Variables in a standard R data frame.

@@ -27,7 +27,7 @@
 #' # Look for a phrase.
 #' lookfor(nes1948, "personal attribute")}
 #' @source Based on the behaviour of the \code{lookfor} command in Stata. Future versions might include fuzzey search as featured by the \code{query} function of the \code{memisc} package, which also searches value labels and therefore offers a wider search scope.
-#' @seealso \code{\link{query}} in the \link{memisc} package
+#' @seealso \code{query} in the \code{memisc} package
 #' @export
 
 lookfor <- function(data, 
