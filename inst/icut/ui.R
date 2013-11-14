@@ -22,7 +22,7 @@ summary_table <- function(v) {
     out <- paste0(out, "</tr></thead><tbody><tr>")
     out <- paste0(out, sprintf("<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>",
                           min(v, na.rm=TRUE), quantile(v, prob=0.25, na.rm=TRUE),
-                          median(v, na.rm=TRUE), mean(v, na.rm=TRUE),
+                          median(v, na.rm=TRUE), round(mean(v, na.rm=TRUE),3),
                           quantile(v, prob=0.75, na.rm=TRUE), max(v, na.rm=TRUE), sum(is.na(v))))
     out <- paste0(out, "</tr></tbody></table>")
     out
