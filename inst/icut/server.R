@@ -33,8 +33,8 @@ shinyServer(function(input, output) {
                               length.out = nb)
         }
         if (length(breaks) > 1 && input$addext) {
-            if (min(breaks) > min(oldvar)) breaks <- c(min(oldvar), breaks)
-            if (max(breaks) < max(oldvar)) breaks <- c(breaks, max(oldvar))
+            if (min(breaks, na.rm=TRUE) > min(oldvar, na.rm=TRUE)) breaks <- c(min(oldvar, na.rm=TRUE), breaks)
+            if (max(breaks, na.rm=TRUE) < max(oldvar, na.rm=TRUE)) breaks <- c(breaks, max(oldvar, na.rm=TRUE))
         }
         breaks
     }
