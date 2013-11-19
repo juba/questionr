@@ -2,9 +2,9 @@ library(shiny)
 library(xtable)
 
 ## Global variables
-df_name <- get(".questionr_icut_df", .GlobalEnv)
+df_name <- getOption("questionr_icut_df")
 df <- get(df_name)
-oldvar_name <- get(".questionr_icut_oldvar", .GlobalEnv)
+oldvar_name <- getOption("questionr_icut_oldvar")
 oldvar <- df[,oldvar_name]
 ## Formatted source variable name
 src_var <- ifelse(grepl(" ", oldvar_name),
@@ -12,8 +12,8 @@ src_var <- ifelse(grepl(" ", oldvar_name),
                   sprintf('%s$%s', df_name, oldvar_name))
 
 ## Flag to display the alert on first time launch
-display_alert <- !exists(".questionr_displayed_alert", .GlobalEnv)
-if (display_alert) assign(".questionr_displayed_alert", FALSE, envir=.GlobalEnv)
+display_alert <- is.null(getOption("questionr_displayed_alert"))
+if (display_alert) options(questionr_displayed_alert=TRUE)
 
 summary_table <- function(v) {
     out <- "<table class='table table-bordered table-condensed' id='sumtable'>"
@@ -22,7 +22,7 @@ summary_table <- function(v) {
     out <- paste0(out, "</tr></thead><tbody><tr>")
     out <- paste0(out, sprintf("<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>",
                           min(v, na.rm=TRUE), quantile(v, prob=0.25, na.rm=TRUE),
-                          median(v, na.rm=TRUE), mean(v, na.rm=TRUE),
+                          median(v, na.rm=TRUE), round(mean(v, na.rm=TRUE),3),
                           quantile(v, prob=0.75, na.rm=TRUE), max(v, na.rm=TRUE), sum(is.na(v))))
     out <- paste0(out, "</tr></tbody></table>")
     out

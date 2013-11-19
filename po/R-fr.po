@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: questionr\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2013-10-11 14:53\n"
-"PO-Revision-Date: 2013-10-11 15:08+0100\n"
+"POT-Creation-Date: 2013-11-08 12:31\n"
+"PO-Revision-Date: 2013-11-08 12:32+0100\n"
 "Last-Translator: Julien Barnier <julien@nozav.org>\n"
 "Language-Team: \n"
 "Language: fr-FR\n"
@@ -27,6 +27,21 @@ msgstr ""
 
 msgid "Nothing found. Sorry."
 msgstr "Désolé, aucun résultat n'a été trouvé."
+
+msgid "x must be of class 'glm'."
+msgstr "x doit être de classe 'glm'."
+
+msgid "x should be a glm with family=binomial."
+msgstr "x doit être de classe 'glm' avec 'family=binomial'."
+
+msgid "x must be of class 'multinom'."
+msgstr "x doit être de classe 'multinom'."
+
+msgid "x must be of class 'factor'."
+msgstr "x doit être de classe 'factor'."
+
+msgid "x must be of class 'table'."
+msgstr "x doit être de classe 'table'."
 
 msgid "Recoded"
 msgstr "Recodage de "

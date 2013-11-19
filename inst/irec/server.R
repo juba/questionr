@@ -3,10 +3,10 @@ library(highr)
 
 ## Global variables
 ## Original data frame name and object
-df_name <- get(".questionr_irec_df", .GlobalEnv)
+df_name <- getOption("questionr_irec_df")
 df <- get(df_name)
 ## Variable to be recoded, name and object
-oldvar_name <- get(".questionr_irec_oldvar", .GlobalEnv)
+oldvar_name <- getOption("questionr_irec_oldvar")
 oldvar <- df[,oldvar_name]
 ## Formatted source variable name
 src_var <- ifelse(grepl(" ", oldvar_name),

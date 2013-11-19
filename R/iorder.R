@@ -16,6 +16,7 @@
 ##' \dontrun{data(hdv2003)
 ##' iorder(hdv2003, "qualif")}
 ##' @importFrom shiny runApp
+##' @importFrom highr hi_html
 ##' @export
 
 iorder <- function(df, oldvar) {
@@ -23,14 +24,14 @@ iorder <- function(df, oldvar) {
     if (!is.character(df)) df <- deparse(substitute(df))
     ## Check if df is a data frame
     if (!is.data.frame(get(df))) stop(sQuote(paste0(df, ' must be a data frame.')))
-    assign(".questionr_iorder_df", df, envir=.GlobalEnv)
+    options(questionr_iorder_df=df)
     ## If oldvar is not a character string, deparse it
     is_char <- FALSE
     try(if(is.character(oldvar)) is_char <- TRUE, silent=TRUE)
     if (!is_char) oldvar <- deparse(substitute(oldvar))
     ## Check if oldvar is a column of df
     if (!(oldvar %in% names(get(df)))) stop(sQuote(paste0(oldvar, ' must be a column of ', df, '.')))    
-    assign(".questionr_iorder_oldvar", oldvar, envir=.GlobalEnv)
+    options(questionr_iorder_oldvar=oldvar)
     ## Run shiny app
     invisible(shiny::runApp(system.file("iorder", package="questionr")))
 }

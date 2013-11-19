@@ -1,9 +1,9 @@
 library(shiny)
 
 ## Global variables
-df_name <- get(".questionr_iorder_df", .GlobalEnv)
+df_name <- getOption("questionr_iorder_df")
 df <- get(df_name)
-oldvar_name <- get(".questionr_iorder_oldvar", .GlobalEnv)
+oldvar_name <- getOption("questionr_iorder_oldvar")
 oldvar <- df[,oldvar_name]
 ## Formatted source variable name
 src_var <- ifelse(grepl(" ", oldvar_name),
@@ -11,8 +11,8 @@ src_var <- ifelse(grepl(" ", oldvar_name),
                   sprintf('%s$%s', df_name, oldvar_name))
 
 ## Flag to display the alert on first time launch
-display_alert <- !exists(".questionr_displayed_alert", .GlobalEnv)
-if (display_alert) assign(".questionr_displayed_alert", FALSE, envir=.GlobalEnv)
+display_alert <- is.null(getOption("questionr_displayed_alert"))
+if (display_alert) options(questionr_displayed_alert=TRUE)
 
 
 generate_levels_ol <- function(oldvar) {
@@ -47,7 +47,7 @@ shinyUI(bootstrapPage(
                    div(class="span8",
                        div(class="alert alert-dismissable",
                            HTML('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'),
-                           HTML("<strong>Warning :</strong> This inteface doesn't do anything by itself. It only generates R code you'll have to copy/paste into your script and execute yourself.")
+                           HTML("<strong>Warning :</strong> This interface doesn't do anything by itself. It only generates R code you'll have to copy/paste into your script and execute yourself.")
                            )))} else "",
 
         ## First panel : new variable name and recoding style

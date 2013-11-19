@@ -1,0 +1,118 @@
+#' Odds Ratio
+#' 
+#' S3 method for odds ratio
+#' 
+#' @param x object from whom odds ratio will be computed
+#' @param ... further arguments passed to or from other methods
+#' @author Joseph Larmarange <joseph@@larmarange.net>
+#' @export odds.ratio
+
+
+`odds.ratio` <-
+function (x, ...) {
+    UseMethod("odds.ratio")
+}
+
+#' @rdname odds.ratio
+#' @method odds.ratio glm
+#' @S3method odds.ratio glm
+#' @aliases odds.ratio.glm
+#' @param level the confidence level required
+#' @param digits number of decimal to display
+#' @details
+#' For models calculated with \code{glm}, \code{x} should have
+#' been calculated with \code{family=binomial}.
+#' p-value are the same as \code{summary(x)$coefficients[,4]}. 
+#' Odds ratio could also be obtained with \code{exp(coef(x))} and 
+#' confidence intervals with \code{exp(confint(x))}.
+#' @return
+#' For \code{glm} or \code{multinom} objects, returns odds ratios, 
+#' their confidence interval and tests if they differ from 1.
+#' @examples
+#' data(hdv2003)
+#' reg <- glm(cinema ~ sexe + age, data=hdv2003, family=binomial)
+#' odds.ratio(reg)
+#' @seealso 
+#' \code{\link{glm}} in the \link{stats} package.
+#' @export odds.ratio.glm
+
+`odds.ratio.glm` <- 
+function(x, level=0.95, digits=3, ...) {
+    if (!inherits(x, "glm")) stop("x must be of class 'glm'.")
+    if(x$family$family != "binomial")
+        stop('x should be a glm with family=binomial.')
+    r <- cbind(exp(coef(x)),exp(confint(x, level=level)),summary(x)$coefficients[,4])
+    r[,1:3] <- round(r[,1:3],digits=digits)
+    colnames(r)[1] <- "OR"
+    colnames(r)[4] <- "p"
+    printCoefmat(r,signif.stars=TRUE,has.Pvalue=TRUE)
+}
+
+
+#' @rdname odds.ratio
+#' @method odds.ratio multinom
+#' @S3method odds.ratio multinom
+#' @aliases odds.ratio.multinom
+#' @details
+#' For models calculated with \code{multinom} (nnet),
+#' p-value are calculated according to
+#' \url{http://www.ats.ucla.edu/stat/r/dae/mlogit.htm}.
+#' @seealso 
+#' \code{\link[nnet]{multinom}} in the \link[nnet]{nnet} package.
+#' @export odds.ratio.glm
+
+`odds.ratio.multinom` <- 
+function(x, level=0.95, digits=3, ...) {
+    if (!inherits(x, "multinom")) stop("x must be of class 'multinom'.")
+    coef <- summary(x)$coefficients
+    ci <- confint(x,level=level)
+    ## From http://www.ats.ucla.edu/stat/r/dae/mlogit.htm
+    z <- summary(x)$coefficients/summary(x)$standard.errors
+    p <- p <- (1 - pnorm(abs(z), 0, 1)) * 2
+    d <- dim(ci)
+    r <- array(NA,c(d[1]*d[3],d[2]+2))
+    dimnames(r)[[1]]<-rep("",d[1]*d[3])
+    for (i in 1:d[3]) {
+        fl <- (i-1)*d[1] + 1 #first line
+        ll <- i*d[1] #last line
+        r[fl:ll,] <- cbind(coef[i,],ci[,,i],p[i,])
+        rownames(r)[fl:ll] <- paste0(rownames(coef)[i],"/",colnames(coef))
+    }
+    r[,1:3] <- round(r[,1:3],digits=digits)
+    colnames(r) <- c("OR",dimnames(ci)[[2]],"p")
+    printCoefmat(r,signif.stars=TRUE,has.Pvalue=TRUE)
+}
+
+#' @rdname odds.ratio
+#' @method odds.ratio factor
+#' @S3method odds.ratio factor
+#' @aliases odds.ratio.factor
+#' @param y a second factor object
+#' @return
+#' For 2x2 \code{table} or \code{factor} objects, \code{odds.ratio}
+#' is a wrapper for \code{fisher.test}.
+#' @examples
+#' odds.ratio(hdv2003$sport, hdv2003$cuisine)
+#' @export odds.ratio.factor
+
+`odds.ratio.factor` <- 
+function(x, y, level=0.95, ...) {
+    if (!inherits(x, "factor")) stop("x must be of class 'factor'.")
+    fisher.test(x, y, conf.level=level)
+}
+
+#' @rdname odds.ratio
+#' @method odds.ratio table
+#' @S3method odds.ratio table
+#' @aliases odds.ratio.table
+#' @examples
+#' odds.ratio(table(hdv2003$sport, hdv2003$cuisine))
+#' @seealso 
+#' \code{\link{fisher.test}} in the \link{stats} package.
+#' @export odds.ratio.table
+
+`odds.ratio.table` <- 
+function(x, level=0.95, ...) {
+    if (!inherits(x, "table")) stop("x must be of class 'table'.")
+    fisher.test(x, conf.level=level)
+}

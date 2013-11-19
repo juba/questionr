@@ -3,10 +3,10 @@ library(highr)
 
 ## Global variables
 ## Original data frame name and object
-df_name <- get(".questionr_icut_df", .GlobalEnv)
+df_name <- getOption("questionr_icut_df")
 df <- get(df_name)
 ## Variable to be recoded, name and object
-oldvar_name <- get(".questionr_icut_oldvar", .GlobalEnv)
+oldvar_name <- getOption("questionr_icut_oldvar")
 oldvar <- df[,oldvar_name]
 ## Formatted source variable name
 src_var <- ifelse(grepl(" ", oldvar_name),
@@ -33,8 +33,8 @@ shinyServer(function(input, output) {
                               length.out = nb)
         }
         if (length(breaks) > 1 && input$addext) {
-            if (min(breaks) > min(oldvar)) breaks <- c(min(oldvar), breaks)
-            if (max(breaks) < max(oldvar)) breaks <- c(breaks, max(oldvar))
+            if (min(breaks, na.rm=TRUE) > min(oldvar, na.rm=TRUE)) breaks <- c(min(oldvar, na.rm=TRUE), breaks)
+            if (max(breaks, na.rm=TRUE) < max(oldvar, na.rm=TRUE)) breaks <- c(breaks, max(oldvar, na.rm=TRUE))
         }
         breaks
     }

@@ -1,19 +1,19 @@
-\name{copy}
+\name{clipcopy}
+\alias{clipcopy}
+\alias{clipcopy.default}
+\alias{clipcopy.proptab}
 \alias{copie}
 \alias{copie.default}
 \alias{copie.proptab}
-\alias{copy}
-\alias{copy.default}
-\alias{copy.proptab}
 \title{Transform an object into HTML and copy it for export}
 \usage{
-  copy(obj, ...)
+  clipcopy(obj, ...)
 
-  \method{copy}{default} (obj, append = FALSE,
+  \method{clipcopy}{default} (obj, append = FALSE,
     file = FALSE, filename = "temp.html",
     clipboard.size = 4096, ...)
 
-  \method{copy}{proptab} (obj, percent = NULL,
+  \method{clipcopy}{proptab} (obj, percent = NULL,
     digits = NULL, justify = "right", ...)
 }
 \arguments{
@@ -58,13 +58,13 @@ data(iris)
 tab <- table(cut(iris$Sepal.Length,8),cut(iris$Sepal.Width,4))
 \dontrun{copie(tab)}
 ptab <- rprop(tab, percent=TRUE)
-\dontrun{copy(ptab)}
+\dontrun{clipcopy(ptab)}
 }
 \seealso{
   \code{\link[R2HTML]{HTML}},
   \code{\link[questionr]{format.proptab}}
 
-  \code{\link[questionr]{copy}},
+  \code{\link[questionr]{clipcopy}},
   \code{\link[questionr]{format.proptab}}
 }
 \keyword{connection}

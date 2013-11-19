@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: questionr 0.3\n"
-"POT-Creation-Date: 2013-10-11 14:53\n"
+"POT-Creation-Date: 2013-11-08 12:31\n"
 "PO-Revision-Date: 2013-10-11 15:02+0100\n"
 "Last-Translator: Julien Barnier <julien@nozav.org>\n"
 "Language-Team: \n"
@@ -24,6 +24,21 @@ msgid "there are no names to search in that object"
 msgstr ""
 
 msgid "Nothing found. Sorry."
+msgstr ""
+
+msgid "x must be of class 'glm'."
+msgstr ""
+
+msgid "x should be a glm with family=binomial."
+msgstr ""
+
+msgid "x must be of class 'multinom'."
+msgstr ""
+
+msgid "x must be of class 'factor'."
+msgstr ""
+
+msgid "x must be of class 'table'."
 msgstr ""
 
 msgid "Recoded"

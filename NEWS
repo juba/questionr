@@ -1,8 +1,10 @@
 questionr 0.3
 -------------
 
+* New functions from Joseph Larmarange : addNAstr and odds.ratios
+* copy renamed to clipcopy to avoid name collisions with data.table
 * New function : icut, interactive shiny interface for `cut`
-* New function : iorder, interactive shiny interface for ordering the levels of a variable
+* New function : iorder, interactive shiny interface for ordering the levels of a factor
 * New function : irec, interactive shiny interface for recoding a variable
 
 questionr 0.2

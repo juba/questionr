@@ -1,16 +1,16 @@
 library(shiny)
 
 ## Global variables
-df_name <- get(".questionr_irec_df", .GlobalEnv)
-oldvar_name <- get(".questionr_irec_oldvar", .GlobalEnv)
+df_name <- getOption("questionr_irec_df")
+oldvar_name <- getOption("questionr_irec_oldvar")
 ## Formatted source variable name
 src_var <- ifelse(grepl(" ", oldvar_name),
                   sprintf('%s[,"%s"]', df_name, oldvar_name),
                   sprintf('%s$%s', df_name, oldvar_name))
 
 ## Flag to display the alert on first time launch
-display_alert <- !exists(".questionr_displayed_alert", .GlobalEnv)
-if (display_alert) assign(".questionr_displayed_alert", FALSE, envir=.GlobalEnv)
+display_alert <- is.null(getOption("questionr_displayed_alert"))
+if (display_alert) options(questionr_displayed_alert=TRUE)
 
 shinyUI(bootstrapPage(
 
@@ -31,7 +31,7 @@ shinyUI(bootstrapPage(
                    div(class="span12",
                        div(class="alert alert-dismissable",
                            HTML('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'),
-                           HTML("<strong>Warning :</strong> This inteface doesn't do anything by itself. It only generates R code you'll have to copy/paste into your script and execute yourself.")
+                           HTML("<strong>Warning :</strong> This interface doesn't do anything by itself. It only generates R code you'll have to copy/paste into your script and execute yourself.")
                            )))} else "",
 
         ## First panel : new variable name and recoding style
