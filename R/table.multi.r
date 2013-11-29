@@ -68,9 +68,20 @@ multi.table <- function(df, true.codes=NULL, weights=NULL) {
 ##' cross.multi.table(df[,c("jazz", "rock","electronic")], df$sex, true.codes=list("Y"))
 ##' @export
  
-cross.multi.table <- function(df, crossvar, ...) {
+cross.multi.table <- function(df, crossvar, weights=NULL, ...) {
   tmp <- factor(crossvar)
-  simplify2array(by(df, tmp, multi.table, ...))
+  if(is.null(weights))
+      return(simplify2array(by(df, tmp, multi.table, ...)))
+  else {
+      ## (Not very elegant) fix when weights is provided
+      df <- cbind(weights, df)
+      res <- by(df, tmp, function(d) {
+          tmpw <- d[,1]
+          tmpd <- d[,-1]
+          multi.table(tmpd, weights=tmpw, ...)
+      })
+      return(simplify2array(res))
+  }
 }
 
 ##' Split a multiple choices variable in a series of binary variables
