@@ -14,7 +14,8 @@
 ##'
 ##' By default, only '1' and 'TRUE' as considered as 'true' values fro the binary variables,
 ##' and counted in the frequency table. It is possible to specify other values to be counted
-##' with the \code{true.codes} argument.
+##' with the \code{true.codes} argument. Note than '1' and 'TRUE' are always considered as
+##' true values even if \code{true.codes} is provided.
 ##'
 ##' @return Object of class table.
 ##' @seealso \code{\link[questionr]{cross.multi.table}}, \code{\link[questionr]{multi.split}}, \code{\link{table}}
@@ -49,6 +50,7 @@ multi.table <- function(df, true.codes=NULL, weights=NULL) {
 ##' 
 ##' @param df data frame with the binary variables
 ##' @param crossvar factor to cross the multiple choices question with
+##' @param weights optional weighting vector
 ##' @param ... arguments passed to \code{multi.table}
 ##' @details
 ##' See the \code{multi.table} help page for details on handling of the multiple

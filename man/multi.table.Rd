@@ -31,7 +31,9 @@
   By default, only '1' and 'TRUE' as considered as 'true'
   values fro the binary variables, and counted in the
   frequency table. It is possible to specify other values
-  to be counted with the \code{true.codes} argument.
+  to be counted with the \code{true.codes} argument. Note
+  than '1' and 'TRUE' are always considered as true values
+  even if \code{true.codes} is provided.
 }
 \examples{
 ## Sample data frame

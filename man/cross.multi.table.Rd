@@ -2,13 +2,15 @@
 \alias{cross.multi.table}
 \title{Two-way frequency table between a multiple choices question and a factor}
 \usage{
-  cross.multi.table(df, crossvar, ...)
+  cross.multi.table(df, crossvar, weights = NULL, ...)
 }
 \arguments{
   \item{df}{data frame with the binary variables}
 
   \item{crossvar}{factor to cross the multiple choices
   question with}
+
+  \item{weights}{optional weighting vector}
 
   \item{...}{arguments passed to \code{multi.table}}
 }
