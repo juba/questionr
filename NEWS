@@ -1,3 +1,9 @@
+questionr 0.3.1
+---------------
+
+* Bugfix : weights handling in cross.multi.table
+* Bugfix : NA values in icut
+
 questionr 0.3
 -------------
 
@@ -12,7 +18,6 @@ questionr 0.2
 
 * New functions : describe, freq.na, qload, qscan, recode.na
 * Finish transition from rgrs
-
 
 questionr 0.1
 -------------
