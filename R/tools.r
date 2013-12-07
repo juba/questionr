@@ -100,3 +100,32 @@ function (df, old, new) {
   df
 }
 renomme.variable <- rename.variable
+
+#' Determine all duplicate elements
+#' 
+#' The native \link{duplicated} function determines which elements of a vector 
+#' or data frame are duplicates of elements already observed in the vector or the
+#' data frame provided. Therefore, only the second occurence (or third or nth)
+#' of an element is considered as a duplicate.
+#' \code{duplicated2} is similar but will also mark the first occurence as a 
+#' duplicate (see examples).
+#' 
+#' @param x a vector, a data frame or a matrix
+#' @return A logical vector indicated wich elements are duplicated in \code{x}.
+#' @source \url{http://forums.cirad.fr/logiciel-R/viewtopic.php?p=2968}
+#' @seealso \link{duplicated}
+#' @examples
+#' df <- data.frame(x=c("a","b","c","b","d","c"),y=c(1,2,3,2,4,3))
+#' df
+#' duplicated(df)
+#' duplicated2(df)
+#' @export duplicated2
+
+`duplicated2` <- 
+function(x){ 
+	if (sum(dup <- duplicated(x))==0) 
+		return(dup) 
+	if (class(x) %in% c("data.frame","matrix")) 
+		duplicated(rbind(x[dup,],x))[-(1:sum(dup))] 
+	else duplicated(c(x[dup],x))[-(1:sum(dup))] 
+}
