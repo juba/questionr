@@ -129,3 +129,34 @@ function(x){
 		duplicated(rbind(x[dup,],x))[-(1:sum(dup))] 
 	else duplicated(c(x[dup],x))[-(1:sum(dup))] 
 }
+
+#' Remove observations with missing values
+#' 
+#' \code{na.rm} is similar to \link{na.omit} but allows to specify a list of
+#' variables to take into account.
+#' 
+#' @param x a data frame
+#' @param v a list of variables
+#' @details
+#' If \code{v} is not specified, the result of \code{na.rm} will be the same as
+#' \link{na.omit}. If a list of variables is specified through \code{v}, only 
+#' observations with a missing value (\code{NA}) for one of the specified 
+#' variables will be removed from \code{x}. See examples.
+#' @author Joseph Larmarange <joseph@@larmarange.net>
+#' @seealso \link{na.omit}
+#' @examples
+#' df <- data.frame(x = c(1, 2, 3), y = c(0, 10, NA), z= c("a",NA,"b"))
+#' df
+#' na.omit(df)
+#' na.rm(df)
+#' na.rm(df, c("x","y"))
+#' na.rm(df, "z")
+#' @export na.rm
+
+`na.rm` <- 
+function(x, v=NULL){
+  if (!is.data.frame(x)) x <- as.data.frame(x)
+  if (is.null(v)) v <- names(x)
+  r <- x[complete.cases(x[v]),]
+  return(r)
+}
