@@ -160,3 +160,38 @@ function(x, v=NULL){
   r <- x[complete.cases(x[v]),]
   return(r)
 }
+
+#' Remove unused levels
+#' 
+#' This function removes unused levels of a factor or in a data.frame. See examples.
+#' 
+#' @param x a factor or a data frame
+#' @param v a list of variables (optional, if \code{x} is a data frame)
+#' @details
+#' If \code{x} is a data frame, only factor variables of \code{x} will be impacted.
+#' If a list of variables is provided through \code{v}, only the unused levels of the
+#' specified variables will be removed.
+#' @author Joseph Larmarange <joseph@@larmarange.net>
+#' @examples
+#' df <- data.frame(v1=c("a","b","a","b"),v2=c("x","x","y","y"))
+#' df$v1 <- factor(df$v1,c("a","b","c"))
+#' df$v2 <- factor(df$v2,c("x","y","z"))
+#' df
+#' str(df)
+#' str(rm.unused.levels(df))
+#' str(rm.unused.levels(df,"v1"))
+#' @export rm.unused.levels
+
+`rm.unused.levels` <- 
+function(x, v=NULL) {
+  if (!is.data.frame(x) & !is.factor(x)) stop("x must be a factor or a data.frame.")
+  if (is.factor(x)) x <- factor(x)
+  if (is.data.frame(x)) {
+    if (is.null(v)) v <- names(x)
+    for (i in 1:length(x)) {
+      if (is.factor(x[[i]]) & names(x)[i] %in% v) 
+        x[[i]] <- factor(x[[i]])
+    }
+  }
+  return(x)
+}
