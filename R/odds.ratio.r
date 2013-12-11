@@ -71,13 +71,17 @@ function(x, level=0.95, digits=3, ...) {
     z <- s$coefficients/s$standard.errors
     p <- p <- (1 - pnorm(abs(z), 0, 1)) * 2
     d <- dim(ci)
-    r <- array(NA,c(d[1]*d[3],d[2]+2))
-    dimnames(r)[[1]]<-rep("",d[1]*d[3])
-    for (i in 1:d[3]) {
-        fl <- (i-1)*d[1] + 1 #first line
-        ll <- i*d[1] #last line
-        r[fl:ll,] <- cbind(coef[i,],ci[,,i],p[i,])
-        rownames(r)[fl:ll] <- paste0(rownames(coef)[i],"/",colnames(coef))
+    if (is.na(d[3])) { # If only 2 dimensions
+      r <- cbind(coef, ci, p)
+    } else {
+      r <- array(NA,c(d[1]*d[3],d[2]+2))
+      dimnames(r)[[1]]<-rep("",d[1]*d[3])
+      for (i in 1:d[3]) {
+          fl <- (i-1)*d[1] + 1 #first line
+          ll <- i*d[1] #last line
+          r[fl:ll,] <- cbind(coef[i,],ci[,,i],p[i,])
+          rownames(r)[fl:ll] <- paste0(rownames(coef)[i],"/",colnames(coef))
+      }
     }
     r[,1:3] <- round(r[,1:3],digits=digits)
     colnames(r) <- c("OR",dimnames(ci)[[2]],"p")
