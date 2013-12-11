@@ -64,8 +64,8 @@ function(x, level=0.95, digits=3, ...) {
 `odds.ratio.multinom` <- 
 function(x, level=0.95, digits=3, ...) {
     if (!inherits(x, "multinom")) stop("x must be of class 'multinom'.")
-    coef <- summary(x)$coefficients
-    ci <- confint(x,level=level)
+    coef <- exp(summary(x)$coefficients)
+    ci <- exp(confint(x,level=level))
     ## From http://www.ats.ucla.edu/stat/r/dae/mlogit.htm
     z <- summary(x)$coefficients/summary(x)$standard.errors
     p <- p <- (1 - pnorm(abs(z), 0, 1)) * 2
