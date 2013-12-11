@@ -67,7 +67,8 @@ function(x, level=0.95, digits=3, ...) {
     coef <- exp(summary(x)$coefficients)
     ci <- exp(confint(x,level=level))
     ## From http://www.ats.ucla.edu/stat/r/dae/mlogit.htm
-    z <- summary(x)$coefficients/summary(x)$standard.errors
+    s <- summary(x)
+    z <- s$coefficients/s$standard.errors
     p <- p <- (1 - pnorm(abs(z), 0, 1)) * 2
     d <- dim(ci)
     r <- array(NA,c(d[1]*d[3],d[2]+2))
