@@ -1,0 +1,36 @@
+\name{rm.unused.levels}
+\alias{rm.unused.levels}
+\title{Remove unused levels}
+\usage{
+  rm.unused.levels(x, v = NULL)
+}
+\arguments{
+  \item{x}{a factor or a data frame}
+
+  \item{v}{a list of variables (optional, if \code{x} is a
+  data frame)}
+}
+\description{
+  This function removes unused levels of a factor or in a
+  data.frame. See examples.
+}
+\details{
+  If \code{x} is a data frame, only factor variables of
+  \code{x} will be impacted. If a list of variables is
+  provided through \code{v}, only the unused levels of the
+  specified variables will be removed.
+}
+\examples{
+df <- data.frame(v1=c("a","b","a","b"),v2=c("x","x","y","y"))
+df$v1 <- factor(df$v1,c("a","b","c"))
+df$v2 <- factor(df$v2,c("x","y","z"))
+df
+str(df)
+str(rm.unused.levels(df$v1))
+str(rm.unused.levels(df))
+str(rm.unused.levels(df,"v1"))
+}
+\author{
+  Joseph Larmarange <joseph@larmarange.net>
+}
+
