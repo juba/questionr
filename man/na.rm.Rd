@@ -1,0 +1,38 @@
+\name{na.rm}
+\alias{na.rm}
+\title{Remove observations with missing values}
+\usage{
+  na.rm(x, v = NULL)
+}
+\arguments{
+  \item{x}{a data frame}
+
+  \item{v}{a list of variables}
+}
+\description{
+  \code{na.rm} is similar to \link{na.omit} but allows to
+  specify a list of variables to take into account.
+}
+\details{
+  If \code{v} is not specified, the result of \code{na.rm}
+  will be the same as \link{na.omit}. If a list of
+  variables is specified through \code{v}, only
+  observations with a missing value (\code{NA}) for one of
+  the specified variables will be removed from \code{x}.
+  See examples.
+}
+\examples{
+df <- data.frame(x = c(1, 2, 3), y = c(0, 10, NA), z= c("a",NA,"b"))
+df
+na.omit(df)
+na.rm(df)
+na.rm(df, c("x","y"))
+na.rm(df, "z")
+}
+\author{
+  Joseph Larmarange <joseph@larmarange.net>
+}
+\seealso{
+  \link{na.omit}
+}
+
