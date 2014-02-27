@@ -117,7 +117,7 @@ freq.na <- function(data, ...) {
 `cprop` <-
 function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE) {
   # subset to non-empty rows/columns
-  if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0]
+  if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop=FALSE]
   dn <- names(dimnames(tab))
   if (total) tab <- cbind(tab, Ensemble=apply(tab,1,sum))
   tab <- prop.table(tab,2)*100
@@ -157,7 +157,7 @@ function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE) {
 `rprop` <-
 function(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE) {
   # subset to non-empty rows/columns
-  if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0]
+  if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop=FALSE]
   dn <- names(dimnames(tab))
   if (total) tab <- rbind(tab, Ensemble=apply(tab,2,sum))
   tab <- prop.table(tab,1)*100
@@ -197,7 +197,7 @@ lprop <- rprop
 `prop` <-
 function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE) {
   # subset to non-empty rows/columns
-  if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0]
+  if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop=FALSE]
   dn <- names(dimnames(tab))
   tmp <- tab/sum(tab)*100
   if (total) {
