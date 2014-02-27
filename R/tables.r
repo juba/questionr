@@ -100,6 +100,7 @@ freq.na <- function(data, ...) {
 #' @param total if \code{TRUE}, add a row with the sum of percentages and a column with global percentages
 #' @param percent if \code{TRUE}, add a percent sign after the values when printing
 #' @param drop if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped.
+#' @param n if \code{TRUE}, display number of observations per column.
 #' @return
 #' The result is an object of class \code{table} and \code{proptab}.
 #' @seealso
@@ -115,18 +116,22 @@ freq.na <- function(data, ...) {
 #' @export
 
 `cprop` <-
-function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE) {
+function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE) {
   # subset to non-empty rows/columns
   if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop=FALSE]
   dn <- names(dimnames(tab))
   if (total) tab <- cbind(tab, Ensemble=apply(tab,1,sum))
+  if (n) effectifs <- apply(tab,2,sum)
   tab <- prop.table(tab,2)*100
   if (total) tab <- rbind(tab,Total=apply(tab,2,sum))
+  if (n) tab <- rbind(tab, n=effectifs)
   result <- as.table(tab)
   names(dimnames(result)) <- dn
   class(result) <- c("proptab", class(result))
   attr(result, "percent") <- percent
   attr(result, "digits") <- digits
+  attr(result, "total") <- total
+  attr(result, "row.n") <- n
   return(result)
 }
 
@@ -140,6 +145,7 @@ function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE) {
 #' @param total if \code{TRUE}, add a column with the sum of percentages and a row with global percentages
 #' @param percent if \code{TRUE}, add a percent sign after the values when printing
 #' @param drop if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped.
+#' @param n if \code{TRUE}, display number of observations per row.
 #' @return
 #' The result is an object of class \code{table} and \code{proptab}.
 #' @seealso
@@ -155,18 +161,22 @@ function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE) {
 #' @export rprop lprop
 
 `rprop` <-
-function(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE) {
+function(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE) {
   # subset to non-empty rows/columns
   if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop=FALSE]
   dn <- names(dimnames(tab))
   if (total) tab <- rbind(tab, Ensemble=apply(tab,2,sum))
+  if (n) effectifs <- apply(tab,1,sum)
   tab <- prop.table(tab,1)*100
   if (total) tab <- cbind(tab, Total=apply(tab,1,sum))
+  if (n) tab <- cbind(tab, n=effectifs)
   result <- as.table(tab)
   names(dimnames(result)) <- dn
   class(result) <- c("proptab", class(result))
   attr(result, "percent") <- percent
   attr(result, "digits") <- digits
+  attr(result, "total") <- total
+  attr(result, "col.n") <- n
   return(result)
 }
 lprop <- rprop
@@ -180,6 +190,7 @@ lprop <- rprop
 #' @param total if \code{TRUE}, add a column with the sum of percentages and a row with global percentages
 #' @param percent if \code{TRUE}, add a percent sign after the values when printing
 #' @param drop if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped.
+#' @param n if \code{TRUE}, display number of observations per row and per column.
 #' @return
 #' The result is an object of class \code{table} and \code{proptab}.
 #' @seealso
@@ -191,24 +202,40 @@ lprop <- rprop
 #' ## Percentages
 #' prop(tab)
 #' ## Percentages with custom display
-#' prop(tab, digits=2, percent=TRUE, total=FALSE)
+#' prop(tab, digits=2, percent=TRUE, total=FALSE, n=TRUE)
 #' @export
 
 `prop` <-
-function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE) {
+function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE) {
   # subset to non-empty rows/columns
   if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop=FALSE]
   dn <- names(dimnames(tab))
+  if (n) {
+    l.effectifs <- apply(tab,1,sum)
+    r.effectifs <- apply(tab,2,sum)
+  }
   tmp <- tab/sum(tab)*100
   if (total) {
     tmp <- rbind(tmp,Total=apply(tmp,2,sum))
     tmp <- cbind(tmp,Total=apply(tmp,1,sum))
+  }
+  if (n) {
+    ntot <- sum(tab)
+    if (total) {
+      l.effectifs <- c(l.effectifs,ntot)
+      r.effectifs <- c(r.effectifs,ntot)
+    }
+    tmp <- cbind(tmp, n=l.effectifs)
+    tmp <- rbind(tmp, n=c(r.effectifs,ntot))
   }
   result <- as.table(tmp)
   names(dimnames(result)) <- dn
   class(result) <- c("proptab", class(result))
   attr(result, "percent") <- percent
   attr(result, "digits") <- digits
+  attr(result, "total") <- total
+  attr(result, "row.n") <- n
+  attr(result, "col.n") <- n
   return(result)
 }
 
@@ -282,6 +309,12 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
   if (!inherits(x, "proptab")) stop("x must be of class 'proptab'")
   if (is.null(digits)) digits <- attr(x, "digits")
   if (is.null(percent)) percent <- attr(x, "percent")
+  total <- attr(x, "total"); if (is.null(total)) total <- FALSE
+  row.n <- attr(x, "row.n"); if (is.null(row.n)) row.n <- FALSE
+  col.n <- attr(x, "col.n"); if (is.null(col.n)) col.n <- FALSE
+  tmp <- format.default(round(x,0), ...)
+  if (row.n) rn <- tmp[nrow(x),]
+  if (col.n) cn <- tmp[,ncol(x)]
   if (percent) {
     fmt <- paste("%.",digits,"f%%",sep="")
     x[,] <- sprintf(x, fmt=fmt)
@@ -289,6 +322,9 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
   }
   else
     result <- format.default(round(x,digits), ...)
+  if (row.n) result[nrow(x),] <- rn
+  if (col.n) result[,ncol(x)] <- cn
+  if (total & row.n & col.n) result[nrow(x),ncol(x)] <- ""
   return(result)
 }
 
