@@ -40,18 +40,24 @@ shinyServer(function(input, output) {
         for (l in levs) {
             ## Special NA placeholder
             if (is.na(l)) l <- "*irec_NA_id*"
+            ## Special empty string placeholder
+            if (l=="") l <- "*irec_emptystr_id*"
             value <- get_value(input[[l]])
             ## If minimal style, values unchanged are omitted
             if (style=="min") {
                 if (l==input[[l]]) next
                 if (l=="*irec_NA_id*" && value=="NA") next
+                if (l=="*irec_emptystr_id*" && value=="\"\"") next
             }
-            ## Normal values
-            if (l!="*irec_NA_id*")
-                out <- paste0(out, sprintf('%s[%s == %s] <- %s\n', dest_var, src_var, capture.output(dput(l)), value))
             ## NA values
-            else
+            if (l=="*irec_NA_id*")
                 out <- paste0(out, sprintf('%s[is.na(%s)] <- %s\n', dest_var, src_var, value))
+            ## Empty strings
+            else if (l=="*irec_emptystr_id*")
+                out <- paste0(out, sprintf('%s[%s==""] <- %s\n', dest_var, src_var, value))
+            ## Normal values
+            else
+                out <- paste0(out, sprintf('%s[%s == %s] <- %s\n', dest_var, src_var, capture.output(dput(l)), value))
         }
         ## Optional factor conversion
         if (input$facconv) out <- paste0(out, sprintf("%s <- factor(%s)\n", dest_var, dest_var))
@@ -118,8 +124,19 @@ shinyServer(function(input, output) {
         for (l in levs) {
             out <- paste0(out,'<tr><td class="right">',shiny:::htmlEscape(l),'</td>')
             out <- paste0(out,'<td>&nbsp;<i class="icon-arrow-right"></i>&nbsp;</td>')
+            id <- l
+            label <- l
             ## If the level is NA, replace by the NA value placeholder
-            out <- paste0(out,'<td>',textInput(ifelse(is.na(l), "*irec_NA_id*",l),"", ifelse(is.na(l), "NA",l)),'</td>')
+            if (is.na(id)) {
+              id <- "*irec_NA_id*"
+              label <- "NA"
+            }
+            ## If the level is an empty string, replace by a placeholder
+            if (id=="") {
+              id <- "*irec_emptystr_id*"
+              label <- ""
+            }
+            out <- paste0(out,'<td>',textInput(id,"",label),'</td>')
             out <- paste0(out,'</tr>')
         }
         out <- paste0(out, "</table>")
