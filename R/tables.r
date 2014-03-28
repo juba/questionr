@@ -48,7 +48,7 @@ function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA
       result <- cbind(result, valid.pourc.cum)
     }
   }
-  if (valid & NA%in%names(tab)) {
+  if (valid & NA %in% names(tab)) {
     result["NA","valid.pourc"] <- NA
     if (cum)
       result["NA","valid.pourc.cum"] <- NA
