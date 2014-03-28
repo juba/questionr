@@ -9,7 +9,7 @@
   and therefore offers a wider search scope.
 }
 \usage{
-  lookfor(data, keywords = "weight|sample", labels = TRUE,
+  lookfor(data, keywords = "", labels = TRUE,
     ignore.case = TRUE)
 }
 \arguments{
@@ -18,8 +18,8 @@
 
   \item{keywords}{a character string, which can be
   formatted as a regular expression suitable for a
-  \code{grep} pattern, or a vector of keywords; searches
-  for keywords 'sample' and 'weight' by default}
+  \code{grep} pattern, or a vector of keywords; displays
+  all variables by default}
 
   \item{labels}{whether or not to search variable labels
   (descriptions); \code{TRUE} by default}

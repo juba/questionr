@@ -26,7 +26,6 @@ df$v1 <- factor(df$v1,c("a","b","c"))
 df$v2 <- factor(df$v2,c("x","y","z"))
 df
 str(df)
-str(rm.unused.levels(df$v1))
 str(rm.unused.levels(df))
 str(rm.unused.levels(df,"v1"))
 }

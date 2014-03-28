@@ -23,7 +23,7 @@
   \item{sort}{if specified, allow to sort the table by
   increasing ("inc") or decreasing ("dec") frequencies}
 
-  \item{valid}{if TRUE, display valid percentages)}
+  \item{valid}{if TRUE, display valid percentages}
 }
 \value{
   The result is an object of class data.frame.
