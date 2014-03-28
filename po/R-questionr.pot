@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: questionr 0.3\n"
-"POT-Creation-Date: 2013-11-08 12:31\n"
+"Project-Id-Version: questionr 0.4\n"
+"POT-Creation-Date: 2014-03-28 12:34\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,6 +55,12 @@ msgstr ""
 msgid "No variables specified; showing top five results."
 msgstr ""
 
+msgid "All"
+msgstr ""
+
+msgid "Total"
+msgstr ""
+
 msgid "Choose between standardized and raw residuals."
 msgstr ""
 
@@ -62,6 +68,9 @@ msgid "x must be of class 'proptab'"
 msgstr ""
 
 msgid "Object is not of class proptab"
+msgstr ""
+
+msgid "x must be a factor or a data.frame."
 msgstr ""
 
 msgid "The package"
