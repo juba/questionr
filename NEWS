@@ -2,6 +2,13 @@ questionr 0.4
 ---------------
 
 * New functions from Joseph Larmarange : duplicated2, na.rm, rm.unused.levels
+* Default lookfor `keywords` argument changed to "" (displays all variables)
+* New argument `n` to cprop and rprop to display the number of observations
+  per row/column
+* "Ensemble" and "Total" strings in cprop and rprop are now localized
+* Bugfixes on irec : encoding on windows and empty strings in factor levels
+* `freq` now displays, by default, a column of percentage based on
+  non-missing values 
 
 questionr 0.3.1
 ---------------
