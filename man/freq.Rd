@@ -3,7 +3,8 @@
 \title{Generate frequency tables.}
 \usage{
   freq(x, digits = 1, cum = FALSE, total = FALSE,
-    exclude = NULL, sort = "")
+    exclude = NULL, sort = "",
+    valid = !(NA \%in\% exclude))
 }
 \arguments{
   \item{x}{either a vector to be tabulated, or a table
@@ -17,10 +18,12 @@
   \item{total}{if TRUE, add a final row with totals}
 
   \item{exclude}{vector of values to exclude from the
-  tabulation}
+  tabulation (if \code{x} is a vector)}
 
   \item{sort}{if specified, allow to sort the table by
   increasing ("inc") or decreasing ("dec") frequencies}
+
+  \item{valid}{if TRUE, display valid percentages)}
 }
 \value{
   The result is an object of class data.frame.

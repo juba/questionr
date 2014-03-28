@@ -6,8 +6,9 @@
 #' @param digits number of digits to keep for the percentages
 #' @param cum if TRUE, display cumulative percentages
 #' @param total if TRUE, add a final row with totals
-#' @param exclude vector of values to exclude from the tabulation
+#' @param exclude vector of values to exclude from the tabulation (if \code{x} is a vector)
 #' @param sort if specified, allow to sort the table by increasing ("inc") or decreasing ("dec") frequencies
+#' @param valid if TRUE, display valid percentages
 #' @return
 #' The result is an object of class data.frame.
 #' @seealso
@@ -15,24 +16,47 @@
 #' @export
 
 `freq` <-
-function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="") {
-  if (is.factor(x)) x <- factor(x, exclude=exclude)
+function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA%in%exclude)) {
   if (is.table(x)) tab <- x
-  else tab <- table(x, exclude=exclude)
+  else tab <- table(x, exclude=exclude, useNA="ifany")
   effectifs <- as.vector(tab)
   pourc <- as.vector(effectifs/sum(effectifs)*100)
   result <- data.frame(n=effectifs, pourc=pourc)
   rownames(result) <- ifelse(is.na(names(tab)),"NA",names(tab))
+  if (valid) {
+    if (NA %in% names(tab)) {
+      NA.position <- which(is.na(names(tab)))
+      n.na <- tab[NA.position]
+      valid.pourc <- as.vector(effectifs/(sum(effectifs)-n.na)*100)
+      valid.pourc[NA.position] <- 0 # temporary 0 for cumsum
+    } else
+      valid.pourc <- pourc
+    result <- cbind(result, valid.pourc)
+  }
   if (sort=="inc") result <- result[order(result$n),]
   if (sort=="dec") result <- result[order(result$n, decreasing=TRUE),]
   if (total) result <- rbind(result, Total=apply(result,2,sum))
+  if (total & valid) 
+    result[length(result$pourc),"valid.pourc"] <- 100
   if (cum) {
     pourc.cum <- cumsum(result$pourc)
     if (total) pourc.cum[length(pourc.cum)] <- 100
     result <- cbind(result, pourc.cum)
+    if (valid) {
+      valid.pourc.cum <- cumsum(result$valid.pourc)
+      if (total) valid.pourc.cum[length(valid.pourc.cum)] <- 100
+      result <- cbind(result, valid.pourc.cum)
+    }
+  }
+  if (valid & NA%in%names(tab)) {
+    result["NA","valid.pourc"] <- NA
+    if (cum)
+      result["NA","valid.pourc.cum"] <- NA
   }
   names(result)[which(names(result)=="pourc")] <- "%"
+  names(result)[which(names(result)=="valid.pourc")] <- "val%"
   names(result)[which(names(result)=="pourc.cum")] <- "%cum"
+  names(result)[which(names(result)=="valid.pourc.cum")] <- "val%cum"
   round(result, digits=digits)
 }
 
