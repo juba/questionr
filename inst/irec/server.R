@@ -20,6 +20,9 @@ shinyServer(function(input, output) {
     get_value <- function(val) {
         if (is.null(val)) return()
         if (val %in% c("NA", "TRUE", "FALSE")) return(val)
+        ## Encoding conversion for Windows
+        Encoding(val) <- "UTF-8"
+        val <- enc2native(val)
         val <- capture.output(dput(val))
         val
     }
