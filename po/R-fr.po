@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: questionr\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2013-11-08 12:31\n"
-"PO-Revision-Date: 2013-11-08 12:32+0100\n"
+"POT-Creation-Date: 2014-03-28 12:34\n"
+"PO-Revision-Date: 2014-03-28 12:35+0100\n"
 "Last-Translator: Julien Barnier <julien@nozav.org>\n"
 "Language-Team: \n"
 "Language: fr-FR\n"
@@ -58,6 +58,12 @@ msgstr "Pensez à utiliser as.numeric = TRUE."
 msgid "No variables specified; showing top five results."
 msgstr "Aucune variable spécifiée; les cinq premiers résultats sont affichés."
 
+msgid "All"
+msgstr "Ensemble"
+
+msgid "Total"
+msgstr "Total"
+
 msgid "Choose between standardized and raw residuals."
 msgstr "Vous devez choisir entre résidus bruts et résidus standardisés."
 
@@ -66,6 +72,9 @@ msgstr "x doit être de classe 'proptab'"
 
 msgid "Object is not of class proptab"
 msgstr "l'objet doit être de la classe proptab"
+
+msgid "x must be a factor or a data.frame."
+msgstr "x doit être un facteur ou un data frame."
 
 msgid "The package"
 msgstr "L'extension"

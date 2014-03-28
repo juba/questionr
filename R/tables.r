@@ -119,9 +119,17 @@ function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE) {
   # subset to non-empty rows/columns
   if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop=FALSE]
   dn <- names(dimnames(tab))
-  if (total) tab <- cbind(tab, Ensemble=apply(tab,1,sum))
+  if (total) {
+    .tmp.colnames <- colnames(tab)
+    tab <- cbind(tab, apply(tab,1,sum))
+    colnames(tab) <- c(.tmp.colnames, gettext("All"))
+  }
   tab <- prop.table(tab,2)*100
-  if (total) tab <- rbind(tab,Total=apply(tab,2,sum))
+  if (total) {
+    .tmp.rownames <- rownames(tab)
+    tab <- rbind(tab,Total=apply(tab,2,sum))
+    rownames(tab) <- c(.tmp.rownames, gettext("Total"))
+  }
   result <- as.table(tab)
   names(dimnames(result)) <- dn
   class(result) <- c("proptab", class(result))
@@ -159,9 +167,17 @@ function(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE) {
   # subset to non-empty rows/columns
   if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop=FALSE]
   dn <- names(dimnames(tab))
-  if (total) tab <- rbind(tab, Ensemble=apply(tab,2,sum))
+  if (total) {
+    .tmp.rownames <- rownames(tab)
+    tab <- rbind(tab, apply(tab,2,sum))
+    rownames(tab) <- c(.tmp.rownames, gettext("All"))
+  }
   tab <- prop.table(tab,1)*100
-  if (total) tab <- cbind(tab, Total=apply(tab,1,sum))
+  if (total) {
+    .tmp.colnames <- colnames(tab)
+    tab <- cbind(tab, Total=apply(tab,1,sum))
+    colnames(tab) <- c(.tmp.colnames, gettext("Total"))
+  }
   result <- as.table(tab)
   names(dimnames(result)) <- dn
   class(result) <- c("proptab", class(result))
