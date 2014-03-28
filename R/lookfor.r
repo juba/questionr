@@ -7,7 +7,7 @@
 #' The command is meant to help users finding variables in large datasets.
 #' 
 #' @param data a data frame that can be annotated by the \code{foreign} or \code{memisc} packages.
-#' @param keywords a character string, which can be formatted as a regular expression suitable for a \code{grep} pattern, or a vector of keywords; searches for keywords 'sample' and 'weight' by default
+#' @param keywords a character string, which can be formatted as a regular expression suitable for a \code{grep} pattern, or a vector of keywords; displays all variables by default
 #' @param labels whether or not to search variable labels (descriptions); \code{TRUE} by default
 #' @param ignore.case whether or not to make the keywords case sensitive; \code{TRUE} by default (case is ignored during matching)
 #' @return a data frame featuring the variable position, name and description (if it exists) in the original data frame
@@ -31,7 +31,7 @@
 #' @export
 
 lookfor <- function(data, 
-                    keywords = "weight|sample", 
+                    keywords = "", 
                     labels = TRUE, 
                     ignore.case = TRUE) {
   # search scope
