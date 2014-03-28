@@ -4,8 +4,8 @@ Authors@R: c(person("Julien", "Barnier", email="julien.barnier@ens-lyon.fr",
     role=c("aut","cre")), person("François", "Briatte",
     email="f.briatte@ed.ac.uk", role="aut"), person("Joseph", "Larmarange",
     email="joseph@larmarange.net", role="aut"))
-Version: 0.4
-Date: 2014-03-28
+Version: 0.4.1
+Date: 2014-03-29
 License: GPL (>= 2)
 Encoding: UTF-8
 Title: Functions to make surveys processing easier.
