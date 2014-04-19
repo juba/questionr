@@ -65,6 +65,8 @@ shinyUI(bootstrapPage(
                         tags$form(class="well",
                                   HTML(sprintf("<p>Statistics of <tt>%s</tt> :</p>", oldvar_name)),
                                   HTML(summary_table(oldvar)),
+                                  selectizeInput("cutMethod", "Cutting method", choices=c("Manual" = "fixed", "Standard deviation" = "sd", "Equal width" = "equal", "Pretty" = "pretty", "Quantile" = "quantile", "K-means" = "kmeans", "Hierarchical cluster" = "hclust", "Bagged clustering" = "bclust", "Fisher algorithm" = "fisher", "Jenks algorithm" = "jenks")),
+                                  uiOutput("ui"),
                                   textInput("breaks", "Breaks"),
                                   checkboxInput("right", HTML("Right-closed intervals (<tt>right</tt>)"), TRUE),
                                   checkboxInput("inclowest", HTML("Include extreme (<tt>include.lowest</tt>)"), FALSE),
