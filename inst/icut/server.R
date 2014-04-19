@@ -1,5 +1,6 @@
 library(shiny)
 library(highr)
+library(classInt)
 
 ## Global variables
 ## Original data frame name and object
@@ -14,8 +15,19 @@ src_var <- ifelse(grepl(" ", oldvar_name),
                   sprintf('%s$%s', df_name, oldvar_name))
 
 
-shinyServer(function(input, output) {
+shinyServer(function(input, output, session) {
+    
+    observe({
+      output$ui <- renderUI({
+        if (input$cutMethod == "fixed") return()
+          numericInput(inputId="nb_breaks", label="Breaks number", value=6, min=2, step=1)
+        })
+      if (input$cutMethod != "fixed") {
+        updateTextInput(session, "breaks", value=classIntervals(oldvar, n=ifelse(is.null(input$nb_breaks), 6, input$nb_breaks), style=input$cutMethod)$brks)
+      }
+    })
 
+      
     get_breaks <- function(b, compute=FALSE) {
         if (b=="") return(NULL)
         b <- gsub(", *$", "",b)
