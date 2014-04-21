@@ -23,7 +23,13 @@ shinyServer(function(input, output, session) {
           numericInput(inputId="nb_breaks", label="Breaks number", value=6, min=2, step=1)
         })
       if (input$cutMethod != "fixed") {
-        updateTextInput(session, "breaks", value=classIntervals(oldvar, n=ifelse(is.null(input$nb_breaks), 6, input$nb_breaks), style=input$cutMethod)$brks)
+        nb_breaks <- reactive({
+          if (is.null(input$nb_breaks)) return(2)
+          if (is.na(input$nb_breaks)) return(2)
+          if (input$nb_breaks < 2) return(2)
+            return(input$nb_breaks)
+          })
+        updateTextInput(session, "breaks", value=classIntervals(oldvar, n=ifelse(is.null(nb_breaks()), 6, nb_breaks()), style=input$cutMethod)$brks)
       }
     })
 
