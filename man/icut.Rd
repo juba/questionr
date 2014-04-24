@@ -2,11 +2,11 @@
 \alias{icut}
 \title{Interactive conversion from numeric to factor}
 \usage{
-  icut(df, oldvar)
+  icut(dfobject, oldvar)
 }
 \arguments{
-  \item{df}{data frame to operate on, as an object or a
-  character string}
+  \item{dfobject}{data frame to operate on, as an object or
+  a character string}
 
   \item{oldvar}{name of the variable to be recoded, as a
   character string (possibly without quotes)}

@@ -2,11 +2,11 @@
 \alias{iorder}
 \title{Interactive reordering of factor levels}
 \usage{
-  iorder(df, oldvar)
+  iorder(dfobject, oldvar)
 }
 \arguments{
-  \item{df}{data frame to operate on, as an object or a
-  character string}
+  \item{dfobject}{data frame to operate on, as an object or
+  a character string}
 
   \item{oldvar}{name of the variable to be reordered, as a
   character string (possibly without quotes)}

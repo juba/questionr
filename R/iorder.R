@@ -4,7 +4,7 @@
 ##' interactive reordering of the levels of a categorical variable (character
 ##' or factor).
 ##'
-##' @param df data frame to operate on, as an object or a character string
+##' @param dfobject data frame to operate on, as an object or a character string
 ##' @param oldvar name of the variable to be reordered, as a character string (possibly without quotes)
 ##' @details
 ##' The generated convert the variable into a factor, as only those allow for levels ordering.
@@ -19,18 +19,20 @@
 ##' @importFrom highr hi_html
 ##' @export
 
-iorder <- function(df, oldvar) {
-    ## Check if df is an object or a character string
-    if (!is.character(df)) df <- deparse(substitute(df))
-    ## Check if df is a data frame
-    if (!is.data.frame(get(df))) stop(sQuote(paste0(df, ' must be a data frame.')))
-    options(questionr_iorder_df=df)
+iorder <- function(dfobject, oldvar) {
+    ## Check if dfobject is an object or a character string
+    if (!is.character(dfobject)) dfobject <- deparse(substitute(dfobject))
+    ## Prevents get() conflicts
+    if (dfobject=="dfobject") stop(sQuote(paste0(dfobject, ' must not be an object named "dfobject".')))
+    ## Check if dfobject is a data frame
+    if (!is.data.frame(get(dfobject))) stop(sQuote(paste0(dfobject, ' must be a data frame.')))
+    options(questionr_iorder_df=dfobject)
     ## If oldvar is not a character string, deparse it
     is_char <- FALSE
     try(if(is.character(oldvar)) is_char <- TRUE, silent=TRUE)
     if (!is_char) oldvar <- deparse(substitute(oldvar))
-    ## Check if oldvar is a column of df
-    if (!(oldvar %in% names(get(df)))) stop(sQuote(paste0(oldvar, ' must be a column of ', df, '.')))    
+    ## Check if oldvar is a column of dfobject
+    if (!(oldvar %in% names(get(dfobject)))) stop(sQuote(paste0(oldvar, ' must be a column of ', dfobject, '.')))    
     options(questionr_iorder_oldvar=oldvar)
     ## Run shiny app
     invisible(shiny::runApp(system.file("iorder", package="questionr")))
