@@ -15,6 +15,7 @@
 ##' irec(hdv2003, heures.tv) ## this also works}
 ##' @importFrom shiny runApp
 ##' @importFrom highr hi_html
+##' @importFrom classInt classIntervals
 ##' @export
 
 icut <- function(df, oldvar) {
