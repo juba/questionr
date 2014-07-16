@@ -125,7 +125,7 @@ shinyServer(function(input, output) {
         if (any(is.na(oldvar))) levs <- c(levs, NA)
         ## Generate fields
         for (l in levs) {
-            out <- paste0(out,'<tr><td class="right">',shiny:::htmlEscape(l),'</td>')
+            out <- paste0(out,'<tr><td class="right">',htmltools::htmlEscape(l),'</td>')
             out <- paste0(out,'<td>&nbsp;<i class="icon-arrow-right"></i>&nbsp;</td>')
             id <- l
             label <- l
