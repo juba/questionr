@@ -7,6 +7,13 @@ R package to make surveys processing easier
 * Wiki : https://github.com/juba/questionr/wiki
 
 
-To install :
+## Installation
+
+From CRAN :
 
     install.packages("questionr")
+
+Lates version from GitHub :
+
+    library(devtools)
+    install_github("juba/questionr")
