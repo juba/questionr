@@ -21,7 +21,7 @@ generate_levels_ol <- function(oldvar) {
     if (is.factor(oldvar)) levs <- levels(oldvar)
     else levs <- na.omit(unique(oldvar))
     ## Generate fields
-    for (l in levs) out <- paste0(out,'<li><i class="icon-move"></i> <span>',shiny:::htmlEscape(l),'</span></li>')
+    for (l in levs) out <- paste0(out,'<li><i class="icon-move"></i> <span>',htmltools::htmlEscape(l),'</span></li>')
     out <- paste0(out, "</ol>")
     HTML(out)     
 }
