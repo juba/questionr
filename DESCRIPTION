@@ -13,7 +13,6 @@ Description: This package provides some convenience functions to make the
     processing and analysis of surveys easier.
 Imports:
     shiny (>= 0.10),
-    htmltools,
     highr,
     classInt
 Suggests:
