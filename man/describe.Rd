@@ -35,7 +35,7 @@ nes1948 <- spss.portable.file(nes1948.por)
 describe(nes1948, "v480050", "version|set", "v48004*")}
 }
 \author{
-  François Briatte <f.briatte@ed.ac.uk>
+  François Briatte <f.briatte@gmail.com>
 }
 \seealso{
   \code{\link{regex}}, \code{description} in the

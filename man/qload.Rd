@@ -34,7 +34,7 @@ qload("questionr")
 qload("questionr", silent = FALSE)
 }
 \author{
-  François Briatte <f.briatte@ed.ac.uk>
+  François Briatte <f.briatte@gmail.com>
 }
 \seealso{
   \code{\link[questionr]{qscan}},

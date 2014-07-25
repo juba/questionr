@@ -64,7 +64,7 @@ lookfor(nes1948, "truman|dewey")
 lookfor(nes1948, "personal attribute")}
 }
 \author{
-  François Briatte <f.briatte@ed.ac.uk>
+  François Briatte <f.briatte@gmail.com>
 }
 \seealso{
   \code{query} in the \code{memisc} package
