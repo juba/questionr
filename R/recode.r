@@ -42,7 +42,7 @@ function (var, nbclass, include.lowest=TRUE, right=FALSE, dig.lab=5, ...) {
 #' The result is a factor with properly encoded missing values. If the recoded variable contains only numeric values, it is converted to an object of class \code{numeric}.
 #' @seealso
 #' \code{\link{regex}}
-#' @author François Briatte <f.briatte@@ed.ac.uk>
+#' @author François Briatte <f.briatte@@gmail.com>
 #' @examples
 #' data(hdv2003)
 #' ## With exact string matches.

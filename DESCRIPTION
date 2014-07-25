@@ -2,7 +2,7 @@ Package: questionr
 Maintainer: Julien Barnier <julien.barnier@ens-lyon.fr>
 Authors@R: c(person("Julien", "Barnier", email="julien.barnier@ens-lyon.fr",
     role=c("aut","cre")), person("François", "Briatte",
-    email="f.briatte@ed.ac.uk", role="aut"), person("Joseph", "Larmarange",
+    email="f.briatte@gmail.com", role="aut"), person("Joseph", "Larmarange",
     email="joseph@larmarange.net", role="aut"))
 Version: 0.4.1
 Date: 2014-07-16

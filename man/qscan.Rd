@@ -31,7 +31,7 @@
 \dontrun{qscan()}
 }
 \author{
-  François Briatte <f.briatte@ed.ac.uk>
+  François Briatte <f.briatte@gmail.com>
 }
 \seealso{
   \code{\link[questionr]{qload}}, \code{\link{library}}

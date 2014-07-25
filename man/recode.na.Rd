@@ -50,7 +50,7 @@ freq(recode.na(hdv2003$trav.satisf, "Equilibre"))
 freq(recode.na(hdv2003$freres.soeurs, 5:22))
 }
 \author{
-  François Briatte <f.briatte@ed.ac.uk>
+  François Briatte <f.briatte@gmail.com>
 }
 \seealso{
   \code{\link{regex}}

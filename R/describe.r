@@ -11,7 +11,7 @@
 #' imported with the \code{foreign} package.
 #' @seealso
 #' \code{\link{regex}}, \code{description} in the \code{memisc} package
-#' @author François Briatte <f.briatte@@ed.ac.uk>
+#' @author François Briatte <f.briatte@@gmail.com>
 #' @examples
 #' # Variables in a standard R data frame.
 #' data(hdv2003)
