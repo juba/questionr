@@ -49,7 +49,7 @@ icut <- function(dfobject, oldvar) {
     if (show_alert) options(questionr_hide_alert=TRUE)  
     
     ## CSS file
-    css.file <- system.file(file.path("css", "ifuncs.css"), package = "questionr")
+    css.file <- system.file(file.path("shiny", "css", "ifuncs.css"), package = "questionr")
     irec.css <- paste(readLines(css.file),collapse="\n")
     
 
