@@ -14,7 +14,8 @@ Description: This package provides some convenience functions to make the
 Imports:
     shiny (>= 0.10),
     highr,
-    classInt
+    classInt,
+    htmltools
 Suggests:
     memisc,
     testthat,
@@ -22,21 +23,3 @@ Suggests:
     R2HTML
 SystemRequirements: xclip (Linux)
 URL: https://github.com/juba/questionr
-Collate:
-    'questionr-package.r'
-    'lookfor.r'
-    'recode.r'
-    'stats.r'
-    'tables.r'
-    'tools.r'
-    'datasets.r'
-    'table.multi.r'
-    'describe.r'
-    'utils.r'
-    'odds.ratio.r'
-    'weighting.r'
-    'irec.r'
-    'iorder.R'
-    'icut.r'
-    'addNAstr.r'
-    'imca.r'

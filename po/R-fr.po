@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: questionr\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-03-28 12:34\n"
-"PO-Revision-Date: 2014-03-28 12:35+0100\n"
+"POT-Creation-Date: 2014-09-30 15:09\n"
+"PO-Revision-Date: 2014-09-30 15:12+0100\n"
 "Last-Translator: Julien Barnier <julien@nozav.org>\n"
 "Language-Team: \n"
 "Language: fr-FR\n"
@@ -11,6 +11,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
+
+msgid "must not be an object named \"dfobject\"."
+msgstr "ne doit pas s'appeler \"dfobject\"."
 
 msgid "must be a data frame."
 msgstr "doit être un data frame."
@@ -20,6 +23,48 @@ msgstr "doit être une colonne de"
 
 msgid "."
 msgstr "."
+
+msgid "Interactive recoding"
+msgstr "Recodage interactif"
+
+msgid ""
+"<strong>Warning :</strong> This interface doesn't do anything by itself. It "
+"only generates R code you'll have to copy/paste into your script and execute "
+"yourself."
+msgstr ""
+"<strong>Attention :</strong> Cette interface n'effectue aucune action. Vous "
+"devez copier et exécuter le code R généré pour que le recodage soit effectif."
+
+msgid "New variable :"
+msgstr "Nouvelle variable :"
+
+msgid "Recoding style"
+msgstr "Style de recodage"
+
+msgid "Convert to factor"
+msgstr "Convertir en factor"
+
+msgid "Old variable as rows, new variable as columns."
+msgstr "Ancienne variable en ligne, variable recodée en colonne"
+
+msgid "Send code to console and exit"
+msgstr "Copier le code dans la console et quitter"
+
+msgid "## Recoding %s into %s"
+msgstr "## Recodage de %s en %s"
+
+msgid ""
+"<p class='header'>Recoding <tt>%s</tt> from <tt>%s</tt> of class <tt>%s</tt>."
+"</p>"
+msgstr ""
+"<p class='header'>Recodage de <tt>%s</tt> depuis <tt>%s</tt> de classe <tt>"
+"%s</tt>.</p>"
+
+msgid "-------- Start recoding code --------"
+msgstr "-------- Début du code --------"
+
+msgid "--------- End recoding code ---------"
+msgstr "--------- Fin du code ---------"
 
 msgid "there are no names to search in that object"
 msgstr ""

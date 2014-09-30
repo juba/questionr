@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: questionr 0.3\n"
-"POT-Creation-Date: 2014-03-28 12:34\n"
+"POT-Creation-Date: 2014-09-30 15:09\n"
 "PO-Revision-Date: 2013-10-11 15:02+0100\n"
 "Last-Translator: Julien Barnier <julien@nozav.org>\n"
 "Language-Team: \n"
@@ -11,6 +11,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
 
+msgid "must not be an object named \"dfobject\"."
+msgstr ""
+
 msgid "must be a data frame."
 msgstr ""
 
@@ -18,6 +21,44 @@ msgid "must be a column of"
 msgstr ""
 
 msgid "."
+msgstr ""
+
+msgid "Interactive recoding"
+msgstr ""
+
+msgid ""
+"<strong>Warning :</strong> This interface doesn't do anything by itself. It "
+"only generates R code you'll have to copy/paste into your script and execute "
+"yourself."
+msgstr ""
+
+msgid "New variable :"
+msgstr ""
+
+msgid "Recoding style"
+msgstr ""
+
+msgid "Convert to factor"
+msgstr ""
+
+msgid "Old variable as rows, new variable as columns."
+msgstr ""
+
+msgid "Send code to console and exit"
+msgstr ""
+
+msgid "## Recoding %s into %s"
+msgstr ""
+
+msgid ""
+"<p class='header'>Recoding <tt>%s</tt> from <tt>%s</tt> of class <tt>%s</tt>."
+"</p>"
+msgstr ""
+
+msgid "-------- Start recoding code --------"
+msgstr ""
+
+msgid "--------- End recoding code ---------"
 msgstr ""
 
 msgid "there are no names to search in that object"
