@@ -41,6 +41,7 @@ irec <- function(dfobject, oldvar) {
     src_var <- ifelse(grepl(" ", oldvar_name),
                       sprintf('%s[,"%s"]', df_name, oldvar_name),
                       sprintf('%s$%s', df_name, oldvar_name))
+    
     ## Flag to display the alert on first time launch
     show_alert <- is.null(getOption("questionr_hide_alert"))
     if (show_alert) options(questionr_hide_alert=TRUE)  
@@ -50,7 +51,6 @@ irec <- function(dfobject, oldvar) {
     irec.css <- paste(readLines(css.file),collapse="\n")
         
     ## Run shiny app
-    #require(shiny)
     shiny::shinyApp(ui=bootstrapPage(
       header=tags$head(
         ## Custom CSS
