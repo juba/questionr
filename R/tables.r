@@ -336,8 +336,6 @@ residus <- chisq.residuals
 #' @param percent if not NULL, add a percent sign after each value
 #' @param justify justification of character vectors. Passed to \code{format.default}
 #' @param ... other arguments to pass to \code{format.default}
-#' @method format proptab
-#' @S3method format proptab
 #' @details
 #' This function is designed for internal use only.
 #' @seealso
@@ -377,8 +375,6 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
 #' @param percent if not NULL, add a percent sign after each value
 #' @param justify justification of character vectors. Passed to \code{format.default}
 #' @param ... other arguments to pass to \code{format.default}
-#' @method print proptab
-#' @S3method print proptab
 #' @seealso
 #' \code{\link[questionr]{format.proptab}}
 #' @export print.proptab

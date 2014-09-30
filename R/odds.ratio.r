@@ -14,8 +14,6 @@ function (x, ...) {
 }
 
 #' @rdname odds.ratio
-#' @method odds.ratio glm
-#' @S3method odds.ratio glm
 #' @aliases odds.ratio.glm
 #' @param level the confidence level required
 #' @param digits number of decimal to display
@@ -50,8 +48,6 @@ function(x, level=0.95, digits=3, ...) {
 
 
 #' @rdname odds.ratio
-#' @method odds.ratio multinom
-#' @S3method odds.ratio multinom
 #' @aliases odds.ratio.multinom
 #' @details
 #' For models calculated with \code{multinom} (nnet),
@@ -89,8 +85,6 @@ function(x, level=0.95, digits=3, ...) {
 }
 
 #' @rdname odds.ratio
-#' @method odds.ratio factor
-#' @S3method odds.ratio factor
 #' @aliases odds.ratio.factor
 #' @param y a second factor object
 #' @return
@@ -107,8 +101,6 @@ function(x, y, level=0.95, ...) {
 }
 
 #' @rdname odds.ratio
-#' @method odds.ratio table
-#' @S3method odds.ratio table
 #' @aliases odds.ratio.table
 #' @examples
 #' odds.ratio(table(hdv2003$sport, hdv2003$cuisine))

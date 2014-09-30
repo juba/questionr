@@ -28,13 +28,12 @@ copie <- clipcopy
 #' @return \code{NULL}
 #'
 #' @rdname clipcopy
-#' @method clipcopy default
-#' @S3method clipcopy default
 #' @aliases copie.proptab
 #' @param append if TRUE, append to the file instead of replacing it
 #' @param file if TRUE, export to a file instead of the clipboard
 #' @param filename name of the file to export to
 #' @param clipboard.size under Windows, size of the clipboard in kB
+#' @export clipcopy.default
 
 `clipcopy.default` <-
 function (obj, append=FALSE, file=FALSE, filename="temp.html", clipboard.size=4096, ...) {
@@ -61,8 +60,6 @@ copie.default <- clipcopy.default
 #' @return \code{NULL}
 #'
 #' @rdname clipcopy
-#' @method clipcopy proptab
-#' @S3method clipcopy proptab
 #' @aliases copie.proptab
 #' @param percent whether to add a percent sign in each cell
 #' @param digits number of digits to display
