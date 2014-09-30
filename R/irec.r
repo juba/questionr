@@ -106,7 +106,8 @@ irec <- function(dfobject, oldvar) {
                           onclick="javascript:window.close();", 
                           list(icon=icon("share")), 
                           gettext("Send code to console and exit", domain="R-questionr"))
-              )
+              ),
+            textOutput("done")
           )
           
       )),
@@ -165,9 +166,10 @@ irec <- function(dfobject, oldvar) {
         }
         
         ## Call recoding code generation function based on style
-        generate_code <- function(newvar_name) {
+        generate_code <- function(check=FALSE) {
+          newvar_name <- input$newvarname
           ## if null, create temporary variable for check table
-          if (is.null(newvar_name)) dest_var <- ".irec_tmp"
+          if (check) dest_var <- ".irec_tmp"
           ## else, format new variable for code
           else
             dest_var <- ifelse(grepl(" ", newvar_name),
@@ -184,14 +186,7 @@ irec <- function(dfobject, oldvar) {
           ## Header
           header <- HTML(gettextf("<p class='header'>Recoding <tt>%s</tt> from <tt>%s</tt> of class <tt>%s</tt>.</p>", oldvar_name, df_name, class(oldvar), domain="R-questionr"))
           ## Generate code
-          out <- generate_code(input$newvarname)
-          ## If "Done" button is pressed, exit and cat generated code in the console
-          if (input$donebutton > 0) {
-            cat("\n", gettext("-------- Start recoding code --------\n\n", domain="R-questionr"))
-            cat(out)
-            cat("\n", gettext("--------- End recoding code ---------\n", domain="R-questionr"))
-            shiny::stopApp()
-          }
+          out <- generate_code()
           ## Generated code syntax highlighting
           out <- paste(highr::hi_html(out), collapse="\n")
           ## Final paste
@@ -199,10 +194,23 @@ irec <- function(dfobject, oldvar) {
           out
         })
         
+        output$done <- renderText({
+          ## Generate code
+          out <- generate_code()
+          ## If "Done" button is pressed, exit and cat generated code in the console
+          if (input$donebutton > 0) {
+            cat(gettext("\n-------- Start recoding code --------\n\n", domain="R-questionr"))
+            cat(out)
+            cat(gettext("\n--------- End recoding code ---------\n", domain="R-questionr"))
+            shiny::stopApp()
+          }
+          return("")
+        })
+        
         ## Generate the check table
         output$tableOut <- renderTable({
           ## Generate the recoding code with a temporary variable
-          code <- generate_code(newvar_name=NULL)
+          code <- generate_code(check=TRUE)
           ## Eval generated code
           eval(parse(text=code))
           ## Display table
