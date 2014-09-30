@@ -31,7 +31,7 @@ irec <- function(dfobject, oldvar) {
     if (!is_char) oldvar <- deparse(substitute(oldvar))
     ## Check if oldvar is a column of dfobject
     if (!(oldvar %in% names(get(dfobject)))) stop(sQuote(paste0(oldvar, ' must be a column of ', dfobject, '.')))    
-    
+
     ## Global variables
     df_name <- dfobject
     df <- get(df_name)
@@ -59,7 +59,7 @@ irec <- function(dfobject, oldvar) {
       ## Page title
       div(class="container-fluid",
           div(class="row",
-              headerPanel(gettext("Interactive recoding"))),
+              headerPanel(gettext("Interactive recoding", domain="R-questionr"))),
           
           ## Display an alert, only on first launch for the current session
           if (show_alert) {
@@ -67,7 +67,7 @@ irec <- function(dfobject, oldvar) {
                 div(class="span12",
                     div(class="alert alert-dismissable",
                         HTML('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'),
-                        HTML(gettext("<strong>Warning :</strong> This interface doesn't do anything by itself. It only generates R code you'll have to copy/paste into your script and execute yourself."))
+                        HTML(gettext("<strong>Warning :</strong> This interface doesn't do anything by itself. It only generates R code you'll have to copy/paste into your script and execute yourself.", domain="R-questionr"))
                     )))} else "",
           
           ## First panel : new variable name and recoding style
@@ -75,11 +75,11 @@ irec <- function(dfobject, oldvar) {
               div(class="span12",
                   tags$form(class="well",
                             HTML("<table><tr>"),
-                            HTML("<td>",gettext("New variable : "),"</td><td>"), textInput("newvarname","", paste0(oldvar_name,".rec")),HTML("</td>"),
-                            HTML('<td class="selstyle">',gettext("Recoding style"), ' : </td><td>'),
+                            HTML("<td>",gettext("New variable : ", domain="R-questionr"),"</td><td>"), textInput("newvarname","", paste0(oldvar_name,".rec")),HTML("</td>"),
+                            HTML('<td class="selstyle">',gettext("Recoding style", domain="R-questionr"), ' : </td><td>'),
                             selectInput("recstyle", "", c("Character - complete"="charcomp", "Character - minimal"="charmin")),
                             HTML("</td><td class='selstyle'>"),
-                            checkboxInput("facconv", gettext("Convert to factor"), FALSE),
+                            checkboxInput("facconv", gettext("Convert to factor", domain="R-questionr"), FALSE),
                             HTML("</td>"),
                             HTML("</tr></table>")
                   ))),
@@ -96,7 +96,7 @@ irec <- function(dfobject, oldvar) {
               tabPanel("Code", htmlOutput("recodeOut")),
               ## Table check tab
               tabPanel("Check",
-                       p(class='header', gettext('Old variable as rows, new variable as columns.')),
+                       p(class='header', gettext('Old variable as rows, new variable as columns.', domain="R-questionr")),
                        tableOutput("tableOut"))
             ),
             
@@ -105,7 +105,7 @@ irec <- function(dfobject, oldvar) {
               tags$button(id="donebutton", type="button", class="btn action-button btn-success", 
                           onclick="javascript:window.close();", 
                           list(icon=icon("share")), 
-                          gettext("Send code to console and exit"))
+                          gettext("Send code to console and exit", domain="R-questionr"))
               )
           )
           
@@ -127,7 +127,7 @@ irec <- function(dfobject, oldvar) {
         ## Generate recoding code
         generate_code_character <- function(newvar_name, dest_var, style) {
           ## Initial comment
-          out <- gettextf("## Recoding %s into %s\n", src_var, dest_var)
+          out <- gettextf("## Recoding %s into %s\n", src_var, dest_var, domain="R-questionr")
           ## Create new variable
           if (!is.character(oldvar))
             out <- paste0(out, sprintf("%s <- as.character(%s)\n", dest_var, src_var))
@@ -182,14 +182,14 @@ irec <- function(dfobject, oldvar) {
         ## Generate the code in the interface
         output$recodeOut <- renderText({
           ## Header
-          header <- HTML(gettextf("<p class='header'>Recoding <tt>%s</tt> from <tt>%s</tt> of class <tt>%s</tt>.</p>", oldvar_name, df_name, class(oldvar)))
+          header <- HTML(gettextf("<p class='header'>Recoding <tt>%s</tt> from <tt>%s</tt> of class <tt>%s</tt>.</p>", oldvar_name, df_name, class(oldvar), domain="R-questionr"))
           ## Generate code
           out <- generate_code(input$newvarname)
           ## If "Done" button is pressed, exit and cat generated code in the console
           if (input$donebutton > 0) {
-            cat("\n", gettext("-------- Start recoding code --------\n\n"))
+            cat("\n", gettext("-------- Start recoding code --------\n\n", domain="R-questionr"))
             cat(out)
-            cat("\n", gettext("--------- End recoding code ---------\n"))
+            cat("\n", gettext("--------- End recoding code ---------\n", domain="R-questionr"))
             shiny::stopApp()
           }
           ## Generated code syntax highlighting
