@@ -45,19 +45,9 @@ irec <- function(dfobject, oldvar) {
     show_alert <- is.null(getOption("questionr_hide_alert"))
     if (show_alert) options(questionr_hide_alert=TRUE)  
     
-    irec.css <- "
-span.hl.str { color: #d14;}
-span.hl.kwa { color: #099;}
-span.hl.num { color: #099;}
-span.hl.kwd { color: #333; font-weight: bold;}
-span.hl.com { color: #888; font-style: italic;}
-
-td.selstyle { padding-left: 2em;}
-td.right { text-align: right;}
-
-p.header { font-size: 11px;}
-p.bottom-buttons { margin-top: 15px;}
-"
+    ## CSS file
+    css.file <- system.file(file.path("css", "ifuncs.css"), package = "questionr")
+    irec.css <- paste(readLines(css.file),collapse="\n")
         
     ## Run shiny app
     #require(shiny)
