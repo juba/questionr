@@ -48,13 +48,13 @@ irec <- function(dfobject, oldvar) {
     
     ## CSS file
     css.file <- system.file(file.path("shiny", "css", "ifuncs.css"), package = "questionr")
-    irec.css <- paste(readLines(css.file),collapse="\n")
+    css.content <- paste(readLines(css.file),collapse="\n")
         
     ## Run shiny app
     shiny::shinyApp(ui=bootstrapPage(
       header=tags$head(
         ## Custom CSS
-        tags$style(HTML(irec.css))),
+        tags$style(HTML(css.content))),
       
       ## Page title
       div(class="container-fluid",
