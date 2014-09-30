@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: questionr\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-09-30 15:09\n"
-"PO-Revision-Date: 2014-09-30 15:12+0100\n"
+"POT-Creation-Date: 2014-09-30 16:38\n"
+"PO-Revision-Date: 2014-09-30 16:46+0100\n"
 "Last-Translator: Julien Barnier <julien@nozav.org>\n"
 "Language-Team: \n"
 "Language: fr-FR\n"
@@ -23,6 +23,56 @@ msgstr "doit être une colonne de"
 
 msgid "."
 msgstr "."
+
+msgid "Interactive cutting"
+msgstr "Découpage interactif"
+
+msgid ""
+"<strong>Warning :</strong> This inteface doesn't do anything by itself. It "
+"only generates R code you'll have to copy/paste into your script and execute "
+"yourself."
+msgstr ""
+"<strong>Attention :</strong> Cette interface n'effectue aucune action. Vous "
+"devez copier et exécuter le code R généré pour que le recodage soit effectif."
+
+msgid "New variable"
+msgstr "Nouvelle variable :"
+
+msgid "<p>Statistics of <tt>%s</tt> :</p>"
+msgstr "<p>Statistiques de <tt>%s</tt> :</p>"
+
+msgid "Cutting method"
+msgstr "Méthode"
+
+msgid "Right-closed intervals (<tt>right</tt>)"
+msgstr "Intervalles fermés à droite  (<tt>right</tt>)"
+
+msgid "Include extreme (<tt>include.lowest</tt>)"
+msgstr "Inclure la valeur extrême  (<tt>include.lowest</tt>)"
+
+msgid "Append extreme values if necessary"
+msgstr "Ajouter les valeurs extrêmes si nécessaire"
+
+msgid "Send code to console and exit"
+msgstr "Copier le code dans la console et quitter"
+
+msgid "Breaks number"
+msgstr "Nombre d'intervalles"
+
+msgid "invalid number of intervals"
+msgstr "Nombre d'intervalles invalide"
+
+msgid "## Cutting %s into %s"
+msgstr "## Recodage de %s en %s"
+
+msgid "Original histogram"
+msgstr "Variable originale"
+
+msgid "-------- Start recoding code --------"
+msgstr "-------- Début du code --------"
+
+msgid "--------- End recoding code ---------"
+msgstr "--------- Fin du code ---------"
 
 msgid "Interactive recoding"
 msgstr "Recodage interactif"
@@ -47,9 +97,6 @@ msgstr "Convertir en factor"
 msgid "Old variable as rows, new variable as columns."
 msgstr "Ancienne variable en ligne, variable recodée en colonne"
 
-msgid "Send code to console and exit"
-msgstr "Copier le code dans la console et quitter"
-
 msgid "## Recoding %s into %s"
 msgstr "## Recodage de %s en %s"
 
@@ -59,12 +106,6 @@ msgid ""
 msgstr ""
 "<p class='header'>Recodage de <tt>%s</tt> depuis <tt>%s</tt> de classe <tt>"
 "%s</tt>.</p>"
-
-msgid "-------- Start recoding code --------"
-msgstr "-------- Début du code --------"
-
-msgid "--------- End recoding code ---------"
-msgstr "--------- Fin du code ---------"
 
 msgid "there are no names to search in that object"
 msgstr ""

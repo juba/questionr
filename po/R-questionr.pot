@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: questionr 0.4.2\n"
-"POT-Creation-Date: 2014-09-30 15:09\n"
+"POT-Creation-Date: 2014-09-30 16:38\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,6 +22,51 @@ msgstr ""
 msgid "."
 msgstr ""
 
+msgid "Interactive cutting"
+msgstr ""
+
+msgid "<strong>Warning :</strong> This inteface doesn't do anything by itself. It only generates R code you'll have to copy/paste into your script and execute yourself."
+msgstr ""
+
+msgid "New variable"
+msgstr ""
+
+msgid "<p>Statistics of <tt>%s</tt> :</p>"
+msgstr ""
+
+msgid "Cutting method"
+msgstr ""
+
+msgid "Right-closed intervals (<tt>right</tt>)"
+msgstr ""
+
+msgid "Include extreme (<tt>include.lowest</tt>)"
+msgstr ""
+
+msgid "Append extreme values if necessary"
+msgstr ""
+
+msgid "Send code to console and exit"
+msgstr ""
+
+msgid "Breaks number"
+msgstr ""
+
+msgid "invalid number of intervals"
+msgstr ""
+
+msgid "## Cutting %s into %s"
+msgstr ""
+
+msgid "Original histogram"
+msgstr ""
+
+msgid "-------- Start recoding code --------"
+msgstr ""
+
+msgid "--------- End recoding code ---------"
+msgstr ""
+
 msgid "Interactive recoding"
 msgstr ""
 
@@ -40,19 +85,10 @@ msgstr ""
 msgid "Old variable as rows, new variable as columns."
 msgstr ""
 
-msgid "Send code to console and exit"
-msgstr ""
-
 msgid "## Recoding %s into %s"
 msgstr ""
 
 msgid "<p class='header'>Recoding <tt>%s</tt> from <tt>%s</tt> of class <tt>%s</tt>.</p>"
-msgstr ""
-
-msgid "-------- Start recoding code --------"
-msgstr ""
-
-msgid "--------- End recoding code ---------"
 msgstr ""
 
 msgid "there are no names to search in that object"
