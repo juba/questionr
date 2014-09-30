@@ -16,7 +16,6 @@
 ##' @import shiny
 ##' @importFrom highr hi_html
 ##' @importFrom classInt classIntervals
-##' @importFrom htmltools htmlEscape
 ##' @export
 
 icut <- function(dfobject, oldvar) {
@@ -76,7 +75,7 @@ icut <- function(dfobject, oldvar) {
         ## Page title
         div(class="container-fluid",
             div(class="row",
-                headerPanel(gettext("Interactive cutting", domain="R-questionr")),
+                headerPanel(gettext("Interactive cutting", domain="R-questionr"))),
             
             ## Display an alert, only on first launch for the current session
             if (show_alert) {
@@ -99,7 +98,7 @@ icut <- function(dfobject, oldvar) {
                             )),
                         div(class="span12 inner",
                             tags$form(class="well",
-                                      HTML(sprintf("<p>Statistics of <tt>%s</tt> :</p>", oldvar_name)),
+                                      HTML(gettextf("<p>Statistics of <tt>%s</tt> :</p>", oldvar_name, domain="R-questionr")),
                                       HTML(summary_table(oldvar)),
                                       selectizeInput("cutMethod", gettext('Cutting method',domain='R-questionr'), choices=c("Manual" = "fixed", "Standard deviation" = "sd", "Equal width" = "equal", "Pretty" = "pretty", "Quantile" = "quantile", "K-means" = "kmeans", "Hierarchical cluster" = "hclust", "Bagged clustering" = "bclust", "Fisher algorithm" = "fisher", "Jenks algorithm" = "jenks")),
                                       uiOutput("ui"),
@@ -139,7 +138,7 @@ icut <- function(dfobject, oldvar) {
                     )
                 )
                       
-        )))),
+        ))),
       
       server=function(input, output, session) {
         
@@ -155,7 +154,7 @@ icut <- function(dfobject, oldvar) {
               if (input$nb_breaks < 2) return(2)
               return(input$nb_breaks)
             })
-            updateTextInput(session, "breaks", value=classIntervals(oldvar, n=ifelse(is.null(nb_breaks()), 6, nb_breaks()), style=input$cutMethod)$brks)
+            updateTextInput(session, "breaks", value=classInt::classIntervals(oldvar, n=ifelse(is.null(nb_breaks()), 6, nb_breaks()), style=input$cutMethod)$brks)
           }
         })
         
@@ -214,9 +213,9 @@ icut <- function(dfobject, oldvar) {
           out <- generate_code(input$newvarname)
           ## If "Done" button is pressed, exit and cat generated code in the console
           if (input$donebutton > 0) {
-            cat(gettext("\n-------- Start recoding code --------\n\n"), domain="R-questionr")
+            cat(gettext("\n-------- Start recoding code --------\n\n", domain="R-questionr"))
             cat(out)
-            cat(gettext("\n--------- End recoding code ---------\n"), domain="R-questionr")
+            cat(gettext("\n--------- End recoding code ---------\n", domain="R-questionr"))
             shiny::stopApp()
           }
           ## Generated code syntax highlighting
@@ -233,7 +232,7 @@ icut <- function(dfobject, oldvar) {
           ## Eval generated code
           eval(parse(text=code))
           ## Display table
-          tab <- freq(.icut_tmp)
+          tab <- freq(get(".icut_tmp"))
           tab
         })
         
@@ -244,7 +243,7 @@ icut <- function(dfobject, oldvar) {
           ## Eval generated code
           eval(parse(text=code))
           ## Display table
-          plot(.icut_tmp, col="#bbd8e9", border="white")
+          plot(get(".icut_tmp"), col="#bbd8e9", border="white")
         })
     })
     
