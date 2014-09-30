@@ -23,7 +23,7 @@ irec <- function(dfobject, oldvar) {
     if (!is.character(dfobject)) dfobject <- deparse(substitute(dfobject))
     ## Prevents get() conflicts
     if (dfobject=="dfobject") stop(sQuote(paste0(dfobject, ' must not be an object named "dfobject".')))
-        ## Check if dfobject is a data frame
+    ## Check if dfobject is a data frame
     if (!is.data.frame(get(dfobject))) stop(sQuote(paste0(dfobject, ' must be a data frame.')))
     ## If oldvar is not a character string, deparse it
     is_char <- FALSE
