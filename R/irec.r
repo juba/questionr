@@ -93,9 +93,9 @@ irec <- function(dfobject, oldvar) {
           mainPanel(
             tabsetPanel(
               ## Code tab
-              tabPanel("Code", htmlOutput("recodeOut")),
+              tabPanel(gettext("Code", domain="R-questionr"), htmlOutput("recodeOut")),
               ## Table check tab
-              tabPanel("Check",
+              tabPanel(gettext("Check", domain="R-questionr"),
                        p(class='header', gettext('Old variable as rows, new variable as columns.', domain="R-questionr")),
                        tableOutput("tableOut"))
             ),

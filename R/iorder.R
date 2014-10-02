@@ -114,9 +114,9 @@ iorder <- function(dfobject, oldvar) {
               mainPanel(
                 tabsetPanel(
                   ## Code tab
-                  tabPanel(HTML(gettext("Code", domain="R-questionr")), htmlOutput("codeOut")),
+                  tabPanel(gettext("Code", domain="R-questionr"), htmlOutput("codeOut")),
                   ## Table check tab
-                  tabPanel(HTML(gettext("Check", domain="R-questionr")),
+                  tabPanel(gettext("Check", domain="R-questionr"),
                            HTML("<p class='header'></p>"),
                            tableOutput("tableOut"))
                 ),

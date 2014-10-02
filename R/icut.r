@@ -119,9 +119,9 @@ icut <- function(dfobject, oldvar) {
                 div(class="span10",
                     tabsetPanel(
                       ## Code tab
-                      tabPanel(HTML("Code"), htmlOutput("codeOut")),
+                      tabPanel(gettext("Code", domain="R-questionr"), htmlOutput("codeOut")),
                       ## Table check tab
-                      tabPanel(HTML("Check"),
+                      tabPanel(gettext("Check", domain="R-questionr"),
                                div(class="span4",
                                    HTML("<p class='header'></p>"),
                                    tableOutput("tableOut")),
