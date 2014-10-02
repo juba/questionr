@@ -82,7 +82,7 @@ iorder <- function(dfobject, oldvar) {
       ## Page title
       div(class="container-fluid",
           div(class="row",
-              headerPanel("Interactive levels ordering")),
+              headerPanel(gettext("Interactive levels ordering", domain="R-questionr"))),
           
           ## Display an alert, only on first launch for the current session
           if (show_alert) {
@@ -90,7 +90,7 @@ iorder <- function(dfobject, oldvar) {
                 div(class="span8",
                     div(class="alert alert-dismissable",
                         HTML('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'),
-                        HTML("<strong>Warning :</strong> This interface doesn't do anything by itself. It only generates R code you'll have to copy/paste into your script and execute yourself.")
+                        HTML(gettext("<strong>Warning :</strong> This interface doesn't do anything by itself. It only generates R code you'll have to copy/paste into your script and execute yourself.", domain="R-questionr"))
                     )))} else "",
           
           ## First panel : new variable name and recoding style
@@ -98,7 +98,7 @@ iorder <- function(dfobject, oldvar) {
               div(class="span8",
                   tags$form(class="well",
                             HTML("<table><tr>"),
-                            HTML("<td>New variable : </td><td>"),
+                            HTML(gettext("<td>New variable : </td><td>", domain="R-questionr")),
                             textInput("newvarname","", oldvar_name),
                             HTML("</td>"),
                             HTML("</tr></table>")
@@ -114,9 +114,9 @@ iorder <- function(dfobject, oldvar) {
               mainPanel(
                 tabsetPanel(
                   ## Code tab
-                  tabPanel(HTML("Code"), htmlOutput("codeOut")),
+                  tabPanel(HTML(gettext("Code", domain="R-questionr")), htmlOutput("codeOut")),
                   ## Table check tab
-                  tabPanel(HTML("Check"),
+                  tabPanel(HTML(gettext("Check", domain="R-questionr")),
                            HTML("<p class='header'></p>"),
                            tableOutput("tableOut"))
                 ),
@@ -145,7 +145,7 @@ iorder <- function(dfobject, oldvar) {
                                sprintf('%s[,"%s"]', df_name, newvar_name),
                                sprintf('%s$%s', df_name, newvar_name))
           newlevels <- paste0(capture.output(dput(input$sortable)), collapse="")
-          out <- sprintf("## Reordering %s", src_var)
+          out <- gettextf("## Reordering %s", src_var, domain="R-questionr")
           if (src_var != dest_var) out <- paste0(out, sprintf(" into %s", dest_var))
           out <- paste0(out, sprintf("\n%s <- factor(%s, levels=", dest_var, src_var))
           out <- paste0(out, newlevels, ')')
@@ -155,7 +155,7 @@ iorder <- function(dfobject, oldvar) {
         ## Generate the code in the interface
         output$codeOut <- renderText({
           ## Header
-          header <- HTML(paste0("<p class='header'>Reordering <tt>", oldvar_name, "</tt> from <tt>", df_name, "</tt> of class <tt>", class(oldvar), "</tt>.</p>"))
+          header <- HTML(paste0(gettextf("<p class='header'>Reordering <tt>%s</tt> of class <tt>%s</tt>.</p>", oldvar_name, class(oldvar), domain="R-questionr")))
           ## Generate code
           out <- generate_code()
           ## Generated code syntax highlighting
@@ -185,7 +185,7 @@ iorder <- function(dfobject, oldvar) {
           ## Eval generated code
           eval(parse(text=code))
           ## Display table
-          tab <- freq(.iorder_tmp)
+          tab <- freq(get(".iorder_tmp"))
           tab
         })
         

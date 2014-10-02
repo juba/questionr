@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: questionr\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-09-30 16:38\n"
-"PO-Revision-Date: 2014-09-30 16:46+0100\n"
+"POT-Creation-Date: 2014-10-02 11:08\n"
+"PO-Revision-Date: 2014-10-02 11:08+0100\n"
 "Last-Translator: Julien Barnier <julien@nozav.org>\n"
 "Language-Team: \n"
 "Language: fr-FR\n"
@@ -74,8 +74,8 @@ msgstr "-------- Début du code --------"
 msgid "--------- End recoding code ---------"
 msgstr "--------- Fin du code ---------"
 
-msgid "Interactive recoding"
-msgstr "Recodage interactif"
+msgid "Interactive levels ordering"
+msgstr "Réordonnancement interactif"
 
 msgid ""
 "<strong>Warning :</strong> This interface doesn't do anything by itself. It "
@@ -84,6 +84,25 @@ msgid ""
 msgstr ""
 "<strong>Attention :</strong> Cette interface n'effectue aucune action. Vous "
 "devez copier et exécuter le code R généré pour que le recodage soit effectif."
+
+msgid "<td>New variable : </td><td>"
+msgstr "Nouvelle variable :"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Check"
+msgstr "Vérification"
+
+msgid "## Reordering %s"
+msgstr "## Réordonnancement de %s"
+
+msgid "<p class='header'>Reordering <tt>%s</tt> of class <tt>%s</tt>.</p>"
+msgstr ""
+"<p class='header'>Réordonnancement de <tt>%s</tt> de classe <tt>%s</tt>.</p>"
+
+msgid "Interactive recoding"
+msgstr "Recodage interactif"
 
 msgid "New variable :"
 msgstr "Nouvelle variable :"

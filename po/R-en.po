@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: questionr 0.3\n"
-"POT-Creation-Date: 2014-09-30 16:38\n"
+"POT-Creation-Date: 2014-10-02 11:08\n"
 "PO-Revision-Date: 2013-10-11 15:02+0100\n"
 "Last-Translator: Julien Barnier <julien@nozav.org>\n"
 "Language-Team: \n"
@@ -71,13 +71,31 @@ msgstr ""
 msgid "--------- End recoding code ---------"
 msgstr ""
 
-msgid "Interactive recoding"
+msgid "Interactive levels ordering"
 msgstr ""
 
 msgid ""
 "<strong>Warning :</strong> This interface doesn't do anything by itself. It "
 "only generates R code you'll have to copy/paste into your script and execute "
 "yourself."
+msgstr ""
+
+msgid "<td>New variable : </td><td>"
+msgstr ""
+
+msgid "Code"
+msgstr ""
+
+msgid "Check"
+msgstr ""
+
+msgid "## Reordering %s"
+msgstr ""
+
+msgid "<p class='header'>Reordering <tt>%s</tt> of class <tt>%s</tt>.</p>"
+msgstr ""
+
+msgid "Interactive recoding"
 msgstr ""
 
 msgid "New variable :"
