@@ -15,7 +15,7 @@
 ##' @examples
 ##' \dontrun{data(hdv2003)
 ##' iorder(hdv2003, "qualif")}
-##' @importFrom shiny runApp
+##' @import shiny
 ##' @importFrom highr hi_html
 ##' @export
 
@@ -26,14 +26,180 @@ iorder <- function(dfobject, oldvar) {
     if (dfobject=="dfobject") stop(sQuote(paste0(dfobject, ' must not be an object named "dfobject".')))
     ## Check if dfobject is a data frame
     if (!is.data.frame(get(dfobject))) stop(sQuote(paste0(dfobject, ' must be a data frame.')))
-    options(questionr_iorder_df=dfobject)
-    ## If oldvar is not a character string, deparse it
+        ## If oldvar is not a character string, deparse it
     is_char <- FALSE
     try(if(is.character(oldvar)) is_char <- TRUE, silent=TRUE)
     if (!is_char) oldvar <- deparse(substitute(oldvar))
     ## Check if oldvar is a column of dfobject
     if (!(oldvar %in% names(get(dfobject)))) stop(sQuote(paste0(oldvar, ' must be a column of ', dfobject, '.')))    
-    options(questionr_iorder_oldvar=oldvar)
+    
+    ## Global variables
+    ## Original data frame name and object
+    df_name <- dfobject
+    df <- get(df_name)
+    ## Variable to be recoded, name and object
+    oldvar_name <- oldvar
+    oldvar <- df[,oldvar_name]
+    ## Formatted source variable name
+    src_var <- ifelse(grepl(" ", oldvar_name),
+                      sprintf('%s[,"%s"]', df_name, oldvar_name),
+                      sprintf('%s$%s', df_name, oldvar_name))
+
+    ## Flag to display the alert on first time launch
+    show_alert <- is.null(getOption("questionr_hide_alert"))
+    if (show_alert) options(questionr_hide_alert=TRUE)      
+
+    ## CSS file
+    css.file <- system.file(file.path("shiny", "css", "ifuncs.css"), package = "questionr")
+    css.content <- paste(readLines(css.file),collapse="\n")
+    ## JS files
+    jquery.ui.file <- system.file(file.path("shiny", "js", "jquery-ui.js"), package = "questionr")
+    jquery.ui.content <- paste(readLines(jquery.ui.file),collapse="\n")
+    js.file <- system.file(file.path("shiny", "js", "iorder.js"), package = "questionr")
+    js.content <- paste(readLines(js.file),collapse="\n")
+    
+    
+    generate_levels_ol <- function(oldvar) {
+      out <- "<ol id='sortable' class='sortable'>"
+      ## List of levels
+      if (is.factor(oldvar)) levs <- levels(oldvar)
+      else levs <- na.omit(unique(oldvar))
+      ## Generate fields
+      for (l in levs) out <- paste0(out,'<li><i class="icon-move"></i> <span>',htmltools::htmlEscape(l),'</span></li>')
+      out <- paste0(out, "</ol>")
+      HTML(out)     
+    }
+    
+    
     ## Run shiny app
-    invisible(shiny::runApp(system.file("iorder", package="questionr")))
+    shiny::shinyApp(ui=bootstrapPage(
+      header=tags$head(
+        ## Custom CSS and JS
+        tags$style(HTML(css.content)),
+        tags$script(HTML(jquery.ui.content)),
+        tags$script(HTML(js.content))),
+ 
+      ## Page title
+      div(class="container-fluid",
+          div(class="row",
+              headerPanel("Interactive levels ordering")),
+          
+          ## Display an alert, only on first launch for the current session
+          if (show_alert) {
+            div(class="row-fluid",
+                div(class="span8",
+                    div(class="alert alert-dismissable",
+                        HTML('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'),
+                        HTML("<strong>Warning :</strong> This interface doesn't do anything by itself. It only generates R code you'll have to copy/paste into your script and execute yourself.")
+                    )))} else "",
+          
+          ## First panel : new variable name and recoding style
+          div(class="row-fluid",
+              div(class="span8",
+                  tags$form(class="well",
+                            HTML("<table><tr>"),
+                            HTML("<td>New variable : </td><td>"),
+                            textInput("newvarname","", oldvar_name),
+                            HTML("</td>"),
+                            HTML("</tr></table>")
+                  ))),
+          
+          ## Second panel : recoding fields, dynamically generated
+          div(class="row-fluid",
+              div(class="span8 well",
+                  generate_levels_ol(oldvar)
+              )),
+          ## Main panel with tabs
+          div(class="row-fluid",
+              mainPanel(
+                tabsetPanel(
+                  ## Code tab
+                  tabPanel(HTML("Code"), htmlOutput("codeOut")),
+                  ## Table check tab
+                  tabPanel(HTML("Check"),
+                           HTML("<p class='header'></p>"),
+                           tableOutput("tableOut"))
+                ),
+                
+                ## Bottom buttons
+                p(class='bottom-buttons',
+                  tags$button(id="donebutton", type="button", class="btn action-button btn-success", 
+                              onclick="javascript:window.close();", 
+                              list(icon=icon("share")), 
+                              gettext("Send code to console and exit", domain="R-questionr"))
+                ),
+                textOutput("done")
+      
+      )))),
+      
+      server=function(input, output) {
+        
+        ## Generate reordering code
+        generate_code <- function(check=FALSE) {
+          newvar_name <- input$newvarname
+          ## if null, create temporary variable for check table
+          if (check) dest_var <- ".iorder_tmp"
+          ## else, format new variable for code
+          else
+            dest_var <- ifelse(grepl(" ", newvar_name),
+                               sprintf('%s[,"%s"]', df_name, newvar_name),
+                               sprintf('%s$%s', df_name, newvar_name))
+          newlevels <- paste0(capture.output(dput(input$sortable)), collapse="")
+          out <- sprintf("## Reordering %s", src_var)
+          if (src_var != dest_var) out <- paste0(out, sprintf(" into %s", dest_var))
+          out <- paste0(out, sprintf("\n%s <- factor(%s, levels=", dest_var, src_var))
+          out <- paste0(out, newlevels, ')')
+          out
+        }
+        
+        ## Generate the code in the interface
+        output$codeOut <- renderText({
+          ## Header
+          header <- HTML(paste0("<p class='header'>Reordering <tt>", oldvar_name, "</tt> from <tt>", df_name, "</tt> of class <tt>", class(oldvar), "</tt>.</p>"))
+          ## Generate code
+          out <- generate_code()
+          ## Generated code syntax highlighting
+          out <- paste(highr::hi_html(out), collapse="\n")
+          ## Final paste
+          out <- paste0(header, "<pre class='r'><code class='r' id='codeout'>",out,"</code></pre>")
+          out
+        })
+        
+        output$done <- renderText({
+          ## Generate code
+          out <- generate_code()
+          ## If "Done" button is pressed, exit and cat generated code in the console
+          if (input$donebutton > 0) {
+            cat(gettext("\n-------- Start recoding code --------\n\n", domain="R-questionr"))
+            cat(out)
+            cat(gettext("\n--------- End recoding code ---------\n", domain="R-questionr"))
+            shiny::stopApp()
+          }
+          return("")
+        })
+        
+        ## Generate the check table
+        output$tableOut <- renderTable({
+          ## Generate the recoding code with a temporary variable
+          code <- generate_code(check=TRUE)
+          ## Eval generated code
+          eval(parse(text=code))
+          ## Display table
+          tab <- freq(.iorder_tmp)
+          tab
+        })
+        
+        ## Text fileds for levels, dynamically generated
+        output$levelsInput <- renderUI({
+          out <- "<ol class='sortable'>"
+          ## List of levels
+          if (is.factor(oldvar)) levs <- levels(oldvar)
+          else levs <- na.omit(unique(oldvar))
+          ## Generate fields
+          for (l in levs) out <- paste0(out,'<li>',l,'</li>')
+          out <- paste0(out, "</ol>")
+          HTML(out)
+        })
+  })
+    
 }
