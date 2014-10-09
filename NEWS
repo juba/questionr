@@ -1,6 +1,7 @@
 questionr 0.4.2
 ---------------
 
+* Fix : wrong HTML() call in clipcopy()
 * Refactoring : icut, irec and iorder are now shinyApps functions
 * Translation : icut, irec and iorder interfaces are now translated in french
 
