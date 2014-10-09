@@ -40,7 +40,7 @@ function (obj, append=FALSE, file=FALSE, filename="temp.html", clipboard.size=40
   require(R2HTML)
   if (file) {
     conn <- file(filename, "w", encoding="Latin1")
-    HTML(obj, file=conn, append=append)
+    R2HTML::HTML(obj, file=conn, append=append)
     close(conn)
     return
   }
