@@ -147,14 +147,14 @@ function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE) 
   if (total) {
     .tmp.colnames <- colnames(tab)
     tab <- cbind(tab, apply(tab,1,sum))
-    colnames(tab) <- c(.tmp.colnames, gettext("All"))
+    colnames(tab) <- c(.tmp.colnames, gettext("All", domain="R-questionr"))
   }
   if (n) effectifs <- apply(tab,2,sum)
   tab <- prop.table(tab,2)*100
   if (total) {
     .tmp.rownames <- rownames(tab)
     tab <- rbind(tab,Total=apply(tab,2,sum))
-    rownames(tab) <- c(.tmp.rownames, gettext("Total"))
+    rownames(tab) <- c(.tmp.rownames, gettext("Total", domain="R-questionr"))
   }
   if (n) tab <- rbind(tab, n=effectifs)
   result <- as.table(tab)
@@ -200,14 +200,14 @@ function(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE) {
   if (total) {
     .tmp.rownames <- rownames(tab)
     tab <- rbind(tab, apply(tab,2,sum))
-    rownames(tab) <- c(.tmp.rownames, gettext("All"))
+    rownames(tab) <- c(.tmp.rownames, gettext("All", domain="R-questionr"))
   }
   if (n) effectifs <- apply(tab,1,sum)
   tab <- prop.table(tab,1)*100
   if (total) {
     .tmp.colnames <- colnames(tab)
     tab <- cbind(tab, Total=apply(tab,1,sum))
-    colnames(tab) <- c(.tmp.colnames, gettext("Total"))
+    colnames(tab) <- c(.tmp.colnames, gettext("Total", domain="R-questionr"))
   }
   if (n) tab <- cbind(tab, n=effectifs)
   result <- as.table(tab)
