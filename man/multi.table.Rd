@@ -32,6 +32,7 @@ true values even if \code{true.codes} is provided.
 }
 \examples{
 ## Sample data frame
+set.seed(1337)
 sex <- sample(c("Man","Woman"),100,replace=TRUE)
 jazz <- sample(c(0,1),100,replace=TRUE)
 rock <- sample(c(TRUE, FALSE),100,replace=TRUE)
