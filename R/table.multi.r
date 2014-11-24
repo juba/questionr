@@ -21,6 +21,7 @@
 ##' @seealso \code{\link[questionr]{cross.multi.table}}, \code{\link[questionr]{multi.split}}, \code{\link{table}}
 ##' @examples
 ##' ## Sample data frame
+##' set.seed(1337)
 ##' sex <- sample(c("Man","Woman"),100,replace=TRUE)
 ##' jazz <- sample(c(0,1),100,replace=TRUE)
 ##' rock <- sample(c(TRUE, FALSE),100,replace=TRUE)
@@ -60,6 +61,7 @@ multi.table <- function(df, true.codes=NULL, weights=NULL) {
 ##' @seealso \code{\link[questionr]{multi.table}}, \code{\link[questionr]{multi.split}}, \code{\link{table}}
 ##' @examples
 ##' ## Sample data frame
+##' set.seed(1337)
 ##' sex <- sample(c("Man","Woman"),100,replace=TRUE)
 ##' jazz <- sample(c(0,1),100,replace=TRUE)
 ##' rock <- sample(c(TRUE, FALSE),100,replace=TRUE)
