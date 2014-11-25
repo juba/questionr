@@ -3,7 +3,8 @@
 \alias{multi.table}
 \title{One-way frequency table for multiple choices question}
 \usage{
-multi.table(df, true.codes = NULL, weights = NULL)
+multi.table(df, true.codes = NULL, weights = NULL, digits = 1,
+  freq = TRUE)
 }
 \arguments{
 \item{df}{data frame with the binary variables}
@@ -11,6 +12,10 @@ multi.table(df, true.codes = NULL, weights = NULL)
 \item{true.codes}{optional list of values considered as 'true' for the tabulation}
 
 \item{weights}{optional weighting vector}
+
+\item{digits}{number of digits to keep in the output}
+
+\item{freq}{add a percentage column}
 }
 \value{
 Object of class table.
@@ -29,6 +34,11 @@ By default, only '1' and 'TRUE' as considered as 'true' values fro the binary va
 and counted in the frequency table. It is possible to specify other values to be counted
 with the \code{true.codes} argument. Note than '1' and 'TRUE' are always considered as
 true values even if \code{true.codes} is provided.
+
+If \code{freq} is set to TRUE, a percentage column is added to the resulting table. This
+percentage is computed by dividing the number of TRUE answers for each value by the total
+number of (potentially weighted) observations. Thus, these percentages sum can be greater
+than 100.
 }
 \examples{
 ## Sample data frame
@@ -43,6 +53,8 @@ df <- data.frame(sex,jazz,rock,electronic,weights)
 multi.table(df[,c("jazz", "rock","electronic")], true.codes=list("Y"))
 ## Weighted frequency table on 'music' variables
 multi.table(df[,c("jazz", "rock","electronic")], true.codes=list("Y"), weights=df$weights)
+## No percentages
+multi.table(df[,c("jazz", "rock","electronic")], true.codes=list("Y"), freq=FALSE)
 }
 \seealso{
 \code{\link[questionr]{cross.multi.table}}, \code{\link[questionr]{multi.split}}, \code{\link{table}}

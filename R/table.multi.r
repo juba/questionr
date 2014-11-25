@@ -6,6 +6,8 @@
 ##' @param df data frame with the binary variables
 ##' @param true.codes optional list of values considered as 'true' for the tabulation
 ##' @param weights optional weighting vector
+##' @param digits number of digits to keep in the output
+##' @param freq add a percentage column 
 ##' @details
 ##' The function is applied to a series of binary variables, each one corresponding to a
 ##' choice of the question. For example, if the question is about seen movies among a movies
@@ -16,6 +18,11 @@
 ##' and counted in the frequency table. It is possible to specify other values to be counted
 ##' with the \code{true.codes} argument. Note than '1' and 'TRUE' are always considered as
 ##' true values even if \code{true.codes} is provided.
+##' 
+##' If \code{freq} is set to TRUE, a percentage column is added to the resulting table. This
+##' percentage is computed by dividing the number of TRUE answers for each value by the total
+##' number of (potentially weighted) observations. Thus, these percentages sum can be greater
+##' than 100.
 ##'
 ##' @return Object of class table.
 ##' @seealso \code{\link[questionr]{cross.multi.table}}, \code{\link[questionr]{multi.split}}, \code{\link{table}}
@@ -32,17 +39,28 @@
 ##' multi.table(df[,c("jazz", "rock","electronic")], true.codes=list("Y"))
 ##' ## Weighted frequency table on 'music' variables
 ##' multi.table(df[,c("jazz", "rock","electronic")], true.codes=list("Y"), weights=df$weights)
+##' ## No percentages
+##' multi.table(df[,c("jazz", "rock","electronic")], true.codes=list("Y"), freq=FALSE)
 ##' @export
 
-multi.table <- function(df, true.codes=NULL, weights=NULL) {
+multi.table <- function(df, true.codes=NULL, weights=NULL, digits=1, freq=TRUE) {
   true.codes <- c(as.list(true.codes), TRUE, 1)
-  as.table(sapply(df, function(v) {
+  res <- as.table(sapply(df, function(v) {
     sel <- as.numeric(v %in% true.codes)
     if (!is.null(weights)) sel <- sel * weights
     sum(sel)
   }))
+  if (freq) {
+    if (!is.null(weights)) total <- sum(weights)
+    else total <- nrow(df)
+    pourc <- res / total * 100
+    res <- cbind(res, pourc)
+    colnames(res) <- c("n","%multi")
+  }
+  res <- round(res, digits)
+  return(res)
 }
- 
+
 ##' Two-way frequency table between a multiple choices question and a factor
 ##'
 ##' This function allows to generate a two-way frequency table from a multiple
