@@ -4,13 +4,14 @@ Authors@R: c(person("Julien", "Barnier", email="julien.barnier@ens-lyon.fr",
     role=c("aut","cre")), person("François", "Briatte",
     email="f.briatte@gmail.com", role="aut"), person("Joseph", "Larmarange",
     email="joseph@larmarange.net", role="aut"))
-Version: 0.4.2
-Date: 2014-11-25
+Version: 0.4.3
+Date: 2014-11-26
 License: GPL (>= 2)
 Encoding: UTF-8
-Title: Functions to make surveys processing easier.
-Description: This package provides some convenience functions to make the
-    processing and analysis of surveys easier.
+Title: Functions to Make Surveys Processing Easier
+Description: Set of functions to make the processing and analysis of 
+  surveys easier : interactive shiny apps for data recoding, contingency 
+  tables, dataset metadata handling, and several convenience functions.
 Imports:
     shiny (>= 0.10),
     highr,
