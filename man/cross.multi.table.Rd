@@ -3,7 +3,8 @@
 \alias{cross.multi.table}
 \title{Two-way frequency table between a multiple choices question and a factor}
 \usage{
-cross.multi.table(df, crossvar, weights = NULL, ...)
+cross.multi.table(df, crossvar, weights = NULL, digits = 1, freq = FALSE,
+  ...)
 }
 \arguments{
 \item{df}{data frame with the binary variables}
@@ -11,6 +12,10 @@ cross.multi.table(df, crossvar, weights = NULL, ...)
 \item{crossvar}{factor to cross the multiple choices question with}
 
 \item{weights}{optional weighting vector}
+
+\item{digits}{number of digits to keep in the output}
+
+\item{freq}{display column percentages}
 
 \item{...}{arguments passed to \code{multi.table}}
 }
@@ -25,6 +30,9 @@ series of binary variables.
 \details{
 See the \code{multi.table} help page for details on handling of the multiple
 choices question and corresponding binary variables.
+
+If \code{freq} is set to TRUE, the resulting table gives the columns percentages
+based on the contingency table of crossvar in the respondants population.
 }
 \examples{
 ## Sample data frame
@@ -37,6 +45,8 @@ weights <- runif(100)*2
 df <- data.frame(sex,jazz,rock,electronic,weights)
 ## Two-way frequency table on 'music' variables by sex
 cross.multi.table(df[,c("jazz", "rock","electronic")], df$sex, true.codes=list("Y"))
+## Column percentages based on respondants
+cross.multi.table(df[,c("jazz", "rock","electronic")], df$sex, true.codes=list("Y"), freq=TRUE)
 }
 \seealso{
 \code{\link[questionr]{multi.table}}, \code{\link[questionr]{multi.split}}, \code{\link{table}}
