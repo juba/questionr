@@ -37,6 +37,7 @@ iorder <- function(dfobject, oldvar) {
     ## Original data frame name and object
     df_name <- dfobject
     df <- get(df_name)
+    if (inherits(df, "tbl_df") || inherits(df, "data.table")) df <- as.data.frame(df)
     ## Variable to be recoded, name and object
     oldvar_name <- oldvar
     oldvar <- df[,oldvar_name]

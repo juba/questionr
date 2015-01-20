@@ -35,6 +35,7 @@ irec <- function(dfobject, oldvar) {
     ## Global variables
     df_name <- dfobject
     df <- get(df_name)
+    if (inherits(df, "tbl_df") || inherits(df, "data.table")) df <- as.data.frame(df)
     oldvar_name <- oldvar
     oldvar <- df[,oldvar_name]
     ## Formatted source variable name
