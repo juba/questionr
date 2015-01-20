@@ -1,6 +1,7 @@
 questionr 0.4.3
 ---------------
 
+* Fix : i* interactive functions now work with data.table and dplyr's tbl_df
 
 questionr 0.4.2
 ---------------
