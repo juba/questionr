@@ -66,7 +66,7 @@ iorder <- function(dfobject, oldvar) {
       if (is.factor(oldvar)) levs <- levels(oldvar)
       else levs <- na.omit(unique(oldvar))
       ## Generate fields
-      for (l in levs) out <- paste0(out,'<li><i class="icon-move"></i> <span>',htmltools::htmlEscape(l),'</span></li>')
+       for (l in levs) out <- paste0(out,'<li><span class="glyphicon glyphicon-move"> </span>&nbsp; <span class="level">',htmltools::htmlEscape(l),'</span></li>')
       out <- paste0(out, "</ol>")
       HTML(out)     
     }
@@ -81,38 +81,36 @@ iorder <- function(dfobject, oldvar) {
         tags$script(HTML(js.content))),
  
       ## Page title
-      div(class="container-fluid",
+      div(class="container",
           div(class="row",
               headerPanel(gettext("Interactive levels ordering", domain="R-questionr"))),
           
           ## Display an alert, only on first launch for the current session
           if (show_alert) {
-            div(class="row-fluid",
-                div(class="span8",
-                    div(class="alert alert-dismissable",
-                        HTML('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'),
+            div(class="row",
+                div(class="col-md-12",
+                    div(class="alert alert-warning alert-dismissible",
+                        HTML('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'),
                         HTML(gettext("<strong>Warning :</strong> This interface doesn't do anything by itself. It only generates R code you'll have to copy/paste into your script and execute yourself.", domain="R-questionr"))
                     )))} else "",
           
           ## First panel : new variable name and recoding style
-          div(class="row-fluid",
-              div(class="span8",
-                  tags$form(class="well",
-                            HTML("<table><tr>"),
-                            HTML(gettext("<td>New variable : </td><td>", domain="R-questionr")),
-                            textInput("newvarname","", oldvar_name),
-                            HTML("</td>"),
-                            HTML("</tr></table>")
+          div(class="row",
+              div(class="col-md-12 well",
+                  tags$form(
+                            textInput("newvarname",
+                                      gettext("<td>New variable : </td><td>", domain="R-questionr"), 
+                                      oldvar_name)
                   ))),
           
           ## Second panel : recoding fields, dynamically generated
-          div(class="row-fluid",
-              div(class="span8 well",
+          div(class="row",
+              div(class="col-md-12 well",
                   generate_levels_ol(oldvar)
               )),
           ## Main panel with tabs
-          div(class="row-fluid",
-              mainPanel(
+          div(class="row",
+              mainPanel(width=12,
                 tabsetPanel(
                   ## Code tab
                   tabPanel(gettext("Code", domain="R-questionr"), htmlOutput("codeOut")),

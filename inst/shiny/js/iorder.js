@@ -18,7 +18,7 @@ $(function() {
 	},
 	getValue: function(el) {
 	    var result = [];
-	    $(el).find("li span").each(function() { result.push($(this).text()) });
+	    $(el).find("li span.level").each(function() { result.push($(this).text()) });
 	    return result;
 	},
 	subscribe: function(el, callback) {
