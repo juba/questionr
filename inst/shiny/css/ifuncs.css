@@ -12,13 +12,12 @@ td.right { text-align: right;}
 
 p.header { 
   margin-top: 10px;
+  margin-bottom: 0px;
   font-size: 11px;
 }
 
-p.bottom-buttons { margin-top: 15px;}
-
-.well {
-  padding: 1em !important;
+p.bottom-buttons { 
+  margin: 15px 0px;
 }
 
 #levelsInput .form-group {
@@ -39,6 +38,7 @@ p.bottom-buttons { margin-top: 15px;}
 }
 
 pre code {
+  margin-top: 10px;
   font-size: 12px;
 }
 

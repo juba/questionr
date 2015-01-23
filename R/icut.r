@@ -74,31 +74,30 @@ icut <- function(dfobject, oldvar) {
         tags$style(HTML(css.content))),
  
         ## Page title
-        div(class="container-fluid",
+        div(class="container",
             div(class="row",
                 headerPanel(gettext("Interactive cutting", domain="R-questionr"))),
-            
-            ## Display an alert, only on first launch for the current session
+
+          ## Display an alert, only on first launch for the current session
             if (show_alert) {
-              div(class="row-fluid",
-                  div(class="span12",
-                      div(class="alert alert-dismissable",
-                          HTML('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'),
-                          HTML(gettext("<strong>Warning :</strong> This inteface doesn't do anything by itself. It only generates R code you'll have to copy/paste into your script and execute yourself.",domain='R-questionr'))
+              div(class="row",
+                  div(class="col-md-12",
+                      div(class="alert alert-warning alert-dismissible",
+                          HTML('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'),
+                          HTML(gettext("<strong>Warning :</strong> This interface doesn't do anything by itself. It only generates R code you'll have to copy/paste into your script and execute yourself.", domain="R-questionr"))
                       )))} else "",
             
             ## First panel : new variable name
-            div(class="row-fluid",
-                div(class="span8",
-                    div(class="row-fluid",
-                        div(class="span12",
-                            tags$form(class="well",
-                                      HTML("<table><tr>"),
-                                      HTML("<td>", gettext('New variable',domain="R-questionr")," : </td><td>"), textInput("newvarname","", paste0(oldvar_name,".rec")),HTML("</td>"),
-                                      HTML("</tr></table>")
-                            )),
-                        div(class="span12 inner",
-                            tags$form(class="well",
+            div(class="row",
+                div(class="col-sm-7",
+                    div(class="row",
+                        div(class="col-md-12 well",
+                            tags$form(textInput("newvarname",
+                                                gettext('New variable',domain="R-questionr"), 
+                                                paste0(oldvar_name,".rec")),HTML("</td>"))
+                            ),
+                        div(class="col-md-12 well",
+                            tags$form(
                                       HTML(gettextf("<p>Statistics of <tt>%s</tt> :</p>", oldvar_name, domain="R-questionr")),
                                       HTML(summary_table(oldvar)),
                                       selectizeInput("cutMethod", gettext('Cutting method',domain='R-questionr'), choices=c("Manual" = "fixed", "Standard deviation" = "sd", "Equal width" = "equal", "Pretty" = "pretty", "Quantile" = "quantile", "K-means" = "kmeans", "Hierarchical cluster" = "hclust", "Bagged clustering" = "bclust", "Fisher algorithm" = "fisher", "Jenks algorithm" = "jenks")),
@@ -110,14 +109,14 @@ icut <- function(dfobject, oldvar) {
                             )))), 
                 
                 
-                div(class="span4",
+                div(class="col-sm-5",
                     wellPanel(plotOutput("histOut")))),
             
             ## Second panel : recoding fields,
             
             ## Main panel with tabs
-            div(class="row-fluid",
-                div(class="span10",
+            div(class="row",
+                div(class="col-md-12",
                     tabsetPanel(
                       ## Code tab
                       tabPanel(gettext("Code", domain="R-questionr"), htmlOutput("codeOut")),
@@ -144,12 +143,12 @@ icut <- function(dfobject, oldvar) {
       
       server=function(input, output, session) {
         
-        observe({
           output$ui <- renderUI({
             if (input$cutMethod == "fixed") return()
             numericInput(inputId="nb_breaks", label=gettext("Breaks number", domain="R-questionr"), value=6, min=2, step=1)
           })
-          if (input$cutMethod != "fixed") {
+          
+          observe(if (input$cutMethod != "fixed") {
             nb_breaks <- reactive({
               if (is.null(input$nb_breaks)) return(2)
               if (is.na(input$nb_breaks)) return(2)
@@ -157,10 +156,8 @@ icut <- function(dfobject, oldvar) {
               return(input$nb_breaks)
             })
             updateTextInput(session, "breaks", value=classInt::classIntervals(oldvar, n=ifelse(is.null(nb_breaks()), 6, nb_breaks()), style=input$cutMethod)$brks)
-          }
-        })
-        
-        
+          })
+      
         get_breaks <- function(b, compute=FALSE) {
           if (b=="") return(NULL)
           b <- gsub(", *$", "",b)
