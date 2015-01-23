@@ -8,11 +8,39 @@ span.hl.com { color: #888; font-style: italic;}
 
 /* Tweaking */
 
-td.selstyle { padding-left: 2em;}
 td.right { text-align: right;}
 
-p.header { font-size: 11px;}
+p.header { 
+  margin-top: 10px;
+  font-size: 11px;
+}
+
 p.bottom-buttons { margin-top: 15px;}
+
+.well {
+  padding: 1em !important;
+}
+
+#levelsInput .form-group {
+    margin: 2px;
+}
+
+#levelsInput .form-group label {
+    display: none;
+}
+
+#levelsInput .form-control {
+    width: 20em;
+    padding: 4px 8px;
+}
+
+.vertical-align {
+    vertical-align: middle;
+}
+
+pre code {
+  font-size: 12px;
+}
 
 /* Sortable items */
 

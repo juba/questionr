@@ -58,40 +58,41 @@ irec <- function(dfobject, oldvar) {
         tags$style(HTML(css.content))),
       
       ## Page title
-      div(class="container-fluid",
+      div(class="container",
           div(class="row",
               headerPanel(gettext("Interactive recoding", domain="R-questionr"))),
           
           ## Display an alert, only on first launch for the current session
           if (show_alert) {
-            div(class="row-fluid",
-                div(class="span12",
-                    div(class="alert alert-dismissable",
-                        HTML('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'),
+            div(class="row",
+                div(class="col-md-12",
+                    div(class="alert alert-warning alert-dismissible",
+                        HTML('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'),
                         HTML(gettext("<strong>Warning :</strong> This interface doesn't do anything by itself. It only generates R code you'll have to copy/paste into your script and execute yourself.", domain="R-questionr"))
                     )))} else "",
           
           ## First panel : new variable name and recoding style
-          div(class="row-fluid",
-              div(class="span12",
+          div(class="row",
+              div(class="col-sm-12",
                   tags$form(class="well",
-                            HTML("<table><tr>"),
-                            HTML("<td>",gettext("New variable : ", domain="R-questionr"),"</td><td>"), textInput("newvarname","", paste0(oldvar_name,".rec")),HTML("</td>"),
-                            HTML('<td class="selstyle">',gettext("Recoding style", domain="R-questionr"), ' : </td><td>'),
-                            selectInput("recstyle", "", c("Character - complete"="charcomp", "Character - minimal"="charmin")),
-                            HTML("</td><td class='selstyle'>"),
-                            checkboxInput("facconv", gettext("Convert to factor", domain="R-questionr"), FALSE),
-                            HTML("</td>"),
-                            HTML("</tr></table>")
-                  ))),
+                            div(class="row",
+                               div(class="col-sm-4", 
+                                   textInput("newvarname", gettext("New variable", domain="R-questionr"), 
+                                             paste0(oldvar_name,".rec"))),
+                               div(class="col-sm-4", 
+                                   selectInput("recstyle", gettext("Recoding style", domain="R-questionr"), 
+                                               c("Character - complete"="charcomp", "Character - minimal"="charmin"))),
+                               div(class="col-sm-3",                           
+                                  checkboxInput("facconv", gettext("Convert to factor", domain="R-questionr"), FALSE))
+                  )))),
           
           ## Second panel : recoding fields, dynamically generated
-          div(class="row-fluid",
-              div(class="span12",
+          div(class="row",
+              div(class="col-md-12",
                   tags$form(class="well",
                             uiOutput("levelsInput")))),
           ## Main panel with tabs
-          mainPanel(
+          mainPanel(width=12,
             tabsetPanel(
               ## Code tab
               tabPanel(gettext("Code", domain="R-questionr"), htmlOutput("recodeOut")),
@@ -105,7 +106,7 @@ irec <- function(dfobject, oldvar) {
             p(class='bottom-buttons',
               tags$button(id="donebutton", type="button", class="btn action-button btn-success", 
                           onclick="javascript:window.close();", 
-                          list(icon=icon("share")), 
+                          list(icon=icon("ok", lib="glyphicon")), 
                           gettext("Send code to console and exit", domain="R-questionr"))
               ),
             textOutput("done")
@@ -224,7 +225,7 @@ irec <- function(dfobject, oldvar) {
         
         ## Text fileds for levels, dynamically generated
         output$levelsInput <- renderUI({
-          out <- "<table>"
+          out <- "<table><tbody>"
           ## List of levels
           if (is.factor(oldvar)) levs <- levels(oldvar)
           else levs <- na.omit(unique(oldvar))
@@ -232,8 +233,9 @@ irec <- function(dfobject, oldvar) {
           if (any(is.na(oldvar))) levs <- c(levs, NA)
           ## Generate fields
           for (l in levs) {
-            out <- paste0(out,'<tr><td class="right">',htmltools::htmlEscape(l),'</td>')
-            out <- paste0(out,'<td>&nbsp;<i class="icon-arrow-right"></i>&nbsp;</td>')
+            out <- paste0(out, '<tr>')
+            out <- paste0(out,'<td class="right vertical-align">',htmltools::htmlEscape(l),
+                              '&nbsp;<span class="glyphicon glyphicon-arrow-right left-sep" aria-hidden="true"></span> &nbsp;</td>')
             id <- l
             label <- l
             ## If the level is NA, replace by the NA value placeholder
@@ -246,10 +248,10 @@ irec <- function(dfobject, oldvar) {
               id <- "*irec_emptystr_id*"
               label <- ""
             }
-            out <- paste0(out,'<td>',textInput(id,"",label),'</td>')
+            out <- paste0(out,'<td class="vertical-align">',textInput(id,"",label),'</td>')
             out <- paste0(out,'</tr>')
           }
-          out <- paste0(out, "</table>")
+          out <- paste0(out, "</tbody></table>")
           HTML(out)
         })
       }
