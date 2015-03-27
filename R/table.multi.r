@@ -71,7 +71,8 @@ multi.table <- function(df, true.codes=NULL, weights=NULL, digits=1, freq=TRUE) 
 ##' @param crossvar factor to cross the multiple choices question with
 ##' @param weights optional weighting vector
 ##' @param digits number of digits to keep in the output
-##' @param freq display column percentages 
+##' @param freq display percentages 
+##' @param tfreq type of percentages to compute ("row" or "col")
 ##' @param ... arguments passed to \code{multi.table}
 ##' @details
 ##' See the \code{multi.table} help page for details on handling of the multiple
@@ -95,9 +96,11 @@ multi.table <- function(df, true.codes=NULL, weights=NULL, digits=1, freq=TRUE) 
 ##' cross.multi.table(df[,c("jazz", "rock","electronic")], df$sex, true.codes=list("Y"))
 ##' ## Column percentages based on respondants
 ##' cross.multi.table(df[,c("jazz", "rock","electronic")], df$sex, true.codes=list("Y"), freq=TRUE)
+##' ## Row percentages based on respondants
+##' cross.multi.table(df[,c("jazz", "rock","electronic")], df$sex, true.codes=list("Y"), freq=TRUE, tfreq="row")
 ##' @export
  
-cross.multi.table <- function(df, crossvar, weights=NULL, digits=1, freq=FALSE, ...) {
+cross.multi.table <- function(df, crossvar, weights=NULL, digits=1, freq=FALSE, tfreq="col", ...) {
   tmp <- factor(crossvar)
   if(is.null(weights))
       res <- simplify2array(by(df, tmp, multi.table, freq=FALSE, digits=NULL, ...))
@@ -111,11 +114,18 @@ cross.multi.table <- function(df, crossvar, weights=NULL, digits=1, freq=FALSE, 
       })
       res <- simplify2array(res)
   }
-  if (freq) {
+  ## Column percentages
+  if (freq & tfreq!="row") {
     if(is.null(weights)) totals <- table(tmp)
     else totals <- wtd.table(tmp, weights=weights)
     totals <- totals[colnames(res)]
     res <- sweep(res, 2, totals, FUN="/") * 100
+  }
+  ## Row percentages
+  if (freq & tfreq=="row") {
+    totals <- multi.table(df, weights=weights, freq=FALSE, digits=NULL, ...)
+    totals <- totals[rownames(res)]
+    res <- sweep(res, 1, totals, FUN="/") * 100
   }
   return(round(res, digits))
 }
