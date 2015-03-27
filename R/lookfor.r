@@ -47,7 +47,7 @@ lookfor <- function(data,
   if(is.null(l)) l <- attr(data, "var.labels")
   # memisc objects
   if(grepl("data.set|importer", class(data))) {
-      suppressMessages(suppressWarnings(require(memisc)))
+      suppressMessages(suppressWarnings(requireNamespace("memisc")))
       l <- as.vector(memisc::description(data))
   }
   if(length(l) & labels) {
