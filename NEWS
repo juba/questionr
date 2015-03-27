@@ -1,13 +1,15 @@
 questionr 0.4.3
 ---------------
 
+* cross.multi.table() now accept a `tfreq` argument to display row percentages 
+  based on the (potentially weighted) contingency table of respondants.
 * Fix : i* interactive functions now work with data.table and dplyr's tbl_df
 
 questionr 0.4.2
 ---------------
 
 * cross.multi.table() now accept a `freq` argument to display column percentages 
-  based on the (potentially weighted) contingency table of crossvar on repondants. 
+  based on the (potentially weighted) contingency table of crossvar on respondants. 
 * multi.table() now accept a `freq` argument to compute percentages based on 
   (potentially weighted) number of repondants. Note that `freq` is set to TRUE
   by default
