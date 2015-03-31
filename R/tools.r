@@ -17,12 +17,14 @@
 #' \dontrun{clipcopy(ptab)}
 #' @seealso \code{\link[R2HTML]{HTML}}, \code{\link[questionr]{format.proptab}}
 #' @keywords connection 
-#' @export clipcopy clipcopy.default copie copie.default 
+#' @export 
 
 `clipcopy` <-
 function (obj, ...) {
   UseMethod("clipcopy")
 }
+
+#' @export
 copie <- clipcopy
 
 #' @return \code{NULL}
@@ -33,7 +35,7 @@ copie <- clipcopy
 #' @param file if TRUE, export to a file instead of the clipboard
 #' @param filename name of the file to export to
 #' @param clipboard.size under Windows, size of the clipboard in kB
-#' @export clipcopy.default
+#' @export 
 
 `clipcopy.default` <-
 function (obj, append=FALSE, file=FALSE, filename="temp.html", clipboard.size=4096, ...) {
@@ -53,6 +55,7 @@ function (obj, append=FALSE, file=FALSE, filename="temp.html", clipboard.size=40
   close(conn)
 }
 
+#' @export
 copie.default <- clipcopy.default
 
 
@@ -64,7 +67,7 @@ copie.default <- clipcopy.default
 #' @param digits number of digits to display
 #' @param justify justification
 #' @seealso \code{\link[questionr]{clipcopy}}, \code{\link[questionr]{format.proptab}}
-#' @export clipcopy.proptab copie.proptab
+#' @export
 
 `clipcopy.proptab` <-
 function (obj, percent=NULL, digits=NULL, justify="right", ...) {
@@ -72,6 +75,8 @@ function (obj, percent=NULL, digits=NULL, justify="right", ...) {
   obj <- format.proptab(obj, digits=digits, percent=percent, justify=justify)
   copie.default(obj, ...)
 }
+
+#' @export
 copie.proptab <- clipcopy.proptab
 
 #' Rename a data frame column
@@ -95,6 +100,8 @@ function (df, old, new) {
   names(df)[which(names(df)==old)] <- new
   df
 }
+
+#' @export
 renomme.variable <- rename.variable
 
 #' Determine all duplicate elements

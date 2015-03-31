@@ -5,8 +5,7 @@
 #' @param x object from whom odds ratio will be computed
 #' @param ... further arguments passed to or from other methods
 #' @author Joseph Larmarange <joseph@@larmarange.net>
-#' @export odds.ratio
-
+#' @export
 
 `odds.ratio` <-
 function (x, ...) {
@@ -32,7 +31,7 @@ function (x, ...) {
 #' odds.ratio(reg)
 #' @seealso 
 #' \code{\link{glm}} in the \link{stats} package.
-#' @export odds.ratio.glm
+#' @export
 
 `odds.ratio.glm` <- 
 function(x, level=0.95, digits=3, ...) {
@@ -55,7 +54,7 @@ function(x, level=0.95, digits=3, ...) {
 #' \url{http://www.ats.ucla.edu/stat/r/dae/mlogit.htm}.
 #' @seealso 
 #' \code{\link[nnet]{multinom}} in the \link[nnet]{nnet} package.
-#' @export odds.ratio.glm
+#' @export
 
 `odds.ratio.multinom` <- 
 function(x, level=0.95, digits=3, ...) {
@@ -92,7 +91,7 @@ function(x, level=0.95, digits=3, ...) {
 #' is a wrapper for \code{fisher.test}.
 #' @examples
 #' odds.ratio(hdv2003$sport, hdv2003$cuisine)
-#' @export odds.ratio.factor
+#' @export
 
 `odds.ratio.factor` <- 
 function(x, y, level=0.95, ...) {
@@ -106,7 +105,7 @@ function(x, y, level=0.95, ...) {
 #' odds.ratio(table(hdv2003$sport, hdv2003$cuisine))
 #' @seealso 
 #' \code{\link{fisher.test}} in the \link{stats} package.
-#' @export odds.ratio.table
+#' @export
 
 `odds.ratio.table` <- 
 function(x, level=0.95, ...) {
