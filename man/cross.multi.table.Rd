@@ -54,7 +54,7 @@ cross.multi.table(df[,c("jazz", "rock","electronic")], df$sex, true.codes=list("
 cross.multi.table(df[,c("jazz", "rock","electronic")], df$sex, true.codes=list("Y"), freq=TRUE)
 ## Row percentages based on respondants
 cross.multi.table(df[,c("jazz", "rock","electronic")],
-                  df$sex, true.codes=list("Y"), freq=TRUE, tfreq="row")
+                  df$sex, true.codes=list("Y"), freq=TRUE, tfreq="row", n=TRUE)
 }
 \seealso{
 \code{\link[questionr]{multi.table}}, \code{\link[questionr]{multi.split}}, \code{\link{table}}

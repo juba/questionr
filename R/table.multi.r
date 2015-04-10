@@ -99,7 +99,7 @@ multi.table <- function(df, true.codes=NULL, weights=NULL, digits=1, freq=TRUE) 
 ##' cross.multi.table(df[,c("jazz", "rock","electronic")], df$sex, true.codes=list("Y"), freq=TRUE)
 ##' ## Row percentages based on respondants
 ##' cross.multi.table(df[,c("jazz", "rock","electronic")], 
-##'                   df$sex, true.codes=list("Y"), freq=TRUE, tfreq="row")
+##'                   df$sex, true.codes=list("Y"), freq=TRUE, tfreq="row", n=TRUE)
 ##' @export
  
 cross.multi.table <- function(df, crossvar, weights=NULL, digits=1, freq=FALSE, tfreq="col", n=FALSE, ...) {
