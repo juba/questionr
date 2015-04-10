@@ -73,6 +73,7 @@ multi.table <- function(df, true.codes=NULL, weights=NULL, digits=1, freq=TRUE) 
 ##' @param digits number of digits to keep in the output
 ##' @param freq display percentages 
 ##' @param tfreq type of percentages to compute ("row" or "col")
+##' @param n if \code{TRUE}, and freq is \code{TRUE}, display number of observations per row or column.
 ##' @param ... arguments passed to \code{multi.table}
 ##' @details
 ##' See the \code{multi.table} help page for details on handling of the multiple
@@ -101,7 +102,7 @@ multi.table <- function(df, true.codes=NULL, weights=NULL, digits=1, freq=TRUE) 
 ##'                   df$sex, true.codes=list("Y"), freq=TRUE, tfreq="row")
 ##' @export
  
-cross.multi.table <- function(df, crossvar, weights=NULL, digits=1, freq=FALSE, tfreq="col", ...) {
+cross.multi.table <- function(df, crossvar, weights=NULL, digits=1, freq=FALSE, tfreq="col", n=FALSE, ...) {
   tmp <- factor(crossvar)
   if(is.null(weights))
       res <- simplify2array(by(df, tmp, multi.table, freq=FALSE, digits=NULL, ...))
@@ -120,13 +121,17 @@ cross.multi.table <- function(df, crossvar, weights=NULL, digits=1, freq=FALSE, 
     if(is.null(weights)) totals <- table(tmp)
     else totals <- wtd.table(tmp, weights=weights)
     totals <- totals[colnames(res)]
+    if (n) eff <- apply(res,2,sum)
     res <- sweep(res, 2, totals, FUN="/") * 100
+    if (n) res <- rbind(res, n=eff)
   }
   ## Row percentages
   if (freq & tfreq=="row") {
     totals <- multi.table(df, weights=weights, freq=FALSE, digits=NULL, ...)
     totals <- totals[rownames(res)]
+    if (n) eff <- apply(res,1,sum)    
     res <- sweep(res, 1, totals, FUN="/") * 100
+    if (n) res <- cbind(res, n=eff)
   }
   return(round(res, digits))
 }
