@@ -36,8 +36,8 @@ function (x, ...) {
 `odds.ratio.glm` <- 
 function(x, level=0.95, digits=3, ...) {
     if (!inherits(x, "glm")) stop("x must be of class 'glm'.")
-    if(x$family$family != "binomial")
-        stop('x should be a glm with family=binomial.')
+    if(x$family$family != "binomial" & x$family$family != "quasibinomial")
+        stop('x should be a glm with family=binomial or family=quasibinomial.')
     r <- cbind(exp(coef(x)),exp(confint(x, level=level)),summary(x)$coefficients[,4])
     r[,1:3] <- round(r[,1:3],digits=digits)
     colnames(r)[1] <- "OR"
