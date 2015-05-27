@@ -88,7 +88,7 @@ function(x, level=0.95, digits=3, ...) {
 #' @param y a second factor object
 #' @return
 #' For 2x2 \code{table} or \code{factor} objects, \code{odds.ratio}
-#' is a wrapper for \code{fisher.test}.
+#' uses \code{fisher.test} to compute the odds ratio.
 #' @examples
 #' odds.ratio(hdv2003$sport, hdv2003$cuisine)
 #' @export
@@ -96,7 +96,12 @@ function(x, level=0.95, digits=3, ...) {
 `odds.ratio.factor` <- 
 function(x, y, level=0.95, ...) {
     if (!inherits(x, "factor")) stop("x must be of class 'factor'.")
-    fisher.test(x, y, conf.level=level)
+    ft <- fisher.test(x, y, conf.level=level)
+    r <- data.frame(OR = ft$estimate, lower = ft$conf.int[1], upper = ft$conf.int[1], p = ft$p.value)
+    names(r)[2] <- paste(100 * (1 - level)/2,"%")
+    names(r)[3] <- paste(100 * (1- (1 - level)/2),"%")
+    rownames(r) <- "Fisher's test"
+    printCoefmat(r, signif.stars=TRUE, has.Pvalue=TRUE)
 }
 
 #' @rdname odds.ratio
@@ -110,5 +115,10 @@ function(x, y, level=0.95, ...) {
 `odds.ratio.table` <- 
 function(x, level=0.95, ...) {
     if (!inherits(x, "table")) stop("x must be of class 'table'.")
-    fisher.test(x, conf.level=level)
+    ft <- fisher.test(x, conf.level=level)
+    r <- data.frame(OR = ft$estimate, lower = ft$conf.int[1], upper = ft$conf.int[1], p = ft$p.value)
+    names(r)[2] <- paste(100 * (1 - level)/2,"%")
+    names(r)[3] <- paste(100 * (1- (1 - level)/2),"%")
+    rownames(r) <- "Fisher's test"
+    printCoefmat(r, signif.stars=TRUE, has.Pvalue=TRUE)
 }
