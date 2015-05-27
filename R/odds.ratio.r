@@ -23,8 +23,8 @@ function (x, ...) {
 #' Odds ratio could also be obtained with \code{exp(coef(x))} and 
 #' confidence intervals with \code{exp(confint(x))}.
 #' @return
-#' For \code{glm} or \code{multinom} objects, returns odds ratios, 
-#' their confidence interval and tests if they differ from 1.
+#' Returns odds ratios, their confidence interval and 
+#' tests if they differ from 1.
 #' @examples
 #' data(hdv2003)
 #' reg <- glm(cinema ~ sexe + age, data=hdv2003, family=binomial)
@@ -86,18 +86,21 @@ function(x, level=0.95, digits=3, ...) {
 #' @rdname odds.ratio
 #' @aliases odds.ratio.factor
 #' @param y a second factor object
-#' @return
-#' For 2x2 \code{table} or \code{factor} objects, \code{odds.ratio}
+#' @details 
+#' For 2x2 \code{table}, \code{factor} or \code{matrix}, \code{odds.ratio}
 #' uses \code{fisher.test} to compute the odds ratio.
 #' @examples
 #' odds.ratio(hdv2003$sport, hdv2003$cuisine)
 #' @export
 
 `odds.ratio.factor` <- 
-function(x, y, level=0.95, ...) {
+function(x, y, level=0.95, digits = 3, ...) {
     if (!inherits(x, "factor")) stop("x must be of class 'factor'.")
     ft <- fisher.test(x, y, conf.level=level)
     r <- data.frame(OR = ft$estimate, lower = ft$conf.int[1], upper = ft$conf.int[1], p = ft$p.value)
+    r$OR <- round(r$OR, digits = digits)
+    r$lower <- round(r$lower, digits = digits)
+    r$upper <- round(r$upper, digits = digits)
     names(r)[2] <- paste(100 * (1 - level)/2,"%")
     names(r)[3] <- paste(100 * (1- (1 - level)/2),"%")
     rownames(r) <- "Fisher's test"
@@ -113,10 +116,13 @@ function(x, y, level=0.95, ...) {
 #' @export
 
 `odds.ratio.table` <- 
-function(x, level=0.95, ...) {
+function(x, level=0.95, digits = 3, ...) {
     if (!inherits(x, "table")) stop("x must be of class 'table'.")
     ft <- fisher.test(x, conf.level=level)
     r <- data.frame(OR = ft$estimate, lower = ft$conf.int[1], upper = ft$conf.int[1], p = ft$p.value)
+    r$OR <- round(r$OR, digits = digits)
+    r$lower <- round(r$lower, digits = digits)
+    r$upper <- round(r$upper, digits = digits)
     names(r)[2] <- paste(100 * (1 - level)/2,"%")
     names(r)[3] <- paste(100 * (1- (1 - level)/2),"%")
     rownames(r) <- "Fisher's test"
@@ -131,10 +137,13 @@ function(x, level=0.95, ...) {
 #' @export
 
 `odds.ratio.matrix` <- 
-  function(x, level=0.95, ...) {
+  function(x, level=0.95, digits = 3, ...) {
     if (!inherits(x, "matrix")) stop("x must be of class 'matrix'.")
     ft <- fisher.test(x, conf.level=level)
     r <- data.frame(OR = ft$estimate, lower = ft$conf.int[1], upper = ft$conf.int[1], p = ft$p.value)
+    r$OR <- round(r$OR, digits = digits)
+    r$lower <- round(r$lower, digits = digits)
+    r$upper <- round(r$upper, digits = digits)
     names(r)[2] <- paste(100 * (1 - level)/2,"%")
     names(r)[3] <- paste(100 * (1- (1 - level)/2),"%")
     rownames(r) <- "Fisher's test"
@@ -145,8 +154,8 @@ function(x, level=0.95, ...) {
 #' @aliases odds.ratio.numeric
 #' @param y a second numeric object
 #' @return
-#' If \code{x} and {y} are proportions, \code{odds.ratio} simply
-#' returns the value of the odds.ratio, with no confidence interval.
+#' If \code{x} and \code{y} are proportions, \code{odds.ratio} simply
+#' returns the value of the odds ratio, with no confidence interval.
 #' @examples
 #' odds.ratio(0.26, 0.42)
 #' @export
