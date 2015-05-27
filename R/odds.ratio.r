@@ -122,3 +122,21 @@ function(x, level=0.95, ...) {
     rownames(r) <- "Fisher's test"
     printCoefmat(r, signif.stars=TRUE, has.Pvalue=TRUE)
 }
+
+#' @rdname odds.ratio
+#' @aliases odds.ratio.matrix
+#' @examples
+#' M <- matrix(c(759, 360, 518, 363), ncol = 2)
+#' odds.ratio(M)
+#' @export
+
+`odds.ratio.matrix` <- 
+  function(x, level=0.95, ...) {
+    if (!inherits(x, "matrix")) stop("x must be of class 'matrix'.")
+    ft <- fisher.test(x, conf.level=level)
+    r <- data.frame(OR = ft$estimate, lower = ft$conf.int[1], upper = ft$conf.int[1], p = ft$p.value)
+    names(r)[2] <- paste(100 * (1 - level)/2,"%")
+    names(r)[3] <- paste(100 * (1- (1 - level)/2),"%")
+    rownames(r) <- "Fisher's test"
+    printCoefmat(r, signif.stars=TRUE, has.Pvalue=TRUE)
+  }
