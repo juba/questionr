@@ -140,3 +140,24 @@ function(x, level=0.95, ...) {
     rownames(r) <- "Fisher's test"
     printCoefmat(r, signif.stars=TRUE, has.Pvalue=TRUE)
   }
+
+#' @rdname odds.ratio
+#' @aliases odds.ratio.numeric
+#' @param y a second numeric object
+#' @return
+#' If \code{x} and {y} are proportions, \code{odds.ratio} simply
+#' returns the value of the odds.ratio, with no confidence interval.
+#' @examples
+#' odds.ratio(0.26, 0.42)
+#' @export
+
+`odds.ratio.numeric` <- 
+  function(x, y, level = 0.95, digits = 3, ...) {
+    if (!inherits(x, "numeric")) stop("x must be numeric.")
+    if (length(x)>1) stop("x should be a simple value.")
+    if (x <= 0 | x >= 1) stop ("x should be between 0 and 1")
+    if (!inherits(y, "numeric")) stop("y must be numeric.")
+    if (length(y)>1) stop("y should be a simple value.")
+    if (y <= 0 | y >= 1) stop ("y should be between 0 and 1")
+    return (round(x * (1-y) / (y * (1 - x)), digits = digits))
+  }
