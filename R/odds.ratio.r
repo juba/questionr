@@ -97,7 +97,7 @@ function(x, level=0.95, digits=3, ...) {
 function(x, y, level=0.95, digits = 3, ...) {
     if (!inherits(x, "factor")) stop("x must be of class 'factor'.")
     ft <- fisher.test(x, y, conf.level=level)
-    r <- data.frame(OR = ft$estimate, lower = ft$conf.int[1], upper = ft$conf.int[1], p = ft$p.value)
+    r <- data.frame(OR = ft$estimate, lower = ft$conf.int[1], upper = ft$conf.int[2], p = ft$p.value)
     r$OR <- round(r$OR, digits = digits)
     r$lower <- round(r$lower, digits = digits)
     r$upper <- round(r$upper, digits = digits)
@@ -119,7 +119,7 @@ function(x, y, level=0.95, digits = 3, ...) {
 function(x, level=0.95, digits = 3, ...) {
     if (!inherits(x, "table")) stop("x must be of class 'table'.")
     ft <- fisher.test(x, conf.level=level)
-    r <- data.frame(OR = ft$estimate, lower = ft$conf.int[1], upper = ft$conf.int[1], p = ft$p.value)
+    r <- data.frame(OR = ft$estimate, lower = ft$conf.int[1], upper = ft$conf.int[2], p = ft$p.value)
     r$OR <- round(r$OR, digits = digits)
     r$lower <- round(r$lower, digits = digits)
     r$upper <- round(r$upper, digits = digits)
@@ -140,7 +140,7 @@ function(x, level=0.95, digits = 3, ...) {
   function(x, level=0.95, digits = 3, ...) {
     if (!inherits(x, "matrix")) stop("x must be of class 'matrix'.")
     ft <- fisher.test(x, conf.level=level)
-    r <- data.frame(OR = ft$estimate, lower = ft$conf.int[1], upper = ft$conf.int[1], p = ft$p.value)
+    r <- data.frame(OR = ft$estimate, lower = ft$conf.int[1], upper = ft$conf.int[2], p = ft$p.value)
     r$OR <- round(r$OR, digits = digits)
     r$lower <- round(r$lower, digits = digits)
     r$upper <- round(r$upper, digits = digits)
