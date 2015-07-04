@@ -37,7 +37,7 @@ describe <- function(data, ...) {
     x <- c(names(data)[m], x[!grepl("\\||\\*", x)])
   }
   # memisc objects
-  if(grepl("data.set|importer", class(data))) {
+  if(any(grepl("data.set|importer", class(data)))) {
       suppressMessages(suppressWarnings(requireNamespace("memisc")))
       l <- memisc::description(data[, x])
   }
