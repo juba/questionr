@@ -42,9 +42,8 @@ lookfor <- function(data,
   # names search
   x <- look(n)
   variable <- n[x]
-  # foreign objects
-  l <- attr(data, "variable.labels")
-  if(is.null(l)) l <- attr(data, "var.labels")
+  # foreign / haven objects
+  l <- get_var_labels(data)
   # memisc objects
   if(any(grepl("data.set|importer", class(data)))) {
       suppressMessages(suppressWarnings(requireNamespace("memisc")))
