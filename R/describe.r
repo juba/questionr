@@ -187,12 +187,15 @@
       s <- c(names(x)[m], s[!grepl("\\||\\*", s)])
     }
     
-    x <- subset(x, select = s)
+    y <- subset(x, select = s)
     
     res <- paste0("[", nrow(x), " obs. x ", ncol(x), " variables] ", paste(class(x), collapse = " "))
     
-    for (v in names(x))
-      res <- paste0(res, "\n\n$", v, ": ", describe(x[[v]], n = n, show.length = FALSE))
+    for (v in names(y)) {
+      attr(y[[v]], "label") <- get_var_labels(x[[v]]) # restoring labels lost when subsetting
+      res <- paste0(res, "\n\n$", v, ": ", describe(y[[v]], n = n, show.length = FALSE))  
+    }
+
     
     
     class(res) <- "description"
