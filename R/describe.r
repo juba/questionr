@@ -37,15 +37,14 @@ describe <- function(data, ...) {
     x <- c(names(data)[m], x[!grepl("\\||\\*", x)])
   }
   # memisc objects
-  if(grepl("data.set|importer", class(data))) {
+  if(any(grepl("data.set|importer", class(data)))) {
       suppressMessages(suppressWarnings(requireNamespace("memisc")))
       l <- memisc::description(data[, x])
   }
   else {
-    # foreign objects
-    l <- as.vector(attr(data, "variable.labels"))
-    if(is.null(l)) l <- attr(data, "var.labels")
-    l <- cbind(variable = names(data), label = l)
+    l <- get_var_labels(data)
+    l <- data.frame(variable = names(data), label = l)
+    row.names(l) <- 1:nrow(l)
     l <- l[which(l[, 1] %in% x), ]
   }
   return(l)
