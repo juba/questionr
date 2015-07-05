@@ -9,6 +9,8 @@
 #' @param exclude vector of values to exclude from the tabulation (if \code{x} is a vector)
 #' @param sort if specified, allow to sort the table by increasing ("inc") or decreasing ("dec") frequencies
 #' @param valid if TRUE, display valid percentages
+#' @param factor_labels the desired labels for the factor in case of labelled vector: 
+#'    "l" for value labels, "v" for values or "p" for labels prefixed with values
 #' @return
 #' The result is an object of class data.frame.
 #' @seealso
@@ -16,9 +18,9 @@
 #' @export
 
 `freq` <-
-function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA%in%exclude)) {
+function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA%in%exclude), factor_labels = "p") {
   if (is.table(x)) tab <- x
-  else tab <- table(x, exclude=exclude, useNA="ifany")
+  else tab <- table(to_factor(x, factor_labels), exclude=exclude, useNA="ifany")
   effectifs <- as.vector(tab)
   pourc <- as.vector(effectifs/sum(effectifs)*100)
   result <- data.frame(n=effectifs, pourc=pourc)
