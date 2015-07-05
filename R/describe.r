@@ -144,8 +144,6 @@
 
 #' @rdname describe
 #' @aliases describe.labelled
-#' @examples
-#' describe(hdv2003$age)
 #' @export
 
 `describe.labelled` <- 
