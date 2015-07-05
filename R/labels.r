@@ -65,7 +65,10 @@ sji.getValueLabel <- function(x, include.values = NULL) {
   # check if we have anything
   if (!is.null(lab)) {
     # retrieve values associated with labels
-    values <- as.numeric(unname(attr(x, attr.string, exact = T)))
+    if (is.character(x))
+      values <- unname(attr(x, attr.string, exact = T))
+    else
+      values <- as.numeric(unname(attr(x, attr.string, exact = T)))
     # retrieve order of value labels
     reihenfolge <- order(values)
     # retrieve label values in correct order
@@ -81,7 +84,10 @@ sji.getValueLabel <- function(x, include.values = NULL) {
       }
       # here we include values as prefix of labels
       if (include.values == "as.prefix" || include.values == "p") {
-        labels <- sprintf("[%i] %s", values[reihenfolge], labels)
+        if (is.numeric(x))
+          labels <- sprintf("[%i] %s", values[reihenfolge], labels)
+        else
+          labels <- sprintf("[%s] %s", values[reihenfolge], labels)
       }
     }
   }
