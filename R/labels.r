@@ -293,3 +293,41 @@ getValLabelAttribute <- function(x) {
   return(attr.string)
 }
 
+#' Convert a vector to as factor taking into account value labels
+#' 
+#' @param x a vector to convert to a factor
+#' @param factor_labels the desired labels for the factor in case of labelled vector: 
+#'    "l" for value labels, "v" for values or "p" for labels prefixed with values
+#'    
+#' @details If \code{x} is already a factor, \code{x} is returned unchanged.
+#'    If \code{x} is not labelled or if some values observed in \code{x} doesn't have a label,
+#'    these values are used as labels.
+#'    
+#' @return \code{x} transformed into a factor.
+#' 
+#' @export
+
+to_factor <- function(x, factor_labels = "l") {
+  if (is.factor(x)) return(x)
+  if (!is.atomic(x)) stop("x should be a vector.")
+  
+  v <- unique(x[!is.na(x)])
+  if (is.null(get_val_labels(x)))
+    l <- data.frame(values = v, labels = v)
+  else if (factor_labels == "p") 
+    l <- data.frame(values = names(get_val_labels(x, "n")), labels = get_val_labels(x, "p"))
+  else if (factor_labels == "v") 
+    l <- data.frame(values = v, labels = v)
+  else 
+    l <- data.frame(values = names(get_val_labels(x, "n")), labels = get_val_labels(x))
+  
+  v <- data.frame(values = v)
+  v <- merge(v, l, by = "values", all.x = TRUE)
+  v$labels <- as.character(v$labels)
+  v$values <- as.character(v$values)
+  v[is.na(v$labels), "labels"] <- v[is.na(v$labels), "values"] 
+  
+  res <- factor(x, levels = v$values, labels = v$labels)
+  attr(res, "label") <- attr(x, "label")
+  return(res)
+}
