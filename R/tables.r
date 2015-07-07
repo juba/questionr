@@ -9,6 +9,8 @@
 #' @param exclude vector of values to exclude from the tabulation (if \code{x} is a vector)
 #' @param sort if specified, allow to sort the table by increasing ("inc") or decreasing ("dec") frequencies
 #' @param valid if TRUE, display valid percentages
+#' @param factor_labels the desired labels for the factor in case of labelled vector: 
+#'    "l" for value labels, "v" for values or "p" for labels prefixed with values
 #' @return
 #' The result is an object of class data.frame.
 #' @seealso
@@ -16,9 +18,9 @@
 #' @export
 
 `freq` <-
-function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA%in%exclude)) {
+function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA%in%exclude), factor_labels = "p") {
   if (is.table(x)) tab <- x
-  else tab <- table(x, exclude=exclude, useNA="ifany")
+  else tab <- table(to_factor(x, factor_labels), exclude=exclude, useNA="ifany")
   effectifs <- as.vector(tab)
   pourc <- as.vector(effectifs/sum(effectifs)*100)
   result <- data.frame(n=effectifs, pourc=pourc)
@@ -386,3 +388,46 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
   print.table(x, ...)
 }
 
+#' Cross tabulation with labelled variables
+#' 
+#' This function is a wrapper around \code{\link[stats]{xtabs}}, adding automatically
+#' value labels if available.
+#' 
+#' @param formula a formula object (see \code{\link[stats]{xtabs}})
+#' @param data a data frame
+#' @param factor_labels the desired labels for the factor in case of labelled vector: 
+#'    "l" for value labels, "v" for values or "p" for labels prefixed with values
+#' @param ... additional arguments passed to \code{\link[stats]{xtabs}}
+#'    
+#' @details This function applies \code{\link{to_factor}} to each variable found in
+#'    \code{formula} before to call \code{\link[stats]{xtabs}}.
+#' 
+#' @seealso \code{\link{to_factor}}, \code{\link[stats]{xtabs}}, \code{\link{to_factor}}.
+#' @examples 
+#' \dontrun{
+#' load(url("http://larmarange.github.io/analyse-R/data/enquete_menages.Rdata"))
+#' ltabs(~radio, femmes)
+#' ltabs(~radio+tv, femmes)
+#' ltabs(~radio+tv, femmes, "l")
+#' ltabs(~radio+tv, femmes, "v")
+#' ltabs(~radio+tv+journal, femmes)
+#' }
+#' @export
+
+`ltabs` <-
+function(formula, data, factor_labels = "p", ...){
+  formula <- as.formula(formula)
+  if (!is.data.frame(data))
+    data <- as.data.frame(data)
+  
+  vars <- attr(terms(formula), "term.labels")
+  for (v in vars) 
+    data[[v]] <- to_factor(data[[v]], factor_labels = factor_labels)
+  
+  tab <- xtabs(formula, data, ...)
+  if (factor_labels == "l")
+    names(dimnames(tab)) <- get_var_labels(data)[vars]
+  else if (factor_labels == "p")
+    names(dimnames(tab)) <- paste(vars, get_var_labels(data)[vars], sep = ": ")
+  return(tab)
+}
