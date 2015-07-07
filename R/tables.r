@@ -9,16 +9,30 @@
 #' @param exclude vector of values to exclude from the tabulation (if \code{x} is a vector)
 #' @param sort if specified, allow to sort the table by increasing ("inc") or decreasing ("dec") frequencies
 #' @param valid if TRUE, display valid percentages
+#' @param levels the desired levels for the factor in case of labelled vector: 
+#'    "l" for value labels, "v" for values or "p" for labels prefixed with values
 #' @return
 #' The result is an object of class data.frame.
 #' @seealso
 #' \code{\link{table}}, \code{\link[questionr]{prop}}, \code{\link[questionr]{cprop}}, \code{\link[questionr]{rprop}}
+#' @examples 
+#' # factor
+#' data(hdv2003)
+#' freq(hdv2003$qualif)
+#' freq(hdv2003$qualif, cum = T, total = T)
+#' freq(hdv2003$qualif, cum = T, total = T, sort ="dec")
+#' 
+#' # labelled data
+#' data(fecondite)
+#' freq(femmes$region)
+#' freq(femmes$region, levels = "l")
+#' freq(femmes$region, levels = "v")
 #' @export
 
 `freq` <-
-function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA%in%exclude)) {
+function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA%in%exclude), levels = "p") {
   if (is.table(x)) tab <- x
-  else tab <- table(x, exclude=exclude, useNA="ifany")
+  else tab <- table(.as_factor(x, levels), exclude=exclude, useNA="ifany")
   effectifs <- as.vector(tab)
   pourc <- as.vector(effectifs/sum(effectifs)*100)
   result <- data.frame(n=effectifs, pourc=pourc)
