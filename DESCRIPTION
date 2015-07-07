@@ -21,6 +21,7 @@ Suggests:
     memisc,
     testthat,
     roxygen2,
-    R2HTML
+    R2HTML,
+    sjmisc
 SystemRequirements: xclip (Linux)
 URL: https://github.com/juba/questionr
