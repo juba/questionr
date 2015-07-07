@@ -400,3 +400,40 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
   print.table(x, ...)
 }
 
+#' Cross tabulation with labelled variables
+#' 
+#' This function is a wrapper around \code{\link[stats]{xtabs}}, adding automatically
+#' value labels if available.
+#' 
+#' @param formula a formula object (see \code{\link[stats]{xtabs}})
+#' @param data a data frame
+#' @param levels the desired levels in case of labelled vector: 
+#'    "l" for value labels, "v" for values or "p" for labels prefixed with values
+#' @param ... additional arguments passed to \code{\link[stats]{xtabs}}
+#' 
+#' @seealso \code{\link[stats]{xtabs}}.
+#' @examples 
+#' \dontrun{
+#' data(fecondite)
+#' ltabs(~radio, femmes)
+#' ltabs(~radio+tv, femmes)
+#' ltabs(~radio+tv, femmes, "l")
+#' ltabs(~radio+tv, femmes, "v")
+#' ltabs(~radio+tv+journal, femmes)
+#' }
+#' @export
+
+`ltabs` <-
+function(formula, data, levels = "p", ...){
+  formula <- as.formula(formula)
+  if (!is.data.frame(data))
+    data <- as.data.frame(data)
+  
+  vars <- attr(terms(formula), "term.labels")
+  for (v in vars) 
+    data[[v]] <- .as_factor(data[[v]], levels = levels)
+  
+  tab <- xtabs(formula, data, ...)
+  names(dimnames(tab)) <- paste(vars, .get_var_labels(data)[vars], sep = ": ")
+  return(tab)
+}
