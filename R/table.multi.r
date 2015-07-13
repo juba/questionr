@@ -168,7 +168,8 @@ multi.split <- function (var, split.char="/", mnames = NULL) {
   result <- matrix(data = 0, nrow = length(var), ncol = length(lev))
   char.var <- as.character(var)
   for (i in 1:length(lev)) {
-    result[grep(lev[i], char.var, fixed = TRUE), i] <- 1
+    pattern <- sprintf("(^|%s)%s(%s|$)", split.char, lev[i], split.char)
+    result[grep(pattern, char.var), i] <- 1
   }
   result <- data.frame(result)
   colnames(result) <- mnames
