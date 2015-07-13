@@ -41,7 +41,10 @@
     if (length(x) > n) obs <- paste(obs, "...")
     res <- paste0(res, obs, "\n")
     
-    res <- paste0(res, nlevels(x), " levels: ", paste(levels(x), collapse = " | "), "\n")
+    if (is.ordered(x))
+      res <- paste0(res, nlevels(x), " levels: ", paste(levels(x), collapse = " < "), "\n")
+    else
+      res <- paste0(res, nlevels(x), " levels: ", paste(levels(x), collapse = " | "), "\n")
     
     nNA <- sum(is.na(x))
     res <- paste0(res, "NAs: ", nNA, " (", round(nNA / length(x), digits = 1), "%)")
