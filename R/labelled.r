@@ -21,19 +21,20 @@
     return(attr(x, "labels"))
 }
 
-.as_factor <- function(x, levels = "l") {
+.as_factor <- function(x, levels = c("prefixed", "labels", "values")) {
+  levels <- match.arg(levels)
   if (is.factor(x)) return(x)
   if (!is.atomic(x)) stop("x should be a vector.")
   
   v <- unique(x[!is.na(x)])
   if (is.null(.get_val_labels(x)))
     l <- data.frame(values = v, labels = v)
-  else if (levels == "v") 
+  else if (levels == "values") 
     l <- data.frame(values = v, labels = v)
   else 
     l <- data.frame(values = .get_val_labels(x), labels = names(.get_val_labels(x)))
   
-  if (levels == "p")
+  if (levels == "prefixed")
     l$labels <- paste0("[", l$values, "] ", l$labels)
   
   v <- data.frame(values = v)

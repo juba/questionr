@@ -10,7 +10,7 @@
 #' @param sort if specified, allow to sort the table by increasing ("inc") or decreasing ("dec") frequencies
 #' @param valid if TRUE, display valid percentages
 #' @param levels the desired levels for the factor in case of labelled vector: 
-#'    "l" for value labels, "v" for values or "p" for labels prefixed with values
+#'    "labels" for value labels, "values" for values or "prefixed" for labels prefixed with values
 #' @return
 #' The result is an object of class data.frame.
 #' @seealso
@@ -19,8 +19,8 @@
 #' # factor
 #' data(hdv2003)
 #' freq(hdv2003$qualif)
-#' freq(hdv2003$qualif, cum = T, total = T)
-#' freq(hdv2003$qualif, cum = T, total = T, sort ="dec")
+#' freq(hdv2003$qualif, cum = TRUE, total = TRUE)
+#' freq(hdv2003$qualif, cum = TRUE, total = TRUE, sort ="dec")
 #' 
 #' # labelled data
 #' data(fecondite)
@@ -30,7 +30,9 @@
 #' @export
 
 `freq` <-
-function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA%in%exclude), levels = "p") {
+function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA%in%exclude), 
+          levels = c("prefixed", "labels", "values")) {
+  levels <- match.arg(levels)
   if (is.table(x)) tab <- x
   else tab <- table(.as_factor(x, levels), exclude=exclude, useNA="ifany")
   effectifs <- as.vector(tab)
@@ -408,7 +410,7 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
 #' @param formula a formula object (see \code{\link[stats]{xtabs}})
 #' @param data a data frame
 #' @param levels the desired levels in case of labelled vector: 
-#'    "l" for value labels, "v" for values or "p" for labels prefixed with values
+#'    "labels" for value labels, "values" for values or "prefixed" for labels prefixed with values
 #' @param ... additional arguments passed to \code{\link[stats]{xtabs}}
 #' 
 #' @seealso \code{\link[stats]{xtabs}}.
@@ -424,7 +426,8 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
 #' @export
 
 `ltabs` <-
-function(formula, data, levels = "p", ...){
+function(formula, data, levels = c("prefixed", "labels", "values"), ...){
+  levels <- match.arg(levels)
   formula <- as.formula(formula)
   if (!is.data.frame(data))
     data <- as.data.frame(data)
