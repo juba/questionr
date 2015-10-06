@@ -22,6 +22,6 @@ Suggests:
     testthat,
     roxygen2,
     R2HTML,
-    sjmisc
+    labelled
 SystemRequirements: xclip (Linux)
 URL: https://github.com/juba/questionr

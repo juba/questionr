@@ -2,23 +2,20 @@
 ## wrapping to sjmisc if available
 ## doing a minimum overwise (haven compatibility only)
 
-.get_var_labels <- function(x) {
-  if (requireNamespace("sjmisc", quietly = TRUE))
-    return(sjmisc::get_var_labels(x))
+.get_var_label <- function(x) {
+  if (requireNamespace("labelled", quietly = TRUE))
+    return(labelled::var_label(x))
   else
-    return(attr(x, "label"))
+    return(attr(x, "label", exact = TRUE))
 }
 
 .get_val_labels <- function(x) {
-  if (requireNamespace("sjmisc", quietly = TRUE)) {
-    tmp <- sjmisc::get_val_labels(x, include.values = "n")
-    res <- names(tmp)
-    names(res) <- tmp
-    return(res)
+  if (requireNamespace("labelled", quietly = TRUE)) {
+    return(labelled::val_labels(x))
   }
     
   else
-    return(attr(x, "labels"))
+    return(attr(x, "labels", exact = TRUE))
 }
 
 .as_factor <- function(x, levels = c("prefixed", "labels", "values")) {
@@ -45,6 +42,6 @@
   v[is.na(v$labels), "labels"] <- v[is.na(v$labels), "values"] 
   
   res <- factor(x, levels = v$values, labels = v$labels)
-  attr(res, "label") <- .get_var_labels(x)
+  attr(res, "label") <- .get_var_label(x)
   return(res)
 }

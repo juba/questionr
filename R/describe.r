@@ -28,7 +28,7 @@
     res <- ""
     if (show.length)
       res <- paste0("[", length(x), " obs.] ")
-    res <- paste0(res, .get_var_labels(x), "\n")
+    res <- paste0(res, .get_var_label(x), "\n")
     
     if (is.ordered(x))
       res <- paste0(res, "ordinal factor: ")
@@ -65,7 +65,7 @@
     res <- ""
     if (show.length)
       res <- paste0("[", length(x), " obs.] ")
-    res <- paste0(res, .get_var_labels(x), "\n")
+    res <- paste0(res, .get_var_label(x), "\n")
     
     res <- paste0(res, class(x), ": ")
     
@@ -97,7 +97,7 @@
     res <- ""
     if (show.length)
       res <- paste0("[", length(x), " obs.] ")
-    res <- paste0(res, .get_var_labels(x), "\n")
+    res <- paste0(res, .get_var_label(x), "\n")
     
     res <- paste0(res, class(x), ": ")
     
@@ -132,7 +132,7 @@
     res <- ""
     if (show.length)
       res <- paste0("[", length(x), " obs.] ")
-    res <- paste0(res, .get_var_labels(x), "\n")
+    res <- paste0(res, .get_var_label(x), "\n")
     
     res <- paste0(res, class(x), ": ")
     
@@ -203,7 +203,7 @@
     res <- paste0("[", nrow(x), " obs. x ", ncol(x), " variables] ", paste(class(x), collapse = " "))
     
     for (v in names(y)) {
-      attr(y[[v]], "label") <- .get_var_labels(x[[v]]) # restoring labels lost when subsetting
+      attr(y[[v]], "label") <- .get_var_label(x[[v]]) # restoring labels lost when subsetting
       res <- paste0(res, "\n\n$", v, ": ", describe(y[[v]], n = n, show.length = FALSE))  
     }
 

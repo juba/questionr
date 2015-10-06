@@ -437,6 +437,6 @@ function(formula, data, levels = c("prefixed", "labels", "values"), ...){
     data[[v]] <- .as_factor(data[[v]], levels = levels)
   
   tab <- xtabs(formula, data, ...)
-  names(dimnames(tab)) <- paste(vars, .get_var_labels(data)[vars], sep = ": ")
+  names(dimnames(tab)) <- paste(vars, .get_var_label(data)[vars], sep = ": ")
   return(tab)
 }
