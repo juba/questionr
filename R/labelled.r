@@ -20,7 +20,10 @@
 
 .as_factor <- function(x, levels = c("prefixed", "labels", "values")) {
   if (requireNamespace("labelled", quietly = TRUE)) {
-    return(labelled::as_factor(x, levels))
+    if (inherits(x, "labbeled"))
+      return(labelled::as_factor(x, levels))
+    else
+      return(labelled::as_factor(x))
   } else {
     return(as.factor(x))
   }
