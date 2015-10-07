@@ -26,6 +26,10 @@
 #' lookfor(nes1948, "truman|dewey")
 #' # Look for a phrase.
 #' lookfor(nes1948, "personal attribute")}
+#' # Labelled data
+#' data(fecondite)
+#' lookfor(femmes)
+#' lookfor(femmes, "date")
 #' @source Based on the behaviour of the \code{lookfor} command in Stata. Future versions might include fuzzey search as featured by the \code{query} function of the \code{memisc} package, which also searches value labels and therefore offers a wider search scope.
 #' @seealso \code{query} in the \code{memisc} package
 #' @export
@@ -42,11 +46,10 @@ lookfor <- function(data,
   # names search
   x <- look(n)
   variable <- n[x]
-  # foreign objects
-  l <- attr(data, "variable.labels")
-  if(is.null(l)) l <- attr(data, "var.labels")
+  # foreign / haven objects
+  l <- .get_var_label(data)
   # memisc objects
-  if(grepl("data.set|importer", class(data))) {
+  if(any(grepl("data.set|importer", class(data)))) {
       suppressMessages(suppressWarnings(requireNamespace("memisc")))
       l <- as.vector(memisc::description(data))
   }

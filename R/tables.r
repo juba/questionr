@@ -9,16 +9,32 @@
 #' @param exclude vector of values to exclude from the tabulation (if \code{x} is a vector)
 #' @param sort if specified, allow to sort the table by increasing ("inc") or decreasing ("dec") frequencies
 #' @param valid if TRUE, display valid percentages
+#' @param levels the desired levels for the factor in case of labelled vector: 
+#'    "labels" for value labels, "values" for values or "prefixed" for labels prefixed with values
 #' @return
 #' The result is an object of class data.frame.
 #' @seealso
 #' \code{\link{table}}, \code{\link[questionr]{prop}}, \code{\link[questionr]{cprop}}, \code{\link[questionr]{rprop}}
+#' @examples 
+#' # factor
+#' data(hdv2003)
+#' freq(hdv2003$qualif)
+#' freq(hdv2003$qualif, cum = TRUE, total = TRUE)
+#' freq(hdv2003$qualif, cum = TRUE, total = TRUE, sort ="dec")
+#' 
+#' # labelled data
+#' data(fecondite)
+#' freq(femmes$region)
+#' freq(femmes$region, levels = "l")
+#' freq(femmes$region, levels = "v")
 #' @export
 
 `freq` <-
-function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA%in%exclude)) {
+function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA%in%exclude), 
+          levels = c("prefixed", "labels", "values")) {
+  levels <- match.arg(levels)
   if (is.table(x)) tab <- x
-  else tab <- table(x, exclude=exclude, useNA="ifany")
+  else tab <- table(.as_factor(x, levels), exclude=exclude, useNA="ifany")
   effectifs <- as.vector(tab)
   pourc <- as.vector(effectifs/sum(effectifs)*100)
   result <- data.frame(n=effectifs, pourc=pourc)
@@ -386,3 +402,41 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
   print.table(x, ...)
 }
 
+#' Cross tabulation with labelled variables
+#' 
+#' This function is a wrapper around \code{\link[stats]{xtabs}}, adding automatically
+#' value labels if available.
+#' 
+#' @param formula a formula object (see \code{\link[stats]{xtabs}})
+#' @param data a data frame
+#' @param levels the desired levels in case of labelled vector: 
+#'    "labels" for value labels, "values" for values or "prefixed" for labels prefixed with values
+#' @param ... additional arguments passed to \code{\link[stats]{xtabs}}
+#' 
+#' @seealso \code{\link[stats]{xtabs}}.
+#' @examples 
+#' \dontrun{
+#' data(fecondite)
+#' ltabs(~radio, femmes)
+#' ltabs(~radio+tv, femmes)
+#' ltabs(~radio+tv, femmes, "l")
+#' ltabs(~radio+tv, femmes, "v")
+#' ltabs(~radio+tv+journal, femmes)
+#' }
+#' @export
+
+`ltabs` <-
+function(formula, data, levels = c("prefixed", "labels", "values"), ...){
+  levels <- match.arg(levels)
+  formula <- as.formula(formula)
+  if (!is.data.frame(data))
+    data <- as.data.frame(data)
+  
+  vars <- attr(terms(formula), "term.labels")
+  for (v in vars) 
+    data[[v]] <- .as_factor(data[[v]], levels = levels)
+  
+  tab <- xtabs(formula, data, ...)
+  names(dimnames(tab)) <- paste(vars, .get_var_label(data)[vars], sep = ": ")
+  return(tab)
+}
