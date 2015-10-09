@@ -42,7 +42,7 @@ function (x, weights = NULL, normwt = FALSE, na.rm = TRUE)
     if (!length(weights)) {
         if (na.rm) 
             x <- x[!is.na(x)]
-        return(var(x))
+        return(stats::var(x))
     }
     if (na.rm) {
         s <- !is.na(x + weights)

@@ -108,7 +108,7 @@ freq.na <- function(data, ...) {
     colnames(d) = n
   if (length(c(...)) < 1 & class(data) == "data.frame") {
     warning("No variables specified; showing top five results.")
-    return(head(d))
+    return(utils::head(d))
   }
   else {
     return(d)
@@ -310,7 +310,7 @@ function (tab, digits = 2, std = FALSE, raw = FALSE) {
   if(all(std, raw))
     stop("Choose between standardized and raw residuals.")
 
-  k = chisq.test(tab)
+  k = stats::chisq.test(tab)
   if (raw) {
     # raw residuals
     res <- k$observed - k$expected

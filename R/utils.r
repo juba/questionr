@@ -73,7 +73,7 @@ qload <- function(..., load = TRUE, silent = TRUE) {
   run = sapply(c(...), FUN = function(x) {
     # install
     if(!suppressMessages(suppressWarnings(require(x, character.only = TRUE)))) {
-      dl <- try(install.packages(x, quiet = TRUE))
+      dl <- try(utils::install.packages(x, quiet = TRUE))
       if(class(dl) == "try-error")
         stop("The package ", x, "could not be downloaded.")
     }

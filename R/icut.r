@@ -13,9 +13,8 @@
 ##' \dontrun{data(hdv2003)
 ##' icut(hdv2003, "age")
 ##' irec(hdv2003, heures.tv) ## this also works}
+##' 
 ##' @import shiny
-##' @importFrom highr hi_html
-##' @importFrom classInt classIntervals
 ##' @export
 
 icut <- function(dfobject, oldvar) {
@@ -60,9 +59,9 @@ icut <- function(dfobject, oldvar) {
       out <- paste0(out, "<th>Min</th><th>1st quartile</th><th>Median</th><th>Mean</th><th>3rd quartile</th><th>Max</th><th>NA</th>")
       out <- paste0(out, "</tr></thead><tbody><tr>")
       out <- paste0(out, sprintf("<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>",
-                                 min(v, na.rm=TRUE), quantile(v, prob=0.25, na.rm=TRUE),
-                                 median(v, na.rm=TRUE), round(mean(v, na.rm=TRUE),3),
-                                 quantile(v, prob=0.75, na.rm=TRUE), max(v, na.rm=TRUE), sum(is.na(v))))
+                                 min(v, na.rm=TRUE), stats::quantile(v, prob=0.25, na.rm=TRUE),
+                                 stats::median(v, na.rm=TRUE), round(mean(v, na.rm=TRUE),3),
+                                 stats::quantile(v, prob=0.75, na.rm=TRUE), max(v, na.rm=TRUE), sum(is.na(v))))
       out <- paste0(out, "</tr></tbody></table>")
       out
     }
@@ -194,16 +193,16 @@ icut <- function(dfobject, oldvar) {
                                sprintf('%s$%s', df_name, newvar_name))
           out <- sprintf(gettextf("## Cutting %s into %s\n", oldvar_name, newvar_name, domain="R-questionr"))
           out <- paste0(out, sprintf("%s <- cut(%s, include.lowest=%s,  right=%s,\n", dest_var, src_var, input$inclowest, input$right))
-          breaks <- paste0(capture.output(dput(get_breaks(input$breaks))), collapse="")
+          breaks <- paste0(utils::capture.output(dput(get_breaks(input$breaks))), collapse="")
           out <- paste0(out, paste0(rep(" ",nchar(dest_var)+8),collapse=""),sprintf("breaks=%s)\n", breaks))
           out
         }
         
         
         output$histOut <- renderPlot({
-          hist(oldvar, col="#bbd8e9", border="white", main=gettext("Original histogram", domain="R-questionr"), xlab=oldvar_name)
+          graphics::hist(oldvar, col="#bbd8e9", border="white", main=gettext("Original histogram", domain="R-questionr"), xlab=oldvar_name)
           breaks <- get_breaks(input$breaks, compute=TRUE)
-          for (b in breaks) abline(v=b, col="#dd1144", lwd=1, lty=2)
+          for (b in breaks) graphics::abline(v=b, col="#dd1144", lwd=1, lty=2)
         })
         
         
@@ -249,7 +248,7 @@ icut <- function(dfobject, oldvar) {
           ## Eval generated code
           eval(parse(text=code))
           ## Display table
-          plot(get(".icut_tmp"), col="#bbd8e9", border="white")
+          graphics::plot(get(".icut_tmp"), col="#bbd8e9", border="white")
         })
     })
     

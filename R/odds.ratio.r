@@ -38,11 +38,11 @@ function(x, level=0.95, digits=3, ...) {
     if (!inherits(x, "glm")) stop("x must be of class 'glm'.")
     if(x$family$family != "binomial" & x$family$family != "quasibinomial")
         stop('x should be a glm with family=binomial or family=quasibinomial.')
-    r <- cbind(exp(coef(x)),exp(confint(x, level=level)),summary(x)$coefficients[,4])
+    r <- cbind(exp(stats::coef(x)),exp(stats::confint(x, level=level)),summary(x)$coefficients[,4])
     r[,1:3] <- round(r[,1:3],digits=digits)
     colnames(r)[1] <- "OR"
     colnames(r)[4] <- "p"
-    printCoefmat(r,signif.stars=TRUE,has.Pvalue=TRUE)
+    stats::printCoefmat(r,signif.stars=TRUE,has.Pvalue=TRUE)
 }
 
 
@@ -60,11 +60,11 @@ function(x, level=0.95, digits=3, ...) {
 function(x, level=0.95, digits=3, ...) {
     if (!inherits(x, "multinom")) stop("x must be of class 'multinom'.")
     OR <- exp(summary(x)$coefficients)
-    ci <- exp(confint(x,level=level))
+    ci <- exp(stats::confint(x,level=level))
     ## From http://www.ats.ucla.edu/stat/r/dae/mlogit.htm
     s <- summary(x)
     z <- s$coefficients/s$standard.errors
-    p <- p <- (1 - pnorm(abs(z), 0, 1)) * 2
+    p <- p <- (1 - stats::pnorm(abs(z), 0, 1)) * 2
     d <- dim(ci)
     if (is.na(d[3])) { # If only 2 dimensions
       r <- cbind(OR, ci, p)
@@ -80,7 +80,7 @@ function(x, level=0.95, digits=3, ...) {
     }
     r[,1:3] <- round(r[,1:3],digits=digits)
     colnames(r) <- c("OR",dimnames(ci)[[2]],"p")
-    printCoefmat(r,signif.stars=TRUE,has.Pvalue=TRUE)
+    stats::printCoefmat(r,signif.stars=TRUE,has.Pvalue=TRUE)
 }
 
 #' @rdname odds.ratio
@@ -96,7 +96,7 @@ function(x, level=0.95, digits=3, ...) {
 `odds.ratio.factor` <- 
 function(x, y, level=0.95, ...) {
     if (!inherits(x, "factor")) stop("x must be of class 'factor'.")
-    fisher.test(x, y, conf.level=level)
+    stats::fisher.test(x, y, conf.level=level)
 }
 
 #' @rdname odds.ratio
@@ -110,5 +110,5 @@ function(x, y, level=0.95, ...) {
 `odds.ratio.table` <- 
 function(x, level=0.95, ...) {
     if (!inherits(x, "table")) stop("x must be of class 'table'.")
-    fisher.test(x, conf.level=level)
+    stats::fisher.test(x, conf.level=level)
 }

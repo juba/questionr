@@ -123,7 +123,7 @@ irec <- function(dfobject, oldvar) {
           ## Encoding conversion for Windows
           Encoding(val) <- "UTF-8"
           val <- enc2native(val)
-          val <- capture.output(dput(val))
+          val <- utils::capture.output(dput(val))
           val
         }
         
@@ -138,7 +138,7 @@ irec <- function(dfobject, oldvar) {
             out <- paste0(out, sprintf("%s <- %s\n", dest_var, src_var))
           ## List levels
           if (is.factor(oldvar)) levs <- levels(oldvar)
-          else levs <- na.omit(unique(oldvar))
+          else levs <- stats::na.omit(unique(oldvar))
           if (any(is.na(oldvar))) levs <- c(levs, NA)
           for (l in levs) {
             ## Special NA placeholder
@@ -160,7 +160,7 @@ irec <- function(dfobject, oldvar) {
               out <- paste0(out, sprintf('%s[%s==""] <- %s\n', dest_var, src_var, value))
             ## Normal values
             else
-              out <- paste0(out, sprintf('%s[%s == %s] <- %s\n', dest_var, src_var, capture.output(dput(l)), value))
+              out <- paste0(out, sprintf('%s[%s == %s] <- %s\n', dest_var, src_var, utils::capture.output(dput(l)), value))
           }
           ## Optional factor conversion
           if (input$facconv) out <- paste0(out, sprintf("%s <- factor(%s)\n", dest_var, dest_var))
@@ -228,7 +228,7 @@ irec <- function(dfobject, oldvar) {
           out <- "<table><tbody>"
           ## List of levels
           if (is.factor(oldvar)) levs <- levels(oldvar)
-          else levs <- na.omit(unique(oldvar))
+          else levs <- stats::na.omit(unique(oldvar))
           ## Add NA level if there is any NA value
           if (any(is.na(oldvar))) levs <- c(levs, NA)
           ## Generate fields

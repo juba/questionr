@@ -64,7 +64,7 @@ iorder <- function(dfobject, oldvar) {
       out <- "<ol id='sortable' class='sortable'>"
       ## List of levels
       if (is.factor(oldvar)) levs <- levels(oldvar)
-      else levs <- na.omit(unique(oldvar))
+      else levs <- stats::na.omit(unique(oldvar))
       ## Generate fields
        for (l in levs) out <- paste0(out,'<li><span class="glyphicon glyphicon-move"> </span>&nbsp; <span class="level">',htmltools::htmlEscape(l),'</span></li>')
       out <- paste0(out, "</ol>")
@@ -143,7 +143,7 @@ iorder <- function(dfobject, oldvar) {
             dest_var <- ifelse(grepl(" ", newvar_name),
                                sprintf('%s[,"%s"]', df_name, newvar_name),
                                sprintf('%s$%s', df_name, newvar_name))
-          newlevels <- paste0(capture.output(dput(input$sortable)), collapse="")
+          newlevels <- paste0(utils::capture.output(dput(input$sortable)), collapse="")
           out <- gettextf("## Reordering %s", src_var, domain="R-questionr")
           if (src_var != dest_var) out <- paste0(out, sprintf(" into %s", dest_var))
           out <- paste0(out, sprintf("\n%s <- factor(%s, levels=", dest_var, src_var))
@@ -193,7 +193,7 @@ iorder <- function(dfobject, oldvar) {
           out <- "<ol class='sortable'>"
           ## List of levels
           if (is.factor(oldvar)) levs <- levels(oldvar)
-          else levs <- na.omit(unique(oldvar))
+          else levs <- stats::na.omit(unique(oldvar))
           ## Generate fields
           for (l in levs) out <- paste0(out,'<li>',l,'</li>')
           out <- paste0(out, "</ol>")

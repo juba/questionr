@@ -160,7 +160,7 @@ function(x){
 function(x, v=NULL){
   if (!is.data.frame(x)) x <- as.data.frame(x)
   if (is.null(v)) v <- names(x)
-  r <- x[complete.cases(x[v]),]
+  r <- x[stats::complete.cases(x[v]),]
   return(r)
 }
 
