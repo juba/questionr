@@ -38,6 +38,9 @@ lookfor <- function(data,
                     keywords = "", 
                     labels = TRUE, 
                     ignore.case = TRUE) {
+  # applying to_labelled if available
+  if (requireNamespace("labelled", quietly = TRUE))
+    data <- labelled::to_labelled(data)
   # search scope
   n <- names(data)
   if(!length(n)) stop("there are no names to search in that object")

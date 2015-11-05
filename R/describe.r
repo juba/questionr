@@ -186,6 +186,10 @@
 
 `describe.data.frame` <- 
   function(x, ..., n = 5) {
+    # applying to_labelled if available
+    if (requireNamespace("labelled", quietly = TRUE))
+      x <- labelled::to_labelled(x)
+    
     # select variables
     s <- c(...)
     
