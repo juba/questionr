@@ -81,7 +81,7 @@ irec <- function(dfobject, oldvar) {
                                              paste0(oldvar_name,".rec"))),
                                div(class="col-sm-4", 
                                    selectInput("recstyle", gettext("Recoding style", domain="R-questionr"), 
-                                               c("Character - complete"="charcomp", "Character - minimal"="charmin"))),
+                                               c("Character - minimal"="charmin", "Character - complete"="charcomp"))),
                                div(class="col-sm-3",                           
                                   checkboxInput("facconv", gettext("Convert to factor", domain="R-questionr"), FALSE))
                   )))),
