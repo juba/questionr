@@ -1,6 +1,7 @@
 questionr 0.4.4
 ---------------
 
+* Minimal recoding style by default in `irec`
 * Fix false positives in multi.split (thanks @markriseley)
 * New fecondite labelled dataset (thanks @larmarange)
 * New happy dataset (thanks @briatte)
