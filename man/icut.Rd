@@ -23,6 +23,7 @@ interactive conversion of a numeric variable into a categorical one.
 \dontrun{data(hdv2003)
 icut(hdv2003, "age")
 irec(hdv2003, heures.tv) ## this also works}
+
 }
 \author{
 Julien Barnier <julien.barnier@ens-lyon.fr>

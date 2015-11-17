@@ -16,11 +16,11 @@ duplicated2(x)
 A logical vector indicated wich elements are duplicated in \code{x}.
 }
 \description{
-The native \link{duplicated} function determines which elements of a vector
+The native \link{duplicated} function determines which elements of a vector 
 or data frame are duplicates of elements already observed in the vector or the
 data frame provided. Therefore, only the second occurence (or third or nth)
 of an element is considered as a duplicate.
-\code{duplicated2} is similar but will also mark the first occurence as a
+\code{duplicated2} is similar but will also mark the first occurence as a 
 duplicate (see examples).
 }
 \examples{

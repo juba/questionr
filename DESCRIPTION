@@ -27,4 +27,4 @@ Suggests:
     R2HTML
 SystemRequirements: xclip (Linux)
 URL: https://github.com/juba/questionr
-RoxygenNote: 4.1.1.9000
+RoxygenNote: 5.0.1

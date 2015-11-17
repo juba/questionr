@@ -7,10 +7,10 @@
 qload(..., load = TRUE, silent = TRUE)
 }
 \arguments{
-\item{...}{the packages to load/install. Packages are loaded with \code{library}
+\item{...}{the packages to load/install. Packages are loaded with \code{library} 
 and installed first with \code{install.packages} if necessary.}
 
-\item{load}{load the packages. Set to \code{FALSE} to just install any missing packages.
+\item{load}{load the packages. Set to \code{FALSE} to just install any missing packages. 
 Defaults to \code{TRUE}.}
 
 \item{silent}{keep output as silent as possible.
@@ -20,7 +20,7 @@ Defaults to \code{TRUE}.}
 The result is a list of packages cited in the scripts.
 }
 \description{
-This function quickly loads one or more packages, installing them quietly
+This function quickly loads one or more packages, installing them quietly 
 if necessary.
 }
 \details{

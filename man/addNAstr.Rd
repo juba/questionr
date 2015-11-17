@@ -4,7 +4,7 @@
 \alias{addNAstr}
 \title{Transform missing values of a factor to an extra level}
 \source{
-Adapted from James (\url{http://stackoverflow.com/a/5817181})
+Adapted from James (\url{http://stackoverflow.com/a/5817181}) 
 by Joseph Larmarange <joseph@larmarange.net>
 }
 \usage{
@@ -19,12 +19,12 @@ addNAstr(x, value = "NA", ...)
 }
 \value{
 an object of class \code{"factor"}, original missing values being coded as an
-extra level named \code{NA} if \code{as.string=FALSE}, \code{"NA"} if
+extra level named \code{NA} if \code{as.string=FALSE}, \code{"NA"} if 
 \code{as.string=TRUE}, as specified by \code{as.string} if \code{as.string} is
 a string.
 }
 \description{
-This function modifies a factor by turning \code{NA} into an extra level
+This function modifies a factor by turning \code{NA} into an extra level 
 (so that \code{NA} values are counted in tables, for instance).
 This version of \code{addNA} extends the same function provided in \R by
 allowing to specify a string name for the extra level (see examples).

@@ -16,7 +16,7 @@ This function describes the variables of a dataset that might
 include labels imported with the foreign or memisc packages.
 }
 \details{
-This function wraps around the \code{description} function of the
+This function wraps around the \code{description} function of the 
 \code{memisc} package and fetches the variable labels in datasets
 imported with the \code{foreign} package.
 }

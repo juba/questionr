@@ -17,8 +17,8 @@ variables to take into account.
 }
 \details{
 If \code{v} is not specified, the result of \code{na.rm} will be the same as
-\link{na.omit}. If a list of variables is specified through \code{v}, only
-observations with a missing value (\code{NA}) for one of the specified
+\link{na.omit}. If a list of variables is specified through \code{v}, only 
+observations with a missing value (\code{NA}) for one of the specified 
 variables will be removed from \code{x}. See examples.
 }
 \examples{

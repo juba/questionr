@@ -38,7 +38,7 @@ odds.ratio(x, ...)
 \item{y}{a second numeric object}
 }
 \value{
-Returns odds ratios, their confidence interval and
+Returns odds ratios, their confidence interval and 
 tests if they differ from 1.
 
 If \code{x} and \code{y} are proportions, \code{odds.ratio} simply
@@ -50,8 +50,8 @@ S3 method for odds ratio
 \details{
 For models calculated with \code{glm}, \code{x} should have
 been calculated with \code{family=binomial}.
-p-value are the same as \code{summary(x)$coefficients[,4]}.
-Odds ratio could also be obtained with \code{exp(coef(x))} and
+p-value are the same as \code{summary(x)$coefficients[,4]}. 
+Odds ratio could also be obtained with \code{exp(coef(x))} and 
 confidence intervals with \code{exp(confint(x))}.
 
 For models calculated with \code{multinom} (nnet),
