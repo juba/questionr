@@ -85,7 +85,7 @@ function(x, level=0.95, digits=3, ...) {
 
 #' @rdname odds.ratio
 #' @aliases odds.ratio.factor
-#' @param y a second factor object
+#' @param fac a second factor object
 #' @details 
 #' For 2x2 \code{table}, \code{factor} or \code{matrix}, \code{odds.ratio}
 #' uses \code{fisher.test} to compute the odds ratio.
@@ -94,9 +94,9 @@ function(x, level=0.95, digits=3, ...) {
 #' @export
 
 `odds.ratio.factor` <- 
-function(x, y, level=0.95, digits = 3, ...) {
+function(x, fac, level=0.95, digits = 3, ...) {
     if (!inherits(x, "factor")) stop("x must be of class 'factor'.")
-    ft <- stats::fisher.test(x, y, conf.level=level)
+    ft <- stats::fisher.test(x, fac, conf.level=level)
     r <- data.frame(OR = ft$estimate, lower = ft$conf.int[1], upper = ft$conf.int[2], p = ft$p.value)
     r$OR <- round(r$OR, digits = digits)
     r$lower <- round(r$lower, digits = digits)

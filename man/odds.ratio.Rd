@@ -16,7 +16,7 @@ odds.ratio(x, ...)
 
 \method{odds.ratio}{multinom}(x, level = 0.95, digits = 3, ...)
 
-\method{odds.ratio}{factor}(x, y, level = 0.95, digits = 3, ...)
+\method{odds.ratio}{factor}(x, fac, level = 0.95, digits = 3, ...)
 
 \method{odds.ratio}{table}(x, level = 0.95, digits = 3, ...)
 
@@ -33,7 +33,7 @@ odds.ratio(x, ...)
 
 \item{digits}{number of decimal to display}
 
-\item{y}{a second factor object}
+\item{fac}{a second factor object}
 
 \item{y}{a second numeric object}
 }
