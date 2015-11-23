@@ -43,3 +43,34 @@ NULL
 #' describe(femmes)
 #' describe(enfants)
 NULL
+
+#' A fertility survey - "menages" table
+#' 
+#' Some fictive results from a fecondity survey.
+#' 
+#' @docType data
+#' @keywords datasets
+#' @format a data frame containing some information from the households selected for the \link{fecondite} survey.
+#' @name menages
+NULL
+
+#' A fertility survey - "femmes" table
+#' 
+#' Some fictive results from a fecondity survey.
+#' 
+#' @docType data
+#' @keywords datasets
+#' @format a data frame containing the questionnaire administered to all 15-49 years old women 
+#'        living in the selected households for the \link{fecondite} survey.
+#' @name femmes
+NULL
+
+#' A fertility survey - "enfants" table
+#' 
+#' Some fictive results from a fecondity survey.
+#' 
+#' @docType data
+#' @keywords datasets
+#' @format a data frame containing one record for each child of the surveyed women in the \link{fecondite} survey.
+#' @name enfants
+NULL
