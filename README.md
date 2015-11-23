@@ -6,6 +6,7 @@ R package to make surveys processing easier
 * CRAN web page : [http://cran.r-project.org/web/packages/questionr/](http://cran.r-project.org/web/packages/questionr/)
 * Wiki : https://github.com/juba/questionr/wiki
 
+[![Travis-CI Build Status](https://travis-ci.org/juba/questionr.svg?branch=master)](https://travis-ci.org/juba/questionr)
 ![CRAN Downloads](http://cranlogs.r-pkg.org/badges/last-month/questionr)
 
 ## Installation
