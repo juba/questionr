@@ -1,6 +1,7 @@
 questionr 0.4.4
 ---------------
 
+* `irec` now trims leading and trailing whitespaces in inputted values
 * Minimal recoding style by default in `irec`
 * Fix false positives in multi.split (thanks @markriseley)
 * New fecondite labelled dataset (thanks @larmarange)

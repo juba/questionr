@@ -120,6 +120,7 @@ irec <- function(dfobject, oldvar) {
         get_value <- function(val) {
           if (is.null(val)) return()
           if (val %in% c("NA", "TRUE", "FALSE")) return(val)
+          val <- gsub("^\\s+|\\s+$", "", val)
           ## Encoding conversion for Windows
           Encoding(val) <- "UTF-8"
           val <- enc2native(val)
@@ -147,7 +148,7 @@ irec <- function(dfobject, oldvar) {
             if (l=="") l <- "*irec_emptystr_id*"
             value <- get_value(input[[l]])
             ## If minimal style, values unchanged are omitted
-            if (style=="min") {
+            if (style=="min" && !is.null(input[[l]])) {
               if (l==input[[l]]) next
               if (l=="*irec_NA_id*" && value=="NA") next
               if (l=="*irec_emptystr_id*" && value=="\"\"") next
