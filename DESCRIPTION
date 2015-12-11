@@ -21,7 +21,8 @@ Imports:
     htmltools,
     graphics,
     stats,
-    utils
+    utils,
+    Hmisc
 Suggests:
     memisc,
     testthat,
