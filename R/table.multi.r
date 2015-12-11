@@ -161,10 +161,12 @@ cross.multi.table <- function(df, crossvar, weights=NULL, digits=1, freq=FALSE, 
 multi.split <- function (var, split.char="/", mnames = NULL) {
   vname <- deparse(substitute(var))
   lev <- levels(factor(var))
-  lev <- unique(unlist(strsplit(lev, split.char)))
+  lev <- unique(unlist(strsplit(lev, split.char, fixed = TRUE)))
   if (is.null(mnames)) 
     mnames <- gsub(" ", "_", paste(vname, lev, sep = "."))
   else mnames <- paste(vname, mnames, sep = ".")
+  lev <- Hmisc::escapeRegex(lev)
+  split.char <- Hmisc::escapeRegex(split.char)
   result <- matrix(data = 0, nrow = length(var), ncol = length(lev))
   char.var <- as.character(var)
   for (i in 1:length(lev)) {
