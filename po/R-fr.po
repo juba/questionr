@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: questionr\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-02 11:08\n"
-"PO-Revision-Date: 2014-10-02 11:08+0100\n"
+"POT-Creation-Date: 2015-12-14 15:01\n"
+"PO-Revision-Date: 2015-12-14 15:05+0100\n"
 "Last-Translator: Julien Barnier <julien@nozav.org>\n"
 "Language-Team: \n"
-"Language: fr-FR\n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.4\n"
 
 msgid "must not be an object named \"dfobject\"."
 msgstr "ne doit pas s'appeler \"dfobject\"."
@@ -28,7 +28,7 @@ msgid "Interactive cutting"
 msgstr "Découpage interactif"
 
 msgid ""
-"<strong>Warning :</strong> This inteface doesn't do anything by itself. It "
+"<strong>Warning :</strong> This interface doesn't do anything by itself. It "
 "only generates R code you'll have to copy/paste into your script and execute "
 "yourself."
 msgstr ""
@@ -36,7 +36,7 @@ msgstr ""
 "devez copier et exécuter le code R généré pour que le recodage soit effectif."
 
 msgid "New variable"
-msgstr "Nouvelle variable :"
+msgstr "Nouvelle variable"
 
 msgid "<p>Statistics of <tt>%s</tt> :</p>"
 msgstr "<p>Statistiques de <tt>%s</tt> :</p>"
@@ -52,6 +52,12 @@ msgstr "Inclure la valeur extrême  (<tt>include.lowest</tt>)"
 
 msgid "Append extreme values if necessary"
 msgstr "Ajouter les valeurs extrêmes si nécessaire"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Check"
+msgstr "Vérification"
 
 msgid "Send code to console and exit"
 msgstr "Copier le code dans la console et quitter"
@@ -77,22 +83,8 @@ msgstr "--------- Fin du code ---------"
 msgid "Interactive levels ordering"
 msgstr "Réordonnancement interactif"
 
-msgid ""
-"<strong>Warning :</strong> This interface doesn't do anything by itself. It "
-"only generates R code you'll have to copy/paste into your script and execute "
-"yourself."
-msgstr ""
-"<strong>Attention :</strong> Cette interface n'effectue aucune action. Vous "
-"devez copier et exécuter le code R généré pour que le recodage soit effectif."
-
 msgid "<td>New variable : </td><td>"
 msgstr "Nouvelle variable :"
-
-msgid "Code"
-msgstr "Code"
-
-msgid "Check"
-msgstr "Vérification"
 
 msgid "## Reordering %s"
 msgstr "## Réordonnancement de %s"
@@ -104,14 +96,11 @@ msgstr ""
 msgid "Interactive recoding"
 msgstr "Recodage interactif"
 
-msgid "New variable :"
-msgstr "Nouvelle variable :"
-
 msgid "Recoding style"
 msgstr "Style de recodage"
 
-msgid "Convert to factor"
-msgstr "Convertir en factor"
+msgid "Output type"
+msgstr "Type de variable recodée"
 
 msgid "Old variable as rows, new variable as columns."
 msgstr "Ancienne variable en ligne, variable recodée en colonne"
@@ -136,8 +125,9 @@ msgstr "Désolé, aucun résultat n'a été trouvé."
 msgid "x must be of class 'glm'."
 msgstr "x doit être de classe 'glm'."
 
-msgid "x should be a glm with family=binomial."
-msgstr "x doit être de classe 'glm' avec 'family=binomial'."
+msgid "x should be a glm with family=binomial or family=quasibinomial."
+msgstr ""
+"x doit être de classe 'glm' avec 'family=binomial' ou 'family=quasibinomial'."
 
 msgid "x must be of class 'multinom'."
 msgstr "x doit être de classe 'multinom'."
@@ -147,6 +137,27 @@ msgstr "x doit être de classe 'factor'."
 
 msgid "x must be of class 'table'."
 msgstr "x doit être de classe 'table'."
+
+msgid "x must be of class 'matrix'."
+msgstr "x doit être de classe 'matrix'."
+
+msgid "x must be numeric."
+msgstr "x doit être numérique."
+
+msgid "x should be a simple value."
+msgstr "x doit être un nombre, pas un vecteur."
+
+msgid "x should be between 0 and 1"
+msgstr "x doit être compris entre 0 et 1"
+
+msgid "y must be numeric."
+msgstr "y doit être numérique."
+
+msgid "y should be a simple value."
+msgstr "y doit être un nombre, pas un vecteur."
+
+msgid "y should be between 0 and 1"
+msgstr "y doit être compris entre 0 et 1"
 
 msgid "Recoded"
 msgstr "Recodage de "
@@ -195,3 +206,18 @@ msgstr "x et weights doivent être de la même taille"
 
 msgid "x and y lengths must be the same"
 msgstr "x et y doivent être de la même taille"
+
+#~ msgid ""
+#~ "<strong>Warning :</strong> This inteface doesn't do anything by itself. "
+#~ "It only generates R code you'll have to copy/paste into your script and "
+#~ "execute yourself."
+#~ msgstr ""
+#~ "<strong>Attention :</strong> Cette interface n'effectue aucune action. "
+#~ "Vous devez copier et exécuter le code R généré pour que le recodage soit "
+#~ "effectif."
+
+#~ msgid "New variable :"
+#~ msgstr "Nouvelle variable :"
+
+#~ msgid "Convert to factor"
+#~ msgstr "Convertir en factor"

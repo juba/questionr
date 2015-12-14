@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: questionr 0.4.2\n"
-"POT-Creation-Date: 2014-10-02 11:08\n"
+"Project-Id-Version: questionr 0.4.4\n"
+"POT-Creation-Date: 2015-12-14 15:01\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Interactive cutting"
 msgstr ""
 
-msgid "<strong>Warning :</strong> This inteface doesn't do anything by itself. It only generates R code you'll have to copy/paste into your script and execute yourself."
+msgid "<strong>Warning :</strong> This interface doesn't do anything by itself. It only generates R code you'll have to copy/paste into your script and execute yourself."
 msgstr ""
 
 msgid "New variable"
@@ -44,6 +44,12 @@ msgid "Include extreme (<tt>include.lowest</tt>)"
 msgstr ""
 
 msgid "Append extreme values if necessary"
+msgstr ""
+
+msgid "Code"
+msgstr ""
+
+msgid "Check"
 msgstr ""
 
 msgid "Send code to console and exit"
@@ -70,16 +76,7 @@ msgstr ""
 msgid "Interactive levels ordering"
 msgstr ""
 
-msgid "<strong>Warning :</strong> This interface doesn't do anything by itself. It only generates R code you'll have to copy/paste into your script and execute yourself."
-msgstr ""
-
 msgid "<td>New variable : </td><td>"
-msgstr ""
-
-msgid "Code"
-msgstr ""
-
-msgid "Check"
 msgstr ""
 
 msgid "## Reordering %s"
@@ -91,13 +88,10 @@ msgstr ""
 msgid "Interactive recoding"
 msgstr ""
 
-msgid "New variable :"
-msgstr ""
-
 msgid "Recoding style"
 msgstr ""
 
-msgid "Convert to factor"
+msgid "Output type"
 msgstr ""
 
 msgid "Old variable as rows, new variable as columns."
@@ -118,7 +112,7 @@ msgstr ""
 msgid "x must be of class 'glm'."
 msgstr ""
 
-msgid "x should be a glm with family=binomial."
+msgid "x should be a glm with family=binomial or family=quasibinomial."
 msgstr ""
 
 msgid "x must be of class 'multinom'."
@@ -128,6 +122,27 @@ msgid "x must be of class 'factor'."
 msgstr ""
 
 msgid "x must be of class 'table'."
+msgstr ""
+
+msgid "x must be of class 'matrix'."
+msgstr ""
+
+msgid "x must be numeric."
+msgstr ""
+
+msgid "x should be a simple value."
+msgstr ""
+
+msgid "x should be between 0 and 1"
+msgstr ""
+
+msgid "y must be numeric."
+msgstr ""
+
+msgid "y should be a simple value."
+msgstr ""
+
+msgid "y should be between 0 and 1"
 msgstr ""
 
 msgid "Recoded"
