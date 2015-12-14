@@ -97,7 +97,7 @@ icut <- function(dfobject, oldvar) {
                         div(class="col-md-12 well",
                             tags$form(textInput("newvarname",
                                                 gettext('New variable',domain="R-questionr"), 
-                                                paste0(oldvar_name,".rec")),HTML("</td>"))
+                                                paste0(oldvar_name,"_rec")),HTML("</td>"))
                             ),
                         div(class="col-md-12 well",
                             tags$form(

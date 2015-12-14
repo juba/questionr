@@ -78,7 +78,7 @@ irec <- function(dfobject, oldvar) {
                             div(class="row",
                                div(class="col-sm-4", 
                                    textInput("newvarname", gettext("New variable", domain="R-questionr"), 
-                                             paste0(oldvar_name,".rec"))),
+                                             paste0(oldvar_name,"_rec"))),
                                div(class="col-sm-4", 
                                    selectInput("recstyle", gettext("Recoding style", domain="R-questionr"), 
                                                c("Character - minimal"="charmin", "Character - complete"="charcomp"))),
