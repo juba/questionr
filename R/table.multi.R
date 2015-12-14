@@ -161,17 +161,27 @@ cross.multi.table <- function(df, crossvar, weights=NULL, digits=1, freq=FALSE, 
 multi.split <- function (var, split.char="/", mnames = NULL) {
   vname <- deparse(substitute(var))
   lev <- levels(factor(var))
-  lev <- unique(unlist(strsplit(lev, split.char)))
+  lev <- unique(unlist(strsplit(lev, split.char, fixed = TRUE)))
   if (is.null(mnames)) 
     mnames <- gsub(" ", "_", paste(vname, lev, sep = "."))
   else mnames <- paste(vname, mnames, sep = ".")
   result <- matrix(data = 0, nrow = length(var), ncol = length(lev))
   char.var <- as.character(var)
   for (i in 1:length(lev)) {
-    pattern <- sprintf("(^|%s)%s(%s|$)", split.char, lev[i], split.char)
+    pattern <- sprintf("(^|%s)%s(%s|$)", escape_regex(split.char), escape_regex(lev[i]), escape_regex(split.char))
     result[grep(pattern, char.var), i] <- 1
   }
   result <- data.frame(result)
   colnames(result) <- mnames
   result
 }
+
+
+##' Escape regex special chars
+##' Code directly taken from Hmisc::escapeRegex
+
+escape_regex <- function(s) {
+  gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", s)
+}
+
+
