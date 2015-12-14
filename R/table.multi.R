@@ -57,7 +57,7 @@ multi.table <- function(df, true.codes=NULL, weights=NULL, digits=1, freq=TRUE) 
     res <- cbind(res, pourc)
     colnames(res) <- c("n","%multi")
   }
-  if(!is.null(digits)) res <- round(res, digits)
+  if (!is.null(digits)) res <- round(res, digits)
   return(res)
 }
 
@@ -102,22 +102,22 @@ multi.table <- function(df, true.codes=NULL, weights=NULL, digits=1, freq=TRUE) 
 ##'                   df$sex, true.codes=list("Y"), freq=TRUE, tfreq="row", n=TRUE)
 ##' @export
  
-cross.multi.table <- function(df, crossvar, weights=NULL, digits=1, freq=FALSE, tfreq="col", n=FALSE, ...) {
+cross.multi.table <- function(df, crossvar, weights = NULL, digits = 1, freq = FALSE, tfreq = "col", n = FALSE, ...) {
   tmp <- factor(crossvar)
-  if(is.null(weights))
-      res <- simplify2array(by(df, tmp, multi.table, freq=FALSE, digits=NULL, ...))
+  if (is.null(weights))
+      res <- simplify2array(by(df, tmp, multi.table, freq = FALSE, digits = NULL, ...))
   else {
       ## (Not very elegant) fix when weights is provided
       df <- cbind(weights, df)
       res <- by(df, tmp, function(d) {
           tmpw <- d[,1]
           tmpd <- d[,-1]
-          multi.table(tmpd, weights=tmpw, freq=FALSE, digits=NULL, ...)
+          multi.table(tmpd, weights = tmpw, freq = FALSE, digits = NULL, ...)
       })
       res <- simplify2array(res)
   }
   ## Column percentages
-  if (freq & tfreq!="row") {
+  if (freq & tfreq != "row") {
     if(is.null(weights)) totals <- table(tmp)
     else totals <- wtd.table(tmp, weights=weights)
     totals <- totals[colnames(res)]
@@ -126,7 +126,7 @@ cross.multi.table <- function(df, crossvar, weights=NULL, digits=1, freq=FALSE, 
     if (n) res <- rbind(res, n=eff)
   }
   ## Row percentages
-  if (freq & tfreq=="row") {
+  if (freq & tfreq == "row") {
     totals <- multi.table(df, weights=weights, freq=FALSE, digits=NULL, ...)
     totals <- totals[rownames(res)]
     if (n) eff <- apply(res,1,sum)    
@@ -158,17 +158,18 @@ cross.multi.table <- function(df, crossvar, weights=NULL, digits=1, freq=FALSE, 
 ##' multi.table(multi.split(v))
 ##' @export
 
-multi.split <- function (var, split.char="/", mnames = NULL) {
+multi.split <- function(var, split.char="/", mnames = NULL) {
   vname <- deparse(substitute(var))
   lev <- levels(factor(var))
   lev <- unique(unlist(strsplit(lev, split.char, fixed = TRUE)))
+  split.char <- escape_regex(split.char)
   if (is.null(mnames)) 
     mnames <- gsub(" ", "_", paste(vname, lev, sep = "."))
   else mnames <- paste(vname, mnames, sep = ".")
   result <- matrix(data = 0, nrow = length(var), ncol = length(lev))
   char.var <- as.character(var)
   for (i in 1:length(lev)) {
-    pattern <- sprintf("(^|%s)%s(%s|$)", escape_regex(split.char), escape_regex(lev[i]), escape_regex(split.char))
+    pattern <- sprintf("(^|%s)%s(%s|$)", split.char, escape_regex(lev[i]), split.char)
     result[grep(pattern, char.var), i] <- 1
   }
   result <- data.frame(result)
