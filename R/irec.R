@@ -82,8 +82,9 @@ irec <- function(dfobject, oldvar) {
                                div(class="col-sm-4", 
                                    selectInput("recstyle", gettext("Recoding style", domain="R-questionr"), 
                                                c("Character - minimal"="charmin", "Character - complete"="charcomp"))),
-                               div(class="col-sm-3",                           
-                                  checkboxInput("facconv", gettext("Convert to factor", domain="R-questionr"), FALSE))
+                               div(class="col-sm-4",
+                                   selectInput("outconv", gettext("Output type", domain="R-questionr"), 
+                                               c("Character"="character", "Factor"="factor", "Numeric"="numeric")))
                   )))),
           
           ## Second panel : recoding fields, dynamically generated
@@ -139,7 +140,10 @@ irec <- function(dfobject, oldvar) {
             out <- paste0(out, sprintf("%s <- %s\n", dest_var, src_var))
           ## List levels
           if (is.factor(oldvar)) levs <- levels(oldvar)
-          else levs <- stats::na.omit(unique(oldvar))
+          else {
+            levs <- stats::na.omit(unique(oldvar))
+            levs <- as.character(levs)
+          }
           if (any(is.na(oldvar))) levs <- c(levs, NA)
           for (l in levs) {
             ## Special NA placeholder
@@ -163,8 +167,9 @@ irec <- function(dfobject, oldvar) {
             else
               out <- paste0(out, sprintf('%s[%s == %s] <- %s\n', dest_var, src_var, utils::capture.output(dput(l)), value))
           }
-          ## Optional factor conversion
-          if (input$facconv) out <- paste0(out, sprintf("%s <- factor(%s)\n", dest_var, dest_var))
+          ## Optional output conversion
+          if (input$outconv == "factor") out <- paste0(out, sprintf("%s <- factor(%s)\n", dest_var, dest_var))
+          if (input$outconv == "numeric") out <- paste0(out, sprintf("%s <- as.numeric(%s)\n", dest_var, dest_var))          
           out
         }
         
