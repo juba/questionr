@@ -24,17 +24,17 @@ irec <- function(dfobject, oldvar) {
     ## Prevents get() conflicts
     if (dfobject=="dfobject") stop(sQuote(paste0(dfobject, ' must not be an object named "dfobject".')))
     ## Check if dfobject is a data frame
-    if (!is.data.frame(get(dfobject))) stop(sQuote(paste0(dfobject, ' must be a data frame.')))
+    if (!is.data.frame(get(dfobject, envir = sys.parent()))) stop(sQuote(paste0(dfobject, ' must be a data frame.')))
     ## If oldvar is not a character string, deparse it
     is_char <- FALSE
     try(if(is.character(oldvar)) is_char <- TRUE, silent=TRUE)
     if (!is_char) oldvar <- deparse(substitute(oldvar))
     ## Check if oldvar is a column of dfobject
-    if (!(oldvar %in% names(get(dfobject)))) stop(sQuote(paste0(oldvar, ' must be a column of ', dfobject, '.')))    
+    if (!(oldvar %in% names(get(dfobject, envir = sys.parent())))) stop(sQuote(paste0(oldvar, ' must be a column of ', dfobject, '.')))    
 
     ## Global variables
     df_name <- dfobject
-    df <- get(df_name)
+    df <- get(df_name, envir = sys.parent())
     if (inherits(df, "tbl_df") || inherits(df, "data.table")) df <- as.data.frame(df)
     oldvar_name <- oldvar
     oldvar <- df[,oldvar_name]
@@ -215,7 +215,7 @@ irec <- function(dfobject, oldvar) {
           ## Generate the recoding code with a temporary variable
           code <- generate_code(check=TRUE)
           ## Eval generated code
-          eval(parse(text=code))
+          eval(parse(text=code), envir = .GlobalEnv)
           ## Display table
           tab <- table(oldvar, get(".irec_tmp"), useNA="always")
           rownames(tab)[is.na(rownames(tab))] <- "NA"

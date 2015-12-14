@@ -23,18 +23,18 @@ icut <- function(dfobject, oldvar) {
     ## Prevents get() conflicts
     if (dfobject=="dfobject") stop(sQuote(paste0(dfobject, ' must not be an object named "dfobject".')))
     ## Check if dfobject is a data frame
-    if (!is.data.frame(get(dfobject))) stop(sQuote(paste0(dfobject, ' must be a data frame.')))
+    if (!is.data.frame(get(dfobject, envir = sys.parent()))) stop(sQuote(paste0(dfobject, ' must be a data frame.')))
     ## If oldvar is not a character string, deparse it
     is_char <- FALSE
     try(if(is.character(oldvar)) is_char <- TRUE, silent=TRUE)
     if (!is_char) oldvar <- deparse(substitute(oldvar))
     ## Check if oldvar is a column of df
-    if (!(oldvar %in% names(get(dfobject)))) stop(sQuote(paste0(oldvar, ' must be a column of ', dfobject, '.')))    
+    if (!(oldvar %in% names(get(dfobject, envir = sys.parent())))) stop(sQuote(paste0(oldvar, ' must be a column of ', dfobject, '.')))    
     
     ## Global variables
     ## Original data frame name and object
     df_name <- dfobject
-    df <- get(df_name)
+    df <- get(df_name, envir = sys.parent())
     if (inherits(df, "tbl_df") || inherits(df, "data.table")) df <- as.data.frame(df)
     ## Variable to be recoded, name and object
     oldvar_name <- oldvar
@@ -59,9 +59,13 @@ icut <- function(dfobject, oldvar) {
       out <- paste0(out, "<th>Min</th><th>1st quartile</th><th>Median</th><th>Mean</th><th>3rd quartile</th><th>Max</th><th>NA</th>")
       out <- paste0(out, "</tr></thead><tbody><tr>")
       out <- paste0(out, sprintf("<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td>",
-                                 min(v, na.rm=TRUE), stats::quantile(v, prob=0.25, na.rm=TRUE),
-                                 stats::median(v, na.rm=TRUE), round(mean(v, na.rm=TRUE),3),
-                                 stats::quantile(v, prob=0.75, na.rm=TRUE), max(v, na.rm=TRUE), sum(is.na(v))))
+                                 round(min(v, na.rm=TRUE), 4), 
+                                 round(stats::quantile(v, prob=0.25, na.rm=TRUE), 4),
+                                 round(stats::median(v, na.rm=TRUE), 4), 
+                                 round(mean(v, na.rm=TRUE), 4),
+                                 round(stats::quantile(v, prob=0.75, na.rm=TRUE), 4), 
+                                 round(max(v, na.rm=TRUE), 4), 
+                                 sum(is.na(v))))
       out <- paste0(out, "</tr></tbody></table>")
       out
     }
@@ -235,7 +239,7 @@ icut <- function(dfobject, oldvar) {
           ## Generate the recoding code with a temporary variable
           code <- generate_code(check=TRUE)
           ## Eval generated code
-          eval(parse(text=code))
+          eval(parse(text=code), envir = .GlobalEnv)
           ## Display table
           tab <- freq(get(".icut_tmp"))
           tab
@@ -246,7 +250,7 @@ icut <- function(dfobject, oldvar) {
           ## Generate the recoding code with a temporary variable
           code <- generate_code(check=TRUE)
           ## Eval generated code
-          eval(parse(text=code))
+          eval(parse(text=code), envir = .GlobalEnv)
           ## Display table
           graphics::plot(get(".icut_tmp"), col="#bbd8e9", border="white")
         })
