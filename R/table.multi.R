@@ -179,6 +179,7 @@ multi.split <- function (var, split.char="/", mnames = NULL) {
 
 ##' Escape regex special chars
 ##' Code directly taken from Hmisc::escapeRegex
+##' @param s string to escape regex special chars from
 
 escape_regex <- function(s) {
   gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", s)

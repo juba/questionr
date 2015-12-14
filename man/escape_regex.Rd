@@ -7,6 +7,9 @@ Code directly taken from Hmisc::escapeRegex}
 \usage{
 escape_regex(s)
 }
+\arguments{
+\item{s}{string to escape regex special chars from}
+}
 \description{
 Escape regex special chars
 Code directly taken from Hmisc::escapeRegex
