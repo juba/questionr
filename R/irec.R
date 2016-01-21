@@ -92,7 +92,8 @@ irec <- function(obj = NULL, var_name = NULL) {
                                                               choices = Filter(
                                                                 function(x) {
                                                                   inherits(get(x, envir = sys.parent()), "data.frame") || 
-                                                                    is.vector(get(x, envir = sys.parent()))
+                                                                    is.vector(get(x, envir = sys.parent())) ||
+                                                                    is.factor(get(x, envir = sys.parent()))
                                                                 }, ls(.GlobalEnv)),
                                                               selected = obj_name, multiple = FALSE)),
                                            div(class="col-sm-6", "",
@@ -229,7 +230,7 @@ irec <- function(obj = NULL, var_name = NULL) {
                          sprintf('%s[,"%s"]', req(input$obj_name), req(input$var_name)),
                          sprintf('%s$%s', req(input$obj_name), req(input$var_name)))
       }
-      if (is.vector(robj())) {
+      if (is.vector(robj()) || is.factor(robj())) {
         result <- req(input$obj_name)
       }
       return(result)
