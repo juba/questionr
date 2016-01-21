@@ -27,28 +27,35 @@
 
 irec <- function(obj = NULL, var_name = NULL) {
   
-  run_as_addin <- rstudioapi::isAvailable() && rstudioapi::getActiveDocumentContext()$id != "#console"
+  run_as_addin <- ifunc_run_as_addin()
   
   if (is.null(obj)) {
-    obj_name <- NULL      
+    obj_name <- NULL
+    var_name <- NULL
   }
   else {
-    
     obj_name <- deparse(substitute(obj))
+    if (grepl("\\$", obj_name)) {
+        s <- strsplit(obj_name, "\\$")
+        obj_name <- s[[1]][1]
+        var_name <- s[[1]][2]
+        obj <- get(obj_name, envir = sys.parent())
+    }
     if (inherits(obj, "tbl_df") || inherits(obj, "data.table")) obj <- as.data.frame(obj)
     
     ## Check if obj is a data frame or a vector
     if (!is.data.frame(obj) && !is.vector(obj) && !is.factor(obj)) {
       stop(sQuote(paste0(obj_name, ' must be a vector, a factor or a data frame.')))
     }
-    
+
     ## If obj is a data.frame
     if (is.data.frame(obj)) {
       ## If var_name is not a character string, deparse it
       is_char <- FALSE
       is_null <- FALSE
-      try({if(is.character(var_name)) is_char <- TRUE
-      if(is.null(var_name)) is_null <- TRUE}, silent=TRUE)
+      try({if (is.character(var_name)) is_char <- TRUE
+      if (is.null(var_name)) is_null <- TRUE}, silent = TRUE)
+      print(is_char)
       if (!is_char && !is_null) {
         var_name <- deparse(substitute(var_name))
       }
@@ -59,11 +66,7 @@ irec <- function(obj = NULL, var_name = NULL) {
     }
   }
   
-  
-  ## Flag to display the alert on first time launch
-  show_alert <- is.null(getOption("questionr_hide_alert"))
-  if (show_alert) options(questionr_hide_alert=TRUE)  
-  
+
   ## CSS file
   css.file <- system.file(file.path("shiny", "css", "ifuncs.css"), package = "questionr")
   css.content <- paste(readLines(css.file),collapse="\n")
@@ -81,17 +84,7 @@ irec <- function(obj = NULL, var_name = NULL) {
       miniUI::miniTabPanel(gettext("Variable and settings", domain = "R-questionr"), icon = icon("sliders"),
                            miniUI::miniContentPanel(
 
-                             ## Display an alert, only on first launch for the current session
-                             if (show_alert) {
-                               div(class="alert alert-warning alert-dismissible",
-                                   HTML('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'),
-                                   HTML(gettext("<strong>Warning :</strong> This interface doesn't do anything by itself.", domain = "R-questionr")),
-                                   if (run_as_addin) {
-                                     HTML(gettext("It will generate R code, insert it in your current R script, and you'll have to run it yourself.", domain = "R-questionr"))
-                                   } else {   
-                                     HTML(gettext("It only generates R code you'll have to copy/paste into your script and run yourself.", domain = "R-questionr"))
-                                   }
-                               )},
+                            ifunc_show_alert(run_as_addin),
                              
                              ## First panel : new variable name and recoding style
                              tags$h4(icon("columns"), gettext("Variable to be recoded", domain = "R-questionr")),
@@ -129,7 +122,7 @@ irec <- function(obj = NULL, var_name = NULL) {
                            miniUI::miniContentPanel(
                              tags$form(class="well",
                                        uiOutput("levelsInput")))),
-      ## Code tab
+      ## Third panel : generated code and results checking
       miniUI::miniTabPanel(gettext("Code and result", domain = "R-questionr"), icon = icon("code"), 
                            miniUI::miniContentPanel(
                              tags$h4(icon("code"), gettext("Code", domain = "R-questionr")),
