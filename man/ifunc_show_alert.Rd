@@ -6,6 +6,9 @@
 \usage{
 ifunc_show_alert(run_as_addin)
 }
+\arguments{
+\item{run_as_addin}{TRUE if the function is running as an rstudio addin}
+}
 \description{
 Display an alert, only on first launch for the current session
 }
