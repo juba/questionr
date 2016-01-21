@@ -194,10 +194,14 @@ irec <- function(dfobject, oldvar) {
         observeEvent(input$done, {
           ## Generate code
           out <- generate_code()
-          out <- paste0(gettext("\n-------- Start recoding code --------\n\n", domain="R-questionr"),
-                        out,
-                        gettext("\n--------- End recoding code ---------\n", domain="R-questionr"))
-          cat(out)
+          if (rstudioapi::isAvailable()) {
+            rstudioapi::insertText(out)
+          } else {
+            out <- paste0(gettext("\n-------- Start recoding code --------\n\n", domain="R-questionr"),
+                          out,
+                          gettext("\n--------- End recoding code ---------\n", domain="R-questionr"))
+            cat(out)
+          }
           stopApp()
         })
         
