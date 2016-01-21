@@ -18,6 +18,8 @@
 ##' @importFrom htmltools htmlEscape
 ##' @export irec
 
+
+
 irec <- function(dfobject, oldvar) {
     ## Check if dfobject is an object or a character string
     if (!is.character(dfobject)) dfobject <- deparse(substitute(dfobject))
@@ -50,20 +52,19 @@ irec <- function(dfobject, oldvar) {
     ## CSS file
     css.file <- system.file(file.path("shiny", "css", "ifuncs.css"), package = "questionr")
     css.content <- paste(readLines(css.file),collapse="\n")
-        
-    ## Run shiny app
-    shiny::shinyApp(ui=bootstrapPage(
-      header=tags$head(
-        ## Custom CSS
-        tags$style(HTML(css.content))),
-      
+
+    
+    ## Gadget UI        
+    ui <- miniUI::miniPage(
+      miniUI::gadgetTitleBar(gettext("Interactive recoding", domain="R-questionr")),
+      tags$style(HTML(css.content)),
       ## Page title
-      div(class="container",
-          div(class="row",
-              headerPanel(gettext("Interactive recoding", domain="R-questionr"))),
-          
+      miniUI::miniTabstripPanel(
+        miniUI::miniTabPanel(gettext("Recoding", domain="R-questionr"), icon = icon("wrench"),
+                             miniUI::miniContentPanel(
           ## Display an alert, only on first launch for the current session
-          if (show_alert) {
+
+                    if (show_alert) {
             div(class="row",
                 div(class="col-md-12",
                     div(class="alert alert-warning alert-dismissible",
@@ -88,34 +89,20 @@ irec <- function(dfobject, oldvar) {
                   )))),
           
           ## Second panel : recoding fields, dynamically generated
-          div(class="row",
-              div(class="col-md-12",
-                  tags$form(class="well",
-                            uiOutput("levelsInput")))),
-          ## Main panel with tabs
-          mainPanel(width=12,
-            tabsetPanel(
+                               tags$form(class="well",
+                                         uiOutput("levelsInput")))),
               ## Code tab
-              tabPanel(gettext("Code", domain="R-questionr"), htmlOutput("recodeOut")),
+              miniUI::miniTabPanel(gettext("Code and result", domain="R-questionr"), icon = icon("code"), 
+                                   miniUI::miniContentPanel(
+                                     htmlOutput("recodeOut"),
               ## Table check tab
-              tabPanel(gettext("Check", domain="R-questionr"),
-                       p(class='header', gettext('Old variable as rows, new variable as columns.', domain="R-questionr")),
-                       tableOutput("tableOut"))
-            ),
-            
-            ## Bottom buttons
-            p(class='bottom-buttons',
-              tags$button(id="donebutton", type="button", class="btn action-button btn-success", 
-                          onclick="javascript:window.close();", 
-                          list(icon=icon("ok", lib="glyphicon")), 
-                          gettext("Send code to console and exit", domain="R-questionr"))
-              ),
-            textOutput("done")
+                        p(class='header', gettext('Old variable as rows, new variable as columns.', domain="R-questionr")),
+                       tableOutput("tableOut")))
+            )
           )
           
-      )),
       
-      server=function(input, output) {
+      server <- function(input, output, session) {
         
         ## Format a value from a text input to code
         get_value <- function(val) {
@@ -202,17 +189,16 @@ irec <- function(dfobject, oldvar) {
           out
         })
         
-        output$done <- renderText({
+        
+        # Handle the Done button being pressed.
+        observeEvent(input$done, {
           ## Generate code
           out <- generate_code()
-          ## If "Done" button is pressed, exit and cat generated code in the console
-          if (input$donebutton > 0) {
-            cat(gettext("\n-------- Start recoding code --------\n\n", domain="R-questionr"))
-            cat(out)
-            cat(gettext("\n--------- End recoding code ---------\n", domain="R-questionr"))
-            shiny::stopApp()
-          }
-          return("")
+          out <- paste0(gettext("\n-------- Start recoding code --------\n\n", domain="R-questionr"),
+                        out,
+                        gettext("\n--------- End recoding code ---------\n", domain="R-questionr"))
+          cat(out)
+          stopApp()
         })
         
         ## Generate the check table
@@ -263,6 +249,6 @@ irec <- function(dfobject, oldvar) {
       }
       
         
-    )
+    runGadget(ui, server, viewer = dialogViewer("irec", width = 800, height = 700))
         
 }
