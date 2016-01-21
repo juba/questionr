@@ -7,6 +7,7 @@ ifunc_run_as_addin <- function() {
 
 
 #' Display an alert, only on first launch for the current session
+#' @param run_as_addin TRUE if the function is running as an rstudio addin
 
 ifunc_show_alert <- function(run_as_addin) {
   ## Display the alert only on first time launch
