@@ -67,18 +67,13 @@ irec <- function(obj = NULL, var_name = NULL) {
   }
   
 
-  ## CSS file
-  css.file <- system.file(file.path("shiny", "css", "ifuncs.css"), package = "questionr")
-  css.content <- paste(readLines(css.file),collapse="\n")
-  
-  
   ## Gadget UI        
   ui <- miniUI::miniPage(
     
     ## Page title
     miniUI::gadgetTitleBar(gettext("Interactive recoding", domain = "R-questionr")),
     ## Custom CSS
-    tags$style(HTML(css.content)),
+    tags$style(ifunc_get_css()),
     
     miniUI::miniTabstripPanel(
       miniUI::miniTabPanel(gettext("Variable and settings", domain = "R-questionr"), icon = icon("sliders"),

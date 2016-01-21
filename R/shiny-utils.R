@@ -7,6 +7,7 @@ ifunc_run_as_addin <- function() {
 
 
 #' Display an alert, only on first launch for the current session
+
 ifunc_show_alert <- function(run_as_addin) {
   ## Display the alert only on first time launch
   show_alert <- is.null(getOption("questionr_hide_alert"))
@@ -21,4 +22,12 @@ ifunc_show_alert <- function(run_as_addin) {
           HTML(gettext("It only generates R code you'll have to copy/paste into your script and run yourself.", domain = "R-questionr"))
         }
     )}
+}
+
+#' Returns custom CSS content
+
+ifunc_get_css <- function() {
+  css.file <- system.file(file.path("shiny", "css", "ifuncs.css"), package = "questionr")
+  out <- paste(readLines(css.file),collapse="\n")
+  HTML(out)
 }
