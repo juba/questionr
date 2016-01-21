@@ -4,12 +4,12 @@
 \alias{irec}
 \title{Interactive recoding}
 \usage{
-irec(dfobject, oldvar)
+irec(obj = NULL, var_name = NULL)
 }
 \arguments{
-\item{dfobject}{data frame to operate on, as an object or a character string}
+\item{obj}{vector to recode or data frame to operate on}
 
-\item{oldvar}{name of the variable to be recoded, as a character string (possibly without quotes)}
+\item{var_name}{if obj is a data frame, name of the column to be recoded, as a character string (possibly without quotes)}
 }
 \value{
 The function launches a shiny app in the system web browser. The recoding code is returned in the console
@@ -21,6 +21,9 @@ interactive recoding of a categorical variable (character or factor).
 }
 \examples{
 \dontrun{data(hdv2003)
+irec()
+v <- sample(c("Red","Green","Blue"), 50, replace=TRUE)
+irec(v)
 irec(hdv2003, "qualif")
 irec(hdv2003, sexe) ## this also works}
 }
