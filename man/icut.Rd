@@ -4,12 +4,12 @@
 \alias{icut}
 \title{Interactive conversion from numeric to factor}
 \usage{
-icut(dfobject, oldvar)
+icut(obj = NULL, var_name = NULL)
 }
 \arguments{
-\item{dfobject}{data frame to operate on, as an object or a character string}
+\item{obj}{vector to recode or data frame to operate on}
 
-\item{oldvar}{name of the variable to be recoded, as a character string (possibly without quotes)}
+\item{var_name}{if obj is a data frame, name of the column to be recoded, as a character string (possibly without quotes)}
 }
 \value{
 The function launches a shiny app in the system web browser. The recoding code is returned in the console
