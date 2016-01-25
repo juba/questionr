@@ -104,26 +104,27 @@ irec <- function(obj = NULL, var_name = NULL) {
             fluidRow(
               column(4, uiOutput("newvarInput")),
               column(4,selectInput("recstyle", int("Recoding style"), 
-                                   c("Character - minimal"="charmin", "Character - complete"="charcomp"))),
+                                   c("Character - minimal" = "charmin", "Character - complete" = "charcomp"))),
               column(4, selectInput("outconv", int("Output type"), 
-                                    c("Character"="character", "Factor"="factor", "Numeric"="numeric")))
+                                    c("Character" = "character", "Factor" = "factor", "Numeric" = "numeric")))
             )))),
       
       ## Second panel : recoding fields, dynamically generated
-      miniUI::miniTabPanel(int("Recoding"), icon = icon("wrench"),
-                           miniUI::miniContentPanel(
-                             tags$form(class="well",
-                                       uiOutput("levelsInput")))),
+      miniUI::miniTabPanel(
+        int("Recoding"), icon = icon("wrench"),
+        miniUI::miniContentPanel(
+          wellPanel(uiOutput("levelsInput")))),
       ## Third panel : generated code and results checking
-      miniUI::miniTabPanel(int("Code and result"), icon = icon("code"), 
-                           miniUI::miniContentPanel(
-                             tags$h4(icon("code"), int("Code")),
-                             htmlOutput("recodeOut"),
-                             tags$h4(icon("table"), int("Check")),
-                             ## Table check tab
-                             p(class='header', 
-                               int('Old variable as rows, new variable as columns.')),
-                             tableOutput("tableOut")))
+      miniUI::miniTabPanel(
+        int("Code and result"), icon = icon("code"), 
+        miniUI::miniContentPanel(
+          tags$h4(icon("code"), int("Code")),
+          htmlOutput("recodeOut"),
+          tags$h4(icon("table"), int("Check")),
+          ## Table check tab
+          p(class = 'header', 
+            int('Old variable as rows, new variable as columns.')),
+          tableOutput("tableOut")))
     )
   )
   
@@ -185,8 +186,7 @@ irec <- function(obj = NULL, var_name = NULL) {
     output$varInput <- renderUI({
       if (is.data.frame(robj())) {
         selectizeInput("var_name",
-                       int("Data frame column to recode", 
-                               domain = "R-questionr"),
+                       int("Data frame column to recode"),
                        choices = names(robj()),
                        selected = var_name,
                        multiple = FALSE)
