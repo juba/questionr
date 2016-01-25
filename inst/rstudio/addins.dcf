@@ -8,3 +8,8 @@ Name: Levels ordering
 Description: Interactively generate code for a variable levels reordering
 Binding: iorder
 Interacive: true
+
+Name: Variable cutting
+Description: Interactively generate code for cutting a numeric variable
+Binding: icut
+Interacive: true
