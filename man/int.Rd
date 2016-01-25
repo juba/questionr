@@ -6,6 +6,9 @@
 \usage{
 int(s)
 }
+\arguments{
+\item{s}{string to translate}
+}
 \description{
 Get string translation with gettext
 }

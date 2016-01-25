@@ -34,6 +34,7 @@ ifunc_get_css <- function() {
 }
 
 #' Get string translation with gettext
+#' @param s string to translate
 
 int <- function(s) {
   gettext(s, domain = "R-questionr")
