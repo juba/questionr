@@ -1,4 +1,10 @@
-Name: Interactive recoding
+Name: Levels recoding
 Description: Interactively generate code for a variable levels recoding
 Binding: irec
+Interacive: true
+
+
+Name: Levels ordering
+Description: Interactively generate code for a variable levels reordering
+Binding: iorder
 Interacive: true
