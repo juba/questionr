@@ -32,3 +32,9 @@ ifunc_get_css <- function() {
   out <- paste(readLines(css.file),collapse="\n")
   HTML(out)
 }
+
+#' Get string translation with gettext
+
+int <- function(s) {
+  gettext(s, domain = "R-questionr")
+}

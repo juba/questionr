@@ -71,63 +71,58 @@ irec <- function(obj = NULL, var_name = NULL) {
   ui <- miniUI::miniPage(
     
     ## Page title
-    miniUI::gadgetTitleBar(gettext("Interactive recoding", domain = "R-questionr")),
+    miniUI::gadgetTitleBar(int("Interactive recoding")),
     ## Custom CSS
     tags$style(ifunc_get_css()),
     
     miniUI::miniTabstripPanel(
-      miniUI::miniTabPanel(gettext("Variable and settings", domain = "R-questionr"), icon = icon("sliders"),
-                           miniUI::miniContentPanel(
-
-                            ifunc_show_alert(run_as_addin),
+      miniUI::miniTabPanel(
+        int("Variable and settings"), icon = icon("sliders"),
+        miniUI::miniContentPanel(
+      
+          ifunc_show_alert(run_as_addin),
                              
-                             ## First panel : new variable name and recoding style
-                             tags$h4(icon("columns"), gettext("Variable to be recoded", domain = "R-questionr")),
-                             tags$form(class="well",
-                                       div(class="row",
-                                           div(class="col-sm-6", 
-                                               selectizeInput("obj_name",
-                                                              gettext("Data frame or vector to recode from", 
-                                                                      domain = "R-questionr"),
-                                                              choices = Filter(
-                                                                function(x) {
-                                                                  inherits(get(x, envir = sys.parent()), "data.frame") || 
-                                                                    is.vector(get(x, envir = sys.parent())) ||
-                                                                    is.factor(get(x, envir = sys.parent()))
-                                                                }, ls(.GlobalEnv)),
-                                                              selected = obj_name, multiple = FALSE)),
-                                           div(class="col-sm-6", "",
-                                               uiOutput("varInput"))
-                                       )),
-                             uiOutput("nblevelsAlert"),
-                             tags$h4(icon("sliders"), gettext("Recoding settings", domain = "R-questionr")),
-                             tags$form(class="well",
-                                       div(class="row",
-                                           div(class="col-sm-4",
-                                               uiOutput("newvarInput")),
-                                           div(class="col-sm-4", 
-                                               selectInput("recstyle", gettext("Recoding style", domain = "R-questionr"), 
-                                                           c("Character - minimal"="charmin", "Character - complete"="charcomp"))),
-                                           div(class="col-sm-4",
-                                               selectInput("outconv", gettext("Output type", domain = "R-questionr"), 
-                                                           c("Character"="character", "Factor"="factor", "Numeric"="numeric")))
-                                       )))),
+          ## First panel : new variable name and recoding style
+          tags$h4(icon("columns"), int("Variable to be recoded")),
+          wellPanel(
+            fluidRow(
+              column(6, 
+                     selectizeInput(
+                       "obj_name",
+                       int("Data frame or vector to recode from"),
+                       choices = Filter(
+                         function(x) {
+                           inherits(get(x, envir = sys.parent()), "data.frame") || 
+                             is.vector(get(x, envir = sys.parent())) ||
+                             is.factor(get(x, envir = sys.parent()))
+                         }, ls(.GlobalEnv)),
+                       selected = obj_name, multiple = FALSE)),
+              column(6, uiOutput("varInput")))),
+          uiOutput("nblevelsAlert"),
+          tags$h4(icon("sliders"), int("Recoding settings")),
+          wellPanel(
+            fluidRow(
+              column(4, uiOutput("newvarInput")),
+              column(4,selectInput("recstyle", int("Recoding style"), 
+                                   c("Character - minimal"="charmin", "Character - complete"="charcomp"))),
+              column(4, selectInput("outconv", int("Output type"), 
+                                    c("Character"="character", "Factor"="factor", "Numeric"="numeric")))
+            )))),
       
       ## Second panel : recoding fields, dynamically generated
-      miniUI::miniTabPanel(gettext("Recoding", domain = "R-questionr"), icon = icon("wrench"),
+      miniUI::miniTabPanel(int("Recoding"), icon = icon("wrench"),
                            miniUI::miniContentPanel(
                              tags$form(class="well",
                                        uiOutput("levelsInput")))),
       ## Third panel : generated code and results checking
-      miniUI::miniTabPanel(gettext("Code and result", domain = "R-questionr"), icon = icon("code"), 
+      miniUI::miniTabPanel(int("Code and result"), icon = icon("code"), 
                            miniUI::miniContentPanel(
-                             tags$h4(icon("code"), gettext("Code", domain = "R-questionr")),
+                             tags$h4(icon("code"), int("Code")),
                              htmlOutput("recodeOut"),
-                             tags$h4(icon("table"), gettext("Check", domain = "R-questionr")),
+                             tags$h4(icon("table"), int("Check")),
                              ## Table check tab
                              p(class='header', 
-                               gettext('Old variable as rows, new variable as columns.', 
-                                       domain = "R-questionr")),
+                               int('Old variable as rows, new variable as columns.')),
                              tableOutput("tableOut")))
     )
   )
@@ -190,7 +185,7 @@ irec <- function(obj = NULL, var_name = NULL) {
     output$varInput <- renderUI({
       if (is.data.frame(robj())) {
         selectizeInput("var_name",
-                       gettext("Data frame column to recode", 
+                       int("Data frame column to recode", 
                                domain = "R-questionr"),
                        choices = names(robj()),
                        selected = var_name,
@@ -209,7 +204,7 @@ irec <- function(obj = NULL, var_name = NULL) {
       }
       if (!is.null(new_name)) {
         textInput("newvar_name", 
-                  gettext("New variable name", domain = "R-questionr"), 
+                  int("New variable name"), 
                   new_name)
       }
     })
@@ -218,7 +213,7 @@ irec <- function(obj = NULL, var_name = NULL) {
       if (length(unique(rvar())) > 50) {
         div(class = "alert alert-warning alert-dismissible",
             HTML('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'),
-            HTML(gettext("<strong>Warning :</strong> The variable to be recoded has more than 50 levels.", domain = "R-questionr")))
+            HTML(int("<strong>Warning :</strong> The variable to be recoded has more than 50 levels.")))
       }
     })
     
@@ -317,10 +312,12 @@ irec <- function(obj = NULL, var_name = NULL) {
     output$recodeOut <- renderText({
       ## Header
       if (is.data.frame(robj())) {
-        header <- HTML(gettextf("<p class='header'>Recoding <tt>%s</tt> from <tt>%s</tt> of class <tt>%s</tt>.</p>", req(input$var_name), req(input$obj_name), class(rvar()), domain = "R-questionr"))
+        header <- HTML(gettextf("<p class='header'>Recoding <tt>%s</tt> from <tt>%s</tt> of class <tt>%s</tt>.</p>", 
+                   req(input$var_name), req(input$obj_name), class(rvar()), domain = "R-questionr"))
       }
       if (is.vector(robj()) || is.factor(robj())) {
-        header <- HTML(gettextf("<p class='header'>Recoding <tt>%s</tt> of class <tt>%s</tt>.</p>", req(input$obj_name), class(rvar()), domain = "R-questionr"))
+        header <- HTML(gettextf("<p class='header'>Recoding <tt>%s</tt> of class <tt>%s</tt>.</p>", 
+                                req(input$obj_name), class(rvar()), domain = "R-questionr"))
       }
       ## Generate code
       out <- generate_code()
@@ -339,9 +336,9 @@ irec <- function(obj = NULL, var_name = NULL) {
       if (run_as_addin) {
         rstudioapi::insertText(text = out)
       } else {
-        out <- paste0(gettext("\n-------- Start recoding code --------\n\n", domain = "R-questionr"),
+        out <- paste0(int("\n-------- Start recoding code --------\n\n"),
                       out,
-                      gettext("\n--------- End recoding code ---------\n", domain = "R-questionr"))
+                      int("\n--------- End recoding code ---------\n"))
         cat(out)
       }
       stopApp()
