@@ -24,9 +24,9 @@
 
 
 iorder <- function(obj = NULL, var_name = NULL) {
-  
+
   run_as_addin <- ifunc_run_as_addin()
-  
+
   if (is.null(obj)) {
     if (ifunc_run_as_addin()) {
       context <- rstudioapi::getActiveDocumentContext()
@@ -55,12 +55,12 @@ iorder <- function(obj = NULL, var_name = NULL) {
       obj <- get(obj_name, envir = sys.parent())
     }
     if (inherits(obj, "tbl_df") || inherits(obj, "data.table")) obj <- as.data.frame(obj)
-    
+
     ## Check if obj is a data frame or a vector
     if (!is.data.frame(obj) && !is.vector(obj) && !is.factor(obj)) {
       stop(sQuote(paste0(obj_name, ' must be a vector, a factor or a data frame.')))
     }
-    
+
     ## If obj is a data.frame
     if (is.data.frame(obj)) {
       ## If var_name is not a character string, deparse it
@@ -79,14 +79,14 @@ iorder <- function(obj = NULL, var_name = NULL) {
       }
     }
   }
-  
+
   ## JS files
   jquery.ui.file <- system.file(file.path("shiny", "js", "jquery-ui.js"), package = "questionr")
   jquery.ui.content <- paste(readLines(jquery.ui.file),collapse="\n")
   js.file <- system.file(file.path("shiny", "js", "iorder.js"), package = "questionr")
   js.content <- paste(readLines(js.file),collapse="\n")
-  
-  ## Gadget UI        
+
+  ## Gadget UI
   ui <- miniUI::miniPage(
     tags$head(
       ## Custom JS
@@ -97,25 +97,25 @@ iorder <- function(obj = NULL, var_name = NULL) {
     ),
     ## Page title
     miniUI::gadgetTitleBar(int("Interactive levels ordering")),
-    
+
     miniUI::miniTabstripPanel(
       miniUI::miniTabPanel(
         int("Variable and settings"), icon = icon("sliders"),
         miniUI::miniContentPanel(
-          
+
           ifunc_show_alert(run_as_addin),
-          
-          ## First panel : new variable name and recoding style
+
+          ## First panel : new variable name 
           tags$h4(icon("columns"), int("Variable to be recoded")),
           wellPanel(
             fluidRow(
-              column(6, 
+              column(6,
                      selectizeInput(
                        "obj_name",
                        int("Data frame or vector to recode from"),
                        choices = Filter(
                          function(x) {
-                           inherits(get(x, envir = sys.parent()), "data.frame") || 
+                           inherits(get(x, envir = sys.parent()), "data.frame") ||
                              is.vector(get(x, envir = sys.parent())) ||
                              is.factor(get(x, envir = sys.parent()))
                          }, ls(.GlobalEnv)),
@@ -127,7 +127,7 @@ iorder <- function(obj = NULL, var_name = NULL) {
             fluidRow(
               column(4, uiOutput("newvarInput"))
             )))),
-      
+
       ## Second panel : recoding fields, dynamically generated
       miniUI::miniTabPanel(
         int("Recoding"), icon = icon("wrench"),
@@ -135,30 +135,30 @@ iorder <- function(obj = NULL, var_name = NULL) {
           wellPanel(htmlOutput("levelsInput")))),
       ## Third panel : generated code and results checking
       miniUI::miniTabPanel(
-        int("Code and result"), icon = icon("code"), 
+        int("Code and result"), icon = icon("code"),
         miniUI::miniContentPanel(
           tags$h4(icon("code"), int("Code")),
           htmlOutput("codeOut"),
           tags$h4(icon("table"), int("Check")),
           ## Table check tab
-          p(class = 'header', 
+          p(class = 'header',
             int('Old variable as rows, new variable as columns.')),
           tableOutput("tableOut")))
     )
   )
-  
+
 
 
 
   server <- function(input, output) {
-        
+
     ## reactive first level object (vector or data frame)
     robj <- reactive({
       obj <- get(req(input$obj_name), envir = sys.parent())
       if (inherits(obj, "tbl_df") || inherits(obj, "data.table")) obj <- as.data.frame(obj)
       obj
     })
-    
+
     ## reactive variable object (vector or data frame column)
     rvar <- reactive({
       invisible(input$obj_name)
@@ -171,7 +171,7 @@ iorder <- function(obj = NULL, var_name = NULL) {
       return(NULL)
     })
 
-    ## Reactive name of the source variable 
+    ## Reactive name of the source variable
     src_var <- reactive({
       if (is.data.frame(robj())) {
         ## Formatted source variable name
@@ -184,7 +184,7 @@ iorder <- function(obj = NULL, var_name = NULL) {
       }
       return(result)
     })
-        
+
     ## Sortable list of levels, dynamically generated
     output$levelsInput <- renderText({
       out <- "<ol id='sortable' class='sortable'>"
@@ -197,10 +197,10 @@ iorder <- function(obj = NULL, var_name = NULL) {
                                     htmltools::htmlEscape(l),
                                     '</span></li>')
       out <- paste0(out, "</ol>")
-      HTML(out)     
+      HTML(out)
     })
 
-    
+
     ## If obj is a data frame, column to recode, dynamically generated
     output$varInput <- renderUI({
       if (is.data.frame(robj())) {
@@ -210,24 +210,24 @@ iorder <- function(obj = NULL, var_name = NULL) {
                        selected = var_name,
                        multiple = FALSE)
       }
-    }) 
-    
+    })
+
     ## Recoded variable name, dynamically generated
     output$newvarInput <- renderUI({
       new_name <- NULL
       if (is.data.frame(robj())) {
         new_name <- paste0(req(input$var_name), "_rec")
-      } 
+      }
       if (is.vector(robj()) || is.factor(robj())) {
         new_name <- paste0(req(input$obj_name), "_rec")
       }
       if (!is.null(new_name)) {
-        textInput("newvar_name", 
-                  int("New variable name"), 
+        textInput("newvar_name",
+                  int("New variable name"),
                   new_name)
       }
     })
-    
+
     output$nblevelsAlert <- renderUI({
       if (length(unique(rvar())) > 50) {
         div(class = "alert alert-warning alert-dismissible",
@@ -255,16 +255,16 @@ iorder <- function(obj = NULL, var_name = NULL) {
       out <- paste0(out, newlevels, ')')
       out
     }
-    
+
     ## Generate the code in the interface
     output$codeOut <- renderText({
       ## Header
       if (is.data.frame(robj())) {
-        header <- HTML(gettextf("<p class='header'>Reordering <tt>%s</tt> from <tt>%s</tt> of class <tt>%s</tt>.</p>", 
+        header <- HTML(gettextf("<p class='header'>Reordering <tt>%s</tt> from <tt>%s</tt> of class <tt>%s</tt>.</p>",
                                 req(input$var_name), req(input$obj_name), class(rvar()), domain = "R-questionr"))
       }
       if (is.vector(robj()) || is.factor(robj())) {
-        header <- HTML(gettextf("<p class='header'>Reordering <tt>%s</tt> of class <tt>%s</tt>.</p>", 
+        header <- HTML(gettextf("<p class='header'>Reordering <tt>%s</tt> of class <tt>%s</tt>.</p>",
                                 req(input$obj_name), class(rvar()), domain = "R-questionr"))
       }
       ## Generate code
@@ -275,7 +275,7 @@ iorder <- function(obj = NULL, var_name = NULL) {
       out <- paste0(header, "<pre class='r'><code class='r' id='codeout'>",out,"</code></pre>")
       out
     })
-    
+
     # Handle the Done button being pressed.
     observeEvent(input$done, {
       ## Generate code
@@ -290,7 +290,7 @@ iorder <- function(obj = NULL, var_name = NULL) {
       }
       stopApp()
     })
-    
+
     ## Generate the check table
     output$tableOut <- renderTable({
       ## Generate the recoding code with a temporary variable
@@ -301,9 +301,9 @@ iorder <- function(obj = NULL, var_name = NULL) {
       tab <- freq(get(".iorder_tmp"))
       tab
     })
-        
+
   }
-  
+
   runGadget(ui, server, viewer = dialogViewer("iorder", width = 800, height = 700))
-    
+
 }
