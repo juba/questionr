@@ -30,11 +30,26 @@ irec <- function(obj = NULL, var_name = NULL) {
   run_as_addin <- ifunc_run_as_addin()
   
   if (is.null(obj)) {
+    if (ifunc_run_as_addin()) {
+      context <- rstudioapi::getActiveDocumentContext()
+      obj <- context$selection[[1]]$text
+      if (obj == "") obj <- NULL
+    }
     obj_name <- NULL
     var_name <- NULL
   }
-  else {
-    obj_name <- deparse(substitute(obj))
+  if (!is.null(obj)) {
+    ## If first arg is a string
+    if (is.character(obj) && length(obj) == 1) {
+      obj_name <- obj
+      try({
+        obj <- get(obj_name, envir = sys.parent())
+      }, silent = TRUE)
+    }
+    else {
+      obj_name <- deparse(substitute(obj))
+    }
+    ## If first arg is of the form d$x
     if (grepl("\\$", obj_name)) {
         s <- strsplit(obj_name, "\\$")
         obj_name <- s[[1]][1]
@@ -53,9 +68,10 @@ irec <- function(obj = NULL, var_name = NULL) {
       ## If var_name is not a character string, deparse it
       is_char <- FALSE
       is_null <- FALSE
-      try({if (is.character(var_name)) is_char <- TRUE
-      if (is.null(var_name)) is_null <- TRUE}, silent = TRUE)
-      print(is_char)
+      try({
+        if (is.character(var_name)) is_char <- TRUE
+        if (is.null(var_name)) is_null <- TRUE
+      }, silent = TRUE)
       if (!is_char && !is_null) {
         var_name <- deparse(substitute(var_name))
       }
