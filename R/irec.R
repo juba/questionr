@@ -306,7 +306,6 @@ irec <- function(obj = NULL, var_name = NULL) {
     
     ## Call recoding code generation function based on style
     generate_code <- function(check=FALSE) {
-      ## else, format new variable for code
       if (is.data.frame(robj())) {
         dest_var <- ifelse(grepl(" ", req(input$newvar_name)),
                            sprintf('%s[,"%s"]', req(input$obj_name), req(input$newvar_name)),
