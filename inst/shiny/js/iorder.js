@@ -1,18 +1,17 @@
-$(function() {
+var bind_sortable = function() {
 
-    /* JQuery sortable */
+  /* JQuery sortable */
+  $(".sortable" ).sortable({
+    placeholder: "ui-state-highlight",
+    forcePlaceholderSize: true
+  });
+  $(".sortable").disableSelection();
 
-    $(".sortable" ).sortable({
-	    placeholder: "ui-state-highlight",
-	    forcePlaceholderSize: true
-    });
-    $(".sortable").disableSelection();
-
-    /* Shiny sortable binding */
+  /* Shiny sortable binding */
     
-    var sortableBinding = new Shiny.InputBinding();
+  var sortableBinding = new Shiny.InputBinding();
 
-    $.extend(sortableBinding, {
+  $.extend(sortableBinding, {
 	find: function(scope) {
 	    return $(scope).find(".sortable");
 	},
@@ -23,7 +22,7 @@ $(function() {
 	},
 	subscribe: function(el, callback) {
 	    $(el).on("sortupdate.sortableBinding", function(e) {
-		callback();
+		    callback();
 	    });
 	},
 	unsubscribe: function(el) {
@@ -33,6 +32,8 @@ $(function() {
 
     Shiny.inputBindings.register(sortableBinding);
 
+};
 
-})
+bind_sortable();
+$(document).on("shiny:inputchanged", bind_sortable);
 
