@@ -26,9 +26,9 @@
 
 
 irec <- function(obj = NULL, var_name = NULL) {
-  
+
   run_as_addin <- ifunc_run_as_addin()
-  
+
   if (is.null(obj)) {
     if (ifunc_run_as_addin()) {
       context <- rstudioapi::getActiveDocumentContext()
@@ -57,7 +57,7 @@ irec <- function(obj = NULL, var_name = NULL) {
         obj <- get(obj_name, envir = sys.parent())
     }
     if (inherits(obj, "tbl_df") || inherits(obj, "data.table")) obj <- as.data.frame(obj)
-    
+
     ## Check if obj is a data frame or a vector
     if (!is.data.frame(obj) && !is.vector(obj) && !is.factor(obj)) {
       stop(sQuote(paste0(obj_name, ' must be a vector, a factor or a data frame.')))
@@ -81,34 +81,34 @@ irec <- function(obj = NULL, var_name = NULL) {
       }
     }
   }
-  
 
-  ## Gadget UI        
+
+  ## Gadget UI
   ui <- miniUI::miniPage(
-    
+
     ## Page title
     miniUI::gadgetTitleBar(int("Interactive recoding")),
     ## Custom CSS
     tags$style(ifunc_get_css()),
-    
+
     miniUI::miniTabstripPanel(
       miniUI::miniTabPanel(
         int("Variable and settings"), icon = icon("sliders"),
         miniUI::miniContentPanel(
-      
+
           ifunc_show_alert(run_as_addin),
-                             
+
           ## First panel : new variable name and recoding style
           tags$h4(icon("columns"), int("Variable to be recoded")),
           wellPanel(
             fluidRow(
-              column(6, 
+              column(6,
                      selectizeInput(
                        "obj_name",
                        int("Data frame or vector to recode from"),
                        choices = Filter(
                          function(x) {
-                           inherits(get(x, envir = sys.parent()), "data.frame") || 
+                           inherits(get(x, envir = sys.parent()), "data.frame") ||
                              is.vector(get(x, envir = sys.parent())) ||
                              is.factor(get(x, envir = sys.parent()))
                          }, ls(.GlobalEnv)),
@@ -119,12 +119,12 @@ irec <- function(obj = NULL, var_name = NULL) {
           wellPanel(
             fluidRow(
               column(4, uiOutput("newvarInput")),
-              column(4,selectInput("recstyle", int("Recoding style"), 
+              column(4,selectInput("recstyle", int("Recoding style"),
                                    c("Character - minimal" = "charmin", "Character - complete" = "charcomp"))),
-              column(4, selectInput("outconv", int("Output type"), 
+              column(4, selectInput("outconv", int("Output type"),
                                     c("Character" = "character", "Factor" = "factor", "Numeric" = "numeric")))
             )))),
-      
+
       ## Second panel : recoding fields, dynamically generated
       miniUI::miniTabPanel(
         int("Recoding"), icon = icon("wrench"),
@@ -132,28 +132,28 @@ irec <- function(obj = NULL, var_name = NULL) {
           wellPanel(uiOutput("levelsInput")))),
       ## Third panel : generated code and results checking
       miniUI::miniTabPanel(
-        int("Code and result"), icon = icon("code"), 
+        int("Code and result"), icon = icon("code"),
         miniUI::miniContentPanel(
           tags$h4(icon("code"), int("Code")),
           htmlOutput("recodeOut"),
           tags$h4(icon("table"), int("Check")),
           ## Table check tab
-          p(class = 'header', 
+          p(class = 'header',
             int('Old variable as rows, new variable as columns.')),
           tableOutput("tableOut")))
     )
   )
-  
-  
+
+
   server <- function(input, output, session) {
-    
+
     ## reactive first level object (vector or data frame)
     robj <- reactive({
       obj <- get(req(input$obj_name), envir = sys.parent())
       if (inherits(obj, "tbl_df") || inherits(obj, "data.table")) obj <- as.data.frame(obj)
       obj
     })
-    
+
     ## reactive variable object (vector or data frame column)
     rvar <- reactive({
       invisible(input$obj_name)
@@ -165,7 +165,7 @@ irec <- function(obj = NULL, var_name = NULL) {
       }
       return(NULL)
     })
-    
+
     ## Text fileds for levels, dynamically generated
     output$levelsInput <- renderUI({
       out <- "<table><tbody>"
@@ -197,7 +197,7 @@ irec <- function(obj = NULL, var_name = NULL) {
       out <- paste0(out, "</tbody></table>")
       HTML(out)
     })
-    
+
     ## If obj is a data frame, column to recode, dynamically generated
     output$varInput <- renderUI({
       if (is.data.frame(robj())) {
@@ -207,24 +207,24 @@ irec <- function(obj = NULL, var_name = NULL) {
                        selected = var_name,
                        multiple = FALSE)
       }
-    }) 
-    
+    })
+
     ## Recoded variable name, dynamically generated
     output$newvarInput <- renderUI({
       new_name <- NULL
       if (is.data.frame(robj())) {
         new_name <- paste0(req(input$var_name), "_rec")
-      } 
+      }
       if (is.vector(robj()) || is.factor(robj())) {
         new_name <- paste0(req(input$obj_name), "_rec")
       }
       if (!is.null(new_name)) {
-        textInput("newvar_name", 
-                  int("New variable name"), 
+        textInput("newvar_name",
+                  int("New variable name"),
                   new_name)
       }
     })
-    
+
     output$nblevelsAlert <- renderUI({
       if (length(unique(rvar())) > 50) {
         div(class = "alert alert-warning alert-dismissible",
@@ -232,8 +232,8 @@ irec <- function(obj = NULL, var_name = NULL) {
             HTML(int("<strong>Warning :</strong> The variable to be recoded has more than 50 levels.")))
       }
     })
-    
-    ## Reactive 
+
+    ## Reactive source variable name
     src_var <- reactive({
       if (is.data.frame(robj())) {
         ## Formatted source variable name
@@ -246,7 +246,7 @@ irec <- function(obj = NULL, var_name = NULL) {
       }
       return(result)
     })
-    
+
     ## Format a value from a text input to code
     get_value <- function(val) {
       if (is.null(val)) return()
@@ -258,16 +258,10 @@ irec <- function(obj = NULL, var_name = NULL) {
       val <- utils::capture.output(dput(val))
       val
     }
-    
+
     ## Generate recoding code
     generate_code_character <- function(dest_var, style) {
-      ## Initial comment
-      out <- gettextf("## Recoding %s into %s\n", src_var(), dest_var, domain = "R-questionr")
-      ## Create new variable
-      if (!is.character(rvar()))
-        out <- paste0(out, sprintf("%s <- as.character(%s)\n", dest_var, src_var()))
-      else
-        out <- paste0(out, sprintf("%s <- %s\n", dest_var, src_var()))
+      out <- ""
       ## List levels
       if (is.factor(rvar())) levs <- levels(rvar())
       else {
@@ -295,15 +289,26 @@ irec <- function(obj = NULL, var_name = NULL) {
           out <- paste0(out, sprintf('%s[%s==""] <- %s\n', dest_var, src_var(), value))
         ## Normal values
         else
-          out <- paste0(out, sprintf('%s[%s == %s] <- %s\n', 
+          out <- paste0(out, sprintf('%s[%s == %s] <- %s\n',
                                      dest_var, src_var(), utils::capture.output(dput(l)), value))
       }
       ## Optional output conversion
       if (input$outconv == "factor") out <- paste0(out, sprintf("%s <- factor(%s)\n", dest_var, dest_var))
-      if (input$outconv == "numeric") out <- paste0(out, sprintf("%s <- as.numeric(%s)\n", dest_var, dest_var))          
+      if (input$outconv == "numeric") out <- paste0(out, sprintf("%s <- as.numeric(%s)\n", dest_var, dest_var))
+      ## If any recoding has been done
+      if (out != "") {
+          ## Create new variable
+          if (!is.character(rvar())) {
+              out <- paste0(sprintf("%s <- as.character(%s)\n", dest_var, src_var()), out)
+          } else {
+              out <- paste0(sprintf("%s <- %s\n", dest_var, src_var()), out)
+          }
+          ## Initial comment
+          out <- paste0(gettextf("## Recoding %s into %s\n", src_var(), dest_var, domain = "R-questionr"), out)
+      }
       out
     }
-    
+
     ## Call recoding code generation function based on style
     generate_code <- function(check=FALSE) {
       if (is.data.frame(robj())) {
@@ -316,22 +321,22 @@ irec <- function(obj = NULL, var_name = NULL) {
       }
       ## if check, create temporary variable for check table
       if (check) dest_var <- ".irec_tmp"
-      
+
       ## Invoke recoding code generation function
       recstyle <- input$recstyle
       if (recstyle == "charcomp") return(generate_code_character(dest_var, style = "comp"))
       if (recstyle == "charmin") return(generate_code_character(dest_var, style = "min"))
     }
-    
+
     ## Generate the code in the interface
     output$recodeOut <- renderText({
       ## Header
       if (is.data.frame(robj())) {
-        header <- HTML(gettextf("<p class='header'>Recoding <tt>%s</tt> from <tt>%s</tt> of class <tt>%s</tt>.</p>", 
+        header <- HTML(gettextf("<p class='header'>Recoding <tt>%s</tt> from <tt>%s</tt> of class <tt>%s</tt>.</p>",
                    req(input$var_name), req(input$obj_name), class(rvar()), domain = "R-questionr"))
       }
       if (is.vector(robj()) || is.factor(robj())) {
-        header <- HTML(gettextf("<p class='header'>Recoding <tt>%s</tt> of class <tt>%s</tt>.</p>", 
+        header <- HTML(gettextf("<p class='header'>Recoding <tt>%s</tt> of class <tt>%s</tt>.</p>",
                                 req(input$obj_name), class(rvar()), domain = "R-questionr"))
       }
       ## Generate code
@@ -342,8 +347,8 @@ irec <- function(obj = NULL, var_name = NULL) {
       out <- paste0(header, "<pre class='r'><code class='r' id='codeout'>",out,"</code></pre>")
       out
     })
-    
-    
+
+
     # Handle the Done button being pressed.
     observeEvent(input$done, {
       ## Generate code
@@ -358,26 +363,31 @@ irec <- function(obj = NULL, var_name = NULL) {
       }
       stopApp()
     })
-    
+
     ## Generate the check table
     output$tableOut <- renderTable({
       ## Generate the recoding code with a temporary variable
       code <- generate_code(check = TRUE)
-      ## Eval generated code
-      eval(parse(text = code), envir = .GlobalEnv)
-      ## Display table
-      tab <- table(rvar(), get(".irec_tmp"), useNA = "always")
-      rownames(tab)[is.na(rownames(tab))] <- "NA"
-      colnames(tab)[is.na(colnames(tab))] <- "NA"
+      if (code != "") {
+          ## Eval generated code
+          eval(parse(text = code), envir = .GlobalEnv)
+          ## Display table
+          tab <- table(rvar(), get(".irec_tmp"), useNA = "always")
+          rownames(tab)[is.na(rownames(tab))] <- "NA"
+          colnames(tab)[is.na(colnames(tab))] <- "NA"
+      } else {
+          ## Abort, return nothing
+          req(FALSE)
+      }
       tab
     })
-    
-    
-    
-    
+
+
+
+
   }
-  
-  
+
+
   runGadget(ui, server, viewer = dialogViewer("irec", width = 800, height = 700))
-  
+
 }
