@@ -28,6 +28,7 @@
 irec <- function(obj = NULL, var_name = NULL) {
 
   run_as_addin <- ifunc_run_as_addin()
+  selected_tab <- NULL
 
   if (is.null(obj)) {
     if (ifunc_run_as_addin()) {
@@ -80,6 +81,7 @@ irec <- function(obj = NULL, var_name = NULL) {
         stop(sQuote(paste0(var_name, ' must be a column of ', obj_name, '.')))
       }
     }
+    if (!is.null(var_name)) selected_tab <- "recoding"
   }
 
 
@@ -92,7 +94,9 @@ irec <- function(obj = NULL, var_name = NULL) {
     tags$style(ifunc_get_css()),
 
     miniUI::miniTabstripPanel(
+      selected = selected_tab,
       miniUI::miniTabPanel(
+        value = "settings",
         int("Variable and settings"), icon = icon("sliders"),
         miniUI::miniContentPanel(
 
@@ -127,11 +131,13 @@ irec <- function(obj = NULL, var_name = NULL) {
 
       ## Second panel : recoding fields, dynamically generated
       miniUI::miniTabPanel(
+        value = "recoding",
         int("Recoding"), icon = icon("wrench"),
         miniUI::miniContentPanel(
           wellPanel(uiOutput("levelsInput")))),
       ## Third panel : generated code and results checking
       miniUI::miniTabPanel(
+        value = "code",
         int("Code and result"), icon = icon("code"),
         miniUI::miniContentPanel(
           tags$h4(icon("code"), int("Code")),
