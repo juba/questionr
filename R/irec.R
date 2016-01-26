@@ -155,7 +155,7 @@ irec <- function(obj = NULL, var_name = NULL) {
 
     ## reactive first level object (vector or data frame)
     robj <- reactive({
-      obj <- get(req(input$obj_name), envir = sys.parent())
+      obj <- get(req(input$obj_name %||% obj_name), envir = sys.parent())
       if (inherits(obj, "tbl_df") || inherits(obj, "data.table")) obj <- as.data.frame(obj)
       obj
     })
@@ -164,7 +164,7 @@ irec <- function(obj = NULL, var_name = NULL) {
     rvar <- reactive({
       invisible(input$obj_name)
       if (is.data.frame(robj())) {
-        return(robj()[[req(input$var_name)]])
+        return(robj()[[req(input$var_name %||% var_name)]])
       }
       if (is.vector(robj()) || is.factor(robj())) {
         return(robj())
