@@ -130,7 +130,7 @@ iorder <- function(obj = NULL, var_name = NULL) {
 
       ## Second panel : recoding fields, dynamically generated
       miniUI::miniTabPanel(
-        int("Recoding"), icon = icon("wrench"),
+        int("Ordering"), icon = icon("arrows"),
         miniUI::miniContentPanel(
           wellPanel(htmlOutput("levelsInput")))),
       ## Third panel : generated code and results checking
