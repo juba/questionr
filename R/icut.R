@@ -118,7 +118,9 @@ icut <- function(obj = NULL, var_name = NULL) {
               wellPanel(
                 fluidRow(
                   column(4, uiOutput("newvarInput"))
-                )))),
+                )),
+              uiOutput("alreadyexistsAlert")
+              )),
 
           ## Second panel : recoding fields, dynamically generated
           miniUI::miniTabPanel(
@@ -254,6 +256,19 @@ icut <- function(obj = NULL, var_name = NULL) {
             updateTextInput(session, "breaks", value=classInt::classIntervals(rvar(), n=ifelse(is.null(nb_breaks()), 6, nb_breaks()), style=req(input$cutMethod))$brks)
           })
 
+          output$alreadyexistsAlert <- renderUI({
+            exists <- FALSE
+            if (is.data.frame(robj()) && req(input$newvar_name) %in% names(robj())) 
+              exists <- TRUE
+            if (is.vector(robj()) && exists(req(input$newvar_name), envir=.GlobalEnv))
+              exists <- TRUE
+            if (exists) {
+              div(class = "alert alert-warning alert-dismissible",
+                  HTML('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'),
+                  HTML(gettext("<strong>Warning :</strong> This new variable already exists.", domain="R-questionr")))
+            }
+          })
+          
         get_breaks <- function(b, compute=FALSE) {
           if (b=="") return(NULL)
           b <- gsub(", *$", "",b)
