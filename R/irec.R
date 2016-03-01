@@ -190,8 +190,9 @@ irec <- function(obj = NULL, var_name = NULL) {
         out <- paste0(out, '<tr>')
         out <- paste0(out,'<td class="right vertical-align">',htmltools::htmlEscape(l),
                       '&nbsp;<span class="glyphicon glyphicon-arrow-right left-sep" aria-hidden="true"></span> &nbsp;</td>')
-        id <- paste0("ireclev_", l)
         label <- l
+        l <- gsub(":", "_", l)
+        id <- paste0("ireclev_", l)
         ## If the level is NA
         if (id == "ireclev_NA") {
           label <- "NA"
@@ -279,12 +280,13 @@ irec <- function(obj = NULL, var_name = NULL) {
       }
       if (any(is.na(rvar()))) levs <- c(levs, NA)
       for (l in levs) {
-        value <- get_value(input[[paste0("ireclev_", l)]])
+        l_clean <- gsub(":", "_", l)
+        value <- get_value(input[[paste0("ireclev_", l_clean)]])
         ## If minimal style, values unchanged are omitted
-        if (style == "min" && !is.null(input[[paste0("ireclev_", l)]])) {
+        if (style == "min" && !is.null(input[[paste0("ireclev_", l_clean)]])) {
           if (is.na(l) && value == "NA") next
           if (!is.na(l)) {
-            if (l == input[[paste0("ireclev_", l)]]) next
+            if (l == input[[paste0("ireclev_", l_clean)]]) next
             if (l == "" && value == "\"\"") next
           }
         }
