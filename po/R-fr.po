@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: questionr\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-03-01 21:26\n"
-"PO-Revision-Date: 2016-03-01 21:26+0100\n"
+"POT-Creation-Date: 2016-03-01 22:02\n"
+"PO-Revision-Date: 2016-03-01 22:05+0100\n"
 "Last-Translator: Julien Barnier <julien@nozav.org>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -21,6 +21,24 @@ msgstr "doit être une colonne de"
 msgid "."
 msgstr "."
 
+msgid "Interactive cutting"
+msgstr "Découpage interactif"
+
+msgid "Variable and settings"
+msgstr "Variable et paramètres"
+
+msgid "Variable to be recoded"
+msgstr "Variable à recoder"
+
+msgid "Data frame or vector to recode from"
+msgstr "Data frame ou vecteur source"
+
+msgid "Recoding settings"
+msgstr "Paramètres du recodage"
+
+msgid "Cutting"
+msgstr "Découpage en classes"
+
 msgid "Cutting method"
 msgstr "Méthode"
 
@@ -33,6 +51,24 @@ msgstr "Inclure la valeur extrême  (<tt>include.lowest</tt>)"
 msgid "Append extreme values if necessary"
 msgstr "Ajouter les valeurs extrêmes si nécessaire"
 
+msgid "Code and result"
+msgstr "Code et résultat"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Check - table"
+msgstr "Vérification - tableau"
+
+msgid "Check - barplot"
+msgstr "Vérification - graphique"
+
+msgid "Data frame column to recode"
+msgstr "Colonne du data frame à recoder"
+
+msgid "New variable name"
+msgstr "Nouvelle variable"
+
 msgid "<p>Statistics of <tt>%s</tt> :</p>"
 msgstr "<p>Statistiques de <tt>%s</tt> :</p>"
 
@@ -44,6 +80,34 @@ msgstr "Nombre d'intervalles invalide"
 
 msgid "## Cutting %s into %s"
 msgstr "## Recodage de %s en %s"
+
+msgid "Original histogram"
+msgstr "Variable originale"
+
+msgid "-------- Start recoding code --------"
+msgstr "-------- Début du code --------"
+
+msgid "--------- End recoding code ---------"
+msgstr "--------- Fin du code ---------"
+
+msgid "Interactive levels ordering"
+msgstr "Réordonnancement interactif"
+
+msgid "Ordering"
+msgstr "Réordonner"
+
+msgid "Check"
+msgstr "Vérification"
+
+msgid "Old variable as rows, new variable as columns."
+msgstr "Ancienne variable en ligne, variable recodée en colonne"
+
+msgid ""
+"<strong>Warning :</strong> The variable to be recoded has more than 50 "
+"levels."
+msgstr ""
+"<strong>Attention :</strong> La variable à recoder a plus de 50 valeurs "
+"distinctes."
 
 msgid "## Reordering %s"
 msgstr "## Réordonnancement de %s"
@@ -61,6 +125,18 @@ msgstr ""
 msgid "<p class='header'>Reordering <tt>%s</tt> of class <tt>%s</tt>.</p>"
 msgstr ""
 "<p class='header'>Réordonnancement de <tt>%s</tt> de classe <tt>%s</tt>.</p>"
+
+msgid "Interactive recoding"
+msgstr "Recodage interactif"
+
+msgid "Recoding style"
+msgstr "Style de recodage"
+
+msgid "Output type"
+msgstr "Type de variable recodée"
+
+msgid "Recoding"
+msgstr "Recodage"
 
 msgid "## Recoding %s into %s"
 msgstr "## Recodage de %s en %s"
@@ -191,49 +267,13 @@ msgstr "x et y doivent être de la même taille"
 #~ msgid "must be a data frame."
 #~ msgstr "doit être un data frame."
 
-#~ msgid "Interactive cutting"
-#~ msgstr "Découpage interactif"
-
 #~ msgid "New variable"
 #~ msgstr "Nouvelle variable"
-
-#~ msgid "Code"
-#~ msgstr "Code"
-
-#~ msgid "Check"
-#~ msgstr "Vérification"
 
 #~ msgid "Send code to console and exit"
 #~ msgstr "Copier le code dans la console et quitter"
 
-#~ msgid "Original histogram"
-#~ msgstr "Variable originale"
-
-#~ msgid "-------- Start recoding code --------"
-#~ msgstr "-------- Début du code --------"
-
-#~ msgid "--------- End recoding code ---------"
-#~ msgstr "--------- Fin du code ---------"
-
-#~ msgid "Interactive levels ordering"
-#~ msgstr "Réordonnancement interactif"
-
 #~ msgid "<td>New variable : </td><td>"
-#~ msgstr "Nouvelle variable :"
-
-#~ msgid "Interactive recoding"
-#~ msgstr "Recodage interactif"
-
-#~ msgid "Recoding style"
-#~ msgstr "Style de recodage"
-
-#~ msgid "Output type"
-#~ msgstr "Type de variable recodée"
-
-#~ msgid "Old variable as rows, new variable as columns."
-#~ msgstr "Ancienne variable en ligne, variable recodée en colonne"
-
-#~ msgid "New variable :"
 #~ msgstr "Nouvelle variable :"
 
 #~ msgid "Convert to factor"

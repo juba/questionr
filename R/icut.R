@@ -88,25 +88,25 @@ icut <- function(obj = NULL, var_name = NULL) {
       ui <- miniUI::miniPage(
 
         ## Page title
-        miniUI::gadgetTitleBar(int("Interactive cutting")),
+        miniUI::gadgetTitleBar(gettext("Interactive cutting", domain="R-questionr")),
         ## Custom CSS
         tags$style(ifunc_get_css()),
 
         miniUI::miniTabstripPanel(
           miniUI::miniTabPanel(
-            int("Variable and settings"), icon = icon("sliders"),
+            gettext("Variable and settings", domain="R-questionr"), icon = icon("sliders"),
             miniUI::miniContentPanel(
 
               ifunc_show_alert(run_as_addin),
 
               ## First panel : new variable name
-              tags$h4(icon("columns"), int("Variable to be recoded")),
+              tags$h4(icon("columns"), gettext("Variable to be recoded", domain="R-questionr")),
               wellPanel(
                 fluidRow(
                   column(6,
                          selectizeInput(
                            "obj_name",
-                           int("Data frame or vector to recode from"),
+                           gettext("Data frame or vector to recode from", domain="R-questionr"),
                            choices = Filter(
                              function(x) {
                                inherits(get(x, envir = sys.parent()), "data.frame") ||
@@ -115,7 +115,7 @@ icut <- function(obj = NULL, var_name = NULL) {
                              }, ls(.GlobalEnv)),
                            selected = obj_name, multiple = FALSE)),
                   column(6, uiOutput("varInput")))),
-              tags$h4(icon("sliders"), int("Recoding settings")),
+              tags$h4(icon("sliders"), gettext("Recoding settings", domain="R-questionr")),
               wellPanel(
                 fluidRow(
                   column(4, uiOutput("newvarInput"))
@@ -123,7 +123,7 @@ icut <- function(obj = NULL, var_name = NULL) {
 
           ## Second panel : recoding fields, dynamically generated
           miniUI::miniTabPanel(
-            int("Cutting"), icon = icon("cut"),
+            gettext("Cutting", domain="R-questionr"), icon = icon("cut"),
             miniUI::miniContentPanel(
                 fluidRow(
                     column(6,
@@ -140,16 +140,16 @@ icut <- function(obj = NULL, var_name = NULL) {
               ))),
           ## Third panel : generated code and results checking
           miniUI::miniTabPanel(
-            int("Code and result"), icon = icon("code"),
+            gettext("Code and result", domain="R-questionr"), icon = icon("code"),
             miniUI::miniContentPanel(
-              tags$h4(icon("code"), int("Code")),
+              tags$h4(icon("code"), gettext("Code", domain="R-questionr")),
               htmlOutput("codeOut"),
-              tags$h4(icon("table"), int("Check - table")),
+              tags$h4(icon("table"), gettext("Check - table", domain="R-questionr")),
               fluidRow(
                       ## Table check tab
                       p(class = 'header'),
                       tableOutput("tableOut")),
-              tags$h4(icon("bar-chart"), int("Check - barplot")),
+              tags$h4(icon("bar-chart"), gettext("Check - barplot", domain="R-questionr")),
               fluidRow(
                       plotOutput("barOut"))))
 
@@ -196,7 +196,7 @@ icut <- function(obj = NULL, var_name = NULL) {
           output$varInput <- renderUI({
             if (is.data.frame(robj())) {
               selectizeInput("var_name",
-                             int("Data frame column to recode"),
+                             gettext("Data frame column to recode", domain="R-questionr"),
                              choices = names(robj()),
                              selected = var_name,
                              multiple = FALSE)
@@ -214,7 +214,7 @@ icut <- function(obj = NULL, var_name = NULL) {
             }
             if (!is.null(new_name)) {
               textInput("newvar_name",
-                        int("New variable name"),
+                        gettext("New variable name", domain="R-questionr"),
                         new_name)
             }
           })
@@ -300,7 +300,7 @@ icut <- function(obj = NULL, var_name = NULL) {
 
 
         output$histOut <- renderPlot({
-          graphics::hist(rvar(), col="#bbd8e9", border="white", main=int("Original histogram"), xlab=src_var())
+          graphics::hist(rvar(), col="#bbd8e9", border="white", main=gettext("Original histogram", domain="R-questionr"), xlab=src_var())
           breaks <- get_breaks(input$breaks, compute=TRUE)
           for (b in breaks) graphics::abline(v=b, col="#dd1144", lwd=1, lty=2)
         })
@@ -324,9 +324,9 @@ icut <- function(obj = NULL, var_name = NULL) {
           if (run_as_addin) {
             rstudioapi::insertText(text = out)
           } else {
-            out <- paste0(int("\n-------- Start recoding code --------\n\n"),
+            out <- paste0(gettext("\n-------- Start recoding code --------\n\n", domain="R-questionr"),
                           out,
-                          int("\n--------- End recoding code ---------\n"))
+                          gettext("\n--------- End recoding code ---------\n", domain="R-questionr"))
             cat(out)
           }
           stopApp()

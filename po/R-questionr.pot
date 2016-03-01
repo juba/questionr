@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: questionr 0.5\n"
-"POT-Creation-Date: 2016-03-01 21:26\n"
+"POT-Creation-Date: 2016-03-01 22:02\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,24 @@ msgstr ""
 msgid "."
 msgstr ""
 
+msgid "Interactive cutting"
+msgstr ""
+
+msgid "Variable and settings"
+msgstr ""
+
+msgid "Variable to be recoded"
+msgstr ""
+
+msgid "Data frame or vector to recode from"
+msgstr ""
+
+msgid "Recoding settings"
+msgstr ""
+
+msgid "Cutting"
+msgstr ""
+
 msgid "Cutting method"
 msgstr ""
 
@@ -29,6 +47,24 @@ msgid "Include extreme (<tt>include.lowest</tt>)"
 msgstr ""
 
 msgid "Append extreme values if necessary"
+msgstr ""
+
+msgid "Code and result"
+msgstr ""
+
+msgid "Code"
+msgstr ""
+
+msgid "Check - table"
+msgstr ""
+
+msgid "Check - barplot"
+msgstr ""
+
+msgid "Data frame column to recode"
+msgstr ""
+
+msgid "New variable name"
 msgstr ""
 
 msgid "<p>Statistics of <tt>%s</tt> :</p>"
@@ -43,6 +79,30 @@ msgstr ""
 msgid "## Cutting %s into %s"
 msgstr ""
 
+msgid "Original histogram"
+msgstr ""
+
+msgid "-------- Start recoding code --------"
+msgstr ""
+
+msgid "--------- End recoding code ---------"
+msgstr ""
+
+msgid "Interactive levels ordering"
+msgstr ""
+
+msgid "Ordering"
+msgstr ""
+
+msgid "Check"
+msgstr ""
+
+msgid "Old variable as rows, new variable as columns."
+msgstr ""
+
+msgid "<strong>Warning :</strong> The variable to be recoded has more than 50 levels."
+msgstr ""
+
 msgid "## Reordering %s"
 msgstr ""
 
@@ -53,6 +113,18 @@ msgid "<p class='header'>Reordering <tt>%s</tt> from <tt>%s</tt> of class <tt>%s
 msgstr ""
 
 msgid "<p class='header'>Reordering <tt>%s</tt> of class <tt>%s</tt>.</p>"
+msgstr ""
+
+msgid "Interactive recoding"
+msgstr ""
+
+msgid "Recoding style"
+msgstr ""
+
+msgid "Output type"
+msgstr ""
+
+msgid "Recoding"
 msgstr ""
 
 msgid "## Recoding %s into %s"

@@ -88,26 +88,26 @@ irec <- function(obj = NULL, var_name = NULL) {
   ui <- miniUI::miniPage(
 
     ## Page title
-    miniUI::gadgetTitleBar(int("Interactive recoding")),
+    miniUI::gadgetTitleBar(gettext("Interactive recoding", domain="R-questionr")),
     ## Custom CSS
     tags$style(ifunc_get_css()),
 
     miniUI::miniTabstripPanel(
       miniUI::miniTabPanel(
         value = "settings",
-        int("Variable and settings"), icon = icon("sliders"),
+        gettext("Variable and settings", domain="R-questionr"), icon = icon("sliders"),
         miniUI::miniContentPanel(
 
           ifunc_show_alert(run_as_addin),
 
           ## First panel : new variable name and recoding style
-          tags$h4(icon("columns"), int("Variable to be recoded")),
+          tags$h4(icon("columns"), gettext("Variable to be recoded", domain="R-questionr")),
           wellPanel(
             fluidRow(
               column(6,
                      selectizeInput(
                        "obj_name",
-                       int("Data frame or vector to recode from"),
+                       gettext("Data frame or vector to recode from", domain="R-questionr"),
                        choices = Filter(
                          function(x) {
                            inherits(get(x, envir = sys.parent()), "data.frame") ||
@@ -117,33 +117,33 @@ irec <- function(obj = NULL, var_name = NULL) {
                        selected = obj_name, multiple = FALSE)),
               column(6, uiOutput("varInput")))),
           uiOutput("nblevelsAlert"),
-          tags$h4(icon("sliders"), int("Recoding settings")),
+          tags$h4(icon("sliders"), gettext("Recoding settings", domain="R-questionr")),
           wellPanel(
             fluidRow(
               column(4, uiOutput("newvarInput")),
-              column(4,selectInput("recstyle", int("Recoding style"),
+              column(4,selectInput("recstyle", gettext("Recoding style", domain="R-questionr"),
                                    c("Character - minimal" = "charmin", "Character - complete" = "charcomp"))),
-              column(4, selectInput("outconv", int("Output type"),
+              column(4, selectInput("outconv", gettext("Output type", domain="R-questionr"),
                                     c("Character" = "character", "Factor" = "factor", "Numeric" = "numeric")))
             )))),
 
       ## Second panel : recoding fields, dynamically generated
       miniUI::miniTabPanel(
         value = "recoding",
-        int("Recoding"), icon = icon("wrench"),
+        gettext("Recoding"), icon = icon("wrench"),
         miniUI::miniContentPanel(
           wellPanel(uiOutput("levelsInput")))),
       ## Third panel : generated code and results checking
       miniUI::miniTabPanel(
         value = "code",
-        int("Code and result"), icon = icon("code"),
+        gettext("Code and result"), icon = icon("code"),
         miniUI::miniContentPanel(
-          tags$h4(icon("code"), int("Code")),
+          tags$h4(icon("code"), gettext("Code", domain="R-questionr")),
           htmlOutput("recodeOut"),
-          tags$h4(icon("table"), int("Check")),
+          tags$h4(icon("table"), gettext("Check", domain="R-questionr")),
           ## Table check tab
           p(class = 'header',
-            int('Old variable as rows, new variable as columns.')),
+            gettext('Old variable as rows, new variable as columns.', domain="R-questionr")),
           tableOutput("tableOut")))
     )
   )
@@ -213,7 +213,7 @@ irec <- function(obj = NULL, var_name = NULL) {
     output$varInput <- renderUI({
       if (is.data.frame(robj())) {
         selectizeInput("var_name",
-                       int("Data frame column to recode"),
+                       gettext("Data frame column to recode", domain="R-questionr"),
                        choices = names(robj()),
                        selected = var_name,
                        multiple = FALSE)
@@ -231,7 +231,7 @@ irec <- function(obj = NULL, var_name = NULL) {
       }
       if (!is.null(new_name)) {
         textInput("newvar_name",
-                  int("New variable name"),
+                  gettext("New variable name", domain="R-questionr"),
                   new_name)
       }
     })
@@ -240,7 +240,7 @@ irec <- function(obj = NULL, var_name = NULL) {
       if (length(unique(rvar())) > 50) {
         div(class = "alert alert-warning alert-dismissible",
             HTML('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'),
-            HTML(int("<strong>Warning :</strong> The variable to be recoded has more than 50 levels.")))
+            HTML(gettext("<strong>Warning :</strong> The variable to be recoded has more than 50 levels.", domain="R-questionr")))
       }
     })
 
@@ -367,9 +367,9 @@ irec <- function(obj = NULL, var_name = NULL) {
       if (run_as_addin) {
         rstudioapi::insertText(text = out)
       } else {
-        out <- paste0(int("\n-------- Start recoding code --------\n\n"),
+        out <- paste0(gettext("\n-------- Start recoding code --------\n\n", domain="R-questionr"),
                       out,
-                      int("\n--------- End recoding code ---------\n"))
+                      gettext("\n--------- End recoding code ---------\n", domain="R-questionr"))
         cat(out)
       }
       stopApp()

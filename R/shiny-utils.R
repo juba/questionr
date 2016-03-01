@@ -33,13 +33,6 @@ ifunc_get_css <- function() {
   HTML(out)
 }
 
-#' Get string translation with gettext
-#' @param s string to translate
-
-int <- function(s) {
-  gettext(s, domain = "R-questionr")
-}
-
 #' Return first non-null of two values
 #' @name first_non_null
 #' @param x first object
