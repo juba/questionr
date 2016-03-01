@@ -150,6 +150,13 @@ irec <- function(obj = NULL, var_name = NULL) {
 
   server <- function(input, output, session) {
 
+    if (!is.null(obj_name)) {
+      updateSelectizeInput(session, "obj_name", selected = obj_name)
+    }
+    if (!is.null(var_name)) {
+      updateSelectizeInput(session, "var_name", selected = var_name)
+    }
+    
     ## reactive first level object (vector or data frame)
     robj <- reactive({
       obj <- get(req(input$obj_name %||% obj_name), envir = sys.parent())
