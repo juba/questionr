@@ -192,14 +192,12 @@ irec <- function(obj = NULL, var_name = NULL) {
                       '&nbsp;<span class="glyphicon glyphicon-arrow-right left-sep" aria-hidden="true"></span> &nbsp;</td>')
         id <- paste0("ireclev_", l)
         label <- l
-        ## If the level is NA, replace by the NA value placeholder
-        if (is.na(id)) {
-          id <- "*irec_NA_id*"
+        ## If the level is NA
+        if (id == "ireclev_NA") {
           label <- "NA"
         }
-        ## If the level is an empty string, replace by a placeholder
-        if (id == "") {
-          id <- "*irec_emptystr_id*"
+        ## If the level is an empty string
+        if (id == "ireclev_") {
           label <- ""
         }
         out <- paste0(out,'<td class="vertical-align">',textInput(id,"",label),'</td>')
@@ -281,27 +279,30 @@ irec <- function(obj = NULL, var_name = NULL) {
       }
       if (any(is.na(rvar()))) levs <- c(levs, NA)
       for (l in levs) {
-        ## Special NA placeholder
-        if (is.na(l)) l <- "*irec_NA_id*"
-        ## Special empty string placeholder
-        if (l == "") l <- "*irec_emptystr_id*"
         value <- get_value(input[[paste0("ireclev_", l)]])
         ## If minimal style, values unchanged are omitted
         if (style == "min" && !is.null(input[[paste0("ireclev_", l)]])) {
-          if (l == input[[paste0("ireclev_", l)]]) next
-          if (l == "*irec_NA_id*" && value == "NA") next
-          if (l == "*irec_emptystr_id*" && value == "\"\"") next
+          if (is.na(l) && value == "NA") next
+          if (!is.na(l)) {
+            if (l == input[[paste0("ireclev_", l)]]) next
+            if (l == "" && value == "\"\"") next
+          }
         }
         ## NA values
-        if (l == "*irec_NA_id*")
+        if (is.na(l)) {
           out <- paste0(out, sprintf('%s[is.na(%s)] <- %s\n', dest_var, src_var(), value))
+        }
         ## Empty strings
-        else if (l == "*irec_emptystr_id*")
-          out <- paste0(out, sprintf('%s[%s==""] <- %s\n', dest_var, src_var(), value))
+        if (!is.na(l) && l == "") {
+          out <- paste0(out, sprintf('%s[%s == ""] <- %s\n', dest_var, src_var(), value))
+        }
         ## Normal values
-        else
+        if (!is.na(l) && l != "") {
           out <- paste0(out, sprintf('%s[%s == %s] <- %s\n',
-                                     dest_var, src_var(), utils::capture.output(dput(l)), value))
+                                     dest_var, src_var(), 
+                                     utils::capture.output(dput(l)), 
+                                     value))
+        }
       }
       ## Optional output conversion
       if (input$outconv == "factor") out <- paste0(out, sprintf("%s <- factor(%s)\n", dest_var, dest_var))
