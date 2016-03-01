@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: questionr 0.5\n"
-"POT-Creation-Date: 2016-03-01 22:02\n"
+"POT-Creation-Date: 2016-03-02 00:11\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,6 +71,9 @@ msgid "<p>Statistics of <tt>%s</tt> :</p>"
 msgstr ""
 
 msgid "Breaks number"
+msgstr ""
+
+msgid "<strong>Warning :</strong> This new variable already exists."
 msgstr ""
 
 msgid "invalid number of intervals"
