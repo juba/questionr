@@ -250,7 +250,7 @@ iorder <- function(obj = NULL, var_name = NULL) {
       if (check) dest_var <- ".iorder_tmp"
       newlevels <- paste0(utils::capture.output(dput(input$sortable)), collapse = "")
       out <- gettextf("## Reordering %s", src_var(), domain = "R-questionr")
-      if (src_var() != dest_var) out <- paste0(out, sprintf(" into %s", dest_var))
+      if (src_var() != dest_var) out <- paste0(out, gettextf(" into %s", dest_var, domain="R-questionr"))
       out <- paste0(out, sprintf("\n%s <- factor(%s, levels=", dest_var, src_var()))
       out <- paste0(out, newlevels, ')')
       out
