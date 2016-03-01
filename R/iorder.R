@@ -155,7 +155,7 @@ iorder <- function(obj = NULL, var_name = NULL) {
 
     ## reactive first level object (vector or data frame)
     robj <- reactive({
-      obj <- get(req(input$obj_name), envir = sys.parent())
+      obj <- get(req(input$obj_name), envir = .GlobalEnv)
       if (inherits(obj, "tbl_df") || inherits(obj, "data.table")) obj <- as.data.frame(obj)
       obj
     })
