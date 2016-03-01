@@ -110,8 +110,7 @@ icut <- function(obj = NULL, var_name = NULL) {
                            choices = Filter(
                              function(x) {
                                inherits(get(x, envir = sys.parent()), "data.frame") ||
-                                 is.vector(get(x, envir = sys.parent())) ||
-                                 is.factor(get(x, envir = sys.parent()))
+                                 is.numeric(get(x, envir = sys.parent()))
                              }, ls(.GlobalEnv)),
                            selected = obj_name, multiple = FALSE)),
                   column(6, uiOutput("varInput")))),
@@ -172,7 +171,7 @@ icut <- function(obj = NULL, var_name = NULL) {
             if (is.data.frame(robj())) {
               return(robj()[[req(input$var_name)]])
             }
-            if (is.vector(robj()) || is.factor(robj())) {
+            if (is.numeric(robj())) {
               return(robj())
             }
             return(NULL)
@@ -195,9 +194,10 @@ icut <- function(obj = NULL, var_name = NULL) {
           ## If obj is a data frame, column to recode, dynamically generated
           output$varInput <- renderUI({
             if (is.data.frame(robj())) {
+              choices <- names(robj())[unlist(lapply(robj(), is.numeric))]
               selectizeInput("var_name",
                              gettext("Data frame column to recode", domain="R-questionr"),
-                             choices = names(robj()),
+                             choices = choices,
                              selected = var_name,
                              multiple = FALSE)
             }
