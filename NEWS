@@ -1,6 +1,7 @@
-questionr 0.4.4
----------------
+questionr 0.5
+-------------
 
+* `irec`, `icut` and `iorder` have been converted to RStudio addins. They now work both with vectors and data frames.
 * Bugfix : handle regexp special chars in variable or split character in multi.split (thanks @markriseley)
 * `irec` allows to select the type of output : character, factor or numeric (thanks @larmarange)
 * `irec` now works with numeric variables
