@@ -374,6 +374,11 @@ irec <- function(obj = NULL, var_name = NULL) {
       }
       stopApp()
     })
+    
+    # Handle the Cancel button being pressed.
+    observeEvent(input$cancel, { 
+      invisible(stopApp()) 
+    })
 
     ## Generate the check table
     output$tableOut <- renderTable({
