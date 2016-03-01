@@ -52,8 +52,9 @@ irec <- function(obj = NULL, var_name = NULL) {
     ## If first arg is of the form d$x
     if (grepl("\\$", obj_name)) {
         s <- strsplit(obj_name, "\\$")
-        obj_name <- s[[1]][1]
-        var_name <- s[[1]][2]
+        obj_name <- gsub("^\\s*", "", s[[1]][1])
+        var_name <- gsub("\\s*$", "", s[[1]][2])
+        var_name <- gsub("`", "", var_name)
         obj <- get(obj_name, envir = sys.parent())
     }
     if (inherits(obj, "tbl_df") || inherits(obj, "data.table")) obj <- as.data.frame(obj)
