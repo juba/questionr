@@ -114,6 +114,7 @@ function(x, fac, level=0.95, digits = 3, ...) {
 #' @seealso 
 #' \code{\link{fisher.test}} in the \link{stats} package.
 #' @export
+#' @importFrom stats fisher.test
 
 `odds.ratio.table` <- 
 function(x, level=0.95, digits = 3, ...) {
@@ -126,7 +127,7 @@ function(x, level=0.95, digits = 3, ...) {
     names(r)[2] <- paste(100 * (1 - level)/2,"%")
     names(r)[3] <- paste(100 * (1- (1 - level)/2),"%")
     rownames(r) <- "Fisher's test"
-    printCoefmat(r, signif.stars=TRUE, has.Pvalue=TRUE)
+    stats::printCoefmat(r, signif.stars=TRUE, has.Pvalue=TRUE)
 }
 
 #' @rdname odds.ratio
@@ -135,11 +136,12 @@ function(x, level=0.95, digits = 3, ...) {
 #' M <- matrix(c(759, 360, 518, 363), ncol = 2)
 #' odds.ratio(M)
 #' @export
+#' @importFrom stats fisher.test
 
 `odds.ratio.matrix` <- 
   function(x, level=0.95, digits = 3, ...) {
     if (!inherits(x, "matrix")) stop("x must be of class 'matrix'.")
-    ft <- fisher.test(x, conf.level=level)
+    ft <- stats::fisher.test(x, conf.level=level)
     r <- data.frame(OR = ft$estimate, lower = ft$conf.int[1], upper = ft$conf.int[2], p = ft$p.value)
     r$OR <- round(r$OR, digits = digits)
     r$lower <- round(r$lower, digits = digits)
@@ -147,7 +149,7 @@ function(x, level=0.95, digits = 3, ...) {
     names(r)[2] <- paste(100 * (1 - level)/2,"%")
     names(r)[3] <- paste(100 * (1- (1 - level)/2),"%")
     rownames(r) <- "Fisher's test"
-    printCoefmat(r, signif.stars=TRUE, has.Pvalue=TRUE)
+    stats::printCoefmat(r, signif.stars=TRUE, has.Pvalue=TRUE)
   }
 
 #' @rdname odds.ratio
