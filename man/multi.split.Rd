@@ -13,6 +13,9 @@ multi.split(var, split.char = "/", mnames = NULL)
 
 \item{mnames}{names to give to the produced variabels. If NULL, the name are computed from the original variable name and the answers.}
 }
+\value{
+Returns a data frame.
+}
 \description{
 Split a multiple choices variable in a series of binary variables
 }
@@ -23,7 +26,6 @@ if the question is about the favourite colors, answers could be "red/blue",
 "red/green/yellow", etc. This function splits the variable into as many variables
 as the number of different choices. Each of these variables as a 1 or 0 value
 corresponding to the choice of this answer. They are returned as a data frame.
-##' @return Returns a data frame.
 }
 \examples{
 v <- c("red/blue","green","red/green","blue/red")

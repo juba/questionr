@@ -149,7 +149,7 @@ cross.multi.table <- function(df, crossvar, weights = NULL, digits = 1, freq = F
 ##' "red/green/yellow", etc. This function splits the variable into as many variables
 ##' as the number of different choices. Each of these variables as a 1 or 0 value
 ##' corresponding to the choice of this answer. They are returned as a data frame.
-##' ##' @return Returns a data frame.
+##' @return Returns a data frame.
 ##' @seealso \code{\link[questionr]{multi.table}}
 ##' @examples
 ##' v <- c("red/blue","green","red/green","blue/red")
