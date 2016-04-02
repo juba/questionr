@@ -29,7 +29,8 @@ Suggests:
     memisc,
     testthat,
     roxygen2,
-    R2HTML
+    R2HTML,
+    labelled
 SystemRequirements: xclip (Linux)
 URL: https://github.com/juba/questionr
 RoxygenNote: 5.0.1
