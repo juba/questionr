@@ -219,10 +219,10 @@ iorder <- function(obj = NULL, var_name = NULL) {
     output$newvarInput <- renderUI({
       new_name <- NULL
       if (is.data.frame(robj())) {
-        new_name <- paste0(req(input$var_name), "_rec")
+        new_name <- req(input$var_name)
       }
       if (is.vector(robj()) || is.factor(robj())) {
-        new_name <- paste0(req(input$obj_name), "_rec")
+        new_name <- req(input$obj_name)
       }
       if (!is.null(new_name)) {
         textInput("newvar_name",
@@ -241,11 +241,15 @@ iorder <- function(obj = NULL, var_name = NULL) {
     
     output$alreadyexistsAlert <- renderUI({
       exists <- FALSE
-      if (is.data.frame(robj()) && req(input$newvar_name) %in% names(robj())) 
+      if (is.data.frame(robj()) && req(input$newvar_name) %in% names(robj())) {
         exists <- TRUE
-      if (is.vector(robj()) && exists(req(input$newvar_name), envir=.GlobalEnv))
+        orig_name <- req(input$var_name)
+      }
+      if (is.vector(robj()) && exists(req(input$newvar_name), envir=.GlobalEnv)) {
         exists <- TRUE
-      if (exists) {
+        orig_name <- req(input$obj_name)
+      }
+      if (exists && req(input$newvar_name) != orig_name) {
         div(class = "alert alert-warning alert-dismissible",
             HTML('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'),
             HTML(gettext("<strong>Warning :</strong> This new variable already exists.", domain="R-questionr")))
