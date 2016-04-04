@@ -329,11 +329,15 @@ irec <- function(obj = NULL, var_name = NULL) {
           ## Create new variable
           if (!is.character(rvar())) {
               out <- paste0(sprintf("%s <- as.character(%s)\n", dest_var, src_var()), out)
-          } else {
+          } else if (dest_var != src_var()) {
               out <- paste0(sprintf("%s <- %s\n", dest_var, src_var()), out)
           }
           ## Initial comment
+         if (dest_var != src_var()) {
           out <- paste0(gettextf("## Recoding %s into %s\n", src_var(), dest_var, domain = "R-questionr"), out)
+         } else {
+           out <- paste0(gettextf("## Recoding %s\n", src_var(), domain = "R-questionr"), out)
+         }
       }
       out
     }
