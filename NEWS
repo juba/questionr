@@ -1,7 +1,9 @@
 questionr 0.5.1
 ---------------
 
-
+* New `ltabs` function, for labelled variables cross-tabulation (@larmarange)
+* `describe`, `lookfor` and `freq` now work with `labelled` variables (@larmarange)
+* Integration with the `labelled` package (@larmarange)
 
 
 questionr 0.5
@@ -19,6 +21,7 @@ questionr 0.5
 * New happy dataset (thanks @briatte)
 * cross.multi.table() now accept a `n` argument to display the total number of
   observations by row or column (when `freq=TRUE`).
+
 
 questionr 0.4.3
 ---------------
