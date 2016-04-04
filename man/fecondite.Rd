@@ -14,13 +14,16 @@
   
    Data can be linked using the variables \code{id_menage} and \code{id_femme}.}
 \description{
-Some fictive results from a fecondity survey.
+Some fictive results from a fecondity survey, with French labels.
 }
 \examples{
 data(fecondite)
 describe(menages)
 describe(femmes)
 describe(enfants)
+}
+\seealso{
+\link{fertility} for an English version of this dataset.
 }
 \keyword{datasets}
 
