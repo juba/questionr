@@ -36,7 +36,7 @@ NULL
 #'    }
 #'   
 #'    Data can be linked using the variables \code{id_menage} and \code{id_femme}.
-#' @seealso \link{fertily} for an English version of this dataset.
+#' @seealso \link{fertility} for an English version of this dataset.
 #' @name fecondite
 #' @examples 
 #' data(fecondite)
