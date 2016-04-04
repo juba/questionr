@@ -5,7 +5,8 @@
 \title{Generate frequency tables.}
 \usage{
 freq(x, digits = 1, cum = FALSE, total = FALSE, exclude = NULL,
-  sort = "", valid = !(NA \%in\% exclude))
+  sort = "", valid = !(NA \%in\% exclude), levels = c("prefixed",
+  "labels", "values"))
 }
 \arguments{
 \item{x}{either a vector to be tabulated, or a table object}
@@ -21,12 +22,29 @@ freq(x, digits = 1, cum = FALSE, total = FALSE, exclude = NULL,
 \item{sort}{if specified, allow to sort the table by increasing ("inc") or decreasing ("dec") frequencies}
 
 \item{valid}{if TRUE, display valid percentages}
+
+\item{levels}{the desired levels for the factor in case of labelled vector (\pkg{labelled} package
+must be installed): "labels" for value labels, "values" for values or 
+"prefixed" for labels prefixed with values}
 }
 \value{
 The result is an object of class data.frame.
 }
 \description{
 Generate and format frequency tables from a variable or a table, with percentages and formatting options.
+}
+\examples{
+# factor
+data(hdv2003)
+freq(hdv2003$qualif)
+freq(hdv2003$qualif, cum = TRUE, total = TRUE)
+freq(hdv2003$qualif, cum = TRUE, total = TRUE, sort ="dec")
+
+# labelled data
+data(fecondite)
+freq(femmes$region)
+freq(femmes$region, levels = "l")
+freq(femmes$region, levels = "v")
 }
 \seealso{
 \code{\link{table}}, \code{\link[questionr]{prop}}, \code{\link[questionr]{cprop}}, \code{\link[questionr]{rprop}}

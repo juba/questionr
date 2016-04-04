@@ -2,40 +2,69 @@
 % Please edit documentation in R/describe.R
 \name{describe}
 \alias{describe}
-\title{Describe the variables of a dataset in R, SPSS or Stata formats}
+\alias{describe.character}
+\alias{describe.data.frame}
+\alias{describe.default}
+\alias{describe.factor}
+\alias{describe.labelled}
+\alias{describe.numeric}
+\alias{print.description}
+\title{Describe the variables of a data.frame}
 \usage{
-describe(data, ...)
+describe(x, ...)
+
+\method{describe}{factor}(x, n = 5, show.length = TRUE, ...)
+
+\method{describe}{numeric}(x, n = 5, show.length = TRUE, ...)
+
+\method{describe}{character}(x, n = 5, show.length = TRUE, ...)
+
+\method{describe}{default}(x, n = 5, show.length = TRUE, ...)
+
+\method{describe}{labelled}(x, n = 5, show.length = TRUE, ...)
+
+\method{describe}{data.frame}(x, ..., n = 5)
+
+\method{print}{description}(x, ...)
 }
 \arguments{
-\item{data}{dataset}
+\item{x}{object to describe}
 
-\item{...}{variable names as character strings. Using the "*" or "|" wildcards in a variable name will search for it using a regex match.}
+\item{...}{further arguments passed to or from other methods, see details}
+
+\item{n}{number of first values to display}
+
+\item{show.length}{display length of the vector?}
+}
+\value{
+an object of class \code{description}.
 }
 \description{
-This function describes the variables of a dataset that might
-include labels imported with the foreign or memisc packages.
+This function describes the variables of a vector or a dataset that might
+include labels imported with \pkg{haven} packages.
 }
 \details{
-This function wraps around the \code{description} function of the 
-\code{memisc} package and fetches the variable labels in datasets
-imported with the \code{foreign} package.
+When describing a data.frame, you can provide variable names as character strings. 
+Using the "*" or "|" wildcards in a variable name will search for it using a regex match.
+See examples.
+}
+\note{
+Labels imported with \pkg{foreign} or \pkg{memisc} package will be
+displayed only in \pkg{labelled} package is installed.
 }
 \examples{
-# Variables in a standard R data frame.
 data(hdv2003)
-# Find the names of selected variables.
-describe(hdv2003, "age", "sexe", "lecture*", "frere|soeur")
-# Load memisc package and example data.
-\dontrun{require(memisc)
-nes1948.por <- UnZip("anes/NES1948.ZIP","NES1948.POR", package="memisc")
-nes1948 <- spss.portable.file(nes1948.por)
-# Get the labels of selected variables.
-describe(nes1948, "v480050", "version|set", "v48004*")}
+describe(hdv2003$sexe)
+describe(hdv2003$age)
+data(fecondite)
+describe(femmes$milieu)
+describe(hdv2003)
+describe(hdv2003, "cuisine", "heures.tv")
+describe(hdv2003, "trav*")
+describe(hdv2003, "trav|lecture")
+describe(femmes)
 }
 \author{
-François Briatte <f.briatte@gmail.com>
-}
-\seealso{
-\code{\link{regex}}, \code{description} in the \code{memisc} package
+Joseph Larmarange <joseph@larmarange.net>
 }
 
