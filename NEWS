@@ -1,6 +1,7 @@
 questionr 0.5.1
 ---------------
 
+* New `fertility` dataset (@larmarange)
 * New `ltabs` function, for labelled variables cross-tabulation (@larmarange)
 * `describe`, `lookfor` and `freq` now work with `labelled` variables (@larmarange)
 * Integration with the `labelled` package (@larmarange)
