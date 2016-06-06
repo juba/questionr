@@ -32,14 +32,3 @@
   }
 }
 
-.get_missing_val <- function(x) {
-  if (requireNamespace("labelled", quietly = TRUE))
-    return(labelled::missing_val(x))
-    else {
-      miss <- attr(x, "labels", exact = TRUE)[attr(x, "is_na", exact = TRUE)]
-      if (length(miss) > 0)
-        return(miss)
-      else
-        return(NULL)
-    }
-}
