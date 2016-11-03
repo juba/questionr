@@ -424,15 +424,18 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
 #' ltabs(~radio+tv, femmes, "v")
 #' ltabs(~radio+tv+journal, femmes)
 #' @export
+#' @importFrom stats as.formula
+#' @importFrom stats terms
+#' @importFrom stats xtabs 
 
 `ltabs` <-
   function(formula, data, levels = c("prefixed", "labels", "values"), ...){
     levels <- match.arg(levels)
-    formula <- as.formula(formula)
+    formula <- stats::as.formula(formula)
     if (!is.data.frame(data))
       data <- as.data.frame(data)
     
-    vars <- attr(terms(formula), "term.labels")
+    vars <- attr(stats::terms(formula), "term.labels")
     
     dn <- vars
     for (i in 1:length(vars))
@@ -442,7 +445,7 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
     for (v in vars) 
       data[[v]] <- .to_factor(data[[v]], levels = levels)
     
-    tab <- xtabs(formula, data, ...)
+    tab <- stats::xtabs(formula, data, ...)
     names(dimnames(tab)) <- dn
     return(tab)
   }

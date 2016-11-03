@@ -25,6 +25,7 @@
 #' data(hdv2003)
 #' describe(hdv2003$sexe)
 #' @export
+#' @importFrom utils head
 
 `describe.factor` <- 
   function(x, n = 5, show.length = TRUE, ...) {
@@ -62,6 +63,7 @@
 #' @examples
 #' describe(hdv2003$age)
 #' @export
+#' @importFrom utils head 
 
 `describe.numeric` <- 
   function(x, n = 5, show.length = TRUE, ...) {
@@ -94,6 +96,7 @@
 #' @rdname describe
 #' @aliases describe.character
 #' @export
+#' @importFrom utils head
 
 `describe.character` <- 
   function(x, n = 5, show.length = TRUE, ...) {
@@ -128,6 +131,7 @@
 #' @rdname describe
 #' @aliases describe.default
 #' @export
+#' @importFrom utils head
 
 `describe.default` <- 
   function(x, n = 5, show.length = TRUE, ...) {
