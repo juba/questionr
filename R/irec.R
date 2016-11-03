@@ -417,11 +417,8 @@ irec <- function(obj = NULL, var_name = NULL) {
           ## Abort, return nothing
           req(FALSE)
       }
-      tab
-    })
-
-
-
+      as.data.frame.matrix(tab)
+    }, rownames = TRUE)
 
   }
 
