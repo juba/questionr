@@ -5,7 +5,7 @@
 \title{Two-way frequency table between a multiple choices question and a factor}
 \usage{
 cross.multi.table(df, crossvar, weights = NULL, digits = 1, freq = FALSE,
-  tfreq = "col", n = FALSE, ...)
+  tfreq = "col", n = FALSE, na.rm = TRUE, ...)
 }
 \arguments{
 \item{df}{data frame with the binary variables}
@@ -20,7 +20,9 @@ cross.multi.table(df, crossvar, weights = NULL, digits = 1, freq = FALSE,
 
 \item{tfreq}{type of percentages to compute ("row" or "col")}
 
-\item{n}{if \code{TRUE}, and freq is \code{TRUE}, display number of observations per row or column.}
+\item{n}{if \code{TRUE}, and freq is \code{TRUE}, display number of observations per row or column}
+
+\item{na.rm}{Remove any NA values in \code{crossvar}}
 
 \item{...}{arguments passed to \code{multi.table}}
 }
