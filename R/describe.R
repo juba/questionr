@@ -166,7 +166,6 @@
 `describe.labelled` <- 
   function(x, n = 5, show.length = TRUE, ...) {
     vl <- .get_val_labels(x)
-    mv <- .get_missing_val(x)
     if (is.numeric(x)) {
       class(x) <- "labelled numeric"
       res <- describe.numeric(x, n = n, show.length = show.length, ...)
@@ -180,9 +179,7 @@
     }
     if (!is.null(vl))
       res <- paste0(res, "\n", length(vl), " value labels: ", paste0("[", vl, "] ", names(vl), collapse = " "))
-    if (!is.null(mv))
-      res <- paste0(res, "\n", length(mv), " defined missing values: ", paste0(mv, collapse = ", "))
-    
+
     class(res) <- "description"
     return(res)
   }
