@@ -43,7 +43,7 @@ function (obj, append=FALSE, file=FALSE, filename="temp.html", clipboard.size=40
     conn <- file(filename, "w", encoding="Latin1")
     R2HTML::HTML(obj, file=conn, append=append)
     close(conn)
-    return
+    return()
   }
   if (Sys.info()["sysname"] == "Windows") {
     connection.name <- paste("clipboard", format(clipboard.size, scientific=1000), sep="-")
