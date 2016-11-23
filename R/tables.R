@@ -101,7 +101,7 @@ function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA
 
 freq.na <- function(data, ...) {
   d = NULL
-  if (class(data) == "data.frame") {
+  if (inherits(data, "data.frame")) {
     if (length(c(...)) < 1) d = names(data)
     d = data[, c(d, ...)]
   }
@@ -123,7 +123,7 @@ freq.na <- function(data, ...) {
     names(d) = n
   else
     colnames(d) = n
-  if (length(c(...)) < 1 & class(data) == "data.frame") {
+  if (length(c(...)) < 1 & inherits(data, "data.frame")) {
     warning("No variables specified; showing top five results.")
     return(utils::head(d))
   }
