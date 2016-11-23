@@ -54,18 +54,22 @@ lookfor <- function(data,
   x <- look(n)
   variable <- n[x]
   # variable labels
-  l <- labelled::var_label(data)
-  if(length(unlist(l)) & labels) {
+  l <- unlist(labelled::var_label(data))
+  if(length(l) > 0 & labels) {
     # search labels
     y <- look(l)
-    # remove duplicates, reorder
-    x <- sort(c(x, y[!(y %in% x)]))
-    # add variable labels
-    variable <- n[x]
-    label <- l[x]
-    variable <- cbind(variable, label)
+    variable <- unique(c(variable, names(l[y])))
   } 
   # output
-  if(length(x)) return(as.data.frame(data.frame(variable), x))
-  else message("Nothing found. Sorry.")
+  if(length(variable)) {
+    pos <- which(n %in% variable)
+    # reordering according to pos
+    # not forgetting that some variables don't have a label
+    if (length(l))
+      return(data.frame(variable = n[pos], label = l[n[pos]], row.names = pos, stringsAsFactors = FALSE))
+    else
+      return(data.frame(variable = n[pos], row.names = pos, stringsAsFactors = FALSE))
+  } else { 
+    message("Nothing found. Sorry.")
+  }
 }
