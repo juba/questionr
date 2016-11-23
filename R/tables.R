@@ -35,19 +35,17 @@ function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA
           levels = c("prefixed", "labels", "values")) {
   levels <- match.arg(levels)
   if (is.table(x)) tab <- x
-  else tab <- table(.to_factor(x, levels), exclude=exclude, useNA="ifany")
+  else tab <- table(labelled::to_factor(x, levels), exclude=exclude, useNA="ifany")
   effectifs <- as.vector(tab)
   pourc <- as.vector(effectifs/sum(effectifs)*100)
   result <- data.frame(n=effectifs, pourc=pourc)
-  rownames(result) <- ifelse(is.na(names(tab)),"NA",names(tab))
+  rownames(result) <- ifelse(is.na(names(tab)), "NA", names(tab))
   if (valid) {
-    if (NA %in% names(tab)) {
-      NA.position <- which(is.na(names(tab)))
-      n.na <- tab[NA.position]
-      valid.pourc <- as.vector(effectifs/(sum(effectifs)-n.na)*100)
-      valid.pourc[NA.position] <- 0 # temporary 0 for cumsum
-    } else
-      valid.pourc <- pourc
+    user_na <- unique(as.character(labelled::to_factor(x, levels)[is.na(x)]))
+    NA.position <- which(is.na(names(tab)) | names(tab) %in% user_na)
+    n.na <- sum(tab[NA.position])
+    valid.pourc <- as.vector(effectifs/(sum(effectifs)-n.na)*100)
+    valid.pourc[NA.position] <- 0 # temporary 0 for cumsum
     result <- cbind(result, valid.pourc)
   }
   if (sort=="inc") result <- result[order(result$n),]
@@ -65,10 +63,10 @@ function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA
       result <- cbind(result, valid.pourc.cum)
     }
   }
-  if (valid & NA %in% names(tab)) {
-    result["NA","valid.pourc"] <- NA
+  if (valid) {
+    result[NA.position,"valid.pourc"] <- NA
     if (cum)
-      result["NA","valid.pourc.cum"] <- NA
+      result[NA.position,"valid.pourc.cum"] <- NA
   }
   names(result)[which(names(result)=="pourc")] <- "%"
   names(result)[which(names(result)=="valid.pourc")] <- "val%"
@@ -413,6 +411,7 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
 #' @param data a data frame
 #' @param levels the desired levels in case of labelled vector: 
 #'    "labels" for value labels, "values" for values or "prefixed" for labels prefixed with values
+#' @param variable_label display variable label if available?
 #' @param ... additional arguments passed to \code{\link[stats]{xtabs}}
 #' 
 #' @seealso \code{\link[stats]{xtabs}}.
@@ -423,13 +422,14 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
 #' ltabs(~radio+tv, femmes, "l")
 #' ltabs(~radio+tv, femmes, "v")
 #' ltabs(~radio+tv+journal, femmes)
+#' ltabs(~radio+tv, femmes, variable_label = FALSE)
 #' @export
 #' @importFrom stats as.formula
 #' @importFrom stats terms
 #' @importFrom stats xtabs 
 
 `ltabs` <-
-  function(formula, data, levels = c("prefixed", "labels", "values"), ...){
+  function(formula, data, levels = c("prefixed", "labels", "values"), variable_label = TRUE, ...){
     levels <- match.arg(levels)
     formula <- stats::as.formula(formula)
     if (!is.data.frame(data))
@@ -439,11 +439,11 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
     
     dn <- vars
     for (i in 1:length(vars))
-      if (!is.null(.get_var_label(data[[vars[i]]])))
-        dn[i] <- paste(vars[i], .get_var_label(data[[vars[i]]]), sep = ": ")
+      if (!is.null(labelled::var_label(data[[vars[i]]])) & variable_label)
+        dn[i] <- paste(vars[i], labelled::var_label(data[[vars[i]]]), sep = ": ")
     
     for (v in vars) 
-      data[[v]] <- .to_factor(data[[v]], levels = levels)
+      data[[v]] <- labelled::to_factor(data[[v]], levels = levels)
     
     tab <- stats::xtabs(formula, data, ...)
     names(dimnames(tab)) <- dn

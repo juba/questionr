@@ -43,9 +43,8 @@ lookfor <- function(data,
                     keywords = "", 
                     labels = TRUE, 
                     ignore.case = TRUE) {
-  # applying to_labelled if available
-  if (requireNamespace("labelled", quietly = TRUE))
-    data <- labelled::to_labelled(data)
+  # applying to_labelled
+  data <- labelled::to_labelled(data)
   # search scope
   n <- names(data)
   if(!length(n)) stop("there are no names to search in that object")
@@ -55,7 +54,7 @@ lookfor <- function(data,
   x <- look(n)
   variable <- n[x]
   # variable labels
-  l <- .get_var_label(data)
+  l <- labelled::var_label(data)
   if(length(unlist(l)) & labels) {
     # search labels
     y <- look(l)

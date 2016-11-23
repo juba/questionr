@@ -24,13 +24,13 @@ Imports:
     htmltools,
     graphics,
     stats,
-    utils
+    utils,
+    labelled (>= 1.0.0)
 Suggests:
     memisc,
     testthat,
     roxygen2,
-    R2HTML,
-    labelled
+    R2HTML
 SystemRequirements: xclip (Linux)
 URL: https://github.com/juba/questionr
 RoxygenNote: 5.0.1
