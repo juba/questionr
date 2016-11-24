@@ -13,17 +13,17 @@
 \usage{
 describe(x, ...)
 
-\method{describe}{factor}(x, n = 5, show.length = TRUE, ...)
+\method{describe}{factor}(x, n = 10, show.length = TRUE, ...)
 
-\method{describe}{numeric}(x, n = 5, show.length = TRUE, ...)
+\method{describe}{numeric}(x, n = 10, show.length = TRUE, ...)
 
-\method{describe}{character}(x, n = 5, show.length = TRUE, ...)
+\method{describe}{character}(x, n = 10, show.length = TRUE, ...)
 
-\method{describe}{default}(x, n = 5, show.length = TRUE, ...)
+\method{describe}{default}(x, n = 10, show.length = TRUE, ...)
 
-\method{describe}{labelled}(x, n = 5, show.length = TRUE, ...)
+\method{describe}{labelled}(x, n = 10, show.length = TRUE, ...)
 
-\method{describe}{data.frame}(x, ..., n = 5)
+\method{describe}{data.frame}(x, ..., n = 10)
 
 \method{print}{description}(x, ...)
 }
@@ -47,10 +47,6 @@ include labels imported with \pkg{haven} packages.
 When describing a data.frame, you can provide variable names as character strings. 
 Using the "*" or "|" wildcards in a variable name will search for it using a regex match.
 See examples.
-}
-\note{
-Labels imported with \pkg{foreign} or \pkg{memisc} package will be
-displayed only in \pkg{labelled} package is installed.
 }
 \examples{
 data(hdv2003)

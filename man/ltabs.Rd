@@ -4,7 +4,8 @@
 \alias{ltabs}
 \title{Cross tabulation with labelled variables}
 \usage{
-ltabs(formula, data, levels = c("prefixed", "labels", "values"), ...)
+ltabs(formula, data, levels = c("prefixed", "labels", "values"),
+  variable_label = TRUE, ...)
 }
 \arguments{
 \item{formula}{a formula object (see \code{\link[stats]{xtabs}})}
@@ -13,6 +14,8 @@ ltabs(formula, data, levels = c("prefixed", "labels", "values"), ...)
 
 \item{levels}{the desired levels in case of labelled vector: 
 "labels" for value labels, "values" for values or "prefixed" for labels prefixed with values}
+
+\item{variable_label}{display variable label if available?}
 
 \item{...}{additional arguments passed to \code{\link[stats]{xtabs}}}
 }
@@ -27,6 +30,7 @@ ltabs(~radio+tv, femmes)
 ltabs(~radio+tv, femmes, "l")
 ltabs(~radio+tv, femmes, "v")
 ltabs(~radio+tv+journal, femmes)
+ltabs(~radio+tv, femmes, variable_label = FALSE)
 }
 \seealso{
 \code{\link[stats]{xtabs}}.
