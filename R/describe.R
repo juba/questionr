@@ -3,9 +3,6 @@
 #' This function describes the variables of a vector or a dataset that might
 #' include labels imported with \pkg{haven} packages.
 #' 
-#' @note Labels imported with \pkg{foreign} or \pkg{memisc} package will be
-#' displayed only in \pkg{labelled} package is installed.
-#'
 #' @param x object to describe
 #' @param ... further arguments passed to or from other methods, see details
 #' @return an object of class \code{description}.
@@ -28,11 +25,11 @@
 #' @importFrom utils head
 
 `describe.factor` <- 
-  function(x, n = 5, show.length = TRUE, ...) {
+  function(x, n = 10, show.length = TRUE, ...) {
     res <- ""
     if (show.length)
       res <- paste0("[", length(x), " obs.] ")
-    res <- paste0(res, .get_var_label(x), "\n")
+    res <- paste0(res, labelled::var_label(x), "\n")
     
     if (is.ordered(x))
       res <- paste0(res, "ordinal factor: ")
@@ -66,25 +63,30 @@
 #' @importFrom utils head 
 
 `describe.numeric` <- 
-  function(x, n = 5, show.length = TRUE, ...) {
+  function(x, n = 10, show.length = TRUE, ...) {
     res <- ""
     if (show.length)
       res <- paste0("[", length(x), " obs.] ")
-    res <- paste0(res, .get_var_label(x), "\n")
+    res <- paste0(res, labelled::var_label(x), "\n")
     
-    res <- paste0(res, class(x), ": ")
+    if (inherits(x, "labelled_spss")) 
+      cl <- paste("labelled_spss", typeof(x))
+    else if (inherits(x, "labelled")) 
+      cl <- paste("labelled", typeof(x))
+    else 
+      cl <- class(x)
+    res <- paste0(res, cl, ": ")
     
     obs <- paste0(head(x, n = n), collapse = " ")
     if (length(x) > n) obs <- paste(obs, "...")
     res <- paste0(res, obs, "\n")
     
-    lab <- .get_val_labels(x)
-    if (!is.null(lab)) {
-      lab <- paste0("[", lab, "] ", names(lab))
-      res <- paste0(res, length(lab), " labels: ", paste(lab, collapse = " "), "\n")
-    }
-    
-    res <- paste0(res, "min: ", min(x, na.rm = T), " - max: ", max(x, na.rm = T), " - ")
+    res <- paste0(
+      res, 
+      "min: ", min(x, na.rm = T),
+      " - max: ", max(x, na.rm = T), 
+      " - "
+    )
     nNA <- sum(is.na(x))
     res <- paste0(res, "NAs: ", nNA, " (", round(nNA / length(x), digits = 1), "%)")
     res <- paste0(res, " - ", length(unique(x)), " unique values")
@@ -99,25 +101,25 @@
 #' @importFrom utils head
 
 `describe.character` <- 
-  function(x, n = 5, show.length = TRUE, ...) {
+  function(x, n = 10, show.length = TRUE, ...) {
     res <- ""
     if (show.length)
       res <- paste0("[", length(x), " obs.] ")
-    res <- paste0(res, .get_var_label(x), "\n")
+    res <- paste0(res, labelled::var_label(x), "\n")
     
-    res <- paste0(res, class(x), ": ")
+    if (inherits(x, "labelled_spss")) 
+      cl <- paste("labelled_spss", typeof(x))
+    else if (inherits(x, "labelled")) 
+      cl <- paste("labelled", typeof(x))
+    else 
+      cl <- class(x)
+    res <- paste0(res, cl, ": ")
     
     quotes <- rep("\"", times = n)
     quotes[is.na(head(x, n = n))] <- ""
     obs <- paste0(quotes, head(x, n = n), quotes, collapse = " ")
     if (length(x) > n) obs <- paste(obs, "...")
     res <- paste0(res, obs, "\n")
-    
-    lab <- .get_val_labels(x)
-    if (!is.null(lab)) {
-      lab <- paste0("[", lab, "] ", names(lab))
-      res <- paste0(res, length(lab), " labels: ", paste(lab, collapse = " "), "\n")
-    }
     
     nNA <- sum(is.na(x))
     res <- paste0(res, "NAs: ", nNA, " (", round(nNA / length(x), digits = 1), "%)")
@@ -134,12 +136,12 @@
 #' @importFrom utils head
 
 `describe.default` <- 
-  function(x, n = 5, show.length = TRUE, ...) {
+  function(x, n = 10, show.length = TRUE, ...) {
     if (!is.atomic(x)) stop("no method specified for this kind of object.")
     res <- ""
     if (show.length)
       res <- paste0("[", length(x), " obs.] ")
-    res <- paste0(res, .get_var_label(x), "\n")
+    res <- paste0(res, labelled::var_label(x), "\n")
     
     res <- paste0(res, class(x), ": ")
     
@@ -156,29 +158,35 @@
     return(res)
   }
 
+
 #' @rdname describe
 #' @aliases describe.labelled
 #' @examples 
 #' data(fecondite)
 #' describe(femmes$milieu)
 #' @export
-
 `describe.labelled` <- 
-  function(x, n = 5, show.length = TRUE, ...) {
-    vl <- .get_val_labels(x)
+  function(x, n = 10, show.length = TRUE, ...) {
     if (is.numeric(x)) {
-      class(x) <- "labelled numeric"
       res <- describe.numeric(x, n = n, show.length = show.length, ...)
     }
     else if (is.character(x)) {
-      class(x) <- "labelled character"
       res <- describe.character(x, n = n, show.length = show.length, ...)
     }
     else {
       res <- describe.default(x, n = n, show.length = show.length, ...)
     }
-    if (!is.null(vl))
-      res <- paste0(res, "\n", length(vl), " value labels: ", paste0("[", vl, "] ", names(vl), collapse = " "))
+    if (!is.null(labelled::val_labels(x)))
+      res <- paste0(
+        res, "\n", 
+        length(labelled::val_labels(x)), " value labels: ", 
+        paste0("[", labelled::val_labels(x), "] ", names(labelled::val_labels(x)), collapse = " ")
+      )
+    
+    if (!is.null(labelled::na_values(x)))
+      res <- paste0(res, "\nuser-defined na values: ", paste0(labelled::na_values(x), collapse = ", "))
+    if (!is.null(labelled::na_range(x)))
+      res <- paste0(res, "\nuser-defined na range: ", paste0(labelled::na_range(x), collapse = "-"))
 
     class(res) <- "description"
     return(res)
@@ -198,10 +206,9 @@
 #' @export
 
 `describe.data.frame` <- 
-  function(x, ..., n = 5) {
+  function(x, ..., n = 10) {
     # applying to_labelled if available
-    if (requireNamespace("labelled", quietly = TRUE))
-      x <- labelled::to_labelled(x)
+    x <- labelled::to_labelled(x)
     
     # select variables
     s <- c(...)
@@ -212,12 +219,14 @@
     m <- unlist(lapply(1:nrow(m), function(i) any(m[i, ])))
     s <- names(x)[m]
     
-    y <- subset(x, select = s)
+    # subsetting
+    # using [] to keep labels and attributes not preserved by subset
+    # specifying `[.data.frame` for compatibility with data.table objects
+    y <- `[.data.frame`(x, , s, drop = FALSE) 
     
     res <- paste0("[", nrow(x), " obs. x ", ncol(x), " variables] ", paste(class(x), collapse = " "))
     
     for (v in names(y)) {
-      attr(y[[v]], "label") <- .get_var_label(x[[v]]) # restoring labels lost when subsetting
       res <- paste0(res, "\n\n$", v, ": ", describe(y[[v]], n = n, show.length = FALSE))  
     }
     
