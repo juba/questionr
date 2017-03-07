@@ -19,4 +19,3 @@ tab <- apply(Titanic, c(4,1), sum)
 cramer.v(tab)
 }
 \keyword{univar}
-

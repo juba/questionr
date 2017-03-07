@@ -54,10 +54,9 @@ data(fecondite)
 lookfor(femmes)
 lookfor(femmes, "date")
 }
-\author{
-François Briatte <f.briatte@gmail.com>
-}
 \seealso{
 \code{query} in the \code{memisc} package
 }
-
+\author{
+François Briatte <f.briatte@gmail.com>
+}

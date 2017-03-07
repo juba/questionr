@@ -27,4 +27,3 @@ iris <- rename.variable(iris, "Species", "especes")
 str(iris)
 }
 \keyword{manip}
-

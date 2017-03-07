@@ -9,4 +9,3 @@ ifunc_run_as_addin()
 \description{
 Check if we are currently running as an rstudio addin
 }
-

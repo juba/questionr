@@ -28,4 +28,3 @@ irec(hdv2003, heures.tv) ## this also works}
 \author{
 Julien Barnier <julien.barnier@ens-lyon.fr>
 }
-

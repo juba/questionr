@@ -61,4 +61,3 @@ cross.multi.table(df[,c("jazz", "rock","electronic")],
 \seealso{
 \code{\link[questionr]{multi.table}}, \code{\link[questionr]{multi.split}}, \code{\link{table}}
 }
-

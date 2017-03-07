@@ -2,10 +2,12 @@
 % Please edit documentation in R/tools.R
 \name{clipcopy}
 \alias{clipcopy}
-\alias{clipcopy.default}
-\alias{clipcopy.proptab}
 \alias{copie}
 \alias{copie.default}
+\alias{clipcopy.default}
+\alias{clipcopy.default}
+\alias{copie.proptab}
+\alias{clipcopy.proptab}
 \alias{copie.proptab}
 \title{Transform an object into HTML and copy it for export}
 \usage{
@@ -62,4 +64,3 @@ ptab <- rprop(tab, percent=TRUE)
 \code{\link[questionr]{clipcopy}}, \code{\link[questionr]{format.proptab}}
 }
 \keyword{connection}
-

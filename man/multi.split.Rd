@@ -36,4 +36,3 @@ multi.table(multi.split(v))
 \seealso{
 \code{\link[questionr]{multi.table}}
 }
-

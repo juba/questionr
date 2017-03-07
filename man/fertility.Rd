@@ -26,4 +26,3 @@ describe(children)
 \link{fecondite} for an French version of this dataset.
 }
 \keyword{datasets}
-

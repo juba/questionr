@@ -39,4 +39,3 @@ addNAstr(f, value=NULL)
 \seealso{
 \code{\link[base]{addNA}} (base).
 }
-

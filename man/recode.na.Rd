@@ -37,10 +37,9 @@ freq(recode.na(hdv2003$trav.satisf, "Equilibre"))
 ## Truncate a count variable (recommends numeric conversion).
 freq(recode.na(hdv2003$freres.soeurs, 5:22))
 }
-\author{
-François Briatte <f.briatte@gmail.com>
-}
 \seealso{
 \code{\link{regex}}
 }
-
+\author{
+François Briatte <f.briatte@gmail.com>
+}

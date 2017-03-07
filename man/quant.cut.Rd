@@ -39,4 +39,3 @@ table(sepal.width3cl)
 \seealso{
 \code{\link{cut}}, \code{\link{quantile}}
 }
-

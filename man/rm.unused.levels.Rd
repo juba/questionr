@@ -31,4 +31,3 @@ str(rm.unused.levels(df,"v1"))
 \author{
 Joseph Larmarange <joseph@larmarange.net>
 }
-

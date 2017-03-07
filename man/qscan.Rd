@@ -30,10 +30,9 @@ The function calls the \code{qload} function to quick-load/install the packages.
 ## Scan the working directory.
 \dontrun{qscan()}
 }
-\author{
-François Briatte <f.briatte@gmail.com>
-}
 \seealso{
 \code{\link[questionr]{qload}}, \code{\link{library}}
 }
-
+\author{
+François Briatte <f.briatte@gmail.com>
+}
