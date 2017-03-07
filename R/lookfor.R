@@ -11,6 +11,7 @@
 #' @param labels whether or not to search variable labels (descriptions); \code{TRUE} by default
 #' @param ignore.case whether or not to make the keywords case sensitive; 
 #' \code{TRUE} by default (case is ignored during matching)
+#' @param details add details about each variable (see examples)
 #' @return a data frame featuring the variable position, name and description 
 #' (if it exists) in the original data frame
 #' @details The function looks into the variable names for matches to the keywords. If the data frame 
@@ -43,6 +44,8 @@
 #' data(fecondite)
 #' lookfor(femmes)
 #' lookfor(femmes, "date")
+#' # Display details
+#' lookfor(femmes, details = TRUE)
 #' @source Based on the behaviour of the \code{lookfor} command in Stata.
 #' @seealso \code{query} in the \code{memisc} package
 #' @export
@@ -50,7 +53,8 @@
 lookfor <- function(data, 
                     ..., 
                     labels = TRUE, 
-                    ignore.case = TRUE) {
+                    ignore.case = TRUE,
+                    details = FALSE) {
   # applying to_labelled
   data <- labelled::to_labelled(data)
   # search scope
@@ -76,9 +80,36 @@ lookfor <- function(data,
     # reordering according to pos
     # not forgetting that some variables don't have a label
     if (length(l))
-      return(data.frame(variable = n[pos], label = l[n[pos]], row.names = pos, stringsAsFactors = FALSE))
+      res <- data.frame(variable = n[pos], label = l[n[pos]], row.names = pos, stringsAsFactors = FALSE)
     else
-      return(data.frame(variable = n[pos], row.names = pos, stringsAsFactors = FALSE))
+      res <- data.frame(variable = n[pos], row.names = pos, stringsAsFactors = FALSE)
+    
+    if (details) {
+      res$class <- ""
+      res$type <- ""
+      res$levels <- ""
+      res$value_labels <- ""
+      res$unique_values <- NA
+      res$n_na <- NA
+      res$na_values <- ""
+      res$na_range <- ""
+      for (i in 1:nrow(res)) {
+        v <- res$variable[i]
+        res$class[i] <- paste(class(data[[v]]), collapse = ", ")
+        res$type[i] <- paste(typeof(data[[v]]), collapse = ", ")
+        if (is.factor(data[[v]]))
+          res$levels[i] <- paste(levels(data[[v]]), collapse = " | ")
+        if (inherits(data[[v]], "labelled")) {
+          res$value_labels[i] <- paste(names(labelled::val_labels(data[[v]], prefixed=TRUE)), collapse = " | ")
+          res$na_values[i] <- paste(labelled::na_values(data[[v]]), collapse = ", ")
+          res$na_range[i] <- paste(labelled::na_range(data[[v]]), collapse = "-")
+        }
+        res$unique_values[i] <- length(unique(data[[v]]))
+        res$n_na[i] <- sum(is.na(data[[v]]))
+      }
+    }
+    
+    return(res)
   } else { 
     message("Nothing found. Sorry.")
   }
