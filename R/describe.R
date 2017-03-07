@@ -18,6 +18,7 @@
 #' @aliases describe.factor
 #' @param n number of first values to display
 #' @param show.length display length of the vector?
+#' @param freq.n.max display a frequency table if the number of unique values is less than this value, 0 to hide
 #' @examples
 #' data(hdv2003)
 #' describe(hdv2003$sexe)
@@ -25,7 +26,7 @@
 #' @importFrom utils head
 
 `describe.factor` <- 
-  function(x, n = 10, show.length = TRUE, ...) {
+  function(x, n = 10, show.length = TRUE, freq.n.max = 10, ...) {
     res <- ""
     if (show.length)
       res <- paste0("[", length(x), " obs.] ")
@@ -50,10 +51,20 @@
     nNA <- sum(is.na(x))
     res <- paste0(res, "NAs: ", nNA, " (", round(nNA / length(x), digits = 1), "%)")
     
+    if (length(unique(x)) < freq.n.max)
+      res <- paste0(
+        res, "\n\n", 
+        paste0(utils::capture.output(freq(x, total = TRUE, exclude = .excludeNA_if_zero(nNA))), collapse = "\n")
+      )
+    
     class(res) <- "description"
     return(res)
   }
 
+.excludeNA_if_zero <- function(nNA) {
+  if (nNA == 0) return(NA)
+  else return(NULL)
+}
 
 #' @rdname describe
 #' @aliases describe.numeric
@@ -63,7 +74,7 @@
 #' @importFrom utils head 
 
 `describe.numeric` <- 
-  function(x, n = 10, show.length = TRUE, ...) {
+  function(x, n = 10, show.length = TRUE, freq.n.max = 10, ...) {
     res <- ""
     if (show.length)
       res <- paste0("[", length(x), " obs.] ")
@@ -91,6 +102,12 @@
     res <- paste0(res, "NAs: ", nNA, " (", round(nNA / length(x), digits = 1), "%)")
     res <- paste0(res, " - ", length(unique(x)), " unique values")
     
+    if (length(unique(x)) < freq.n.max)
+      res <- paste0(
+        res, "\n\n", 
+        paste0(utils::capture.output(freq(x, total = TRUE, exclude = .excludeNA_if_zero(nNA))), collapse = "\n")
+      )
+    
     class(res) <- "description"
     return(res)
   }
@@ -101,7 +118,7 @@
 #' @importFrom utils head
 
 `describe.character` <- 
-  function(x, n = 10, show.length = TRUE, ...) {
+  function(x, n = 10, show.length = TRUE, freq.n.max = 10, ...) {
     res <- ""
     if (show.length)
       res <- paste0("[", length(x), " obs.] ")
@@ -125,6 +142,12 @@
     res <- paste0(res, "NAs: ", nNA, " (", round(nNA / length(x), digits = 1), "%)")
     res <- paste0(res, " - ", length(unique(x)), " unique values")
     
+    if (length(unique(x)) < freq.n.max)
+      res <- paste0(
+        res, "\n\n", 
+        paste0(utils::capture.output(freq(x, total = TRUE, exclude = .excludeNA_if_zero(nNA))), collapse = "\n")
+      )
+    
     class(res) <- "description"
     return(res)
   }
@@ -136,7 +159,7 @@
 #' @importFrom utils head
 
 `describe.default` <- 
-  function(x, n = 10, show.length = TRUE, ...) {
+  function(x, n = 10, show.length = TRUE, freq.n.max = 10, ...) {
     if (!is.atomic(x)) stop("no method specified for this kind of object.")
     res <- ""
     if (show.length)
@@ -154,6 +177,12 @@
     res <- paste0(res, "NAs: ", nNA, " (", round(nNA / length(x), digits = 1), "%)")
     res <- paste0(res, " - ", length(unique(x)), " unique values")
     
+    if (length(unique(x)) < freq.n.max)
+      res <- paste0(
+        res, "\n\n", 
+        paste0(utils::capture.output(freq(x, total = TRUE, exclude = .excludeNA_if_zero(nNA))), collapse = "\n")
+      )
+    
     class(res) <- "description"
     return(res)
   }
@@ -166,15 +195,15 @@
 #' describe(femmes$milieu)
 #' @export
 `describe.labelled` <- 
-  function(x, n = 10, show.length = TRUE, ...) {
+  function(x, n = 10, show.length = TRUE, freq.n.max = 10, ...) {
     if (is.numeric(x)) {
-      res <- describe.numeric(x, n = n, show.length = show.length, ...)
+      res <- describe.numeric(x, n = n, show.length = show.length, freq.n.max = 0, ...)
     }
     else if (is.character(x)) {
-      res <- describe.character(x, n = n, show.length = show.length, ...)
+      res <- describe.character(x, n = n, show.length = show.length,  freq.n.max = 0, ...)
     }
     else {
-      res <- describe.default(x, n = n, show.length = show.length, ...)
+      res <- describe.default(x, n = n, show.length = show.length,  freq.n.max = 0, ...)
     }
     if (!is.null(labelled::val_labels(x)))
       res <- paste0(
@@ -188,6 +217,12 @@
     if (!is.null(labelled::na_range(x)))
       res <- paste0(res, "\nuser-defined na range: ", paste0(labelled::na_range(x), collapse = "-"))
 
+    if (length(unique(x)) < freq.n.max)
+      res <- paste0(
+        res, "\n\n", 
+        paste0(utils::capture.output(freq(x, total = TRUE, exclude = .excludeNA_if_zero(sum(is.na(x))))), collapse = "\n")
+      )
+    
     class(res) <- "description"
     return(res)
   }
@@ -210,7 +245,7 @@
 #' @export
 
 `describe.data.frame` <- 
-  function(x, ..., n = 10) {
+  function(x, ..., n = 10, freq.n.max = 0) {
     # applying to_labelled if available
     x <- labelled::to_labelled(x)
     
@@ -228,7 +263,7 @@
     res <- paste0("[", nrow(x), " obs. x ", ncol(x), " variables] ", paste(class(x), collapse = " "))
     
     for (v in names(y)) {
-      res <- paste0(res, "\n\n$", v, ": ", describe(y[[v]], n = n, show.length = FALSE))  
+      res <- paste0(res, "\n\n$", v, ": ", describe(y[[v]], n = n, show.length = FALSE, freq.n.max = freq.n.max))  
     }
     
     class(res) <- "description"
