@@ -98,9 +98,9 @@ lookfor <- function(data,
         res$class[i] <- paste(class(data[[v]]), collapse = ", ")
         res$type[i] <- paste(typeof(data[[v]]), collapse = ", ")
         if (is.factor(data[[v]]))
-          res$levels[i] <- paste(levels(data[[v]]), collapse = " | ")
+          res$levels[i] <- paste(levels(data[[v]]), collapse = "; ")
         if (inherits(data[[v]], "labelled")) {
-          res$value_labels[i] <- paste(names(labelled::val_labels(data[[v]], prefixed=TRUE)), collapse = " | ")
+          res$value_labels[i] <- paste(names(labelled::val_labels(data[[v]], prefixed=TRUE)), collapse = "; ")
           res$na_values[i] <- paste(labelled::na_values(data[[v]]), collapse = ", ")
           res$na_range[i] <- paste(labelled::na_range(data[[v]]), collapse = "-")
         }
