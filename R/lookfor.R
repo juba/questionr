@@ -7,7 +7,7 @@
 #' The command is meant to help users finding variables in large datasets.
 #' 
 #' @param data a data frame
-#' @param keywords a character string, which can be formatted as a regular expression suitable for a \code{grep} pattern, or a vector of keywords; displays all variables by default
+#' @param ... list of keywords, a character string (or several character strings), which can be formatted as a regular expression suitable for a \code{grep} pattern, or a vector of keywords; displays all variables if not specified
 #' @param labels whether or not to search variable labels (descriptions); \code{TRUE} by default
 #' @param ignore.case whether or not to make the keywords case sensitive; 
 #' \code{TRUE} by default (case is ignored during matching)
@@ -19,8 +19,16 @@
 #' \pkg{memisc} packages will also be taken into account.
 #' @author François Briatte <f.briatte@@gmail.com>
 #' @examples
+#' lookfor(iris)
 #' # Look for a single keyword.
 #' lookfor(iris, "petal")
+#' lookfor(iris, "s")
+#' # Look for with a regular expression
+#' lookfor(iris, "petal|species")
+#' lookfor(iris, "s$")
+#' # Look for with several keywords
+#' lookfor(iris, "pet", "sp")
+#' lookfor(iris, "pet", "sp", "width")
 #' # Load memisc package and example data.
 #' \dontrun{require(memisc)
 #' nes1948.por <- UnZip("anes/NES1948.ZIP","NES1948.POR", package="memisc")
@@ -40,7 +48,7 @@
 #' @export
 
 lookfor <- function(data, 
-                    keywords = "", 
+                    ..., 
                     labels = TRUE, 
                     ignore.case = TRUE) {
   # applying to_labelled
@@ -49,6 +57,8 @@ lookfor <- function(data,
   n <- names(data)
   if(!length(n)) stop("there are no names to search in that object")
   # search function
+  keywords <- c(...)
+  if(is.null(keywords)) keywords <- names(data)
   look <- function(x) { grep(paste(keywords, collapse="|"), x, ignore.case = ignore.case) }
   # names search
   x <- look(n)
