@@ -196,13 +196,17 @@
 #' @aliases describe.data.frame
 #' @details When describing a data.frame, you can provide variable names as character strings. 
 #' Using the "*" or "|" wildcards in a variable name will search for it using a regex match.
+#' The search will also take into account variable labels, if any.
 #' See examples.
+#' @seealso \code{\link{lookfor}}
 #' @examples
 #' describe(hdv2003)
 #' describe(hdv2003, "cuisine", "heures.tv")
 #' describe(hdv2003, "trav*")
 #' describe(hdv2003, "trav|lecture")
+#' describe(hdv2003, "trav", "lecture")
 #' describe(femmes)
+#' describe(femmes, "ident")
 #' @export
 
 `describe.data.frame` <- 
@@ -211,13 +215,10 @@
     x <- labelled::to_labelled(x)
     
     # select variables
-    s <- c(...)
+    s <- lookfor(x, ...)$variable
     
-    if(is.null(s)) s <- names(x)
-    
-    m <- sapply(s, function(i) grepl(gsub("\\*", "", i), names(x)))
-    m <- unlist(lapply(1:nrow(m), function(i) any(m[i, ])))
-    s <- names(x)[m]
+    if (is.null(s)) 
+      return(NULL)
     
     # subsetting
     # using [] to keep labels and attributes not preserved by subset
