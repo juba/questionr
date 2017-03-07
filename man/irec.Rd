@@ -30,4 +30,3 @@ irec(hdv2003, sexe) ## this also works}
 \author{
 Julien Barnier <julien.barnier@ens-lyon.fr>
 }
-

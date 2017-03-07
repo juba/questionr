@@ -33,4 +33,4 @@ Suggests:
     R2HTML
 SystemRequirements: xclip (Linux)
 URL: https://github.com/juba/questionr
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.0

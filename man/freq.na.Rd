@@ -31,4 +31,3 @@ freq.na(hdv2003, names(hdv2003))
 \seealso{
 \code{\link{table}}, \code{\link{is.na}}
 }
-

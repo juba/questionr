@@ -9,4 +9,3 @@ ifunc_get_css()
 \description{
 Returns custom CSS content
 }
-

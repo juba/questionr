@@ -12,4 +12,3 @@ ifunc_show_alert(run_as_addin)
 \description{
 Display an alert, only on first launch for the current session
 }
-

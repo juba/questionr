@@ -49,4 +49,3 @@ freq(femmes$region, levels = "v")
 \seealso{
 \code{\link{table}}, \code{\link[questionr]{prop}}, \code{\link[questionr]{cprop}}, \code{\link[questionr]{rprop}}
 }
-

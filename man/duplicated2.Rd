@@ -32,4 +32,3 @@ duplicated2(df)
 \seealso{
 \link{duplicated}
 }
-

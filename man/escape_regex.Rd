@@ -14,4 +14,3 @@ escape_regex(s)
 Escape regex special chars
 Code directly taken from Hmisc::escapeRegex
 }
-

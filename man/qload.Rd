@@ -32,10 +32,9 @@ previously achieved in older versions of R.
 qload("questionr")
 qload("questionr", silent = FALSE)
 }
-\author{
-François Briatte <f.briatte@gmail.com>
-}
 \seealso{
 \code{\link[questionr]{qscan}}, \code{\link{install.packages}}, \code{\link{library}}
 }
-
+\author{
+François Briatte <f.briatte@gmail.com>
+}

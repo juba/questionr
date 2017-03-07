@@ -26,4 +26,3 @@ describe(enfants)
 \link{fertility} for an English version of this dataset.
 }
 \keyword{datasets}
-

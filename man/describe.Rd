@@ -2,12 +2,12 @@
 % Please edit documentation in R/describe.R
 \name{describe}
 \alias{describe}
-\alias{describe.character}
-\alias{describe.data.frame}
-\alias{describe.default}
 \alias{describe.factor}
-\alias{describe.labelled}
 \alias{describe.numeric}
+\alias{describe.character}
+\alias{describe.default}
+\alias{describe.labelled}
+\alias{describe.data.frame}
 \alias{print.description}
 \title{Describe the variables of a data.frame}
 \usage{
@@ -63,4 +63,3 @@ describe(femmes)
 \author{
 Joseph Larmarange <joseph@larmarange.net>
 }
-

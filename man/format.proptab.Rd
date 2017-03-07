@@ -27,4 +27,3 @@ This function is designed for internal use only.
 \seealso{
 \code{\link{format.default}}, \code{\link[questionr]{print.proptab}}
 }
-

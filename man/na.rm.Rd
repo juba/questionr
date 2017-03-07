@@ -29,10 +29,9 @@ na.rm(df)
 na.rm(df, c("x","y"))
 na.rm(df, "z")
 }
-\author{
-Joseph Larmarange <joseph@larmarange.net>
-}
 \seealso{
 \link{na.omit}
 }
-
+\author{
+Joseph Larmarange <joseph@larmarange.net>
+}

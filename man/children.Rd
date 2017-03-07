@@ -9,4 +9,3 @@
 Some fictive results from a fecondity survey.
 }
 \keyword{datasets}
-
