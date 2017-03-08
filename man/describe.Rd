@@ -13,17 +13,22 @@
 \usage{
 describe(x, ...)
 
-\method{describe}{factor}(x, n = 10, show.length = TRUE, ...)
+\method{describe}{factor}(x, n = 10, show.length = TRUE, freq.n.max = 10,
+  ...)
 
-\method{describe}{numeric}(x, n = 10, show.length = TRUE, ...)
+\method{describe}{numeric}(x, n = 10, show.length = TRUE, freq.n.max = 10,
+  ...)
 
-\method{describe}{character}(x, n = 10, show.length = TRUE, ...)
+\method{describe}{character}(x, n = 10, show.length = TRUE,
+  freq.n.max = 10, ...)
 
-\method{describe}{default}(x, n = 10, show.length = TRUE, ...)
+\method{describe}{default}(x, n = 10, show.length = TRUE, freq.n.max = 10,
+  ...)
 
-\method{describe}{labelled}(x, n = 10, show.length = TRUE, ...)
+\method{describe}{labelled}(x, n = 10, show.length = TRUE,
+  freq.n.max = 10, ...)
 
-\method{describe}{data.frame}(x, ..., n = 10)
+\method{describe}{data.frame}(x, ..., n = 10, freq.n.max = 0)
 
 \method{print}{description}(x, ...)
 }
@@ -35,6 +40,8 @@ describe(x, ...)
 \item{n}{number of first values to display}
 
 \item{show.length}{display length of the vector?}
+
+\item{freq.n.max}{display a frequency table if the number of unique values is less than this value, 0 to hide}
 }
 \value{
 an object of class \code{description}.
@@ -46,6 +53,7 @@ include labels imported with \pkg{haven} packages.
 \details{
 When describing a data.frame, you can provide variable names as character strings. 
 Using the "*" or "|" wildcards in a variable name will search for it using a regex match.
+The search will also take into account variable labels, if any.
 See examples.
 }
 \examples{
@@ -58,7 +66,12 @@ describe(hdv2003)
 describe(hdv2003, "cuisine", "heures.tv")
 describe(hdv2003, "trav*")
 describe(hdv2003, "trav|lecture")
+describe(hdv2003, "trav", "lecture")
 describe(femmes)
+describe(femmes, "ident")
+}
+\seealso{
+\code{\link{lookfor}}
 }
 \author{
 Joseph Larmarange <joseph@larmarange.net>

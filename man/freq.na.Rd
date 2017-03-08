@@ -9,7 +9,7 @@ freq.na(data, ...)
 \arguments{
 \item{data}{either a vector or a data frame object}
 
-\item{...}{if \code{x} is a data frame, the names of the variables to examine. When no variable names are provided, the function examines the full data frame and returns the five variables with most missing values.}
+\item{...}{if \code{x} is a data frame, the names of the variables to examine or keywords to search for such variables. See \code{\link{lookfor}} for more details.}
 }
 \value{
 The result is an object of class data.frame.
@@ -25,8 +25,8 @@ freq.na(hdv2003$qualif)
 freq.na(hdv2003)
 ## Examine several variables.
 freq.na(hdv2003, "nivetud", "trav.satisf")
-## Examine all variables.
-freq.na(hdv2003, names(hdv2003))
+## To see only variables with the most number of missing values
+head(freq.na(hdv2003))
 }
 \seealso{
 \code{\link{table}}, \code{\link{is.na}}

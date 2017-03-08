@@ -80,7 +80,7 @@ function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA
 #' Generate a frequency table of missing values as raw counts and percentages.
 #'
 #' @param data either a vector or a data frame object
-#' @param ... if \code{x} is a data frame, the names of the variables to examine. When no variable names are provided, the function examines the full data frame and returns the five variables with most missing values.
+#' @param ... if \code{x} is a data frame, the names of the variables to examine or keywords to search for such variables. See \code{\link{lookfor}} for more details.
 #' @return
 #' The result is an object of class data.frame.
 #' @seealso
@@ -93,15 +93,15 @@ function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA
 #' freq.na(hdv2003)
 #' ## Examine several variables.
 #' freq.na(hdv2003, "nivetud", "trav.satisf")
-#' ## Examine all variables.
-#' freq.na(hdv2003, names(hdv2003))
+#' ## To see only variables with the most number of missing values
+#' head(freq.na(hdv2003))
 #' @export
 
 freq.na <- function(data, ...) {
   d = NULL
   if (inherits(data, "data.frame")) {
-    if (length(c(...)) < 1) d = names(data)
-    d = data[, c(d, ...)]
+    s <- lookfor(data, ...)$variable
+    d = data[, c(s)]
   }
   else {
     d = as.data.frame(data)
@@ -121,13 +121,8 @@ freq.na <- function(data, ...) {
     names(d) = n
   else
     colnames(d) = n
-  if (length(c(...)) < 1 & inherits(data, "data.frame")) {
-    warning("No variables specified; showing top five results.")
-    return(utils::head(d))
-  }
-  else {
-    return(d)
-  }
+  
+  return(d)
 }
 
 #' Column percentages of a two-way frequency table.
