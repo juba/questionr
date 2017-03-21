@@ -1,3 +1,9 @@
+questionr 0.6.1
+---------------
+
+
+
+
 questionr 0.6.0
 ---------------
 
@@ -11,8 +17,8 @@ questionr 0.6.0
 * More detailed `lookfor` results (@larmarange)
 
 
-questionr 0.5
--------------
+questionr 0.5.0
+---------------
 
 * `irec`, `icut` and `iorder` have been converted to RStudio addins. They now work both with vectors and data frames.
 * Bugfix : handle regexp special chars in variable or split character in multi.split (thanks @markriseley)
