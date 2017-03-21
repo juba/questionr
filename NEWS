@@ -1,12 +1,14 @@
-questionr 0.5.1
+questionr 0.6.0
 ---------------
 
 * New `na.rm` argument to `cross.multi.table`. Use `na.rm = FALSE` to display NA level in `crossvar`
 * New `rp2012` dataset
 * New `fertility` dataset (@larmarange)
 * New `ltabs` function, for labelled variables cross-tabulation (@larmarange)
-* `describe`, `lookfor` and `freq` now work with `labelled` variables (@larmarange)
+* `describe`, `lookfor` and `freq` are harmonized and now work with `labelled` variables (@larmarange)
 * Integration with the `labelled` package (@larmarange)
+* `freq` added to `describe` (@larmarange)
+* More detailed `lookfor` results (@larmarange)
 
 
 questionr 0.5
