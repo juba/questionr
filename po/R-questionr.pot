@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: questionr 0.5.1\n"
-"POT-Creation-Date: 2016-11-03 12:30\n"
+"Project-Id-Version: questionr 0.6.0\n"
+"POT-Creation-Date: 2017-03-21 09:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -127,13 +127,10 @@ msgstr ""
 msgid "Recoding style"
 msgstr ""
 
-msgid "Recoding"
-msgstr ""
-
 msgid "Output type"
 msgstr ""
 
-msgid "<strong>Warning :</strong> The <tt>forcats</tt> package must be installed and loaded for the generated code to be run."
+msgid "Recoding"
 msgstr ""
 
 msgid "## Recoding %s into %s"
@@ -190,6 +187,9 @@ msgstr ""
 msgid "y should be between 0 and 1"
 msgstr ""
 
+msgid "x must be of class 'odds.ratio'"
+msgstr ""
+
 msgid "Recoded"
 msgstr ""
 
@@ -209,9 +209,6 @@ msgid "It will generate R code, insert it in your current R script, and you'll h
 msgstr ""
 
 msgid "It only generates R code you'll have to copy/paste into your script and run yourself."
-msgstr ""
-
-msgid "No variables specified; showing top five results."
 msgstr ""
 
 msgid "All"
