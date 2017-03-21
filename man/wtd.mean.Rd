@@ -29,12 +29,11 @@ wtd.mean(hdv2003$age, weights=hdv2003$poids)
 var(hdv2003$age)
 wtd.var(hdv2003$age, weights=hdv2003$poids)
 }
+\seealso{
+\code{\link{mean}},\code{\link{var}}, \code{\link{wtd.table}} and the \link{survey} package.
+}
 \author{
 These functions are exact copies of the \code{wtd.mean} and \code{wtd.var}
 function from the \link[Hmisc]{wtd.stats} package. They have been created by Frank Harrell, Department of Biostatistics,
 Vanderbilt University School of Medicine, <f.harrell@vanderbilt.edu>.
 }
-\seealso{
-\code{\link{mean}},\code{\link{var}}, \code{\link{wtd.table}} and the \link{survey} package.
-}
-

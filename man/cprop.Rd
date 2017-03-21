@@ -38,4 +38,3 @@ cprop(tab, digits=2, percent=TRUE, total=FALSE)
 \seealso{
 \code{\link[questionr]{rprop}}, \code{\link[questionr]{prop}}, \code{\link{table}}, \code{\link{prop.table}}
 }
-

@@ -13,4 +13,3 @@ Sample from 2000 people and 20 variables taken from the \emph{Histoire de
 Vie} survey, produced in France in 2003 by INSEE.
 }
 \keyword{datasets}
-

@@ -12,4 +12,3 @@
 Sample from the 1999 french census for the cities of the Rhône state.
 }
 \keyword{datasets}
-

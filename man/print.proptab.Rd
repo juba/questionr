@@ -24,4 +24,3 @@ Print an object of class proptab.
 \seealso{
 \code{\link[questionr]{format.proptab}}
 }
-

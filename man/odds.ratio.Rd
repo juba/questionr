@@ -2,27 +2,30 @@
 % Please edit documentation in R/odds.ratio.R
 \name{odds.ratio}
 \alias{odds.ratio}
-\alias{odds.ratio.factor}
 \alias{odds.ratio.glm}
-\alias{odds.ratio.matrix}
 \alias{odds.ratio.multinom}
-\alias{odds.ratio.numeric}
+\alias{odds.ratio.factor}
 \alias{odds.ratio.table}
+\alias{odds.ratio.matrix}
+\alias{odds.ratio.numeric}
+\alias{print.odds.ratio}
 \title{Odds Ratio}
 \usage{
 odds.ratio(x, ...)
 
-\method{odds.ratio}{glm}(x, level = 0.95, digits = 3, ...)
+\method{odds.ratio}{glm}(x, level = 0.95, ...)
 
-\method{odds.ratio}{multinom}(x, level = 0.95, digits = 3, ...)
+\method{odds.ratio}{multinom}(x, level = 0.95, ...)
 
-\method{odds.ratio}{factor}(x, fac, level = 0.95, digits = 3, ...)
+\method{odds.ratio}{factor}(x, fac, level = 0.95, ...)
 
-\method{odds.ratio}{table}(x, level = 0.95, digits = 3, ...)
+\method{odds.ratio}{table}(x, level = 0.95, ...)
 
-\method{odds.ratio}{matrix}(x, level = 0.95, digits = 3, ...)
+\method{odds.ratio}{matrix}(x, level = 0.95, ...)
 
-\method{odds.ratio}{numeric}(x, y, level = 0.95, digits = 3, ...)
+\method{odds.ratio}{numeric}(x, y, level = 0.95, ...)
+
+\method{print}{odds.ratio}(x, signif.stars = TRUE, ...)
 }
 \arguments{
 \item{x}{object from whom odds ratio will be computed}
@@ -31,15 +34,15 @@ odds.ratio(x, ...)
 
 \item{level}{the confidence level required}
 
-\item{digits}{number of decimal to display}
-
 \item{fac}{a second factor object}
 
 \item{y}{a second numeric object}
+
+\item{signif.stars}{logical; if \code{TRUE}, p-values are encoded visually as 'significance stars'}
 }
 \value{
-Returns odds ratios, their confidence interval and 
-tests if they differ from 1.
+Returns a data.frame of class \code{odds.ratio} with odds ratios, 
+their confidence interval and p-values.
 
 If \code{x} and \code{y} are proportions, \code{odds.ratio} simply
 returns the value of the odds ratio, with no confidence interval.
@@ -59,7 +62,7 @@ p-value are calculated according to
 \url{http://www.ats.ucla.edu/stat/r/dae/mlogit.htm}.
 
 For 2x2 \code{table}, \code{factor} or \code{matrix}, \code{odds.ratio}
-uses \code{fisher.test} to compute the odds ratio.
+uses \code{\link[stats]{fisher.test}} to compute the odds ratio.
 }
 \examples{
 data(hdv2003)
@@ -71,14 +74,15 @@ M <- matrix(c(759, 360, 518, 363), ncol = 2)
 odds.ratio(M)
 odds.ratio(0.26, 0.42)
 }
-\author{
-Joseph Larmarange <joseph@larmarange.net>
-}
 \seealso{
 \code{\link{glm}} in the \link{stats} package.
 
 \code{\link[nnet]{multinom}} in the \link[nnet]{nnet} package.
 
-\code{\link{fisher.test}} in the \link{stats} package.
-}
+\code{\link[stats]{fisher.test}} in the \link{stats} package.
 
+\code{\link[stats]{printCoefmat}} in the \link{stats} package.
+}
+\author{
+Joseph Larmarange <joseph@larmarange.net>
+}

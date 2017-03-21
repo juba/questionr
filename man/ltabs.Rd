@@ -35,4 +35,3 @@ ltabs(~radio+tv, femmes, variable_label = FALSE)
 \seealso{
 \code{\link[stats]{xtabs}}.
 }
-

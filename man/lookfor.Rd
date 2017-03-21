@@ -7,17 +7,19 @@
 Based on the behaviour of the \code{lookfor} command in Stata.
 }
 \usage{
-lookfor(data, keywords = "", labels = TRUE, ignore.case = TRUE)
+lookfor(data, ..., labels = TRUE, ignore.case = TRUE, details = FALSE)
 }
 \arguments{
 \item{data}{a data frame}
 
-\item{keywords}{a character string, which can be formatted as a regular expression suitable for a \code{grep} pattern, or a vector of keywords; displays all variables by default}
+\item{...}{list of keywords, a character string (or several character strings), which can be formatted as a regular expression suitable for a \code{grep} pattern, or a vector of keywords; displays all variables if not specified}
 
 \item{labels}{whether or not to search variable labels (descriptions); \code{TRUE} by default}
 
 \item{ignore.case}{whether or not to make the keywords case sensitive; 
 \code{TRUE} by default (case is ignored during matching)}
+
+\item{details}{add details about each variable (see examples)}
 }
 \value{
 a data frame featuring the variable position, name and description 
@@ -37,8 +39,16 @@ If \pkg{labelled} package is installed, variable labels of data.frame imported w
 \pkg{memisc} packages will also be taken into account.
 }
 \examples{
+lookfor(iris)
 # Look for a single keyword.
 lookfor(iris, "petal")
+lookfor(iris, "s")
+# Look for with a regular expression
+lookfor(iris, "petal|species")
+lookfor(iris, "s$")
+# Look for with several keywords
+lookfor(iris, "pet", "sp")
+lookfor(iris, "pet", "sp", "width")
 # Load memisc package and example data.
 \dontrun{require(memisc)
 nes1948.por <- UnZip("anes/NES1948.ZIP","NES1948.POR", package="memisc")
@@ -53,11 +63,12 @@ lookfor(nes1948, "personal attribute")}
 data(fecondite)
 lookfor(femmes)
 lookfor(femmes, "date")
-}
-\author{
-François Briatte <f.briatte@gmail.com>
+# Display details
+lookfor(femmes, details = TRUE)
 }
 \seealso{
 \code{query} in the \code{memisc} package
 }
-
+\author{
+François Briatte <f.briatte@gmail.com>
+}

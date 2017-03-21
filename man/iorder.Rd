@@ -30,4 +30,3 @@ iorder(hdv2003, "qualif")}
 \author{
 Julien Barnier <julien.barnier@ens-lyon.fr>
 }
-

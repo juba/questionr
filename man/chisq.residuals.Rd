@@ -37,4 +37,3 @@ chisq.residuals(tab, raw = TRUE)
 \seealso{
 \code{\link{chisq.test}}
 }
-
