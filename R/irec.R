@@ -357,8 +357,6 @@ irec <- function(obj = NULL, var_name = NULL) {
 
     ## Generate forcats style recoding code
     generate_code_forcats <- function(dest_var, style) {
-      out <- ""
-      na_recode <- ""
       ## List levels
       if (is.factor(rvar())) levs <- levels(rvar())
       else {
@@ -366,6 +364,10 @@ irec <- function(obj = NULL, var_name = NULL) {
         levs <- as.character(levs)
       }
       if (any(is.na(rvar()))) levs <- c(levs, NA)
+
+      out <- ""
+      na_recode <- ""
+      has_recode_to_na <- FALSE
       for (l in levs) {
         l_clean <- gsub(":", "_", l)
         value <- get_value(input[[paste0("ireclev_", l_clean)]])
@@ -375,47 +377,54 @@ irec <- function(obj = NULL, var_name = NULL) {
           if (l == input[[paste0("ireclev_", l_clean)]]) next
           if (l == "" && value == "\"\"") next
         }
+        ## We can't recode to empty string
+        if (value == '""') { value <- '"-"' }
         ## NA values
-        if (is.na(l)) {
-          na_recode <- value 
+        if (is.na(l)) { na_recode <- value }
+        ## Recode to NA   
+        if (value == "NA") {
+          value <- "NULL"
+          has_recode_to_na <- TRUE
         }
-        
-        ## TODO Empty strings
-        #if (!is.na(l) && l == "") {
-        #  out <- paste0(out, sprintf('%s[%s == ""] <- %s\n', dest_var, src_var(), value))
-        #}
         ## Normal values
-        if (!is.na(l) && l != "" && value != "NA") {
-            out <- paste0(out, sprintf(',\n               %s = %s',
+        if (!is.na(l)) {
+          out <- paste0(out, sprintf(',\n               %s = %s',
                                      value,
                                      utils::capture.output(dput(l))))
         }
-        ## Recode to NA
-        if (value == "NA") {
-          out <- paste0(out, sprintf(',\n               NULL = %s',
-                                     utils::capture.output(dput(l))))
-        }
       }
+      
+      ## fct_recode      
       if (out != "") {
-        out <- paste0(sprintf("%s <- fct_recode(%s", dest_var, src_var()), out)
+        source <- src_var()
+        if (na_recode != "" && has_recode_to_na) { source <- dest_var }
+        out <- paste0(sprintf("%s <- fct_recode(%s", dest_var, source), out)
         out <- paste0(out, ")\n")
-        ## Initial comment
-        if (dest_var != src_var()) {
-          out <- paste0(gettextf("## Recoding %s into %s\n", src_var(), dest_var, domain = "R-questionr"), out)
-        } else {
-          out <- paste0(gettextf("## Recoding %s\n", src_var(), domain = "R-questionr"), out)
-        }
       }
+      
+      ## fct_explicit_na
       if (na_recode != "") {
-        if (out != "") {
+        if (out != "" && !has_recode_to_na) {
           out <- paste0(out, sprintf('%s <- fct_explicit_na(%s, %s)\n', dest_var, dest_var, na_recode))
         } else {
-          out <- paste0(ou, sprintf('%s <- fct_explicit_na(%s, %s)\n', dest_var, src_var(), na_recode))
+          out <- paste0(sprintf('%s <- fct_explicit_na(%s, %s)\n', dest_var, src_var(), na_recode), out)
         }
       }
+      
       ## Optional output conversion
       if (input$outconv == "character") out <- paste0(out, sprintf("%s <- as.character(%s)\n", dest_var, dest_var))
       if (input$outconv == "numeric") out <- paste0(out, sprintf("%s <- as.numeric(as.character(%s))\n", dest_var, dest_var))
+
+      ## Initial comment
+      comment <- ""
+      if (out != "" || na_recode != "") {
+        if (dest_var != src_var()) {
+          comment <- gettextf("## Recoding %s into %s\n", src_var(), dest_var, domain = "R-questionr")
+        } else {
+          comment <- gettextf("## Recoding %s\n", src_var(), domain = "R-questionr")
+        }
+      }
+      out <- paste0(comment, out)  
       out
     }
     
