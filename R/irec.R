@@ -27,6 +27,18 @@
 
 irec <- function(obj = NULL, var_name = NULL) {
 
+  recoding_styles <- c("Character - minimal" = "charmin", 
+                       "Character - complete" = "charcomp",
+                       "fct_recode (forcats)" = "forcats")
+  selected_recoding_style <- "charmin"
+  selected_outconv <- "character"
+
+  ## If forcats is loaded
+  if ("package:forcats" %in% search()) {
+    selected_recoding_style <- "forcats"
+    selected_outconv <- "factor"
+  }
+  
   run_as_addin <- ifunc_run_as_addin()
 
   if (is.null(obj)) {
@@ -122,9 +134,10 @@ irec <- function(obj = NULL, var_name = NULL) {
             fluidRow(
               column(4, uiOutput("newvarInput")),
               column(4,selectInput("recstyle", gettext("Recoding style", domain="R-questionr"),
-                                   c("Character - minimal" = "charmin", "Character - complete" = "charcomp"))),
+                                   recoding_styles, selected = selected_recoding_style)),
               column(4, selectInput("outconv", gettext("Output type", domain="R-questionr"),
-                                    c("Character" = "character", "Factor" = "factor", "Numeric" = "numeric")))
+                                    c("Character" = "character", "Factor" = "factor", "Numeric" = "numeric"),
+                                    selected = selected_outconv))
             )),
           uiOutput("alreadyexistsAlert")
           )),
@@ -284,7 +297,7 @@ irec <- function(obj = NULL, var_name = NULL) {
       val
     }
 
-    ## Generate recoding code
+    ## Generate character style recoding code
     generate_code_character <- function(dest_var, style) {
       out <- ""
       ## List levels
@@ -342,6 +355,71 @@ irec <- function(obj = NULL, var_name = NULL) {
       out
     }
 
+    ## Generate forcats style recoding code
+    generate_code_forcats <- function(dest_var, style) {
+      out <- ""
+      na_recode <- ""
+      ## List levels
+      if (is.factor(rvar())) levs <- levels(rvar())
+      else {
+        levs <- stats::na.omit(unique(rvar()))
+        levs <- as.character(levs)
+      }
+      if (any(is.na(rvar()))) levs <- c(levs, NA)
+      for (l in levs) {
+        l_clean <- gsub(":", "_", l)
+        value <- get_value(input[[paste0("ireclev_", l_clean)]])
+        ## Values unchanged are omitted
+        if (is.na(l) && value == "NA") next
+        if (!is.na(l)) {
+          if (l == input[[paste0("ireclev_", l_clean)]]) next
+          if (l == "" && value == "\"\"") next
+        }
+        ## NA values
+        if (is.na(l)) {
+          na_recode <- value 
+        }
+        
+        ## TODO Empty strings
+        #if (!is.na(l) && l == "") {
+        #  out <- paste0(out, sprintf('%s[%s == ""] <- %s\n', dest_var, src_var(), value))
+        #}
+        ## Normal values
+        if (!is.na(l) && l != "" && value != "NA") {
+            out <- paste0(out, sprintf(',\n               %s = %s',
+                                     value,
+                                     utils::capture.output(dput(l))))
+        }
+        ## Recode to NA
+        if (value == "NA") {
+          out <- paste0(out, sprintf(',\n               NULL = %s',
+                                     utils::capture.output(dput(l))))
+        }
+      }
+      if (out != "") {
+        out <- paste0(sprintf("%s <- fct_recode(%s", dest_var, src_var()), out)
+        out <- paste0(out, ")\n")
+        ## Initial comment
+        if (dest_var != src_var()) {
+          out <- paste0(gettextf("## Recoding %s into %s\n", src_var(), dest_var, domain = "R-questionr"), out)
+        } else {
+          out <- paste0(gettextf("## Recoding %s\n", src_var(), domain = "R-questionr"), out)
+        }
+      }
+      if (na_recode != "") {
+        if (out != "") {
+          out <- paste0(out, sprintf('%s <- fct_explicit_na(%s, %s)\n', dest_var, dest_var, na_recode))
+        } else {
+          out <- paste0(ou, sprintf('%s <- fct_explicit_na(%s, %s)\n', dest_var, src_var(), na_recode))
+        }
+      }
+      ## Optional output conversion
+      if (input$outconv == "character") out <- paste0(out, sprintf("%s <- as.character(%s)\n", dest_var, dest_var))
+      if (input$outconv == "numeric") out <- paste0(out, sprintf("%s <- as.numeric(as.character(%s))\n", dest_var, dest_var))
+      out
+    }
+    
+    
     ## Call recoding code generation function based on style
     generate_code <- function(check=FALSE) {
       if (is.data.frame(robj())) {
@@ -359,6 +437,7 @@ irec <- function(obj = NULL, var_name = NULL) {
       recstyle <- input$recstyle
       if (recstyle == "charcomp") return(generate_code_character(dest_var, style = "comp"))
       if (recstyle == "charmin") return(generate_code_character(dest_var, style = "min"))
+      if (recstyle == "forcats") return(generate_code_forcats(dest_var))
     }
 
     ## Generate the code in the interface
