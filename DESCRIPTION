@@ -10,8 +10,8 @@ License: GPL (>= 2)
 Encoding: UTF-8
 Title: Functions to Make Surveys Processing Easier
 Description: Set of functions to make the processing and analysis of
-    surveys easier : interactive shiny apps and addins for data recoding, 
-    contingency tables, dataset metadata handling, and several convenience 
+    surveys easier : interactive shiny apps and addins for data recoding,
+    contingency tables, dataset metadata handling, and several convenience
     functions.
 Depends:
     R (>= 2.10)
@@ -33,4 +33,4 @@ Suggests:
     R2HTML
 SystemRequirements: xclip (Linux)
 URL: https://github.com/juba/questionr
-RoxygenNote: 6.0.0
+RoxygenNote: 6.0.1
