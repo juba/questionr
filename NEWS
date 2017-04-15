@@ -1,7 +1,7 @@
 questionr 0.6.1
 ---------------
 
-
+* Fix missing rownames in icut table results
 
 
 questionr 0.6.0

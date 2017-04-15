@@ -361,7 +361,7 @@ icut <- function(obj = NULL, var_name = NULL) {
           ## Display table
           tab <- freq(get(".icut_tmp"))
           tab
-        })
+        }, rownames = TRUE)
 
         ## Generate the barplot
         output$barOut <- renderPlot({
