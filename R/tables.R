@@ -35,7 +35,7 @@ function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA
           levels = c("prefixed", "labels", "values")) {
   levels <- match.arg(levels)
   if (is.table(x)) tab <- x
-  else tab <- table(labelled::to_factor(x, levels), exclude=exclude, useNA="ifany")
+  else tab <- table(labelled::to_factor(x, levels), exclude=exclude)
   effectifs <- as.vector(tab)
   pourc <- as.vector(effectifs/sum(effectifs)*100)
   result <- data.frame(n=effectifs, pourc=pourc)
