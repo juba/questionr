@@ -31,7 +31,9 @@ Suggests:
     memisc,
     testthat,
     roxygen2,
-    R2HTML
+    R2HTML,
+    dplyr,
+    forcats
 SystemRequirements: xclip (Linux)
 URL: https://github.com/juba/questionr
 RoxygenNote: 6.0.1
