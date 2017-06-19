@@ -5,7 +5,7 @@ Authors@R: c(person("Julien", "Barnier", email="julien.barnier@ens-lyon.fr",
     email="f.briatte@gmail.com", role="aut"), person("Joseph", "Larmarange",
     email="joseph@larmarange.net", role="aut"))
 Version: 0.6.1
-Date: 2017-03-22
+Date: 2017-06-19
 License: GPL (>= 2)
 Encoding: UTF-8
 Title: Functions to Make Surveys Processing Easier
@@ -33,7 +33,9 @@ Suggests:
     roxygen2,
     R2HTML,
     dplyr,
-    forcats
+    forcats,
+    knitr
 SystemRequirements: xclip (Linux)
+VignetteBuilder: knitr
 URL: https://github.com/juba/questionr
 RoxygenNote: 6.0.1
