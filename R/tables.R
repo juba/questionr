@@ -446,15 +446,3 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
     return(tab)
   }
 
-#' @export
-#' @importFrom DT datatable
-
-`vt` <-
-  function(tab) {
-    tabname <- deparse(substitute(tab))
-    if ("freqtab" %in% class(tab)) {
-      
-    }
-    options <- list(searching = FALSE, paging = FALSE, info = FALSE)
-    DT::datatable(tabname, options = options)
-  }
