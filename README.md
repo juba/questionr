@@ -13,9 +13,13 @@ R package to make surveys processing easier
 
 From CRAN :
 
-    install.packages("questionr")
+```r
+install.packages("questionr")
+```
 
 Latest version from GitHub :
 
-    library(devtools)
-    install_github("juba/questionr")
+```r
+library(devtools)
+install_github("juba/questionr")
+```
