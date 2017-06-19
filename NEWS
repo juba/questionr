@@ -1,6 +1,7 @@
 questionr 0.6.1
 ---------------
 
+* Add support for `forcats::fct_recode` in `irec`
 * Bugfix : conflict between `useNA` and `exclude` in `freq` (thanks @scoavoux)
 * Bugfix : Fix missing rownames in icut table results
 
