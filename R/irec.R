@@ -607,7 +607,6 @@ irec <- function(obj = NULL, var_name = NULL) {
     output$tableOut <- renderTable({
       ## Generate the recoding code with a temporary variable
       code <- generate_code(check = TRUE)
-      assign("irec_code", code, envir = .GlobalEnv)
       if (code != "") {
           ## Eval generated code
           eval(parse(text = code), envir = .GlobalEnv)
