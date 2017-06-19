@@ -72,6 +72,7 @@ function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA
   names(result)[which(names(result)=="valid.pourc")] <- "val%"
   names(result)[which(names(result)=="pourc.cum")] <- "%cum"
   names(result)[which(names(result)=="valid.pourc.cum")] <- "val%cum"
+  class(result) <- c("freqtab", class(result))
   round(result, digits=digits)
 }
 
@@ -443,4 +444,17 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
     tab <- stats::xtabs(formula, data, ...)
     names(dimnames(tab)) <- dn
     return(tab)
+  }
+
+#' @export
+#' @importFrom DT datatable
+
+`vt` <-
+  function(tab) {
+    tabname <- deparse(substitute(tab))
+    if ("freqtab" %in% class(tab)) {
+      
+    }
+    options <- list(searching = FALSE, paging = FALSE, info = FALSE)
+    DT::datatable(tabname, options = options)
   }

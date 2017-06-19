@@ -134,12 +134,11 @@ irec <- function(obj = NULL, var_name = NULL) {
             fluidRow(
               column(4, uiOutput("newvarInput")),
               column(4,selectInput("recstyle", gettext("Recoding style", domain="R-questionr"),
-                                   recoding_styles, selected = selected_recoding_style)),
-              column(4, selectInput("outconv", gettext("Output type", domain="R-questionr"),
-                                    c("Character" = "character", "Factor" = "factor", "Numeric" = "numeric"),
-                                    selected = selected_outconv))
+                                   c("Character - minimal" = "charmin", "Character - complete" = "charcomp", "Forcats - fct_recode" = "forcats"), selected = selected_recoding_style)),
+              column(4, uiOutput("outconvUI"))
             )),
-          uiOutput("alreadyexistsAlert")
+          uiOutput("alreadyexistsAlert"),
+          uiOutput("loadedforcatsAlert")
           )),
 
       ## Second panel : recoding fields, dynamically generated
@@ -192,6 +191,13 @@ irec <- function(obj = NULL, var_name = NULL) {
       return(NULL)
     })
 
+    output$outconvUI <- renderUI({
+      choices <- c("Character" = "character", "Factor" = "factor", "Numeric" = "numeric")
+      if (input$recstyle == "forcats")
+        choices <- c("Factor" = "factor", "Character" = "character", "Numeric" = "numeric")
+      selectInput("outconv", gettext("Output type", domain="R-questionr"), choices)
+    })
+    
     ## Text fileds for levels, dynamically generated
     output$levelsInput <- renderUI({
       out <- "<table><tbody>"
@@ -258,6 +264,15 @@ irec <- function(obj = NULL, var_name = NULL) {
       }
     })
     
+    output$loadedforcatsAlert <- renderUI({
+      if (input$recstyle == "forcats" && !require("forcats", quietly = TRUE)) {
+        div(class = "alert alert-warning alert-dismissible",
+            HTML('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'),
+            HTML(gettext("<strong>Warning :</strong> The <tt>forcats</tt> package must be installed and loaded for the generated code to be run.", domain="R-questionr")))
+      }
+    })
+    
+
     output$alreadyexistsAlert <- renderUI({
       exists <- FALSE
       if (is.data.frame(robj()) && req(input$newvar_name) %in% names(robj())) 
@@ -355,8 +370,10 @@ irec <- function(obj = NULL, var_name = NULL) {
       out
     }
 
-    ## Generate forcats style recoding code
-    generate_code_forcats <- function(dest_var, style) {
+    ## Generate recoding code for forcats
+    generate_code_forcats <- function(dest_var) {
+        out <- ""
+        out_na <- ""
       ## List levels
       if (is.factor(rvar())) levs <- levels(rvar())
       else {
@@ -364,7 +381,6 @@ irec <- function(obj = NULL, var_name = NULL) {
         levs <- as.character(levs)
       }
       if (any(is.na(rvar()))) levs <- c(levs, NA)
-
       out <- ""
       na_recode <- ""
       has_recode_to_na <- FALSE
@@ -427,7 +443,6 @@ irec <- function(obj = NULL, var_name = NULL) {
       out <- paste0(comment, out)  
       out
     }
-    
     
     ## Call recoding code generation function based on style
     generate_code <- function(check=FALSE) {
@@ -494,6 +509,7 @@ irec <- function(obj = NULL, var_name = NULL) {
     output$tableOut <- renderTable({
       ## Generate the recoding code with a temporary variable
       code <- generate_code(check = TRUE)
+      assign("irec_code", code, envir = .GlobalEnv)
       if (code != "") {
           ## Eval generated code
           eval(parse(text = code), envir = .GlobalEnv)
