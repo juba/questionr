@@ -9,7 +9,7 @@ Description: Interactively generate code for a variable levels reordering
 Binding: iorder
 Interactive: true
 
-Name: Variable cutting
-Description: Interactively generate code for cutting a numeric variable
+Name: Numeric range dividing
+Description: Interactively generate code for dividing the range of a numeric variable
 Binding: icut
 Interactive: true
