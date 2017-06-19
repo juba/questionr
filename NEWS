@@ -1,7 +1,8 @@
 questionr 0.6.1
 ---------------
 
-* Fix missing rownames in icut table results
+* Bugfix : conflict between `useNA` and `exclude` in `freq` (thanks @scoavoux)
+* Bugfix : Fix missing rownames in icut table results
 
 
 questionr 0.6.0
