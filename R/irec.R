@@ -34,18 +34,18 @@ irec <- function(obj = NULL, var_name = NULL) {
   selected_recoding_style <- "charmin"
   selected_outconv <- "character"
 
-  ## If forcats is loaded
-  if (isNamespaceLoaded("forcats")) {
-    selected_recoding_style <- "forcats"
-    selected_outconv <- "factor"
-  }
-
   ## If dplyr is loaded
   if (isNamespaceLoaded("dplyr")) {
     selected_recoding_style <- "recode"
     selected_outconv <- "character"
   }
-
+  ## If forcats is loaded
+  if (isNamespaceLoaded("forcats")) {
+    selected_recoding_style <- "forcats"
+    selected_outconv <- "factor"
+  }
+  
+  
   run_as_addin <- ifunc_run_as_addin()
 
   if (is.null(obj)) {
@@ -274,7 +274,7 @@ irec <- function(obj = NULL, var_name = NULL) {
     })
     
     output$loadedforcatsAlert <- renderUI({
-      if (input$recstyle == "forcats" && !requireNamespace("forcats", quietly = TRUE)) {
+      if (input$recstyle == "forcats" && !isNamespaceLoaded("forcats")) {
         div(class = "alert alert-warning alert-dismissible",
             HTML('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'),
             HTML(gettext("<strong>Warning :</strong> The <tt>forcats</tt> package must be installed and loaded for the generated code to be run.", domain="R-questionr")))
@@ -282,7 +282,7 @@ irec <- function(obj = NULL, var_name = NULL) {
     })
     
     output$loadeddplyrAlert <- renderUI({
-      if (input$recstyle == "recode" && !requireNamespace("dplyr", quietly = TRUE)) {
+      if (input$recstyle == "recode" && !isNamespaceLoaded("dplyr")) {
         div(class = "alert alert-warning alert-dismissible",
             HTML('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'),
             HTML(gettext("<strong>Warning :</strong> The <tt>dplyr</tt> package must be installed and loaded for the generated code to be run.", domain="R-questionr")))
