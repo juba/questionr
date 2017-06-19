@@ -1,6 +1,7 @@
 questionr 0.6.1
 ---------------
 
+* New "Recoding addins" vignette
 * Add support for `forcats::fct_recode` in `irec`
 * Add support for `dplyr::recode` in `irec`
 * "Variable cutting" addin entry renamed to "Numeric range dividing"
