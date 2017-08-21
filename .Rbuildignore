@@ -6,3 +6,4 @@ README.md
 ^\.travis\.yml$
 ^.*~$
 resources
+^docs$
