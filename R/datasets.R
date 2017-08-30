@@ -8,7 +8,7 @@
 #' @format A data frame with 2000 rows and 20 variables
 #' @source \url{http://www.insee.fr/fr/themes/detail.asp?ref_id=fd-HDV03}
 #' @name hdv2003
-NULL
+"hdv2003"
 
 #' 1999 French Census - Cities from the Rhône state
 #' 
@@ -19,7 +19,7 @@ NULL
 #' @format A data frame with 301 rows and 21 variables
 #' @source \url{http://www.insee.fr/fr/bases-de-donnees/default.asp?page=recensements.htm}
 #' @name rp99
-NULL
+"rp99"
 
 #' 2012 French Census - French cities of more than 2000 inhabitants
 #' 
@@ -30,7 +30,7 @@ NULL
 #' @format A data frame with 5170 rows and 60 variables
 #' @source \url{http://www.insee.fr/fr/bases-de-donnees/default.asp?page=recensements.htm}
 #' @name rp2012
-NULL
+"rp2012"
 
 #' A fertility survey
 #' 
@@ -64,7 +64,7 @@ NULL
 #' @keywords datasets
 #' @format a data frame containing some information from the households selected for the \link{fecondite} survey.
 #' @name menages
-NULL
+"menages"
 
 #' A fertility survey - "femmes" table
 #' 
@@ -75,7 +75,7 @@ NULL
 #' @format a data frame containing the questionnaire administered to all 15-49 years old women 
 #'        living in the selected households for the \link{fecondite} survey.
 #' @name femmes
-NULL
+"femmes"
 
 #' A fertility survey - "enfants" table
 #' 
@@ -85,7 +85,7 @@ NULL
 #' @keywords datasets
 #' @format a data frame containing one record for each child of the surveyed women in the \link{fecondite} survey.
 #' @name enfants
-NULL
+"enfants"
 
 
 #' A fertility survey
@@ -120,7 +120,7 @@ NULL
 #' @keywords datasets
 #' @format a data frame containing some information from the households selected for the \link{fertility} survey.
 #' @name households
-NULL
+"households"
 
 #' A fertility survey - "women" table
 #' 
@@ -131,7 +131,7 @@ NULL
 #' @format a data frame containing the questionnaire administered to all 15-49 years old women 
 #'        living in the selected households for the \link{fertility} survey.
 #' @name women
-NULL
+"women"
 
 #' A fertility survey - "children" table
 #' 
@@ -141,4 +141,4 @@ NULL
 #' @keywords datasets
 #' @format a data frame containing one record for each child of the surveyed women in the \link{fertility} survey.
 #' @name children
-NULL
+"children"

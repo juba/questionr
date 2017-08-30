@@ -8,6 +8,9 @@
 \source{
 \url{http://www.insee.fr/fr/bases-de-donnees/default.asp?page=recensements.htm}
 }
+\usage{
+rp2012
+}
 \description{
 Sample from the 2012 national french census. It contains results for every french city of more than 2000 inhabitants, and a small subset of variables, both in population counts and proportions.
 }

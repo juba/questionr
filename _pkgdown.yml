@@ -1,0 +1,77 @@
+reference:
+  - title: "Recoding addins"
+    desc: >
+      RStudio addins for variables manipulation.
+    contents: 
+      - irec
+      - iorder
+      - icut
+  - title: "Frequency tables"
+    desc: "Functions to help working with one-way and two-way frequency tables."
+    contents:
+      - freq
+      - rprop
+      - cprop
+      - prop
+      - chisq.residuals
+      - cramer.v
+      - ltabs
+      - format.proptab
+      - print.proptab
+  - title: "Multiple choices questions"
+    desc: "Functions to help working with multiple choices questions."
+    contents:
+      - multi.table
+      - cross.multi.table
+      - multi.split
+  - title: "Datasets"
+    desc: "Example datasets."
+    contents:
+      - fecondite    
+      - enfants
+      - femmes
+      - menages
+      - fertility
+      - children
+      - women
+      - households
+      - happy
+      - hdv2003
+      - rp99
+      - rp2012
+  - title: "Weighted variables"
+    desc: "Functions to deal with weighted variables"
+    contents:
+    - wtd.table
+    - wtd.mean
+  - title: "Data manipulation helpers"
+    desc: "Function helping for common data manipulation tasks."
+    contents:
+    - addNAstr
+    - duplicated2
+    - first_non_null
+    - freq.na
+    - na.rm
+    - quant.cut
+    - recode.na
+    - rename.variable
+    - rm.unused.levels
+  - title: "Odds ratio"
+    desc: "Functions to compute and deal with odds ratio."
+    contents:
+    - odds.ratio
+  - title: "Utils"
+    desc: "Utility functions."
+    contents:
+    - clipcopy
+    - describe
+    - lookfor
+    - qload
+    - qscan
+    - escape_regex
+    exclude:
+    - ifunc_get_css
+    - ifunc_run_as_addin
+    - ifunc_show_alert
+
+

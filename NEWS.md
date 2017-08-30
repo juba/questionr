@@ -1,6 +1,7 @@
 questionr 0.6.2
 ---------------
 
+* Generate a `pkgdown` package documentation at https://juba.github.io/questionr/
 * Fix incompatibility between `cum`, `sort` and NAs in `freq` (thanks @scoavoux) 
 
 questionr 0.6.1

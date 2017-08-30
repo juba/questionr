@@ -8,6 +8,9 @@
 \source{
 \url{http://www.insee.fr/fr/bases-de-donnees/default.asp?page=recensements.htm}
 }
+\usage{
+rp99
+}
 \description{
 Sample from the 1999 french census for the cities of the Rhône state.
 }

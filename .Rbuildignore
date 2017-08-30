@@ -7,3 +7,4 @@ README.md
 ^.*~$
 resources
 ^docs$
+^_pkgdown\.yml$
