@@ -6,7 +6,7 @@
 \usage{
 freq(x, digits = 1, cum = FALSE, total = FALSE, exclude = NULL,
   sort = "", valid = !(NA \%in\% exclude), levels = c("prefixed",
-  "labels", "values"))
+  "labels", "values"), na.last = TRUE)
 }
 \arguments{
 \item{x}{either a vector to be tabulated, or a table object}
@@ -26,6 +26,8 @@ freq(x, digits = 1, cum = FALSE, total = FALSE, exclude = NULL,
 \item{levels}{the desired levels for the factor in case of labelled vector (\pkg{labelled} package
 must be installed): "labels" for value labels, "values" for values or 
 "prefixed" for labels prefixed with values}
+
+\item{na.last}{if TRUE, NA values are always be last table row}
 }
 \value{
 The result is an object of class data.frame.
