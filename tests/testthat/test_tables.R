@@ -17,7 +17,7 @@ test_that("Simple freq is correct", {
 })
 
 test_that("freq with sort, digits, cum, valid and total is correct", {
-  tab <- freq(hdv2003$qualif, digits = 2, cum = TRUE, total = TRUE, valid = FALSE, sort = "inc")
+  tab <- freq(hdv2003$qualif, digits = 2, cum = TRUE, total = TRUE, valid = FALSE, sort = "inc", na.last = FALSE)
   v <- sort(summary(hdv2003$qualif))
   vnum <- as.numeric(v)
   expect_equal(names(tab), c("n", "%", "%cum"))
@@ -26,6 +26,19 @@ test_that("freq with sort, digits, cum, valid and total is correct", {
   expect_equal(tab$`%`, c(round(vnum / sum(vnum) * 100, 2), 100))
   expect_equal(tab$`%cum`, c(round(cumsum(vnum) / sum(vnum) * 100, 2), 100))
 })
+
+test_that("freq with sort, digits, cum, valid, total and na.last is correct", {
+  tab <- freq(hdv2003$qualif, digits = 2, cum = TRUE, total = TRUE, valid = FALSE, sort = "inc", na.last = TRUE)
+  v <- sort(summary(hdv2003$qualif))
+  v <- c(v[names(v) != "NA's"], v[names(v) == "NA's"])
+  vnum <- as.numeric(v)
+  expect_equal(names(tab), c("n", "%", "%cum"))
+  expect_equal(rownames(tab), gsub("NA's", "NA", c(names(v), "Total")))
+  expect_equal(tab$n, c(vnum, sum(vnum)))
+  expect_equal(tab$`%`, c(round(vnum / sum(vnum) * 100, 2), 100))
+  expect_equal(tab$`%cum`, c(round(cumsum(vnum) / sum(vnum) * 100, 2), 100))
+})
+
 
 test_that("freq with exclude is correct", {
   tab <- freq(hdv2003$qualif, exclude = c(NA, "Cadre", "Autre"))

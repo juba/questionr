@@ -12,6 +12,7 @@
 #' @param levels the desired levels for the factor in case of labelled vector (\pkg{labelled} package
 #'    must be installed): "labels" for value labels, "values" for values or 
 #'    "prefixed" for labels prefixed with values
+#' @param na.last if TRUE, NA values are always be last table row
 #' @return
 #' The result is an object of class data.frame.
 #' @seealso
@@ -31,26 +32,30 @@
 #' @export
 
 `freq` <-
-function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA%in%exclude), 
-          levels = c("prefixed", "labels", "values")) {
+function(x, digits = 1, cum = FALSE, total = FALSE, exclude = NULL, sort = "", 
+         valid = !(NA %in% exclude), levels = c("prefixed", "labels", "values"),
+         na.last = TRUE) {
   levels <- match.arg(levels)
   if (is.table(x)) tab <- x
-  else tab <- table(labelled::to_factor(x, levels), exclude=exclude)
+  else tab <- table(labelled::to_factor(x, levels), exclude = exclude)
   effectifs <- as.vector(tab)
-  pourc <- as.vector(effectifs/sum(effectifs)*100)
-  result <- data.frame(n=effectifs, pourc=pourc)
-  rownames(result) <- ifelse(is.na(names(tab)), "NA", names(tab))
+  pourc <- as.vector(effectifs / sum(effectifs) * 100)
+  result <- data.frame(n = effectifs, pourc = pourc)
   if (valid) {
     user_na <- unique(as.character(labelled::to_factor(x, levels)[is.na(x)]))
     NA.position <- which(is.na(names(tab)) | names(tab) %in% user_na)
     n.na <- sum(tab[NA.position])
-    valid.pourc <- as.vector(effectifs/(sum(effectifs)-n.na)*100)
+    valid.pourc <- as.vector(effectifs / (sum(effectifs) - n.na) * 100)
     valid.pourc[NA.position] <- 0 # temporary 0 for cumsum
     result <- cbind(result, valid.pourc)
   }
-  if (sort=="inc") result <- result[order(result$n),]
-  if (sort=="dec") result <- result[order(result$n, decreasing=TRUE),]
-  if (total) result <- rbind(result, Total=apply(result,2,sum))
+  rownames(result) <- ifelse(is.na(names(tab)), "NA", names(tab))
+  if (sort == "inc") result <- result[order(result$n),]
+  if (sort == "dec") result <- result[order(result$n, decreasing = TRUE),]
+  if (na.last && "NA" %in% rownames(result)) {
+    result <- rbind(result[-which(rownames(result) == "NA"), ], result["NA", ])
+  }
+  if (total) result <- rbind(result, Total = apply(result,2,sum))
   if (total & valid) 
     result[length(result$pourc),"valid.pourc"] <- 100
   if (cum) {
@@ -64,16 +69,17 @@ function (x, digits=1, cum=FALSE, total=FALSE, exclude=NULL, sort="", valid=!(NA
     }
   }
   if (valid) {
-    result[NA.position,"valid.pourc"] <- NA
+    NA.position <- which(rownames(result) == "NA" | rownames(result) %in% user_na)
+    result[NA.position, "valid.pourc"] <- NA
     if (cum)
-      result[NA.position,"valid.pourc.cum"] <- NA
+      result[NA.position, "valid.pourc.cum"] <- NA
   }
-  names(result)[which(names(result)=="pourc")] <- "%"
-  names(result)[which(names(result)=="valid.pourc")] <- "val%"
-  names(result)[which(names(result)=="pourc.cum")] <- "%cum"
-  names(result)[which(names(result)=="valid.pourc.cum")] <- "val%cum"
+  names(result)[names(result) == "pourc"] <- "%"
+  names(result)[names(result) == "valid.pourc"] <- "val%"
+  names(result)[names(result) == "pourc.cum"] <- "%cum"
+  names(result)[names(result) == "valid.pourc.cum"] <- "val%cum"
   class(result) <- c("freqtab", class(result))
-  round(result, digits=digits)
+  round(result, digits = digits)
 }
 
 #' Generate frequency table of missing values.
