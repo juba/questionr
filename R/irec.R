@@ -431,7 +431,13 @@ irec <- function(obj = NULL, var_name = NULL) {
       if (out != "") {
         source <- src_var()
         if (na_recode != "" && has_recode_to_na) { source <- dest_var }
-        out <- paste0(sprintf("%s <- fct_recode(%s", dest_var, source), out)
+        ## Input conversion if numeric
+        if (is.numeric(rvar())) {
+          out <- paste0(sprintf("%s <- fct_recode(%s", dest_var, dest_var), out)
+          out <- paste0(sprintf("%s <- as.character(%s)\n", dest_var, source), out)
+        } else {
+          out <- paste0(sprintf("%s <- fct_recode(%s", dest_var, source), out)
+        }
         out <- paste0(out, ")\n")
       }
       
