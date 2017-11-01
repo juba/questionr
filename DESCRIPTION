@@ -16,7 +16,7 @@ Description: Set of functions to make the processing and analysis of
 Depends:
     R (>= 2.10)
 Imports:
-    shiny (>= 0.13),
+    shiny (>= 1.0.5),
     miniUI,
     rstudioapi,
     highr,
