@@ -1,6 +1,7 @@
 questionr 0.6.2
 ---------------
 
+* Bugfix : missing rownames in `iorder` verification table
 * Generate a `pkgdown` package documentation at https://juba.github.io/questionr/
 * Fix incompatibility between `cum`, `sort` and NAs in `freq` (thanks @scoavoux)
 * Bugfix : error when recoding a numeric variable with `forcats` in `irec`

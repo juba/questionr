@@ -325,7 +325,7 @@ iorder <- function(obj = NULL, var_name = NULL) {
       ## Display table
       tab <- freq(get(".iorder_tmp"))
       tab
-    })
+    }, rownames = TRUE)
 
   }
 
