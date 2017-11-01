@@ -66,6 +66,7 @@ function (x, weights = NULL, normwt = FALSE, na.rm = TRUE)
 #' @param normwt if TRUE, normalize weights so that the total weighted count is the same as the unweighted one
 #' @param na.show if TRUE, show NA count in table output
 #' @param na.rm if TRUE, remove NA values before computation
+#' @param exclude values to remove from x and y. To exclude NA, use na.rm argument.
 #' @details
 #' If \code{weights} is not provided, an uniform weghting is used.
 #' @return
@@ -83,7 +84,7 @@ function (x, weights = NULL, normwt = FALSE, na.rm = TRUE)
 #' @export
 
 `wtd.table` <-
-function (x, y = NULL, weights = NULL, normwt = FALSE, na.rm = TRUE, na.show = FALSE) 
+function (x, y = NULL, weights = NULL, normwt = FALSE, na.rm = TRUE, na.show = FALSE, exclude = NULL) 
 {
   if (is.null(weights)) weights <- rep(1, length(x))  
   if (length(x) != length(weights)) stop("x and weights lengths must be the same")
@@ -98,6 +99,13 @@ function (x, y = NULL, weights = NULL, normwt = FALSE, na.rm = TRUE, na.show = F
      x <- x[s, drop = FALSE]
      if (!is.null(y)) y <- y[s, drop = FALSE]
      weights <- weights[s]
+  }
+  if (!is.null(exclude)) {
+    s <- !(x %in% exclude)
+    if (!is.null(y)) s <- s & !(y %in% exclude)
+    x <- factor(x[s, drop = FALSE])
+    if (!is.null(y)) y <- factor(y[s, drop = FALSE])
+    weights <- weights[s]
   }
   if (normwt) {
     weights <- weights * length(x)/sum(weights)

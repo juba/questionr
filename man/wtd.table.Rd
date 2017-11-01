@@ -5,7 +5,7 @@
 \title{Weighted one-way and two-way frequency tables.}
 \usage{
 wtd.table(x, y = NULL, weights = NULL, normwt = FALSE, na.rm = TRUE,
-  na.show = FALSE)
+  na.show = FALSE, exclude = NULL)
 }
 \arguments{
 \item{x}{a vector}
@@ -19,6 +19,8 @@ wtd.table(x, y = NULL, weights = NULL, normwt = FALSE, na.rm = TRUE,
 \item{na.rm}{if TRUE, remove NA values before computation}
 
 \item{na.show}{if TRUE, show NA count in table output}
+
+\item{exclude}{values to remove from x and y. To exclude NA, use na.rm argument.}
 }
 \value{
 If \code{y} is not provided, returns a weighted one-way frequency table

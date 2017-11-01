@@ -1,6 +1,7 @@
 questionr 0.6.2
 ---------------
 
+* Add `exclude` argument to `wtd.table` (thanks @pgtpg)
 * Make `clipcopy` work with tibbles
 * Bugfix : missing rownames in `iorder` verification table
 * Generate a `pkgdown` package documentation at https://juba.github.io/questionr/
