@@ -66,6 +66,7 @@ function (x, weights = NULL, normwt = FALSE, na.rm = TRUE)
 #' @param normwt if TRUE, normalize weights so that the total weighted count is the same as the unweighted one
 #' @param na.show if TRUE, show NA count in table output
 #' @param na.rm if TRUE, remove NA values before computation
+#' @param digits Number of significant digits.
 #' @param exclude values to remove from x and y. To exclude NA, use na.rm argument.
 #' @details
 #' If \code{weights} is not provided, an uniform weghting is used.
@@ -86,7 +87,7 @@ function (x, weights = NULL, normwt = FALSE, na.rm = TRUE)
 
 
 `wtd.table` <-
-function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, na.rm = TRUE, na.show = FALSE, exclude = NULL, proportion = FALSE) 
+function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, na.rm = TRUE, na.show = FALSE, exclude = NULL) 
 {
   if (is.null(weights)) weights <- rep(1, length(x))  
   if (length(x) != length(weights)) stop("x and weights lengths must be the same")
@@ -134,6 +135,7 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, na.rm = TRUE,
 #' @param weight variable name for weight (found in \code{df}). 
 #' @param type 'percent', 'proportion', or 'counts' (type of table returned).
 #' @param normwt if TRUE, normalize weights so that the total weighted count is the same as the unweighted one
+#' @param digits Number of significant digits.
 #' @param na.show if TRUE, show NA count in table output
 #' @param na.rm if TRUE, remove NA values before computation
 #' @param exclude values to remove from x and y. To exclude NA, use na.rm argument.
@@ -150,7 +152,7 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, na.rm = TRUE,
 
 `Xtabs` <- function(df, x, y = NULL, type = "percent",
                     weight = NULL, normwt = FALSE, na.rm = TRUE, 
-                    na.show = FALSE){
+                    na.show = FALSE, digits = 3, exclude = NULL){
   
   sumOne <- function(x, ...) x/sum(x, ...)
   if(!(type %in% c("percent", "proportion", "counts"))){
@@ -176,7 +178,7 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, na.rm = TRUE,
   w <- if(is.null(weight)) NULL else df[[weight]]
   
   tabs <- wtd.table(df[[x]], y = NULL, weights = w, digits = digits,
-                     normwt = normwt, na.rm = na.rm, na.show = na.show)
+                     normwt = normwt, na.rm = na.rm, na.show = na.show, exclude = exclude)
 
   if(type %in% c("percent", "proportion")){
     tabs <- sumOne(tabs)
@@ -186,11 +188,14 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, na.rm = TRUE,
     
     out <- lapply(y, 
                   function(x, y, w, normwt = FALSE, na.rm = TRUE, 
-                           na.show = FALSE) 
+                           na.show = FALSE, digits = 3, exclude = NULL){
+                  
                     wtd.table(df[[y]], df[[x]], 
-                              weight = w, 
-                              normwt = normwt, na.rm = na.rm, na.show = na.show), 
-                  x, w, normwt, na.rm, na.show)
+                              weights = w, normwt = normwt, na.rm = na.rm, 
+                              na.show = na.show, digits = digits, exclude = exclude)
+                  } 
+                    , 
+                  x, w, normwt, na.rm, na.show, digits, exclude)
     
     for(i in 1:length(out)){
       tabs <- cbind(tabs, 

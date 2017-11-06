@@ -5,7 +5,7 @@
 \title{Weighted Crosstabs}
 \usage{
 Xtabs(df, x, y = NULL, type = "percent", weight = NULL, normwt = FALSE,
-  na.rm = TRUE, na.show = FALSE)
+  na.rm = TRUE, na.show = FALSE, digits = 3, exclude = NULL)
 }
 \arguments{
 \item{df}{A data.frame that contains \code{x} and (optionally) \code{y} and \code{weight}.}
@@ -23,6 +23,8 @@ Xtabs(df, x, y = NULL, type = "percent", weight = NULL, normwt = FALSE,
 \item{na.rm}{if TRUE, remove NA values before computation}
 
 \item{na.show}{if TRUE, show NA count in table output}
+
+\item{digits}{Number of significant digits.}
 
 \item{exclude}{values to remove from x and y. To exclude NA, use na.rm argument.}
 }

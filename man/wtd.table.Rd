@@ -5,7 +5,7 @@
 \title{Weighted one-way and two-way frequency tables.}
 \usage{
 wtd.table(x, y = NULL, weights = NULL, digits = 3, normwt = FALSE,
-  na.rm = TRUE, na.show = FALSE, exclude = NULL, proportion = FALSE)
+  na.rm = TRUE, na.show = FALSE, exclude = NULL)
 }
 \arguments{
 \item{x}{a vector}
@@ -13,6 +13,8 @@ wtd.table(x, y = NULL, weights = NULL, digits = 3, normwt = FALSE,
 \item{y}{another optional vector for a two-way frequency table. Must be the same length as \code{x}}
 
 \item{weights}{vector of weights, must be the same length as \code{x}}
+
+\item{digits}{Number of significant digits.}
 
 \item{normwt}{if TRUE, normalize weights so that the total weighted count is the same as the unweighted one}
 
