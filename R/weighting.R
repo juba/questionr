@@ -123,41 +123,59 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, na.rm = TRUE,
 }
 
 
-#' Weighted Crosstabs 
-#'
+#' Weighted Crosstabs
+#' 
 #' Generate table with multiple weighted crosstabs (full sample is first column).
-#' @example 
-#' xtabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), weight = "poids")
+#' kable(), which is found in library(knitr), is recommended for use with RMarkdown.
+#' 
+#' @param df A data.frame that contains \code{x} and (optionally) \code{y} and \code{weight}.
+#' @param x variable name (found in \code{df}). Xtabs(my.data, x = 'q1').
+#' @param y one (or more) variable names. Xtabs(my.data, x = 'q1', y = c('sex', 'race')).
+#' @param weight variable name for weight (found in \code{df}). 
+#' @param type 'percent', 'proportion', or 'counts' (type of table returned).
+#' @param normwt if TRUE, normalize weights so that the total weighted count is the same as the unweighted one
+#' @param na.show if TRUE, show NA count in table output
+#' @param na.rm if TRUE, remove NA values before computation
+#' @param exclude values to remove from x and y. To exclude NA, use na.rm argument.
+#' @details Xtabs calls wtd.table on `\code{x}` and, as applicable, each variable named by `\code{y}`.
+#' @examples
+#' data(hdv2003) 
+#' Xtabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), weight = "poids")
+#' Xtabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), type = "counts")
+#' # library(knitr)
+#' # xt <- Xtabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), weight = "poids")
+#' # kable(xt)                        # to use with RMarkdown...
+#' 
 #' @export
 
-`xtabs` <- function(dataframe, x, y = NULL, type = "percent",
+`Xtabs` <- function(df, x, y = NULL, type = "percent",
                     weight = NULL, normwt = FALSE, na.rm = TRUE, 
                     na.show = FALSE){
   
   sumOne <- function(x, ...) x/sum(x, ...)
-  if(!(type %in% c("percent", "proportion", "counts", "none"))){
-    stop("type must either be \"percent\", \"proportion\", or \"counts\". For example:\n\nxtabs(survey, x = \"q1\", y = \"q2\", type = \"percent\")))")
+  if(!(type %in% c("percent", "proportion", "counts"))){
+    stop("type must either be \"percent\", \"proportion\", or \"counts\". For example:\n\nXtabs(survey, x = \"q1\", y = \"q2\", type = \"percent\")))")
   }
   
-  stopifnot(is.data.frame(dataframe))
+  stopifnot(is.data.frame(df))
             
-  missing <- match(x, names(dataframe), nomatch = 0L) == 0L
+  missing <- match(x, names(df), nomatch = 0L) == 0L
   if(!is.null(y)){
-    missing <- missing | (min(match(y, names(dataframe), nomatch = 0L)) == 0)
+    missing <- missing | (min(match(y, names(df), nomatch = 0L)) == 0)
   }
   if(!is.null(weight)){
-    missing <- missing | (min(match(weight, names(dataframe), nomatch = 0L)) == 0)
+    missing <- missing | (min(match(weight, names(df), nomatch = 0L)) == 0)
   }
   
   if(missing){
     stop(paste("x, y, or weight not found in the data.frame you provided.\nPlease call tabs again with syntax like:\n\n",
-               "xtabs(survey, x = \"q1\")\n",
-               "xtabs(survey, x = \"q1\", y = c(\"age\", \"sex\"), weight = \"cellweights\")\n"))
+               "Xtabs(survey, x = \"q1\")\n",
+               "Xtabs(survey, x = \"q1\", y = c(\"age\", \"sex\"), weight = \"cellweights\")\n"))
   }
   
-  w <- if(is.null(weight)) NULL else dataframe[[weight]]
+  w <- if(is.null(weight)) NULL else df[[weight]]
   
-  tabs <- wtd.table(dataframe[[x]], y = NULL, weights = w, 
+  tabs <- wtd.table(df[[x]], y = NULL, weights = w, digits = digits,
                      normwt = normwt, na.rm = na.rm, na.show = na.show)
 
   if(type %in% c("percent", "proportion")){
@@ -169,7 +187,7 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, na.rm = TRUE,
     out <- lapply(y, 
                   function(x, y, w, normwt = FALSE, na.rm = TRUE, 
                            na.show = FALSE) 
-                    wtd.table(dataframe[[y]], dataframe[[x]], 
+                    wtd.table(df[[y]], df[[x]], 
                               weight = w, 
                               normwt = normwt, na.rm = na.rm, na.show = na.show), 
                   x, w, normwt, na.rm, na.show)
@@ -179,14 +197,21 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, na.rm = TRUE,
                      if(type %in% c("percent", "proportion")) sumOne(out[[i]]) else out[[i]])
     } 
     colnames(tabs)[1] <- "Overall"
+    
+    if(type == "percent" | type == "proportion") 
+      for(i in 1:nrow(tabs))
+        for(j in 1:ncol(tabs))
+          tabs[i, j] <- paste0(format(100^(type == "percent")*as.numeric(tabs[i ,j]), digits = 3), 
+                               if(type == "percent") "%" else NULL)
+    
+  }else{
+    for(i in 1:length(tabs))
+      tabs[i] <- paste0(format(100^(type == "percent")*as.numeric(tabs[i]), digits = 3), 
+                           if(type == "percent") "%" else NULL)
   }
   
-  if(type == "percent") 
-    for(i in 1:nrow(tabs))
-      for(j in 1:ncol(tabs))
-        tabs[i, j] <- paste0(format(100*as.numeric(tabs[i ,j]), digits = 3), "%")
-     
-  return(tabs)
+  return(tabs)   
+
 }
 
 
