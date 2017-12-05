@@ -124,39 +124,39 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, na.rm = TRUE,
 }
 
 
-#' Weighted Crosstabs
+#' Weighted Crossresult
 #' 
-#' Generate table with multiple weighted crosstabs (full sample is first column).
+#' Generate table with multiple weighted crossresult (full sample is first column).
 #' kable(), which is found in library(knitr), is recommended for use with RMarkdown.
 #' 
 #' @param df A data.frame that contains \code{x} and (optionally) \code{y} and \code{weight}.
-#' @param x variable name (found in \code{df}). Xtabs(my.data, x = 'q1').
-#' @param y one (or more) variable names. Xtabs(my.data, x = 'q1', y = c('sex', 'race')).
+#' @param x variable name (found in \code{df}). tabs(my.data, x = 'q1').
+#' @param y one (or more) variable names. tabs(my.data, x = 'q1', y = c('sex', 'race')).
 #' @param weight variable name for weight (found in \code{df}). 
-#' @param type 'percent', 'proportion', or 'counts' (type of table returned).
+#' @param type 'percent' (default ranges 0-100), 'proportion', or 'counts' (type of table returned).
 #' @param normwt if TRUE, normalize weights so that the total weighted count is the same as the unweighted one
-#' @param digits Number of significant digits.
 #' @param na.show if TRUE, show NA count in table output
 #' @param na.rm if TRUE, remove NA values before computation
 #' @param exclude values to remove from x and y. To exclude NA, use na.rm argument.
-#' @details Xtabs calls wtd.table on `\code{x}` and, as applicable, each variable named by `\code{y}`.
+#' @param digits Number of digits to display; ?format.proptab for formatting details.
+#' @details tabs calls wtd.table on `\code{x}` and, as applicable, each variable named by `\code{y}`.
 #' @examples
 #' data(hdv2003) 
-#' Xtabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), weight = "poids")
-#' Xtabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), type = "counts")
+#' tabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), weight = "poids")
+#' result <- tabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), type = "counts")
+#' format(result, digits = 3)
 #' # library(knitr)
-#' # xt <- Xtabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), weight = "poids")
-#' # kable(xt)                        # to use with RMarkdown...
+#' # xt <- tabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), weight = "poids")
+#' # kable(format(xt))                        # to use with RMarkdown...
 #' 
 #' @export
 
-`Xtabs` <- function(df, x, y = NULL, type = "percent",
-                    weight = NULL, normwt = FALSE, na.rm = TRUE, 
-                    na.show = FALSE, digits = 3, exclude = NULL){
+`tabs` <- function(df, x, y = NULL, type = "percent", weight = NULL, normwt = FALSE, 
+                    na.rm = TRUE, na.show = FALSE, exclude = NULL, digits = 3){
   
   sumOne <- function(x, ...) x/sum(x, ...)
   if(!(type %in% c("percent", "proportion", "counts"))){
-    stop("type must either be \"percent\", \"proportion\", or \"counts\". For example:\n\nXtabs(survey, x = \"q1\", y = \"q2\", type = \"percent\")))")
+    stop("type must either be \"percent\", \"proportion\", or \"counts\". For example:\n\ntabs(survey, x = \"q1\", y = \"q2\", type = \"percent\")))")
   }
   
   stopifnot(is.data.frame(df))
@@ -170,52 +170,48 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, na.rm = TRUE,
   }
   
   if(missing){
-    stop(paste("x, y, or weight not found in the data.frame you provided.\nPlease call tabs again with syntax like:\n\n",
-               "Xtabs(survey, x = \"q1\")\n",
-               "Xtabs(survey, x = \"q1\", y = c(\"age\", \"sex\"), weight = \"cellweights\")\n"))
+    stop(paste("x, y, or weight not found in the data.frame you provided.\nPlease call result again with syntax like:\n\n",
+               "tabs(survey, x = \"q1\")\n",
+               "tabs(survey, x = \"q1\", y = c(\"age\", \"sex\"), weight = \"cellweights\")\n"))
   }
   
   w <- if(is.null(weight)) NULL else df[[weight]]
   
-  tabs <- wtd.table(df[[x]], y = NULL, weights = w, digits = digits,
+  result <- wtd.table(df[[x]], y = NULL, weights = w, digits = digits,
                      normwt = normwt, na.rm = na.rm, na.show = na.show, exclude = exclude)
 
   if(type %in% c("percent", "proportion")){
-    tabs <- sumOne(tabs)
+    result <- sumOne(result, na.rm = na.rm)
   }
   
-  if(!is.null(y)){
-    
-    out <- lapply(y, 
-                  function(x, y, w, normwt = FALSE, na.rm = TRUE, 
-                           na.show = FALSE, digits = 3, exclude = NULL){
-                  
-                    wtd.table(df[[y]], df[[x]], 
-                              weights = w, normwt = normwt, na.rm = na.rm, 
-                              na.show = na.show, digits = digits, exclude = exclude)
-                  } 
-                    , 
-                  x, w, normwt, na.rm, na.show, digits, exclude)
-    
-    for(i in 1:length(out)){
-      tabs <- cbind(tabs, 
-                     if(type %in% c("percent", "proportion")) sumOne(out[[i]]) else out[[i]])
-    } 
-    colnames(tabs)[1] <- "Overall"
-    
-    if(type == "percent" | type == "proportion") 
-      for(i in 1:nrow(tabs))
-        for(j in 1:ncol(tabs))
-          tabs[i, j] <- paste0(format(100^(type == "percent")*as.numeric(tabs[i ,j]), digits = 3), 
-                               if(type == "percent") "%" else NULL)
-    
+  if(is.null(y)){
+    return(result)
   }else{
-    for(i in 1:length(tabs))
-      tabs[i] <- paste0(format(100^(type == "percent")*as.numeric(tabs[i]), digits = 3), 
-                           if(type == "percent") "%" else NULL)
+    
+    for(v in y){
+      tmp <- wtd.table(df[[x]], df[[v]], weights = w, digits = digits,
+                       normwt = normwt, na.rm = na.rm, na.show = na.show, exclude = exclude)
+      if(type %in% c("percent", "proportion")) tmp <- sumOne(tmp, na.rm = na.rm)
+      result <- cbind(result, tmp)
+    }
+
+    colnames(result)[1] <- "Overall"
+    class(result) <- c("proptab", class(result))
+    
+    if(type == "percent"){
+      result <- 100*result
+      attr(result, "percent") <- TRUE
+    }else{
+      attr(result, "percent") <- FALSE
+    }
+    
+    attr(result, "digits") <- digits
+    attr(result, "row.n") <- nrow(result)
+    attr(result, "col.n") <- ncol(result)
+    
+    return(result)   
+    
   }
-  
-  return(tabs)   
 
 }
 
