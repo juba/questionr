@@ -1,7 +1,7 @@
 questionr 0.6.3
 ---------------
 
-
+* Add new tabs() function (thanks @rdrr1990)
 
 questionr 0.6.2
 ---------------
