@@ -4,17 +4,20 @@
 \alias{tabs}
 \title{Weighted Crossresult}
 \usage{
-tabs(df, x, y = NULL, type = "percent", weight = NULL, normwt = FALSE,
-  na.rm = TRUE, na.show = FALSE, exclude = NULL, digits = 3)
+tabs(df, x, y, type = "percent", percent = FALSE, weight = NULL,
+  normwt = FALSE, na.rm = TRUE, na.show = FALSE, exclude = NULL,
+  digits = 1)
 }
 \arguments{
 \item{df}{A data.frame that contains \code{x} and (optionally) \code{y} and \code{weight}.}
 
 \item{x}{variable name (found in \code{df}). tabs(my.data, x = 'q1').}
 
-\item{y}{one (or more) variable names. tabs(my.data, x = 'q1', y = c('sex', 'race')).}
+\item{y}{one (or more) variable names. tabs(my.data, x = 'q1', y = c('sex', 'job')).}
 
 \item{type}{'percent' (default ranges 0-100), 'proportion', or 'counts' (type of table returned).}
+
+\item{percent}{if \code{TRUE}, add a percent sign after the values when printing}
 
 \item{weight}{variable name for weight (found in \code{df}).}
 
@@ -44,4 +47,7 @@ format(result, digits = 3)
 # xt <- tabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), weight = "poids")
 # kable(format(xt))                        # to use with RMarkdown...
 
+}
+\author{
+Pete Mohanty
 }
