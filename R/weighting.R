@@ -66,6 +66,8 @@ function (x, weights = NULL, normwt = FALSE, na.rm = TRUE)
 #' @param normwt if TRUE, normalize weights so that the total weighted count is the same as the unweighted one
 #' @param na.show if TRUE, show NA count in table output
 #' @param na.rm if TRUE, remove NA values before computation
+#' @param digits Number of significant digits.
+#' @param exclude values to remove from x and y. To exclude NA, use na.rm argument.
 #' @details
 #' If \code{weights} is not provided, an uniform weghting is used.
 #' @return
@@ -82,8 +84,10 @@ function (x, weights = NULL, normwt = FALSE, na.rm = TRUE)
 #' wtd.table(hdv2003$sexe, hdv2003$hard.rock, weights=hdv2003$poids)
 #' @export
 
+
+
 `wtd.table` <-
-function (x, y = NULL, weights = NULL, normwt = FALSE, na.rm = TRUE, na.show = FALSE) 
+function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, na.rm = TRUE, na.show = FALSE, exclude = NULL) 
 {
   if (is.null(weights)) weights <- rep(1, length(x))  
   if (length(x) != length(weights)) stop("x and weights lengths must be the same")
@@ -99,6 +103,13 @@ function (x, y = NULL, weights = NULL, normwt = FALSE, na.rm = TRUE, na.show = F
      if (!is.null(y)) y <- y[s, drop = FALSE]
      weights <- weights[s]
   }
+  if (!is.null(exclude)) {
+    s <- !(x %in% exclude)
+    if (!is.null(y)) s <- s & !(y %in% exclude)
+    x <- factor(x[s, drop = FALSE])
+    if (!is.null(y)) y <- factor(y[s, drop = FALSE])
+    weights <- weights[s]
+  }
   if (normwt) {
     weights <- weights * length(x)/sum(weights)
   }
@@ -111,3 +122,93 @@ function (x, y = NULL, weights = NULL, normwt = FALSE, na.rm = TRUE, na.show = F
   result[is.na(result)] <- 0
   as.table(result)
 }
+
+
+#' Weighted Crossresult
+#' 
+#' Generate table with multiple weighted crossresult (full sample is first column).
+#' kable(), which is found in library(knitr), is recommended for use with RMarkdown.
+#' 
+#' @param df A data.frame that contains \code{x} and (optionally) \code{y} and \code{weight}.
+#' @param x variable name (found in \code{df}). tabs(my.data, x = 'q1').
+#' @param y one (or more) variable names. tabs(my.data, x = 'q1', y = c('sex', 'job')).
+#' @param weight variable name for weight (found in \code{df}). 
+#' @param type 'percent' (default ranges 0-100), 'proportion', or 'counts' (type of table returned).
+#' @param percent if \code{TRUE}, add a percent sign after the values when printing
+#' @param normwt if TRUE, normalize weights so that the total weighted count is the same as the unweighted one
+#' @param na.show if TRUE, show NA count in table output
+#' @param na.rm if TRUE, remove NA values before computation
+#' @param exclude values to remove from x and y. To exclude NA, use na.rm argument.
+#' @param digits Number of digits to display; ?format.proptab for formatting details.
+#' @details tabs calls wtd.table on `\code{x}` and, as applicable, each variable named by `\code{y}`.
+#' @author Pete Mohanty
+#' @examples
+#' data(hdv2003) 
+#' tabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), weight = "poids")
+#' result <- tabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), type = "counts")
+#' format(result, digits = 3)
+#' # library(knitr)
+#' # xt <- tabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), weight = "poids")
+#' # kable(format(xt))                        # to use with RMarkdown...
+#' 
+#' @export
+
+`tabs` <- function(df, x, y, 
+                   type = "percent", percent = FALSE,
+                   weight = NULL, normwt = FALSE, 
+                   na.rm = TRUE, na.show = FALSE, exclude = NULL, digits = 1){
+  
+  sumOne <- function(x, ...) x/sum(x, ...)
+  
+  if (!(type %in% c("percent", "proportion", "counts"))) {
+    stop("type must either be 'percent', 'proportion', or 'counts'.")
+  }
+  
+  if (!inherits(df, "data.frame")) {
+    stop("df must be a data.frame")
+  }
+
+  if (!(x %in% names(df))) {
+    stop(paste(x, 'not found in data frame.'))
+  }            
+  if (min(match(y, names(df), nomatch = 0L)) == 0L) {
+    stop(paste(y, 'not found in data frame.'))
+  } 
+  if (!is.null(weight) && !(weight %in% names(df))) {
+    stop(paste(weight, 'not found in data frame.'))
+  } 
+
+  w <- if (is.null(weight)) NULL else df[[weight]]
+  
+  result <- wtd.table(df[[x]], y = NULL, weights = w, 
+                     normwt = normwt, na.rm = na.rm, na.show = na.show, exclude = exclude)
+  if (type %in% c("percent", "proportion")) {
+    result <- sumOne(result, na.rm = na.rm)
+  }
+
+  for (v in y) {
+    tmp <- wtd.table(df[[x]], df[[v]], weights = w, 
+                     normwt = normwt, na.rm = na.rm, na.show = na.show, exclude = exclude)
+    if (type %in% c("percent", "proportion")) tmp <- sumOne(tmp, na.rm = na.rm)
+    result <- cbind(result, tmp)
+  }
+  if (type == "percent") {
+    result <- 100 * result
+  }
+  
+  colnames(result)[1] <- gettext("Overall", domain = "R-questionr")
+  class(result) <- c("proptab", class(result))
+
+  attr(result, "percent") <- percent
+  if (type != "percent") {
+    attr(result, "percent") <- FALSE
+  }
+  attr(result, "digits") <- digits
+
+  return(result)   
+  
+}
+
+
+
+

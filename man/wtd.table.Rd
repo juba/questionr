@@ -4,8 +4,8 @@
 \alias{wtd.table}
 \title{Weighted one-way and two-way frequency tables.}
 \usage{
-wtd.table(x, y = NULL, weights = NULL, normwt = FALSE, na.rm = TRUE,
-  na.show = FALSE)
+wtd.table(x, y = NULL, weights = NULL, digits = 3, normwt = FALSE,
+  na.rm = TRUE, na.show = FALSE, exclude = NULL)
 }
 \arguments{
 \item{x}{a vector}
@@ -14,11 +14,15 @@ wtd.table(x, y = NULL, weights = NULL, normwt = FALSE, na.rm = TRUE,
 
 \item{weights}{vector of weights, must be the same length as \code{x}}
 
+\item{digits}{Number of significant digits.}
+
 \item{normwt}{if TRUE, normalize weights so that the total weighted count is the same as the unweighted one}
 
 \item{na.rm}{if TRUE, remove NA values before computation}
 
 \item{na.show}{if TRUE, show NA count in table output}
+
+\item{exclude}{values to remove from x and y. To exclude NA, use na.rm argument.}
 }
 \value{
 If \code{y} is not provided, returns a weighted one-way frequency table
