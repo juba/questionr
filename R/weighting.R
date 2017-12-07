@@ -141,6 +141,7 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, na.rm = TRUE,
 #' @param exclude values to remove from x and y. To exclude NA, use na.rm argument.
 #' @param digits Number of digits to display; ?format.proptab for formatting details.
 #' @details tabs calls wtd.table on `\code{x}` and, as applicable, each variable named by `\code{y}`.
+#' @author Pete Mohanty
 #' @examples
 #' data(hdv2003) 
 #' tabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), weight = "poids")
