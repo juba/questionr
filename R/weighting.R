@@ -131,9 +131,10 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, na.rm = TRUE,
 #' 
 #' @param df A data.frame that contains \code{x} and (optionally) \code{y} and \code{weight}.
 #' @param x variable name (found in \code{df}). tabs(my.data, x = 'q1').
-#' @param y one (or more) variable names. tabs(my.data, x = 'q1', y = c('sex', 'race')).
+#' @param y one (or more) variable names. tabs(my.data, x = 'q1', y = c('sex', 'job')).
 #' @param weight variable name for weight (found in \code{df}). 
 #' @param type 'percent' (default ranges 0-100), 'proportion', or 'counts' (type of table returned).
+#' @param percent if \code{TRUE}, add a percent sign after the values when printing
 #' @param normwt if TRUE, normalize weights so that the total weighted count is the same as the unweighted one
 #' @param na.show if TRUE, show NA count in table output
 #' @param na.rm if TRUE, remove NA values before computation
@@ -151,68 +152,62 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, na.rm = TRUE,
 #' 
 #' @export
 
-`tabs` <- function(df, x, y = NULL, type = "percent", weight = NULL, normwt = FALSE, 
-                    na.rm = TRUE, na.show = FALSE, exclude = NULL, digits = 3){
+`tabs` <- function(df, x, y, 
+                   type = "percent", percent = FALSE,
+                   weight = NULL, normwt = FALSE, 
+                   na.rm = TRUE, na.show = FALSE, exclude = NULL, digits = 1){
   
   sumOne <- function(x, ...) x/sum(x, ...)
-  if(!(type %in% c("percent", "proportion", "counts"))){
-    stop("type must either be \"percent\", \"proportion\", or \"counts\". For example:\n\ntabs(survey, x = \"q1\", y = \"q2\", type = \"percent\")))")
+  
+  if (!(type %in% c("percent", "proportion", "counts"))) {
+    stop("type must either be 'percent', 'proportion', or 'counts'.")
   }
   
-  stopifnot(is.data.frame(df))
-            
-  missing <- match(x, names(df), nomatch = 0L) == 0L
-  if(!is.null(y)){
-    missing <- missing | (min(match(y, names(df), nomatch = 0L)) == 0)
+  if (!inherits(df, "data.frame")) {
+    stop("df must be a data.frame")
   }
-  if(!is.null(weight)){
-    missing <- missing | (min(match(weight, names(df), nomatch = 0L)) == 0)
-  }
-  
-  if(missing){
-    stop(paste("x, y, or weight not found in the data.frame you provided.\nPlease call result again with syntax like:\n\n",
-               "tabs(survey, x = \"q1\")\n",
-               "tabs(survey, x = \"q1\", y = c(\"age\", \"sex\"), weight = \"cellweights\")\n"))
-  }
-  
-  w <- if(is.null(weight)) NULL else df[[weight]]
-  
-  result <- wtd.table(df[[x]], y = NULL, weights = w, digits = digits,
-                     normwt = normwt, na.rm = na.rm, na.show = na.show, exclude = exclude)
 
-  if(type %in% c("percent", "proportion")){
+  if (!(x %in% names(df))) {
+    stop(paste(x, 'not found in data frame.'))
+  }            
+  if (min(match(y, names(df), nomatch = 0L)) == 0L) {
+    stop(paste(y, 'not found in data frame.'))
+  } 
+  if (!is.null(weight) && !(weight %in% names(df))) {
+    stop(paste(weight, 'not found in data frame.'))
+  } 
+
+  w <- if (is.null(weight)) NULL else df[[weight]]
+  
+  result <- wtd.table(df[[x]], y = NULL, weights = w, 
+                     normwt = normwt, na.rm = na.rm, na.show = na.show, exclude = exclude)
+  if (type %in% c("percent", "proportion")) {
     result <- sumOne(result, na.rm = na.rm)
   }
-  
-  if(is.null(y)){
-    return(result)
-  }else{
-    
-    for(v in y){
-      tmp <- wtd.table(df[[x]], df[[v]], weights = w, digits = digits,
-                       normwt = normwt, na.rm = na.rm, na.show = na.show, exclude = exclude)
-      if(type %in% c("percent", "proportion")) tmp <- sumOne(tmp, na.rm = na.rm)
-      result <- cbind(result, tmp)
-    }
 
-    colnames(result)[1] <- "Overall"
-    class(result) <- c("proptab", class(result))
-    
-    if(type == "percent"){
-      result <- 100*result
-      attr(result, "percent") <- TRUE
-    }else{
-      attr(result, "percent") <- FALSE
-    }
-    
-    attr(result, "digits") <- digits
-    attr(result, "row.n") <- nrow(result)
-    attr(result, "col.n") <- ncol(result)
-    
-    return(result)   
-    
+  for (v in y) {
+    tmp <- wtd.table(df[[x]], df[[v]], weights = w, 
+                     normwt = normwt, na.rm = na.rm, na.show = na.show, exclude = exclude)
+    if (type %in% c("percent", "proportion")) tmp <- sumOne(tmp, na.rm = na.rm)
+    result <- cbind(result, tmp)
   }
+  if (type == "percent") {
+    result <- 100 * result
+  }
+  
+  colnames(result)[1] <- gettext("Overall", domain = "R-questionr")
+  class(result) <- c("proptab", class(result))
 
+  attr(result, "percent") <- percent
+  if (type != "percent") {
+    attr(result, "percent") <- FALSE
+  }
+  attr(result, "digits") <- digits
+
+  return(result)   
+  
 }
+
+
 
 
