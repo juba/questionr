@@ -49,7 +49,7 @@
       res <- paste0(res, nlevels(x), " levels: ", paste(levels(x), collapse = " | "), "\n")
     
     nNA <- sum(is.na(x))
-    res <- paste0(res, "NAs: ", nNA, " (", round(nNA / length(x), digits = 1), "%)")
+    res <- paste0(res, "NAs: ", nNA, " (", round((nNA / length(x)) * 100, digits = 1), "%)")
     
     if (length(unique(x)) < freq.n.max)
       res <- paste0(
@@ -99,7 +99,7 @@
       " - "
     )
     nNA <- sum(is.na(x))
-    res <- paste0(res, "NAs: ", nNA, " (", round(nNA / length(x), digits = 1), "%)")
+    res <- paste0(res, "NAs: ", nNA, " (", round((nNA / length(x)) * 100, digits = 1), "%)")
     res <- paste0(res, " - ", length(unique(x)), " unique values")
     
     if (length(unique(x)) < freq.n.max)
@@ -139,7 +139,7 @@
     res <- paste0(res, obs, "\n")
     
     nNA <- sum(is.na(x))
-    res <- paste0(res, "NAs: ", nNA, " (", round(nNA / length(x), digits = 1), "%)")
+    res <- paste0(res, "NAs: ", nNA, " (", round((nNA / length(x)) * 100, digits = 1), "%)")
     res <- paste0(res, " - ", length(unique(x)), " unique values")
     
     if (length(unique(x)) < freq.n.max)
@@ -174,7 +174,7 @@
     
     res <- paste0(res, "min: ", min(x, na.rm = T), " - max: ", max(x, na.rm = T), " - ")
     nNA <- sum(is.na(x))
-    res <- paste0(res, "NAs: ", nNA, " (", round(nNA / length(x), digits = 1), "%)")
+    res <- paste0(res, "NAs: ", nNA, " (", round((nNA / length(x)) * 100, digits = 1), "%)")
     res <- paste0(res, " - ", length(unique(x)), " unique values")
     
     if (length(unique(x)) < freq.n.max)
