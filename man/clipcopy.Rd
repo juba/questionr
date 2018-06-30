@@ -22,7 +22,7 @@ clipcopy(obj, ...)
 \arguments{
 \item{obj}{object to be copied}
 
-\item{...}{arguments passed to \code{R2HTML::HTML}}
+\item{...}{arguments passed to \code{knitr::kable}}
 
 \item{append}{if TRUE, append to the file instead of replacing it}
 
@@ -44,11 +44,12 @@ clipcopy(obj, ...)
 \code{NULL}
 }
 \description{
-This function transforms its argument to HTML and then copy it to the
-clipboard or to a file for later use in an external application.
+This function transforms its argument to HTML with knitr::kable and 
+then copy it to the clipboard or to a file for later use in an 
+external application.
 }
 \details{
-Under linux, this function requires that \code{xclip} is
+Under Linux, this function requires that \code{xclip} is
 installed on the system to copy to the clipboard.
 }
 \examples{
@@ -59,7 +60,7 @@ ptab <- rprop(tab, percent=TRUE)
 \dontrun{clipcopy(ptab)}
 }
 \seealso{
-\code{\link[R2HTML]{HTML}}, \code{\link[questionr]{format.proptab}}
+\code{\link[knitr]{kable}}, \code{\link[questionr]{format.proptab}}
 
 \code{\link[questionr]{clipcopy}}, \code{\link[questionr]{format.proptab}}
 }

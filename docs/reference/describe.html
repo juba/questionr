@@ -18,13 +18,26 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Describe the variables of a data.frame — describe" />
+
+<meta property="og:description" content="This function describes the variables of a vector or a dataset that might
+include labels imported with haven packages." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,12 +60,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">questionr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">questionr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.6.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -73,18 +90,14 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/juba/questionr">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -92,16 +105,20 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Describe the variables of a data.frame</h1>
+    
+    <div class="hidden name"><code>describe.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>This function describes the variables of a vector or a dataset that might
 include labels imported with <span class="pkg">haven</span> packages.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>describe</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
@@ -131,7 +148,7 @@ include labels imported with <span class="pkg">haven</span> packages.</p>
 <span class='co'># S3 method for description</span>
 <span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -169,7 +186,7 @@ See examples.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='lookfor.html'>lookfor</a></code></p>
+    <div class='dont-index'><p><code><a href='lookfor.html'>lookfor</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -211,7 +228,7 @@ See examples.</p>
 #&gt; $nivetud: 
 #&gt; nominal factor: "Enseignement superieur y compris technique superieur" NA "Derniere annee d'etudes primaires" "Enseignement superieur y compris technique superieur" "Derniere annee d'etudes primaires" "Enseignement technique ou professionnel court" "Derniere annee d'etudes primaires" "Enseignement technique ou professionnel court" NA "Enseignement technique ou professionnel long" ...
 #&gt; 8 levels: N'a jamais fait d'etudes | A arrete ses etudes, avant la derniere annee d'etudes primaires | Derniere annee d'etudes primaires | 1er cycle | 2eme cycle | Enseignement technique ou professionnel court | Enseignement technique ou professionnel long | Enseignement superieur y compris technique superieur
-#&gt; NAs: 112 (0.1%)
+#&gt; NAs: 112 (5.6%)
 #&gt; 
 #&gt; $poids: 
 #&gt; numeric: 2634.3982157 9738.3957759 3994.1024587 5731.6615081 4329.0940022 8674.6993828 6165.8034861 12891.640759 7808.8720636 2277.160471 ...
@@ -225,7 +242,7 @@ See examples.</p>
 #&gt; $qualif: 
 #&gt; nominal factor: "Employe" NA "Technicien" "Technicien" "Employe" "Employe" "Ouvrier qualifie" "Ouvrier qualifie" NA "Autre" ...
 #&gt; 7 levels: Ouvrier specialise | Ouvrier qualifie | Technicien | Profession intermediaire | Cadre | Employe | Autre
-#&gt; NAs: 347 (0.2%)
+#&gt; NAs: 347 (17.3%)
 #&gt; 
 #&gt; $freres.soeurs: 
 #&gt; integer: 8 2 2 1 0 5 1 5 4 2 ...
@@ -244,12 +261,12 @@ See examples.</p>
 #&gt; $trav.imp: 
 #&gt; nominal factor: "Peu important" NA "Aussi important que le reste" "Moins important que le reste" NA "Le plus important" NA "Peu important" NA "Moins important que le reste" ...
 #&gt; 4 levels: Le plus important | Aussi important que le reste | Moins important que le reste | Peu important
-#&gt; NAs: 952 (0.5%)
+#&gt; NAs: 952 (47.6%)
 #&gt; 
 #&gt; $trav.satisf: 
 #&gt; nominal factor: "Insatisfaction" NA "Equilibre" "Satisfaction" NA "Equilibre" NA "Insatisfaction" NA "Satisfaction" ...
 #&gt; 3 levels: Satisfaction | Insatisfaction | Equilibre
-#&gt; NAs: 952 (0.5%)
+#&gt; NAs: 952 (47.6%)
 #&gt; 
 #&gt; $hard.rock: 
 #&gt; nominal factor: "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" ...
@@ -288,7 +305,7 @@ See examples.</p>
 #&gt; 
 #&gt; $heures.tv: 
 #&gt; numeric: 0 1 0 2 3 2 2.9 1 2 2 ...
-#&gt; min: 0 - max: 12 - NAs: 5 (0%) - 30 unique values</div><div class='input'><span class='fu'>describe</span>(<span class='no'>hdv2003</span>, <span class='st'>"cuisine"</span>, <span class='st'>"heures.tv"</span>)</div><div class='output co'>#&gt; [2000 obs. x 20 variables] tbl_df tbl data.frame
+#&gt; min: 0 - max: 12 - NAs: 5 (0.2%) - 30 unique values</div><div class='input'><span class='fu'>describe</span>(<span class='no'>hdv2003</span>, <span class='st'>"cuisine"</span>, <span class='st'>"heures.tv"</span>)</div><div class='output co'>#&gt; [2000 obs. x 20 variables] tbl_df tbl data.frame
 #&gt; 
 #&gt; $cuisine: 
 #&gt; nominal factor: "Oui" "Non" "Non" "Oui" "Non" "Non" "Oui" "Oui" "Non" "Non" ...
@@ -297,27 +314,27 @@ See examples.</p>
 #&gt; 
 #&gt; $heures.tv: 
 #&gt; numeric: 0 1 0 2 3 2 2.9 1 2 2 ...
-#&gt; min: 0 - max: 12 - NAs: 5 (0%) - 30 unique values</div><div class='input'><span class='fu'>describe</span>(<span class='no'>hdv2003</span>, <span class='st'>"trav*"</span>)</div><div class='output co'>#&gt; [2000 obs. x 20 variables] tbl_df tbl data.frame
+#&gt; min: 0 - max: 12 - NAs: 5 (0.2%) - 30 unique values</div><div class='input'><span class='fu'>describe</span>(<span class='no'>hdv2003</span>, <span class='st'>"trav*"</span>)</div><div class='output co'>#&gt; [2000 obs. x 20 variables] tbl_df tbl data.frame
 #&gt; 
 #&gt; $trav.imp: 
 #&gt; nominal factor: "Peu important" NA "Aussi important que le reste" "Moins important que le reste" NA "Le plus important" NA "Peu important" NA "Moins important que le reste" ...
 #&gt; 4 levels: Le plus important | Aussi important que le reste | Moins important que le reste | Peu important
-#&gt; NAs: 952 (0.5%)
+#&gt; NAs: 952 (47.6%)
 #&gt; 
 #&gt; $trav.satisf: 
 #&gt; nominal factor: "Insatisfaction" NA "Equilibre" "Satisfaction" NA "Equilibre" NA "Insatisfaction" NA "Satisfaction" ...
 #&gt; 3 levels: Satisfaction | Insatisfaction | Equilibre
-#&gt; NAs: 952 (0.5%)</div><div class='input'><span class='fu'>describe</span>(<span class='no'>hdv2003</span>, <span class='st'>"trav|lecture"</span>)</div><div class='output co'>#&gt; [2000 obs. x 20 variables] tbl_df tbl data.frame
+#&gt; NAs: 952 (47.6%)</div><div class='input'><span class='fu'>describe</span>(<span class='no'>hdv2003</span>, <span class='st'>"trav|lecture"</span>)</div><div class='output co'>#&gt; [2000 obs. x 20 variables] tbl_df tbl data.frame
 #&gt; 
 #&gt; $trav.imp: 
 #&gt; nominal factor: "Peu important" NA "Aussi important que le reste" "Moins important que le reste" NA "Le plus important" NA "Peu important" NA "Moins important que le reste" ...
 #&gt; 4 levels: Le plus important | Aussi important que le reste | Moins important que le reste | Peu important
-#&gt; NAs: 952 (0.5%)
+#&gt; NAs: 952 (47.6%)
 #&gt; 
 #&gt; $trav.satisf: 
 #&gt; nominal factor: "Insatisfaction" NA "Equilibre" "Satisfaction" NA "Equilibre" NA "Insatisfaction" NA "Satisfaction" ...
 #&gt; 3 levels: Satisfaction | Insatisfaction | Equilibre
-#&gt; NAs: 952 (0.5%)
+#&gt; NAs: 952 (47.6%)
 #&gt; 
 #&gt; $lecture.bd: 
 #&gt; nominal factor: "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" ...
@@ -327,12 +344,12 @@ See examples.</p>
 #&gt; $trav.imp: 
 #&gt; nominal factor: "Peu important" NA "Aussi important que le reste" "Moins important que le reste" NA "Le plus important" NA "Peu important" NA "Moins important que le reste" ...
 #&gt; 4 levels: Le plus important | Aussi important que le reste | Moins important que le reste | Peu important
-#&gt; NAs: 952 (0.5%)
+#&gt; NAs: 952 (47.6%)
 #&gt; 
 #&gt; $trav.satisf: 
 #&gt; nominal factor: "Insatisfaction" NA "Equilibre" "Satisfaction" NA "Equilibre" NA "Insatisfaction" NA "Satisfaction" ...
 #&gt; 3 levels: Satisfaction | Insatisfaction | Equilibre
-#&gt; NAs: 952 (0.5%)
+#&gt; NAs: 952 (47.6%)
 #&gt; 
 #&gt; $lecture.bd: 
 #&gt; nominal factor: "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" ...
@@ -380,7 +397,7 @@ See examples.</p>
 #&gt; 
 #&gt; $travail: A un emploi ?
 #&gt; labelled_spss double: 1 1 0 1 1 0 1 0 1 1 ...
-#&gt; min: 0 - max: 9 - NAs: 7 (0%) - 3 unique values
+#&gt; min: 0 - max: 9 - NAs: 7 (0.4%) - 3 unique values
 #&gt; 3 value labels: [0] non [1] oui [9] manquant
 #&gt; user-defined na values: 9
 #&gt; 
@@ -391,7 +408,7 @@ See examples.</p>
 #&gt; 
 #&gt; $religion: Religion
 #&gt; labelled double: 1 3 2 3 2 2 3 1 3 3 ...
-#&gt; min: 1 - max: 5 - NAs: 4 (0%) - 6 unique values
+#&gt; min: 1 - max: 5 - NAs: 4 (0.2%) - 6 unique values
 #&gt; 5 value labels: [1] musulmane [2] chrétienne [3] protestante [4] sans religion [5] autre
 #&gt; 
 #&gt; $journal: Lit la presse ?
@@ -411,13 +428,13 @@ See examples.</p>
 #&gt; 
 #&gt; $nb_enf_ideal: Nombre idéal d'enfants
 #&gt; labelled_spss double: 4 4 4 4 4 5 10 5 4 5 ...
-#&gt; min: 0 - max: 99 - NAs: 175 (0.1%) - 18 unique values
+#&gt; min: 0 - max: 99 - NAs: 175 (8.8%) - 18 unique values
 #&gt; 2 value labels: [96] Ne sait pas [99] manquant
 #&gt; user-defined na range: 96-99
 #&gt; 
 #&gt; $test: A déjà fait un test de dépistage du VIH ?
 #&gt; labelled_spss double: 0 9 0 0 1 0 0 0 0 1 ...
-#&gt; min: 0 - max: 9 - NAs: 29 (0%) - 3 unique values
+#&gt; min: 0 - max: 9 - NAs: 29 (1.5%) - 3 unique values
 #&gt; 3 value labels: [0] non [1] oui [9] manquant
 #&gt; user-defined na values: 9</div><div class='input'><span class='fu'>describe</span>(<span class='no'>femmes</span>, <span class='st'>"ident"</span>)</div><div class='output co'>#&gt; [2000 obs. x 17 variables] tbl_df tbl data.frame
 #&gt; 
@@ -456,11 +473,14 @@ Joseph Larmarange &lt;joseph@larmarange.net&gt;
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

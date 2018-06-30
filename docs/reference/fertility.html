@@ -18,13 +18,25 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="A fertility survey — fertility" />
+
+<meta property="og:description" content="Some fictive results from a fecondity survey, with English labels." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,12 +59,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">questionr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">questionr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.6.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -73,18 +89,14 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/juba/questionr">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -92,15 +104,19 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>A fertility survey</h1>
+    
+    <div class="hidden name"><code>fertility.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Some fictive results from a fecondity survey, with English labels.</p>
     
+    </div>
 
         
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
@@ -115,7 +131,7 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='fecondite.html'>fecondite</a> for an French version of this dataset.</p>
+    <div class='dont-index'><p><a href='fecondite.html'>fecondite</a> for an French version of this dataset.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -186,7 +202,7 @@
 #&gt; 
 #&gt; $employed: Employed?
 #&gt; labelled_spss double: 1 1 0 1 1 0 1 0 1 1 ...
-#&gt; min: 0 - max: 9 - NAs: 7 (0%) - 3 unique values
+#&gt; min: 0 - max: 9 - NAs: 7 (0.4%) - 3 unique values
 #&gt; 3 value labels: [0] no [1] yes [9] missing
 #&gt; user-defined na values: 9
 #&gt; 
@@ -197,7 +213,7 @@
 #&gt; 
 #&gt; $religion: Religion
 #&gt; labelled double: 1 3 2 3 2 2 3 1 3 3 ...
-#&gt; min: 1 - max: 5 - NAs: 4 (0%) - 6 unique values
+#&gt; min: 1 - max: 5 - NAs: 4 (0.2%) - 6 unique values
 #&gt; 5 value labels: [1] Muslim [2] Christian [3] Protestant [4] no religion [5] other
 #&gt; 
 #&gt; $newspaper: Read newspaper?
@@ -217,13 +233,13 @@
 #&gt; 
 #&gt; $ideal_nb_children: Ideal number of children
 #&gt; labelled_spss double: 4 4 4 4 4 5 10 5 4 5 ...
-#&gt; min: 0 - max: 99 - NAs: 175 (0.1%) - 18 unique values
+#&gt; min: 0 - max: 99 - NAs: 175 (8.8%) - 18 unique values
 #&gt; 2 value labels: [96] don't know [99] missing
 #&gt; user-defined na range: 96-99
 #&gt; 
 #&gt; $test: Ever tested for HIV?
 #&gt; labelled_spss double: 0 9 0 0 1 0 0 0 0 1 ...
-#&gt; min: 0 - max: 9 - NAs: 29 (0%) - 3 unique values
+#&gt; min: 0 - max: 9 - NAs: 29 (1.5%) - 3 unique values
 #&gt; 3 value labels: [0] no [1] yes [9] missing
 #&gt; user-defined na values: 9</div><div class='input'><span class='fu'><a href='describe.html'>describe</a></span>(<span class='no'>children</span>)</div><div class='output co'>#&gt; [1584 obs. x 6 variables] tbl_df tbl data.frame
 #&gt; 
@@ -251,7 +267,7 @@
 #&gt; 
 #&gt; $age_at_death: Age at death (in months)
 #&gt; numeric: NaN 0 0 NaN NaN NaN NaN NaN NaN NaN ...
-#&gt; min: 0 - max: 48 - NAs: 1442 (0.9%) - 22 unique values</div></pre>
+#&gt; min: 0 - max: 48 - NAs: 1442 (91%) - 22 unique values</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -273,11 +289,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
