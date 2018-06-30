@@ -30,4 +30,4 @@ Quite sparse for the moment, but please refer to the `pkgdown` generated website
 
 https://juba.github.io/questionr/
 
-You will find there a [functions reference](https://juba.github.io/questionr/reference/index.html) organized by topics, and a [vignette on recoding addins](https://juba.github.io/questionr/articles/recoding_addins.html).
+You will find there a [function reference](https://juba.github.io/questionr/reference/index.html) organized by topics, and a [vignette on recoding addins](https://juba.github.io/questionr/articles/recoding_addins.html).
