@@ -30,7 +30,6 @@ Suggests:
     memisc,
     testthat,
     roxygen2,
-    R2HTML,
     dplyr,
     forcats,
     knitr

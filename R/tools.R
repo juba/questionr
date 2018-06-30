@@ -1,13 +1,14 @@
 #' Transform an object into HTML and copy it for export
 #'
-#' This function transforms its argument to HTML and then copy it to the
-#' clipboard or to a file for later use in an external application.
+#' This function transforms its argument to HTML with knitr::kable and 
+#' then copy it to the clipboard or to a file for later use in an 
+#' external application.
 #' 
 #' @aliases copie copie.default clipcopy.default
 #' @param obj object to be copied
-#' @param ... arguments passed to \code{R2HTML::HTML}
+#' @param ... arguments passed to \code{knitr::kable}
 #' @details
-#' Under linux, this function requires that \code{xclip} is
+#' Under Linux, this function requires that \code{xclip} is
 #' installed on the system to copy to the clipboard.
 #' @examples
 #' data(iris)
@@ -15,7 +16,7 @@
 #' \dontrun{copie(tab)}
 #' ptab <- rprop(tab, percent=TRUE)
 #' \dontrun{clipcopy(ptab)}
-#' @seealso \code{\link[R2HTML]{HTML}}, \code{\link[questionr]{format.proptab}}
+#' @seealso \code{\link[knitr]{kable}}, \code{\link[questionr]{format.proptab}}
 #' @keywords connection 
 #' @export 
 
@@ -25,6 +26,7 @@ function (obj, ...) {
 }
 
 #' @export
+
 copie <- clipcopy
 
 #' @return \code{NULL}
@@ -40,20 +42,22 @@ copie <- clipcopy
 `clipcopy.default` <-
 function (obj, append=FALSE, file=FALSE, filename="temp.html", clipboard.size=4096, ...) {
   if (file) {
-    conn <- file(filename, "w", encoding="Latin1")
-    R2HTML::HTML(obj, file=conn, append=append)
-    close(conn)
-    return()
+    if (Sys.info()["sysname"] == "Windows") {
+      conn <- file(filename, "w", encoding="Latin1")
+    } else {
+      conn <- file(filename, "w", encoding="Latin1")
+    }
   }
-  if (Sys.info()["sysname"] == "Windows") {
-    connection.name <- paste("clipboard", format(clipboard.size, scientific=1000), sep="-")
-    conn <- file(connection.name, "w", encoding="Latin1")
-  } 
-  if (Sys.info()["sysname"] == "Darwin") conn <- pipe("pbcopy", "w", encoding="Latin1")
-  if (Sys.info()["sysname"] == "Linux") conn <- pipe("xclip -i", "w", encoding="Latin1")
-  # Convert tibble to data.frame
-  if (inherits(obj, "tbl_df")) obj <- data.frame(obj)
-  R2HTML::HTML(obj, file = conn, append = append, ...)
+  else {
+    if (Sys.info()["sysname"] == "Windows") {
+      connection.name <- paste("clipboard", format(clipboard.size, scientific=1000), sep="-")
+      conn <- file(connection.name, "w", encoding="Latin1")
+    } 
+    if (Sys.info()["sysname"] == "Darwin") conn <- pipe("pbcopy", "w", encoding="UTF-8")
+    if (Sys.info()["sysname"] == "Linux") conn <- pipe("xclip -i", "w", encoding="UTF-8")
+  }
+  utils::capture.output(knitr::kable(obj, format = "html", ...), 
+                 file = conn, append = append, type = "output")
   close(conn)
 }
 

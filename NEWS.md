@@ -1,6 +1,7 @@
 questionr 0.6.3
 ---------------
 
+* Replace `R2HTML::HTML` with `knitr::kable` in `clipcopy`
 * Fix incorrect NAs percentage in `describe` (thaks @gdutz)
 * Add new tabs() function (thanks @rdrr1990)
 
