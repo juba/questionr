@@ -30,7 +30,7 @@ var(hdv2003$age)
 wtd.var(hdv2003$age, weights=hdv2003$poids)
 }
 \seealso{
-\code{\link{mean}},\code{\link{var}}, \code{\link{wtd.table}} and the \link{survey} package.
+\code{\link{mean}},\code{\link{var}}, \code{\link{wtd.table}} and the \code{survey} package.
 }
 \author{
 These functions are exact copies of the \code{wtd.mean} and \code{wtd.var}

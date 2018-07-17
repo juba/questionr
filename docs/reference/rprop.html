@@ -118,8 +118,23 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>rprop</span>(<span class='no'>tab</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>rprop</span>(<span class='no'>tab</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for table</span>
+<span class='fu'>rprop</span>(<span class='no'>tab</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for data.frame</span>
+<span class='fu'>rprop</span>(<span class='no'>tab</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for matrix</span>
+<span class='fu'>rprop</span>(<span class='no'>tab</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for tabyl</span>
+<span class='fu'>rprop</span>(<span class='no'>tab</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -127,6 +142,10 @@
     <tr>
       <th>tab</th>
       <td><p>frequency table</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>parameters passed to other methods.</p></td>
     </tr>
     <tr>
       <th>digits</th>

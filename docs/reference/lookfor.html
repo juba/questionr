@@ -204,7 +204,7 @@ If <span class="pkg">labelled</span> package is installed, variable labels of da
 </div><span class='co'># NOT RUN {</span>
 <span class='fu'>require</span>(<span class='no'>memisc</span>)
 <span class='no'>nes1948.por</span> <span class='kw'>&lt;-</span> <span class='fu'>UnZip</span>(<span class='st'>"anes/NES1948.ZIP"</span>,<span class='st'>"NES1948.POR"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"memisc"</span>)
-<span class='no'>nes1948</span> <span class='kw'>&lt;-</span> <span class='fu'>spss.portable.file</span>(<span class='no'>nes1948.por</span>)
+<span class='no'>nes1948</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/memisc/topics/importers'>spss.portable.file</a></span>(<span class='no'>nes1948.por</span>)
 <span class='co'># Look for a vector of keywords.</span>
 <span class='fu'>lookfor</span>(<span class='no'>nes1948</span>, <span class='fu'>c</span>(<span class='st'>"Truman"</span>, <span class='st'>"Dewey"</span>))
 <span class='co'># Look for a regular expression.</span>

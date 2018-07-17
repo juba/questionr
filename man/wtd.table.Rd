@@ -43,5 +43,5 @@ table(hdv2003$sexe, hdv2003$hard.rock)
 wtd.table(hdv2003$sexe, hdv2003$hard.rock, weights=hdv2003$poids)
 }
 \seealso{
-\code{\link[Hmisc]{wtd.table}}, \command{\link{table}}, and the \link{survey} extension.
+\code{\link[Hmisc]{wtd.table}}, \command{\link{table}}, and the \code{survey} package.
 }
