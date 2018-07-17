@@ -2,13 +2,30 @@
 % Please edit documentation in R/tables.R
 \name{cprop}
 \alias{cprop}
+\alias{cprop.table}
+\alias{cprop.data.frame}
+\alias{cprop.matrix}
+\alias{cprop.tabyl}
 \title{Column percentages of a two-way frequency table.}
 \usage{
-cprop(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE,
-  n = FALSE)
+cprop(tab, ...)
+
+\method{cprop}{table}(tab, digits = 1, total = TRUE, percent = FALSE,
+  drop = TRUE, n = FALSE, ...)
+
+\method{cprop}{data.frame}(tab, digits = 1, total = TRUE, percent = FALSE,
+  drop = TRUE, n = FALSE, ...)
+
+\method{cprop}{matrix}(tab, digits = 1, total = TRUE, percent = FALSE,
+  drop = TRUE, n = FALSE, ...)
+
+\method{cprop}{tabyl}(tab, digits = 1, total = TRUE, percent = FALSE,
+  n = FALSE, ...)
 }
 \arguments{
 \item{tab}{frequency table}
+
+\item{...}{parameters passed to other methods.}
 
 \item{digits}{number of digits to display}
 

@@ -2,13 +2,30 @@
 % Please edit documentation in R/tables.R
 \name{prop}
 \alias{prop}
+\alias{prop_table}
+\alias{prop.data.frame}
+\alias{prop.matrix}
+\alias{prop.tabyl}
 \title{Global percentages of a two-way frequency table.}
 \usage{
-prop(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE,
-  n = FALSE)
+prop(tab, ...)
+
+prop_table(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE,
+  n = FALSE, ...)
+
+\method{prop}{data.frame}(tab, digits = 1, total = TRUE, percent = FALSE,
+  drop = TRUE, n = FALSE, ...)
+
+\method{prop}{matrix}(tab, digits = 1, total = TRUE, percent = FALSE,
+  drop = TRUE, n = FALSE, ...)
+
+\method{prop}{tabyl}(tab, digits = 1, total = TRUE, percent = FALSE,
+  n = FALSE, ...)
 }
 \arguments{
 \item{tab}{frequency table}
+
+\item{...}{parameters passed to other methods}
 
 \item{digits}{number of digits to display}
 

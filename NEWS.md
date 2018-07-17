@@ -1,8 +1,9 @@
 questionr 0.6.3
 ---------------
 
+* Make `rprop`, `cprop` and `prop` compatible with `janitor::tabyl` for pipeline integration
 * Replace `R2HTML::HTML` with `knitr::kable` in `clipcopy`
-* Fix incorrect NAs percentage in `describe` (thaks @gdutz)
+* Fix incorrect NAs percentage in `describe` (thanks @gdutz)
 * Add new tabs() function (thanks @rdrr1990)
 
 

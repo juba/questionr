@@ -1,5 +1,8 @@
 library(testthat)
 library(questionr)
+library(dplyr)
+library(tidyr)
+library(janitor)
 context("Tables and cross-tables functions")
 
 data(hdv2003)
@@ -56,7 +59,7 @@ test_that("cprop results are correct" , {
   ctab <- cprop(tab, n = TRUE)
   expect_equal(colnames(ctab), c(levels(hdv2003$clso), gettext("All", domain="R-questionr")))
   expect_equal(rownames(ctab), c(levels(hdv2003$qualif), NA, gettext("Total", domain="R-questionr"), "n"))
-  m <- prop.table(etab, 2) * 100
+  m <- base::prop.table(etab, 2) * 100
   expect_equal(ctab[1:nrow(m), 1:ncol(m)], m)
   margin <- margin.table(etab, 1)
   margin <- as.numeric(round(margin / sum(margin) * 100, 2))
@@ -71,7 +74,7 @@ test_that("lprop results are correct" , {
   ltab <- lprop(tab, n = TRUE)
   expect_equal(colnames(ltab), c(levels(hdv2003$clso), gettext("Total", domain="R-questionr"), "n"))
   expect_equal(rownames(ltab), c(levels(hdv2003$qualif), NA, gettext("All", domain="R-questionr")))
-  m <- prop.table(etab, 1) * 100
+  m <- base::prop.table(etab, 1) * 100
   expect_equal(ltab[1:nrow(m), 1:ncol(m)], m)
   margin <- margin.table(etab, 2)
   margin <- as.numeric(round(margin / sum(margin) * 100, 2))
@@ -80,4 +83,42 @@ test_that("lprop results are correct" , {
   expect_equal(ltab[,"n"][1:length(n)], n)
 })
 
+test_that("prop, cprop and lprop tabyl versions are correct" , {
+  ## lprop
+  ltabl <- hdv2003 %>% 
+    tabyl(qualif, sexe) %>% 
+    lprop %>% 
+    as.data.frame %>% 
+    gather(Var2, Freq, -1)
+  ltab <- table(hdv2003$qualif, hdv2003$sexe, useNA = "always") %>% 
+    lprop %>% 
+    round(1) %>% 
+    as.data.frame %>% 
+    mutate(Freq = format(Freq, nsmall = 1, trim = TRUE))
+  expect_equal(ltabl$Freq, ltab$Freq) 
+  ## cprop
+  ctabl <- hdv2003 %>% 
+    tabyl(qualif, sexe) %>% 
+    cprop %>% 
+    as.data.frame %>% 
+    gather(Var2, Freq, -1)
+  ctab <- table(hdv2003$qualif, hdv2003$sexe, useNA = "always") %>% 
+    cprop %>% 
+    round(1) %>% 
+    as.data.frame %>% 
+    mutate(Freq = format(Freq, nsmall = 1, trim = TRUE))
+  expect_equal(ctabl$Freq, ctab$Freq) 
+  ## prop
+  tabl <- hdv2003 %>% 
+    tabyl(qualif, sexe) %>% 
+    prop(digits = 2) %>% 
+    as.data.frame %>% 
+    gather(Var2, Freq, -1)
+  tab <- table(hdv2003$qualif, hdv2003$sexe, useNA = "always") %>% 
+    prop %>% 
+    round(2) %>% 
+    as.data.frame %>% 
+    mutate(Freq = format(Freq, nsmall = 1, trim = TRUE))
+  expect_equal(tabl$Freq, tab$Freq) 
+})
 

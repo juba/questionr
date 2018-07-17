@@ -3,13 +3,30 @@
 \name{rprop}
 \alias{rprop}
 \alias{lprop}
+\alias{rprop.table}
+\alias{rprop.data.frame}
+\alias{rprop.matrix}
+\alias{rprop.tabyl}
 \title{Row percentages of a two-way frequency table.}
 \usage{
-rprop(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE,
-  n = FALSE)
+rprop(tab, ...)
+
+\method{rprop}{table}(tab, digits = 1, total = TRUE, percent = FALSE,
+  drop = TRUE, n = FALSE, ...)
+
+\method{rprop}{data.frame}(tab, digits = 1, total = TRUE, percent = FALSE,
+  drop = TRUE, n = FALSE, ...)
+
+\method{rprop}{matrix}(tab, digits = 1, total = TRUE, percent = FALSE,
+  drop = TRUE, n = FALSE, ...)
+
+\method{rprop}{tabyl}(tab, digits = 1, total = TRUE, percent = FALSE,
+  n = FALSE, ...)
 }
 \arguments{
 \item{tab}{frequency table}
+
+\item{...}{parameters passed to other methods.}
 
 \item{digits}{number of digits to display}
 

@@ -31,8 +31,7 @@
 #' freq(femmes$region, levels = "v")
 #' @export
 
-`freq` <-
-function(x, digits = 1, cum = FALSE, total = FALSE, exclude = NULL, sort = "", 
+freq <- function(x, digits = 1, cum = FALSE, total = FALSE, exclude = NULL, sort = "", 
          valid = !(NA %in% exclude), levels = c("prefixed", "labels", "values"),
          na.last = TRUE) {
   levels <- match.arg(levels)
@@ -142,6 +141,7 @@ freq.na <- function(data, ...) {
 #' @param percent if \code{TRUE}, add a percent sign after the values when printing
 #' @param drop if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped.
 #' @param n if \code{TRUE}, display number of observations per column.
+#' @param ... parameters passed to other methods.
 #' @return
 #' The result is an object of class \code{table} and \code{proptab}.
 #' @seealso
@@ -156,24 +156,32 @@ freq.na <- function(data, ...) {
 #' cprop(tab, digits=2, percent=TRUE, total=FALSE)
 #' @export
 
-`cprop` <-
-function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE) {
+`cprop` <- function(tab, ...) {
+  UseMethod("cprop")
+}
+
+
+##' @rdname cprop
+##' @aliases cprop.table
+##' @export
+
+cprop.table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE, ...) {
   # subset to non-empty rows/columns
   if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop=FALSE]
   dn <- names(dimnames(tab))
   if (total) {
     .tmp.colnames <- colnames(tab)
-    tab <- cbind(tab, apply(tab,1,sum))
+    tab <- cbind(tab, apply(tab, 1, sum))
     colnames(tab) <- c(.tmp.colnames, gettext("All", domain="R-questionr"))
   }
-  if (n) effectifs <- apply(tab,2,sum)
-  tab <- prop.table(tab,2)*100
+  if (n) effectifs <- apply(tab, 2, sum)
+  tab <- base::prop.table(tab, 2) * 100
   if (total) {
     .tmp.rownames <- rownames(tab)
-    tab <- rbind(tab,Total=apply(tab,2,sum))
+    tab <- rbind(tab, Total = apply(tab, 2, sum))
     rownames(tab) <- c(.tmp.rownames, gettext("Total", domain="R-questionr"))
   }
-  if (n) tab <- rbind(tab, n=effectifs)
+  if (n) tab <- rbind(tab, n = effectifs)
   result <- as.table(tab)
   names(dimnames(result)) <- dn
   class(result) <- c("proptab", class(result))
@@ -183,6 +191,33 @@ function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE) 
   attr(result, "row.n") <- n
   return(result)
 }
+
+##' @rdname cprop
+##' @aliases cprop.data.frame
+##' @export 
+cprop.data.frame <- cprop.table
+##' @rdname cprop
+##' @aliases cprop.matrix
+##' @export 
+cprop.matrix <- cprop.table
+
+##' @rdname cprop
+##' @aliases cprop.tabyl
+##' @export
+
+cprop.tabyl <- function(tab, digits = 1, total = TRUE, percent = FALSE, n = FALSE, ...) {
+  if (total) {
+    tab <- janitor::adorn_totals(tab, c("row", "col"))
+  }
+  tab <- janitor::adorn_percentages(tab, "col")
+  tab <- janitor::adorn_pct_formatting(tab, digits = digits, affix_sign = percent)
+  if (n) {
+    tab <- janitor::adorn_ns(tab)
+  }
+  tab <- janitor::adorn_title(tab, "combined")
+  return(tab)
+}
+
 
 #' Row percentages of a two-way frequency table.
 #'
@@ -195,6 +230,7 @@ function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE) 
 #' @param percent if \code{TRUE}, add a percent sign after the values when printing
 #' @param drop if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped.
 #' @param n if \code{TRUE}, display number of observations per row.
+#' @param ... parameters passed to other methods.
 #' @return
 #' The result is an object of class \code{table} and \code{proptab}.
 #' @seealso
@@ -209,24 +245,32 @@ function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE) 
 #' rprop(tab, digits=2, percent=TRUE, total=FALSE)
 #' @export rprop lprop
 
-`rprop` <-
-function(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE) {
+`rprop` <- function(tab, ...) {
+  UseMethod("rprop")
+}
+lprop <- rprop
+
+
+##' @rdname rprop
+##' @aliases rprop.table
+##' @export 
+rprop.table <- function(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE, ...) {
   # subset to non-empty rows/columns
   if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop=FALSE]
   dn <- names(dimnames(tab))
   if (total) {
     .tmp.rownames <- rownames(tab)
-    tab <- rbind(tab, apply(tab,2,sum))
+    tab <- rbind(tab, apply(tab, 2, sum))
     rownames(tab) <- c(.tmp.rownames, gettext("All", domain="R-questionr"))
   }
-  if (n) effectifs <- apply(tab,1,sum)
-  tab <- prop.table(tab,1)*100
+  if (n) effectifs <- apply(tab, 1, sum)
+  tab <- base::prop.table(tab, 1) * 100
   if (total) {
     .tmp.colnames <- colnames(tab)
-    tab <- cbind(tab, Total=apply(tab,1,sum))
+    tab <- cbind(tab, Total = apply(tab, 1, sum))
     colnames(tab) <- c(.tmp.colnames, gettext("Total", domain="R-questionr"))
   }
-  if (n) tab <- cbind(tab, n=effectifs)
+  if (n) tab <- cbind(tab, n = effectifs)
   result <- as.table(tab)
   names(dimnames(result)) <- dn
   class(result) <- c("proptab", class(result))
@@ -236,7 +280,33 @@ function(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE) {
   attr(result, "col.n") <- n
   return(result)
 }
-lprop <- rprop
+##' @rdname rprop
+##' @aliases rprop.data.frame
+##' @export 
+rprop.data.frame <- rprop.table
+##' @rdname rprop
+##' @aliases rprop.matrix
+##' @export 
+rprop.matrix <- rprop.table
+
+##' @rdname rprop
+##' @aliases rprop.tabyl
+##' @export
+
+rprop.tabyl <- function(tab, digits = 1, total = TRUE, percent = FALSE, n = FALSE, ...) {
+  if (total) {
+    tab <- janitor::adorn_totals(tab, c("row", "col"))
+  }
+  tab <- janitor::adorn_percentages(tab, "row")
+  tab <- janitor::adorn_pct_formatting(tab, digits = digits, affix_sign = percent)
+  if (n) {
+    tab <- janitor::adorn_ns(tab)
+  }
+  tab <- janitor::adorn_title(tab, "combined")
+  return(tab)
+}
+ 
+
 
 #' Global percentages of a two-way frequency table.
 #'
@@ -248,6 +318,7 @@ lprop <- rprop
 #' @param percent if \code{TRUE}, add a percent sign after the values when printing
 #' @param drop if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped.
 #' @param n if \code{TRUE}, display number of observations per row and per column.
+#' @param ... parameters passed to other methods
 #' @return
 #' The result is an object of class \code{table} and \code{proptab}.
 #' @seealso
@@ -262,8 +333,19 @@ lprop <- rprop
 #' prop(tab, digits=2, percent=TRUE, total=FALSE, n=TRUE)
 #' @export
 
-`prop` <-
-function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE) {
+prop <- function(tab, ...) {
+  ## Dirty hack to avoid overridig base::prop.table
+  if (inherits(tab, "table")) {
+    return(prop_table(tab, ...))
+  }
+  UseMethod("prop")
+}
+
+##' @rdname prop
+##' @aliases prop_table
+##' @export 
+
+prop_table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE, ...) {
   # subset to non-empty rows/columns
   if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop=FALSE]
   dn <- names(dimnames(tab))
@@ -296,6 +378,34 @@ function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE) 
   return(result)
 }
 
+##' @rdname prop
+##' @aliases prop.data.frame
+##' @export 
+prop.data.frame <- prop_table
+##' @rdname prop
+##' @aliases prop.matrix
+##' @export 
+prop.matrix <- prop_table
+
+##' @rdname prop
+##' @aliases prop.tabyl
+##' @export
+
+prop.tabyl <- function(tab, digits = 1, total = TRUE, percent = FALSE, n = FALSE, ...) {
+  if (total) {
+    tab <- janitor::adorn_totals(tab, c("row", "col"))
+  }
+  tab <- janitor::adorn_percentages(tab, "all")
+  tab <- janitor::adorn_pct_formatting(tab, digits = digits, affix_sign = percent)
+  if (n) {
+    tab <- janitor::adorn_ns(tab)
+  }
+  tab <- janitor::adorn_title(tab, "combined")
+  return(tab)
+}
+
+
+
 #' Return the chi-squared residuals of a two-way frequency table.
 #'
 #' Return the raw, standardized or Pearson's residuals (the default) of a chi-squared test on a two-way frequency table. 
@@ -322,8 +432,7 @@ function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE) 
 #' ## Raw residuals
 #' chisq.residuals(tab, raw = TRUE)
 
-`chisq.residuals` <-
-function (tab, digits = 2, std = FALSE, raw = FALSE) {
+chisq.residuals <- function (tab, digits = 2, std = FALSE, raw = FALSE) {
   if(all(std, raw))
     stop("Choose between standardized and raw residuals.")
 
@@ -359,8 +468,7 @@ residus <- chisq.residuals
 #' \code{\link{format.default}}, \code{\link[questionr]{print.proptab}}
 #' @export
 
-`format.proptab` <-
-function (x, digits=NULL, percent=NULL, justify="right", ...) {
+format.proptab <- function (x, digits=NULL, percent=NULL, justify="right", ...) {
   if (!inherits(x, "proptab")) stop("x must be of class 'proptab'")
   if (is.null(digits)) digits <- attr(x, "digits")
   if (is.null(percent)) percent <- attr(x, "percent")
@@ -396,8 +504,7 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
 #' \code{\link[questionr]{format.proptab}}
 #' @export
 
-`print.proptab` <-
-function (x, digits=NULL, percent=NULL, justify="right", ...) {
+print.proptab <- function (x, digits=NULL, percent=NULL, justify="right", ...) {
   if (!inherits(x, "proptab")) stop("x must be of class 'proptab'")
   x <- format.proptab(x, digits=digits, percent=percent, justify=justify)
   print.table(x, ...)
@@ -430,8 +537,7 @@ function (x, digits=NULL, percent=NULL, justify="right", ...) {
 #' @importFrom stats terms
 #' @importFrom stats xtabs 
 
-`ltabs` <-
-  function(formula, data, levels = c("prefixed", "labels", "values"), variable_label = TRUE, ...){
+ltabs <- function(formula, data, levels = c("prefixed", "labels", "values"), variable_label = TRUE, ...){
     levels <- match.arg(levels)
     formula <- stats::as.formula(formula)
     if (!is.data.frame(data))
