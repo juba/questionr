@@ -14,7 +14,7 @@
 ##' function from the \link[Hmisc]{wtd.stats} package. They have been created by Frank Harrell, Department of Biostatistics,
 ##' Vanderbilt University School of Medicine, <f.harrell@@vanderbilt.edu>.
 ##' @seealso
-##' \code{\link{mean}},\code{\link{var}}, \code{\link{wtd.table}} and the \link{survey} package.
+##' \code{\link{mean}},\code{\link{var}}, \code{\link{wtd.table}} and the \code{survey} package.
 ##' @examples
 ##' data(hdv2003)
 ##' mean(hdv2003$age)
@@ -75,7 +75,7 @@ function (x, weights = NULL, normwt = FALSE, na.rm = TRUE)
 #' of \code{x}. Otherwise, returns a weighted two-way frequency table of
 #' \code{x} and \code{y}
 #' @seealso
-#' \code{\link[Hmisc]{wtd.table}}, \command{\link{table}}, and the \link{survey} extension.
+#' \code{\link[Hmisc]{wtd.table}}, \command{\link{table}}, and the \code{survey} package.
 #' @examples
 #' data(hdv2003)
 #' wtd.table(hdv2003$sexe, weights=hdv2003$poids)
