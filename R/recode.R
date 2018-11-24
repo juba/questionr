@@ -55,7 +55,7 @@ function (var, nbclass, include.lowest=TRUE, right=FALSE, dig.lab=5, ...) {
 #' freq(recode.na(hdv2003$trav.satisf, "Equilibre"))
 #' ## Truncate a count variable (recommends numeric conversion).
 #' freq(recode.na(hdv2003$freres.soeurs, 5:22))
-#' @export
+#' @export recode.na
 
 recode.na <- function(x, ..., verbose = FALSE, regex = TRUE, as.numeric = FALSE) {
   if(!is.factor(x)) x = factor(x)
