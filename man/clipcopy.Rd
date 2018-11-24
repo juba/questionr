@@ -5,10 +5,8 @@
 \alias{copie}
 \alias{copie.default}
 \alias{clipcopy.default}
-\alias{clipcopy.default}
 \alias{copie.proptab}
 \alias{clipcopy.proptab}
-\alias{copie.proptab}
 \title{Transform an object into HTML and copy it for export}
 \usage{
 clipcopy(obj, ...)
