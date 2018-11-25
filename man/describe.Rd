@@ -6,26 +6,26 @@
 \alias{describe.numeric}
 \alias{describe.character}
 \alias{describe.default}
-\alias{describe.labelled}
+\alias{describe.haven_labelled}
 \alias{describe.data.frame}
 \alias{print.description}
 \title{Describe the variables of a data.frame}
 \usage{
 describe(x, ...)
 
-\method{describe}{factor}(x, n = 10, show.length = TRUE, freq.n.max = 10,
-  ...)
+\method{describe}{factor}(x, n = 10, show.length = TRUE,
+  freq.n.max = 10, ...)
 
-\method{describe}{numeric}(x, n = 10, show.length = TRUE, freq.n.max = 10,
-  ...)
+\method{describe}{numeric}(x, n = 10, show.length = TRUE,
+  freq.n.max = 10, ...)
 
 \method{describe}{character}(x, n = 10, show.length = TRUE,
   freq.n.max = 10, ...)
 
-\method{describe}{default}(x, n = 10, show.length = TRUE, freq.n.max = 10,
-  ...)
+\method{describe}{default}(x, n = 10, show.length = TRUE,
+  freq.n.max = 10, ...)
 
-\method{describe}{labelled}(x, n = 10, show.length = TRUE,
+\method{describe}{haven_labelled}(x, n = 10, show.length = TRUE,
   freq.n.max = 10, ...)
 
 \method{describe}{data.frame}(x, ..., n = 10, freq.n.max = 0)

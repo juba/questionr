@@ -80,9 +80,9 @@
       res <- paste0("[", length(x), " obs.] ")
     res <- paste0(res, labelled::var_label(x), "\n")
     
-    if (inherits(x, "labelled_spss")) 
+    if (inherits(x, "haven_labelled_spss")) 
       cl <- paste("labelled_spss", typeof(x))
-    else if (inherits(x, "labelled")) 
+    else if (inherits(x, "haven_labelled")) 
       cl <- paste("labelled", typeof(x))
     else 
       cl <- class(x)
@@ -124,9 +124,9 @@
       res <- paste0("[", length(x), " obs.] ")
     res <- paste0(res, labelled::var_label(x), "\n")
     
-    if (inherits(x, "labelled_spss")) 
+    if (inherits(x, "haven_labelled_spss")) 
       cl <- paste("labelled_spss", typeof(x))
-    else if (inherits(x, "labelled")) 
+    else if (inherits(x, "haven_labelled")) 
       cl <- paste("labelled", typeof(x))
     else 
       cl <- class(x)
@@ -189,12 +189,12 @@
 
 
 #' @rdname describe
-#' @aliases describe.labelled
+#' @aliases describe.haven_labelled
 #' @examples 
 #' data(fecondite)
 #' describe(femmes$milieu)
 #' @export
-`describe.labelled` <- 
+`describe.haven_labelled` <- 
   function(x, n = 10, show.length = TRUE, freq.n.max = 10, ...) {
     if (is.numeric(x)) {
       res <- describe.numeric(x, n = n, show.length = show.length, freq.n.max = 0, ...)
