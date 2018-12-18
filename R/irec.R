@@ -308,7 +308,7 @@ irec <- function(obj = NULL, var_name = NULL) {
       if (is.data.frame(robj())) {
         ## Formatted source variable name
         result <- ifelse(grepl(" ", req(input$var_name)),
-                         sprintf('%s[,"%s"]', req(input$obj_name), req(input$var_name)),
+                         sprintf('%s$`%s`', req(input$obj_name), req(input$var_name)),
                          sprintf('%s$%s', req(input$obj_name), req(input$var_name)))
       }
       if (is.vector(robj()) || is.factor(robj())) {
@@ -551,7 +551,7 @@ irec <- function(obj = NULL, var_name = NULL) {
     generate_code <- function(check=FALSE) {
       if (is.data.frame(robj())) {
         dest_var <- ifelse(grepl(" ", req(input$newvar_name)),
-                           sprintf('%s[,"%s"]', req(input$obj_name), req(input$newvar_name)),
+                           sprintf('%s$`%s`', req(input$obj_name), req(input$newvar_name)),
                            sprintf('%s$%s', req(input$obj_name), req(input$newvar_name)))
       }
       if (is.vector(robj()) || is.factor(robj())) {
