@@ -1,3 +1,8 @@
+questionr 0.7.1
+---------------
+
+* Fix irec fct_recode code when there is a space in variable name
+
 questionr 0.7.0
 ---------------
 
