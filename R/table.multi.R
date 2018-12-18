@@ -122,7 +122,7 @@ cross.multi.table <- function(df, crossvar, weights = NULL, digits = 1, freq = F
   if (freq && tfreq != "row") {
     if (is.null(weights)) totals <- table(tmp)
     else totals <- wtd.table(tmp, weights = weights)
-    totals <- totals[names(totals) %in% colnames(res) || is.na(names(totals))]
+    totals <- totals[names(totals) %in% colnames(res) | is.na(names(totals))]
     res <- sweep(res, 2, totals, FUN = "/") * 100
     if (n) res <- rbind(res, n = totals)
   }
