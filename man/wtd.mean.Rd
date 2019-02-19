@@ -12,12 +12,14 @@ wtd.mean(x, weights = NULL, normwt = "ignored", na.rm = TRUE)
 
 \item{weights}{Numeric weights vector. Must be the same length as \code{x}}
 
-\item{normwt}{Only for \code{wtd.var}, if \code{TRUE} then weights are normalized for the weighted count to be the same as the non-weighted one}
+\item{normwt}{Only for \code{wtd.var}, if \code{TRUE} then weights are normalized 
+for the weighted count to be the same as the non-weighted one}
 
 \item{na.rm}{if \code{TRUE}, delete \code{NA} values.}
 }
 \description{
-Compute the weighted mean or weighted variance of a vector.
+Compute the weighted mean or weighted variance of a vector. Exact copies of Hmisc 
+functions.
 }
 \details{
 If \code{weights} is \code{NULL}, then an uniform weighting is applied.
@@ -26,14 +28,13 @@ If \code{weights} is \code{NULL}, then an uniform weighting is applied.
 data(hdv2003)
 mean(hdv2003$age)
 wtd.mean(hdv2003$age, weights=hdv2003$poids)
-var(hdv2003$age)
-wtd.var(hdv2003$age, weights=hdv2003$poids)
 }
 \seealso{
 \code{\link{mean}},\code{\link{var}}, \code{\link{wtd.table}} and the \code{survey} package.
 }
 \author{
 These functions are exact copies of the \code{wtd.mean} and \code{wtd.var}
-function from the \link[Hmisc]{wtd.stats} package. They have been created by Frank Harrell, Department of Biostatistics,
-Vanderbilt University School of Medicine, <f.harrell@vanderbilt.edu>.
+function from the \link[Hmisc]{wtd.stats} package. They have been created by 
+Frank Harrell, Department of Biostatistics, Vanderbilt University School of 
+Medicine, <f.harrell@vanderbilt.edu>.
 }

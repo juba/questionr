@@ -2,6 +2,8 @@ questionr 0.7.1
 ---------------
 
 * Fix irec fct_recode code when there is a space in variable name
+* Remove obsolete `wtd.var` function. Use `Hmisc::wtd.var` instead.
+
 
 questionr 0.7.0
 ---------------
