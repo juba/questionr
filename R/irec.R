@@ -421,7 +421,7 @@ irec <- function(obj = NULL, var_name = NULL) {
         }
         ## Normal values
         if (!is.na(l)) {
-          out <- paste0(out, sprintf(',\n               %s = %s',
+          out <- paste0(out, sprintf(',\n %s = %s',
                                      value,
                                      utils::capture.output(dput(l))))
         }
@@ -433,10 +433,10 @@ irec <- function(obj = NULL, var_name = NULL) {
         if (na_recode != "" && has_recode_to_na) { source <- dest_var }
         ## Input conversion if numeric
         if (is.numeric(rvar())) {
-          out <- paste0(sprintf("%s <- fct_recode(%s", dest_var, dest_var), out)
+          out <- paste0(sprintf("%s <- fct_recode(%s\n", dest_var, dest_var), out)
           out <- paste0(sprintf("%s <- as.character(%s)\n", dest_var, source), out)
         } else {
-          out <- paste0(sprintf("%s <- fct_recode(%s", dest_var, source), out)
+          out <- paste0(sprintf("%s <- fct_recode(%s\n", dest_var, source), out)
         }
         out <- paste0(out, ")\n")
       }
@@ -497,14 +497,14 @@ irec <- function(obj = NULL, var_name = NULL) {
         }
         ## Normal values
         if (!is.na(l)) {
-          out <- paste0(out, sprintf(',\n               %s = %s',
+          out <- paste0(out, sprintf(',\n %s = %s',
                                      utils::capture.output(dput(l)),
                                      value))
         } 
         ## NA values
         else {
           recode_NA <- TRUE
-          out <- paste0(out, sprintf(',\n               .missing = %s',
+          out <- paste0(out, sprintf(',\n .missing = %s',
                                      value))
         }
       }
@@ -513,7 +513,7 @@ irec <- function(obj = NULL, var_name = NULL) {
       if (out != "") {
         source <- src_var()
         if (recode_NA && is.factor(rvar())) source <- dest_var
-        out <- paste0(sprintf("%s <- recode(%s", dest_var, source), out)
+        out <- paste0(sprintf("%s <- recode(%s\n", dest_var, source), out)
         out <- paste0(out, ")\n")
         ## .missing is not supported for factors
         if (recode_NA && is.factor(rvar())) {
@@ -581,6 +581,7 @@ irec <- function(obj = NULL, var_name = NULL) {
       }
       ## Generate code
       out <- generate_code()
+      out <- styler::style_text(out)
       ## Generated code syntax highlighting
       out <- paste(highr::hi_html(out), collapse = "\n")
       ## Final paste
@@ -593,6 +594,8 @@ irec <- function(obj = NULL, var_name = NULL) {
     observeEvent(input$done, {
       ## Generate code
       out <- generate_code()
+      out <- styler::style_text(out)
+      out <- paste(out, collapse = "\n")
       if (run_as_addin) {
         rstudioapi::insertText(text = out)
       } else {

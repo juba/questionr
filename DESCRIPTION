@@ -20,6 +20,7 @@ Imports:
     miniUI,
     rstudioapi,
     highr,
+    styler,
     classInt,
     htmltools,
     graphics,

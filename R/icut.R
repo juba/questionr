@@ -307,9 +307,9 @@ icut <- function(obj = NULL, var_name = NULL) {
             if (check) dest_var <- ".icut_tmp"
 
           out <- sprintf(gettextf("## Cutting %s into %s\n", src_var(), dest_var, domain="R-questionr"))
-          out <- paste0(out, sprintf("%s <- cut(%s, include.lowest=%s,  right=%s,\n", dest_var, src_var(), input$inclowest, input$right))
+          out <- paste0(out, sprintf("%s <- cut(%s,\n include.lowest=%s,\n right=%s,\n", dest_var, src_var(), input$inclowest, input$right))
           breaks <- paste0(utils::capture.output(dput(get_breaks(input$breaks))), collapse="")
-          out <- paste0(out, paste0(rep(" ",nchar(dest_var)+8),collapse=""),sprintf("breaks=%s)\n", breaks))
+          out <- paste0(out, sprintf("breaks=%s)\n", breaks))
           out
         }
 
@@ -325,6 +325,7 @@ icut <- function(obj = NULL, var_name = NULL) {
         output$codeOut <- renderText({
           ## Generate code
           out <- generate_code()
+          out <- styler::style_text(out)
           ## Generated code syntax highlighting
           out <- paste(highr::hi_html(out), collapse="\n")
           ## Final paste
@@ -336,6 +337,8 @@ icut <- function(obj = NULL, var_name = NULL) {
         observeEvent(input$done, {
           ## Generate code
           out <- generate_code()
+          out <- styler::style_text(out)
+          out <- paste(out, collapse = "\n")
           if (run_as_addin) {
             rstudioapi::insertText(text = out)
           } else {
