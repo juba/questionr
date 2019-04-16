@@ -26,7 +26,7 @@ Imports:
     graphics,
     stats,
     utils,
-    labelled (>= 2.0.0)
+    labelled (>= 2.2.0)
 Suggests:
     memisc,
     testthat,
