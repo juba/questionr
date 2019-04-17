@@ -2,12 +2,16 @@
 % Please edit documentation in R/lookfor.R
 \name{lookfor}
 \alias{lookfor}
+\alias{look_for}
 \title{Look for keywords variable names and descriptions}
 \source{
 Based on the behaviour of the \code{lookfor} command in Stata.
 }
 \usage{
 lookfor(data, ..., labels = TRUE, ignore.case = TRUE,
+  details = FALSE)
+
+look_for(data, ..., labels = TRUE, ignore.case = TRUE,
   details = FALSE)
 }
 \arguments{
@@ -17,7 +21,7 @@ lookfor(data, ..., labels = TRUE, ignore.case = TRUE,
 
 \item{labels}{whether or not to search variable labels (descriptions); \code{TRUE} by default}
 
-\item{ignore.case}{whether or not to make the keywords case sensitive; 
+\item{ignore.case}{whether or not to make the keywords case sensitive;
 \code{TRUE} by default (case is ignored during matching)}
 
 \item{details}{add details about each variable (see examples)}
@@ -34,9 +38,11 @@ in which case it will also search variable descriptions (labels).
 The command is meant to help users finding variables in large datasets.
 }
 \details{
-The function looks into the variable names for matches to the keywords. If the data frame 
-has been imported into R with \pkg{haven} package, then variable labels are included in the search scope.
-If \pkg{labelled} package is installed, variable labels of data.frame imported with \pkg{foreign} or
+The function, imported from \pkg{labelled}, looks into the variable names for matches to the keywords. 
+If the data frame has been imported into R with \pkg{haven} package, 
+then variable labels are included in the search scope.
+If \pkg{labelled} package is installed, variable labels of data.frame 
+imported with \pkg{foreign} or
 \pkg{memisc} packages will also be taken into account.
 }
 \examples{
@@ -50,16 +56,6 @@ lookfor(iris, "s$")
 # Look for with several keywords
 lookfor(iris, "pet", "sp")
 lookfor(iris, "pet", "sp", "width")
-# Load memisc package and example data.
-\dontrun{require(memisc)
-nes1948.por <- UnZip("anes/NES1948.ZIP","NES1948.POR", package="memisc")
-nes1948 <- spss.portable.file(nes1948.por)
-# Look for a vector of keywords.
-lookfor(nes1948, c("Truman", "Dewey"))
-# Look for a regular expression.
-lookfor(nes1948, "truman|dewey")
-# Look for a phrase.
-lookfor(nes1948, "personal attribute")}
 # Labelled data
 data(fecondite)
 lookfor(femmes)
