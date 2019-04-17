@@ -28,7 +28,6 @@ Imports:
     utils,
     labelled (>= 2.2.0)
 Suggests:
-    memisc,
     testthat,
     roxygen2,
     dplyr,
