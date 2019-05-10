@@ -19,6 +19,13 @@ test_that("Simple freq is correct", {
   expect_equal(tab$`val%`, c(round(val / sum(val) * 100, 1), NA))
 })
 
+test_that("freq with NA and 'NA' is ok", {
+  x <- c("a", "a", "b", "NA", NA)
+  tab <- freq(x)
+  expect_equal(rownames(tab), c("a", "b", "\"NA\"", "NA"))
+})
+
+
 test_that("freq with sort, digits, cum, valid and total is correct", {
   tab <- freq(hdv2003$qualif, digits = 2, cum = TRUE, total = TRUE, valid = FALSE, sort = "inc", na.last = FALSE)
   v <- sort(summary(hdv2003$qualif))
