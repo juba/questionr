@@ -513,7 +513,8 @@ irec <- function(obj = NULL, var_name = NULL) {
       if (out != "") {
         source <- src_var()
         if (recode_NA && is.factor(rvar())) source <- dest_var
-        out <- paste0(sprintf("%s <- recode(%s\n", dest_var, source), out)
+        function_name <- ifelse(input$outconv == "factor", "recode_factor", "recode")
+        out <- paste0(sprintf("%s <- %s(%s\n", dest_var, function_name, source), out)
         out <- paste0(out, ")\n")
         ## .missing is not supported for factors
         if (recode_NA && is.factor(rvar())) {
@@ -523,7 +524,6 @@ irec <- function(obj = NULL, var_name = NULL) {
       
       ## Optional output conversion
       output_is_factor <- is.factor(rvar()) && !recode_NA
-      if (!output_is_factor && input$outconv == "factor") out <- paste0(out, sprintf("%s <- factor(%s)\n", dest_var, dest_var))
       if (output_is_factor && input$outconv == "character") out <- paste0(out, sprintf("%s <- as.character(%s)\n", dest_var, dest_var))
       if (input$outconv == "numeric") {
         if (output_is_factor) {
