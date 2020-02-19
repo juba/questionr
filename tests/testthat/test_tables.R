@@ -22,7 +22,7 @@ test_that("Simple freq is correct", {
 test_that("freq with NA and 'NA' is ok", {
   x <- c("a", "a", "b", "NA", NA)
   tab <- freq(x)
-  expect_equal(rownames(tab), c("a", "b", "\"NA\"", "NA"))
+  expect_setequal(rownames(tab), c("a", "b", "\"NA\"", "NA"))
 })
 
 
