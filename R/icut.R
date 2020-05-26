@@ -8,11 +8,12 @@
 ##' @return
 ##' The function launches a shiny app in the system web browser. The recoding code is returned in the console
 ##' when the app is closed with the "Done" button.
-##' @author Julien Barnier <julien.barnier@@ens-lyon.fr>
 ##' @examples
-##' \dontrun{data(hdv2003)
+##' \dontrun{
+##' data(hdv2003)
 ##' icut(hdv2003, "age")
-##' irec(hdv2003, heures.tv) ## this also works}
+##' irec(hdv2003, heures.tv)
+##' }
 ##'
 ##' @import shiny
 ##' @import rstudioapi

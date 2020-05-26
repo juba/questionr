@@ -24,9 +24,8 @@ or factor).
 The generated convert the variable into a factor, as only those allow for levels ordering.
 }
 \examples{
-\dontrun{data(hdv2003)
-iorder(hdv2003, "qualif")}
+\dontrun{
+data(hdv2003)
+iorder(hdv2003, "qualif")
 }
-\author{
-Julien Barnier <julien.barnier@ens-lyon.fr>
 }

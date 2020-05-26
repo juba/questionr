@@ -11,10 +11,11 @@
 ##' @return
 ##' The function launches a shiny app in the system web browser. The reordering code is returned in the console
 ##' when the app is closed with the "Done" button.
-##' @author Julien Barnier <julien.barnier@@ens-lyon.fr>
 ##' @examples
-##' \dontrun{data(hdv2003)
-##' iorder(hdv2003, "qualif")}
+##' \dontrun{
+##' data(hdv2003)
+##' iorder(hdv2003, "qualif")
+##' }
 ##' @import shiny
 ##' @import rstudioapi
 ##' @import miniUI

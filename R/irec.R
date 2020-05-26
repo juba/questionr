@@ -8,14 +8,15 @@
 ##' @return
 ##' The function launches a shiny app in the system web browser. The recoding code is returned in the console
 ##' when the app is closed with the "Done" button.
-##' @author Julien Barnier <julien.barnier@@ens-lyon.fr>
 ##' @examples
-##' \dontrun{data(hdv2003)
+##' \dontrun{
+##' data(hdv2003)
 ##' irec()
 ##' v <- sample(c("Red","Green","Blue"), 50, replace=TRUE)
 ##' irec(v)
 ##' irec(hdv2003, "qualif")
-##' irec(hdv2003, sexe) ## this also works}
+##' irec(hdv2003, sexe) ## this also works
+##' }
 ##' @import shiny
 ##' @import rstudioapi
 ##' @import miniUI

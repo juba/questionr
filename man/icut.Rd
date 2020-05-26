@@ -20,11 +20,10 @@ This function launches a shiny app in a web browser in order to do
 interactive conversion of a numeric variable into a categorical one.
 }
 \examples{
-\dontrun{data(hdv2003)
+\dontrun{
+data(hdv2003)
 icut(hdv2003, "age")
-irec(hdv2003, heures.tv) ## this also works}
-
+irec(hdv2003, heures.tv)
 }
-\author{
-Julien Barnier <julien.barnier@ens-lyon.fr>
+
 }
