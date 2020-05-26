@@ -7,9 +7,6 @@
 \format{
 a data frame containing one record for each child of the surveyed women in the \link{fertility} survey.
 }
-\usage{
-children
-}
 \description{
 Some fictive results from a fecondity survey.
 }

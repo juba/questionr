@@ -8,9 +8,6 @@
 a data frame containing the questionnaire administered to all 15-49 years old women 
        living in the selected households for the \link{fecondite} survey.
 }
-\usage{
-femmes
-}
 \description{
 Some fictive results from a fecondity survey.
 }
