@@ -11,11 +11,16 @@
 \usage{
 clipcopy(obj, ...)
 
-\method{clipcopy}{default}(obj, append = FALSE, file = FALSE,
-  filename = "temp.html", clipboard.size = 4096, ...)
+\method{clipcopy}{default}(
+  obj,
+  append = FALSE,
+  file = FALSE,
+  filename = "temp.html",
+  clipboard.size = 4096,
+  ...
+)
 
-\method{clipcopy}{proptab}(obj, percent = NULL, digits = NULL,
-  justify = "right", ...)
+\method{clipcopy}{proptab}(obj, percent = NULL, digits = NULL, justify = "right", ...)
 }
 \arguments{
 \item{obj}{object to be copied}

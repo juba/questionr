@@ -4,9 +4,19 @@
 \alias{tabs}
 \title{Weighted Crossresult}
 \usage{
-tabs(df, x, y, type = "percent", percent = FALSE, weight = NULL,
-  normwt = FALSE, na.rm = TRUE, na.show = FALSE, exclude = NULL,
-  digits = 1)
+tabs(
+  df,
+  x,
+  y,
+  type = "percent",
+  percent = FALSE,
+  weight = NULL,
+  normwt = FALSE,
+  na.rm = TRUE,
+  na.show = FALSE,
+  exclude = NULL,
+  digits = 1
+)
 }
 \arguments{
 \item{df}{A data.frame that contains \code{x} and (optionally) \code{y} and \code{weight}.}

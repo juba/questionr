@@ -4,8 +4,17 @@
 \alias{cross.multi.table}
 \title{Two-way frequency table between a multiple choices question and a factor}
 \usage{
-cross.multi.table(df, crossvar, weights = NULL, digits = 1,
-  freq = FALSE, tfreq = "col", n = FALSE, na.rm = TRUE, ...)
+cross.multi.table(
+  df,
+  crossvar,
+  weights = NULL,
+  digits = 1,
+  freq = FALSE,
+  tfreq = "col",
+  n = FALSE,
+  na.rm = TRUE,
+  ...
+)
 }
 \arguments{
 \item{df}{data frame with the binary variables}

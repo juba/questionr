@@ -8,11 +8,9 @@
 Based on the behaviour of the \code{lookfor} command in Stata.
 }
 \usage{
-lookfor(data, ..., labels = TRUE, ignore.case = TRUE,
-  details = FALSE)
+lookfor(data, ..., labels = TRUE, ignore.case = TRUE, details = FALSE)
 
-look_for(data, ..., labels = TRUE, ignore.case = TRUE,
-  details = FALSE)
+look_for(data, ..., labels = TRUE, ignore.case = TRUE, details = FALSE)
 }
 \arguments{
 \item{data}{a data frame}

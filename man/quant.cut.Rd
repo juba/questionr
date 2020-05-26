@@ -4,8 +4,7 @@
 \alias{quant.cut}
 \title{Transform a quantitative variable into a qualitative variable}
 \usage{
-quant.cut(var, nbclass, include.lowest = TRUE, right = FALSE,
-  dig.lab = 5, ...)
+quant.cut(var, nbclass, include.lowest = TRUE, right = FALSE, dig.lab = 5, ...)
 }
 \arguments{
 \item{var}{variable to transform}

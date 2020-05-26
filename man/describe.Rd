@@ -13,20 +13,15 @@
 \usage{
 describe(x, ...)
 
-\method{describe}{factor}(x, n = 10, show.length = TRUE,
-  freq.n.max = 10, ...)
+\method{describe}{factor}(x, n = 10, show.length = TRUE, freq.n.max = 10, ...)
 
-\method{describe}{numeric}(x, n = 10, show.length = TRUE,
-  freq.n.max = 10, ...)
+\method{describe}{numeric}(x, n = 10, show.length = TRUE, freq.n.max = 10, ...)
 
-\method{describe}{character}(x, n = 10, show.length = TRUE,
-  freq.n.max = 10, ...)
+\method{describe}{character}(x, n = 10, show.length = TRUE, freq.n.max = 10, ...)
 
-\method{describe}{default}(x, n = 10, show.length = TRUE,
-  freq.n.max = 10, ...)
+\method{describe}{default}(x, n = 10, show.length = TRUE, freq.n.max = 10, ...)
 
-\method{describe}{haven_labelled}(x, n = 10, show.length = TRUE,
-  freq.n.max = 10, ...)
+\method{describe}{haven_labelled}(x, n = 10, show.length = TRUE, freq.n.max = 10, ...)
 
 \method{describe}{data.frame}(x, ..., n = 10, freq.n.max = 0)
 

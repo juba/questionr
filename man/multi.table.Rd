@@ -4,8 +4,7 @@
 \alias{multi.table}
 \title{One-way frequency table for multiple choices question}
 \usage{
-multi.table(df, true.codes = NULL, weights = NULL, digits = 1,
-  freq = TRUE)
+multi.table(df, true.codes = NULL, weights = NULL, digits = 1, freq = TRUE)
 }
 \arguments{
 \item{df}{data frame with the binary variables}

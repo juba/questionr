@@ -4,8 +4,7 @@
 \alias{format.proptab}
 \title{S3 format method for proptab objects.}
 \usage{
-\method{format}{proptab}(x, digits = NULL, percent = NULL,
-  justify = "right", ...)
+\method{format}{proptab}(x, digits = NULL, percent = NULL, justify = "right", ...)
 }
 \arguments{
 \item{x}{object of class proptab}

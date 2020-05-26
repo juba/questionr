@@ -10,17 +10,37 @@
 \usage{
 prop(tab, ...)
 
-prop_table(tab, digits = 1, total = TRUE, percent = FALSE,
-  drop = TRUE, n = FALSE, ...)
+prop_table(
+  tab,
+  digits = 1,
+  total = TRUE,
+  percent = FALSE,
+  drop = TRUE,
+  n = FALSE,
+  ...
+)
 
-\method{prop}{data.frame}(tab, digits = 1, total = TRUE,
-  percent = FALSE, drop = TRUE, n = FALSE, ...)
+\method{prop}{data.frame}(
+  tab,
+  digits = 1,
+  total = TRUE,
+  percent = FALSE,
+  drop = TRUE,
+  n = FALSE,
+  ...
+)
 
-\method{prop}{matrix}(tab, digits = 1, total = TRUE, percent = FALSE,
-  drop = TRUE, n = FALSE, ...)
+\method{prop}{matrix}(
+  tab,
+  digits = 1,
+  total = TRUE,
+  percent = FALSE,
+  drop = TRUE,
+  n = FALSE,
+  ...
+)
 
-\method{prop}{tabyl}(tab, digits = 1, total = TRUE, percent = FALSE,
-  n = FALSE, ...)
+\method{prop}{tabyl}(tab, digits = 1, total = TRUE, percent = FALSE, n = FALSE, ...)
 }
 \arguments{
 \item{tab}{frequency table}

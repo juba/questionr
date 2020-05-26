@@ -4,8 +4,7 @@
 \alias{print.proptab}
 \title{S3 print method for proptab objects.}
 \usage{
-\method{print}{proptab}(x, digits = NULL, percent = NULL,
-  justify = "right", ...)
+\method{print}{proptab}(x, digits = NULL, percent = NULL, justify = "right", ...)
 }
 \arguments{
 \item{x}{object of class proptab}

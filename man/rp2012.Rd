@@ -4,7 +4,9 @@
 \name{rp2012}
 \alias{rp2012}
 \title{2012 French Census - French cities of more than 2000 inhabitants}
-\format{A data frame with 5170 rows and 60 variables}
+\format{
+A data frame with 5170 rows and 60 variables
+}
 \source{
 \url{http://www.insee.fr/fr/bases-de-donnees/default.asp?page=recensements.htm}
 }

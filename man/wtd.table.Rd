@@ -4,8 +4,16 @@
 \alias{wtd.table}
 \title{Weighted one-way and two-way frequency tables.}
 \usage{
-wtd.table(x, y = NULL, weights = NULL, digits = 3, normwt = FALSE,
-  na.rm = TRUE, na.show = FALSE, exclude = NULL)
+wtd.table(
+  x,
+  y = NULL,
+  weights = NULL,
+  digits = 3,
+  normwt = FALSE,
+  na.rm = TRUE,
+  na.show = FALSE,
+  exclude = NULL
+)
 }
 \arguments{
 \item{x}{a vector}

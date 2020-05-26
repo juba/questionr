@@ -4,8 +4,10 @@
 \name{femmes}
 \alias{femmes}
 \title{A fertility survey - "femmes" table}
-\format{a data frame containing the questionnaire administered to all 15-49 years old women 
-       living in the selected households for the \link{fecondite} survey.}
+\format{
+a data frame containing the questionnaire administered to all 15-49 years old women 
+       living in the selected households for the \link{fecondite} survey.
+}
 \usage{
 femmes
 }

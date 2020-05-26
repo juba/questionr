@@ -4,8 +4,13 @@
 \alias{ltabs}
 \title{Cross tabulation with labelled variables}
 \usage{
-ltabs(formula, data, levels = c("prefixed", "labels", "values"),
-  variable_label = TRUE, ...)
+ltabs(
+  formula,
+  data,
+  levels = c("prefixed", "labels", "values"),
+  variable_label = TRUE,
+  ...
+)
 }
 \arguments{
 \item{formula}{a formula object (see \code{\link[stats]{xtabs}})}

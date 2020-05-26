@@ -4,9 +4,17 @@
 \alias{freq}
 \title{Generate frequency tables.}
 \usage{
-freq(x, digits = 1, cum = FALSE, total = FALSE, exclude = NULL,
-  sort = "", valid = !(NA \%in\% exclude), levels = c("prefixed",
-  "labels", "values"), na.last = TRUE)
+freq(
+  x,
+  digits = 1,
+  cum = FALSE,
+  total = FALSE,
+  exclude = NULL,
+  sort = "",
+  valid = !(NA \%in\% exclude),
+  levels = c("prefixed", "labels", "values"),
+  na.last = TRUE
+)
 }
 \arguments{
 \item{x}{either a vector to be tabulated, or a table object}

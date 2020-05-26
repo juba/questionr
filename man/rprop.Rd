@@ -11,17 +11,37 @@
 \usage{
 rprop(tab, ...)
 
-\method{rprop}{table}(tab, digits = 1, total = TRUE, percent = FALSE,
-  drop = TRUE, n = FALSE, ...)
+\method{rprop}{table}(
+  tab,
+  digits = 1,
+  total = TRUE,
+  percent = FALSE,
+  drop = TRUE,
+  n = FALSE,
+  ...
+)
 
-\method{rprop}{data.frame}(tab, digits = 1, total = TRUE,
-  percent = FALSE, drop = TRUE, n = FALSE, ...)
+\method{rprop}{data.frame}(
+  tab,
+  digits = 1,
+  total = TRUE,
+  percent = FALSE,
+  drop = TRUE,
+  n = FALSE,
+  ...
+)
 
-\method{rprop}{matrix}(tab, digits = 1, total = TRUE,
-  percent = FALSE, drop = TRUE, n = FALSE, ...)
+\method{rprop}{matrix}(
+  tab,
+  digits = 1,
+  total = TRUE,
+  percent = FALSE,
+  drop = TRUE,
+  n = FALSE,
+  ...
+)
 
-\method{rprop}{tabyl}(tab, digits = 1, total = TRUE, percent = FALSE,
-  n = FALSE, ...)
+\method{rprop}{tabyl}(tab, digits = 1, total = TRUE, percent = FALSE, n = FALSE, ...)
 }
 \arguments{
 \item{tab}{frequency table}

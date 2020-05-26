@@ -10,17 +10,37 @@
 \usage{
 cprop(tab, ...)
 
-\method{cprop}{table}(tab, digits = 1, total = TRUE, percent = FALSE,
-  drop = TRUE, n = FALSE, ...)
+\method{cprop}{table}(
+  tab,
+  digits = 1,
+  total = TRUE,
+  percent = FALSE,
+  drop = TRUE,
+  n = FALSE,
+  ...
+)
 
-\method{cprop}{data.frame}(tab, digits = 1, total = TRUE,
-  percent = FALSE, drop = TRUE, n = FALSE, ...)
+\method{cprop}{data.frame}(
+  tab,
+  digits = 1,
+  total = TRUE,
+  percent = FALSE,
+  drop = TRUE,
+  n = FALSE,
+  ...
+)
 
-\method{cprop}{matrix}(tab, digits = 1, total = TRUE,
-  percent = FALSE, drop = TRUE, n = FALSE, ...)
+\method{cprop}{matrix}(
+  tab,
+  digits = 1,
+  total = TRUE,
+  percent = FALSE,
+  drop = TRUE,
+  n = FALSE,
+  ...
+)
 
-\method{cprop}{tabyl}(tab, digits = 1, total = TRUE, percent = FALSE,
-  n = FALSE, ...)
+\method{cprop}{tabyl}(tab, digits = 1, total = TRUE, percent = FALSE, n = FALSE, ...)
 }
 \arguments{
 \item{tab}{frequency table}

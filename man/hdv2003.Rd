@@ -4,7 +4,9 @@
 \name{hdv2003}
 \alias{hdv2003}
 \title{Histoire de vie 2003}
-\format{A data frame with 2000 rows and 20 variables}
+\format{
+A data frame with 2000 rows and 20 variables
+}
 \source{
 \url{http://www.insee.fr/fr/themes/detail.asp?ref_id=fd-HDV03}
 }

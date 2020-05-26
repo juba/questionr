@@ -4,7 +4,9 @@
 \name{households}
 \alias{households}
 \title{A fertility survey - "households" table}
-\format{a data frame containing some information from the households selected for the \link{fertility} survey.}
+\format{
+a data frame containing some information from the households selected for the \link{fertility} survey.
+}
 \usage{
 households
 }
