@@ -1,6 +1,6 @@
 Package: questionr
-Maintainer: Julien Barnier <julien.barnier@ens-lyon.fr>
-Authors@R: c(person("Julien", "Barnier", email="julien.barnier@ens-lyon.fr",
+Maintainer: Julien Barnier <julien.barnier@cnrs.fr>
+Authors@R: c(person("Julien", "Barnier", email="julien.barnier@cnrs.fr",
     role=c("aut","cre")), person("François", "Briatte",
     email="f.briatte@gmail.com", role="aut"), person("Joseph", "Larmarange",
     email="joseph@larmarange.net", role="aut"))
