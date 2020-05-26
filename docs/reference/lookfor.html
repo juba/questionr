@@ -8,21 +8,29 @@
 
 <title>Look for keywords variable names and descriptions — lookfor • questionr</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,14 +38,14 @@
 
 
 
-<meta property="og:title" content="Look for keywords variable names and descriptions — lookfor" />
 
+<meta property="og:title" content="Look for keywords variable names and descriptions — lookfor" />
 <meta property="og:description" content="lookfor emulates the lookfor Stata command in R. It supports
 searching into the variable names of regular R data frames as well as into
 SPSS and Stata datasets loaded in R via the haven, 
 in which case it will also search variable descriptions (labels).
 The command is meant to help users finding variables in large datasets." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -51,9 +59,10 @@ The command is meant to help users finding variables in large datasets." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -67,7 +76,7 @@ The command is meant to help users finding variables in large datasets." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">questionr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1</span>
       </span>
     </div>
 
@@ -75,7 +84,7 @@ The command is meant to help users finding variables in large datasets." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -98,9 +107,13 @@ The command is meant to help users finding variables in large datasets." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/juba/questionr/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -108,29 +121,29 @@ The command is meant to help users finding variables in large datasets." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Look for keywords variable names and descriptions</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/juba/questionr/blob/master/R/lookfor.R'><code>R/lookfor.R</code></a></small>
     <div class="hidden name"><code>lookfor.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p><code>lookfor</code> emulates the <code>lookfor</code> Stata command in R. It supports
 searching into the variable names of regular R data frames as well as into
 SPSS and Stata datasets loaded in R via the <span class="pkg">haven</span>, 
 in which case it will also search variable descriptions (labels).
 The command is meant to help users finding variables in large datasets.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>lookfor</span>(<span class='no'>data</span>, <span class='no'>...</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>ignore.case</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>details</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>lookfor</span>(<span class='no'>data</span>, <span class='no'>...</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>ignore.case</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>details</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'>look_for</span>(<span class='no'>data</span>, <span class='no'>...</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>ignore.case</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>details</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -148,7 +161,7 @@ The command is meant to help users finding variables in large datasets.</p>
     </tr>
     <tr>
       <th>ignore.case</th>
-      <td><p>whether or not to make the keywords case sensitive; 
+      <td><p>whether or not to make the keywords case sensitive;
 <code>TRUE</code> by default (case is ignored during matching)</p></td>
     </tr>
     <tr>
@@ -156,27 +169,25 @@ The command is meant to help users finding variables in large datasets.</p>
       <td><p>add details about each variable (see examples)</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p>Based on the behaviour of the <code>lookfor</code> command in Stata.</p>
-    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a data frame featuring the variable position, name and description 
 (if it exists) in the original data frame</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The function looks into the variable names for matches to the keywords. If the data frame 
-has been imported into R with <span class="pkg">haven</span> package, then variable labels are included in the search scope.
-If <span class="pkg">labelled</span> package is installed, variable labels of data.frame imported with <span class="pkg">foreign</span> or
+    <p>The function, imported from <span class="pkg">labelled</span>, looks into the variable names for matches to the keywords. 
+If the data frame has been imported into R with <span class="pkg">haven</span> package, 
+then variable labels are included in the search scope.
+If <span class="pkg">labelled</span> package is installed, variable labels of data.frame 
+imported with <span class="pkg">foreign</span> or
 <span class="pkg">memisc</span> packages will also be taken into account.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code>query</code> in the <code>memisc</code> package</p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>lookfor</span>(<span class='no'>iris</span>)</div><div class='output co'>#&gt;       variable
@@ -203,19 +214,8 @@ If <span class="pkg">labelled</span> package is installed, variable labels of da
 #&gt; 2  Sepal.Width
 #&gt; 3 Petal.Length
 #&gt; 4  Petal.Width
-#&gt; 5      Species</div><div class='input'># Load memisc package and example data.
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>require</a></span>(<span class='no'>memisc</span>)
-<span class='no'>nes1948.por</span> <span class='kw'>&lt;-</span> <span class='fu'>UnZip</span>(<span class='st'>"anes/NES1948.ZIP"</span>,<span class='st'>"NES1948.POR"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"memisc"</span>)
-<span class='no'>nes1948</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/memisc/topics/importers'>spss.portable.file</a></span>(<span class='no'>nes1948.por</span>)
-<span class='co'># Look for a vector of keywords.</span>
-<span class='fu'>lookfor</span>(<span class='no'>nes1948</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Truman"</span>, <span class='st'>"Dewey"</span>))
-<span class='co'># Look for a regular expression.</span>
-<span class='fu'>lookfor</span>(<span class='no'>nes1948</span>, <span class='st'>"truman|dewey"</span>)
-<span class='co'># Look for a phrase.</span>
-<span class='fu'>lookfor</span>(<span class='no'>nes1948</span>, <span class='st'>"personal attribute"</span>)
-<span class='co'># }</span><div class='input'><span class='co'># Labelled data</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>fecondite</span>)
+#&gt; 5      Species</div><div class='input'><span class='co'># Labelled data</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>fecondite</span>)
 <span class='fu'>lookfor</span>(<span class='no'>femmes</span>)</div><div class='output co'>#&gt;          variable
 #&gt; 1        id_femme
 #&gt; 2       id_menage
@@ -291,24 +291,24 @@ If <span class="pkg">labelled</span> package is installed, variable labels of da
 #&gt; 15                                        Regarde la télévision ?
 #&gt; 16                                         Nombre idéal d'enfants
 #&gt; 17                      A déjà fait un test de dépistage du VIH ?
-#&gt;                                  class   type levels
-#&gt; 1                              numeric double       
-#&gt; 2                              numeric double       
-#&gt; 3                              numeric double       
-#&gt; 4                                 Date double       
-#&gt; 5                                 Date double       
-#&gt; 6                              numeric double       
-#&gt; 7                       haven_labelled double       
-#&gt; 8                       haven_labelled double       
-#&gt; 9                       haven_labelled double       
-#&gt; 10 haven_labelled_spss, haven_labelled double       
-#&gt; 11                      haven_labelled double       
-#&gt; 12                      haven_labelled double       
-#&gt; 13                      haven_labelled double       
-#&gt; 14                      haven_labelled double       
-#&gt; 15                      haven_labelled double       
-#&gt; 16 haven_labelled_spss, haven_labelled double       
-#&gt; 17 haven_labelled_spss, haven_labelled double       
+#&gt;                                                      class   type levels
+#&gt; 1                                                  numeric double       
+#&gt; 2                                                  numeric double       
+#&gt; 3                                                  numeric double       
+#&gt; 4                                                     Date double       
+#&gt; 5                                                     Date double       
+#&gt; 6                                                  numeric double       
+#&gt; 7                       haven_labelled, vctrs_vctr, double double       
+#&gt; 8                       haven_labelled, vctrs_vctr, double double       
+#&gt; 9                       haven_labelled, vctrs_vctr, double double       
+#&gt; 10 haven_labelled_spss, haven_labelled, vctrs_vctr, double double       
+#&gt; 11                      haven_labelled, vctrs_vctr, double double       
+#&gt; 12                      haven_labelled, vctrs_vctr, double double       
+#&gt; 13                      haven_labelled, vctrs_vctr, double double       
+#&gt; 14                      haven_labelled, vctrs_vctr, double double       
+#&gt; 15                      haven_labelled, vctrs_vctr, double double       
+#&gt; 16 haven_labelled_spss, haven_labelled, vctrs_vctr, double double       
+#&gt; 17 haven_labelled_spss, haven_labelled, vctrs_vctr, double double       
 #&gt;                                                                             value_labels
 #&gt; 1                                                                                       
 #&gt; 2                                                                                       
@@ -346,26 +346,13 @@ If <span class="pkg">labelled</span> package is installed, variable labels of da
 #&gt; 16            18    0                   
 #&gt; 17             3   29         9         </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#source">Source</a></li>
-
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>François Briatte &lt;f.briatte@gmail.com&gt;</p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -373,13 +360,16 @@ If <span class="pkg">labelled</span> package is installed, variable labels of da
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
