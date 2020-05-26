@@ -14,7 +14,7 @@ Description: Set of functions to make the processing and analysis of
     contingency tables, dataset metadata handling, and several convenience
     functions.
 Depends:
-    R (>= 2.10)
+    R (>= 3.5.0)
 Imports:
     shiny (>= 1.0.5),
     miniUI,
@@ -26,7 +26,8 @@ Imports:
     graphics,
     stats,
     utils,
-    labelled (>= 2.2.0)
+    labelled (>= 2.4.0),
+    haven (>= 2.3.0)
 Suggests:
     testthat,
     roxygen2,
