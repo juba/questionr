@@ -134,7 +134,7 @@ variable by matching its levels to exact or regular expression matches." />
 variable by matching its levels to exact or regular expression matches.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>recode.na</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>regex</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>as.numeric</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>recode.na</span>(<span class='kw'>x</span>, <span class='kw'>...</span>, verbose = <span class='fl'>FALSE</span>, regex = <span class='fl'>TRUE</span>, as.numeric = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,19 +167,22 @@ variable by matching its levels to exact or regular expression matches.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/regex.html'>regex</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>François Briatte &lt;f.briatte@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>hdv2003</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>hdv2003</span>)
 <span class='co'>## With exact string matches.</span>
-<span class='no'>hdv2003</span>$<span class='no'>nivetud</span> <span class='kw'>=</span> <span class='fu'>recode.na</span>(<span class='no'>hdv2003</span>$<span class='no'>nivetud</span>, <span class='st'>"Inconnu"</span>)</div><div class='output co'>#&gt; <span class='message'>Recoded 0 values to NA.</span></div><div class='input'><span class='co'>## With regular expressions.</span>
-<span class='no'>hdv2003</span>$<span class='no'>relig</span> <span class='kw'>=</span> <span class='fu'>recode.na</span>(<span class='no'>hdv2003</span>$<span class='no'>relig</span>, <span class='st'>"[A|a]ppartenance"</span>, <span class='st'>"Rejet|NSP"</span>)</div><div class='output co'>#&gt; <span class='message'>Recoded 1292 values to NA.</span></div><div class='input'><span class='co'>## Showing missing values. </span>
-<span class='no'>hdv2003</span>$<span class='no'>clso</span> <span class='kw'>=</span> <span class='fu'>recode.na</span>(<span class='no'>hdv2003</span>$<span class='no'>clso</span>, <span class='st'>"Ne sait pas"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>Recoded 27 values to NA.</span></div><div class='output co'>#&gt;              n
+<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>nivetud</span> <span class='op'>=</span> <span class='fu'>recode.na</span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>nivetud</span>, <span class='st'>"Inconnu"</span>)</div><div class='output co'>#&gt; <span class='message'>Recoded 0 values to NA.</span></div><div class='input'><span class='co'>## With regular expressions.</span>
+<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>relig</span> <span class='op'>=</span> <span class='fu'>recode.na</span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>relig</span>, <span class='st'>"[A|a]ppartenance"</span>, <span class='st'>"Rejet|NSP"</span>)</div><div class='output co'>#&gt; <span class='message'>Recoded 1292 values to NA.</span></div><div class='input'><span class='co'>## Showing missing values. </span>
+<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>clso</span> <span class='op'>=</span> <span class='fu'>recode.na</span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>clso</span>, <span class='st'>"Ne sait pas"</span>, verbose = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>Recoded 27 values to NA.</span></div><div class='output co'>#&gt;              n
 #&gt; Ne sait pas 27</div><div class='input'><span class='co'>## Test results with freq.</span>
-<span class='fu'><a href='freq.html'>freq</a></span>(<span class='fu'>recode.na</span>(<span class='no'>hdv2003</span>$<span class='no'>trav.satisf</span>, <span class='st'>"Equilibre"</span>))</div><div class='output co'>#&gt; <span class='message'>Recoded 451 values to NA.</span></div><div class='output co'>#&gt;                   n    % val%
+<span class='fu'>freq</span>(<span class='fu'>recode.na</span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>trav.satisf</span>, <span class='st'>"Equilibre"</span>))</div><div class='output co'>#&gt; <span class='message'>Recoded 451 values to NA.</span></div><div class='output co'>#&gt;                   n    % val%
 #&gt; Satisfaction    480 24.0 80.4
 #&gt; Insatisfaction  117  5.9 19.6
 #&gt; NA             1403 70.2   NA</div><div class='input'><span class='co'>## Truncate a count variable (recommends numeric conversion).</span>
-<span class='fu'><a href='freq.html'>freq</a></span>(<span class='fu'>recode.na</span>(<span class='no'>hdv2003</span>$<span class='no'>freres.soeurs</span>, <span class='fl'>5</span>:<span class='fl'>22</span>))</div><div class='output co'>#&gt; <span class='message'>Recoded 505 values to NA.</span></div><div class='output co'>#&gt; <span class='message'>Recoded variable contains only numeric characters. Consider using as.numeric = TRUE.</span></div><div class='output co'>#&gt;      n    % val%
+<span class='fu'>freq</span>(<span class='fu'>recode.na</span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>freres.soeurs</span>, <span class='fl'>5</span><span class='op'>:</span><span class='fl'>22</span>))</div><div class='output co'>#&gt; <span class='message'>Recoded 505 values to NA.</span></div><div class='output co'>#&gt; <span class='message'>Recoded variable contains only numeric characters. Consider using as.numeric = TRUE.</span></div><div class='output co'>#&gt;      n    % val%
 #&gt; 0  167  8.3 11.2
 #&gt; 1  407 20.3 27.2
 #&gt; 2  427 21.3 28.6
@@ -201,7 +204,7 @@ variable by matching its levels to exact or regular expression matches.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

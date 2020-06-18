@@ -134,7 +134,7 @@ functions." />
 functions.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>wtd.mean</span>(<span class='no'>x</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>normwt</span> <span class='kw'>=</span> <span class='st'>"ignored"</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>wtd.mean</span>(<span class='kw'>x</span>, weights = <span class='kw'>NULL</span>, normwt = <span class='st'>"ignored"</span>, na.rm = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,11 +163,17 @@ for the weighted count to be the same as the non-weighted one</p></td>
     <p>If <code>weights</code> is <code>NULL</code>, then an uniform weighting is applied.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/mean.html'>mean</a></code>,<code><a href='https://rdrr.io/r/stats/cor.html'>var</a></code>, <code><a href='wtd.table.html'>wtd.table</a></code> and the <code>survey</code> package.</p></div>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/mean.html'>mean</a></code>,<code><a href='https://rdrr.io/r/stats/cor.html'>var</a></code>, <code>wtd.table</code> and the <code>survey</code> package.</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>These functions are exact copies of the <code>wtd.mean</code> and <code>wtd.var</code>
+function from the wtd.stats package. They have been created by 
+Frank Harrell, Department of Biostatistics, Vanderbilt University School of 
+Medicine, &lt;f.harrell@vanderbilt.edu&gt;.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>hdv2003</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='no'>hdv2003</span>$<span class='no'>age</span>)</div><div class='output co'>#&gt; [1] 48.157</div><div class='input'><span class='fu'>wtd.mean</span>(<span class='no'>hdv2003</span>$<span class='no'>age</span>, <span class='kw'>weights</span><span class='kw'>=</span><span class='no'>hdv2003</span>$<span class='no'>poids</span>)</div><div class='output co'>#&gt; [1] 46.34726</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>hdv2003</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>age</span>)</div><div class='output co'>#&gt; [1] 48.157</div><div class='input'><span class='fu'>wtd.mean</span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>age</span>, weights=<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>poids</span>)</div><div class='output co'>#&gt; [1] 46.34726</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -183,7 +189,7 @@ for the weighted count to be the same as the non-weighted one</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

@@ -135,11 +135,11 @@ value labels for labelled vectors if <span class="pkg">labelled</span> package e
     </div>
 
     <pre class="usage"><span class='fu'>ltabs</span>(
-  <span class='no'>formula</span>,
-  <span class='no'>data</span>,
-  <span class='kw'>levels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"prefixed"</span>, <span class='st'>"labels"</span>, <span class='st'>"values"</span>),
-  <span class='kw'>variable_label</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
+  <span class='kw'>formula</span>,
+  <span class='kw'>data</span>,
+  levels = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"prefixed"</span>, <span class='st'>"labels"</span>, <span class='st'>"values"</span>),
+  variable_label = <span class='fl'>TRUE</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -173,19 +173,19 @@ value labels for labelled vectors if <span class="pkg">labelled</span> package e
     <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/xtabs.html'>xtabs</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>fecondite</span>)
-<span class='fu'>ltabs</span>(~<span class='no'>radio</span>, <span class='no'>femmes</span>)</div><div class='output co'>#&gt; radio: Ecoute la radio ?
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>fecondite</span>)
+<span class='fu'>ltabs</span>(<span class='op'>~</span><span class='kw'>radio</span>, <span class='kw'>femmes</span>)</div><div class='output co'>#&gt; radio: Ecoute la radio ?
 #&gt; [0] non [1] oui 
-#&gt;    1085     915 </div><div class='input'><span class='fu'>ltabs</span>(~<span class='no'>radio</span>+<span class='no'>tv</span>, <span class='no'>femmes</span>)</div><div class='output co'>#&gt;                         tv: Regarde la télévision ?
+#&gt;    1085     915 </div><div class='input'><span class='fu'>ltabs</span>(<span class='op'>~</span><span class='kw'>radio</span><span class='op'>+</span><span class='kw'>tv</span>, <span class='kw'>femmes</span>)</div><div class='output co'>#&gt;                         tv: Regarde la télévision ?
 #&gt; radio: Ecoute la radio ? [0] non [1] oui
 #&gt;                  [0] non     593     492
-#&gt;                  [1] oui     168     747</div><div class='input'><span class='fu'>ltabs</span>(~<span class='no'>radio</span>+<span class='no'>tv</span>, <span class='no'>femmes</span>, <span class='st'>"l"</span>)</div><div class='output co'>#&gt;                         tv: Regarde la télévision ?
+#&gt;                  [1] oui     168     747</div><div class='input'><span class='fu'>ltabs</span>(<span class='op'>~</span><span class='kw'>radio</span><span class='op'>+</span><span class='kw'>tv</span>, <span class='kw'>femmes</span>, <span class='st'>"l"</span>)</div><div class='output co'>#&gt;                         tv: Regarde la télévision ?
 #&gt; radio: Ecoute la radio ? non oui
 #&gt;                      non 593 492
-#&gt;                      oui 168 747</div><div class='input'><span class='fu'>ltabs</span>(~<span class='no'>radio</span>+<span class='no'>tv</span>, <span class='no'>femmes</span>, <span class='st'>"v"</span>)</div><div class='output co'>#&gt;                         tv: Regarde la télévision ?
+#&gt;                      oui 168 747</div><div class='input'><span class='fu'>ltabs</span>(<span class='op'>~</span><span class='kw'>radio</span><span class='op'>+</span><span class='kw'>tv</span>, <span class='kw'>femmes</span>, <span class='st'>"v"</span>)</div><div class='output co'>#&gt;                         tv: Regarde la télévision ?
 #&gt; radio: Ecoute la radio ?   0   1
 #&gt;                        0 593 492
-#&gt;                        1 168 747</div><div class='input'><span class='fu'>ltabs</span>(~<span class='no'>radio</span>+<span class='no'>tv</span>+<span class='no'>journal</span>, <span class='no'>femmes</span>)</div><div class='output co'>#&gt; , , journal: Lit la presse ? = [0] non
+#&gt;                        1 168 747</div><div class='input'><span class='fu'>ltabs</span>(<span class='op'>~</span><span class='kw'>radio</span><span class='op'>+</span><span class='kw'>tv</span><span class='op'>+</span><span class='kw'>journal</span>, <span class='kw'>femmes</span>)</div><div class='output co'>#&gt; , , journal: Lit la presse ? = [0] non
 #&gt; 
 #&gt;                         tv: Regarde la télévision ?
 #&gt; radio: Ecoute la radio ? [0] non [1] oui
@@ -198,7 +198,7 @@ value labels for labelled vectors if <span class="pkg">labelled</span> package e
 #&gt; radio: Ecoute la radio ? [0] non [1] oui
 #&gt;                  [0] non       7      50
 #&gt;                  [1] oui       8     255
-#&gt; </div><div class='input'><span class='fu'>ltabs</span>(~<span class='no'>radio</span>+<span class='no'>tv</span>, <span class='no'>femmes</span>, <span class='kw'>variable_label</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;          tv
+#&gt; </div><div class='input'><span class='fu'>ltabs</span>(<span class='op'>~</span><span class='kw'>radio</span><span class='op'>+</span><span class='kw'>tv</span>, <span class='kw'>femmes</span>, variable_label = <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;          tv
 #&gt; radio     [0] non [1] oui
 #&gt;   [0] non     593     492
 #&gt;   [1] oui     168     747</div></pre>
@@ -217,7 +217,7 @@ value labels for labelled vectors if <span class="pkg">labelled</span> package e
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>
