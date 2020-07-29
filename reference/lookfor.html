@@ -140,9 +140,9 @@ in which case it will also search variable descriptions (labels).
 The command is meant to help users finding variables in large datasets.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>lookfor</span>(<span class='kw'>data</span>, <span class='kw'>...</span>, labels = <span class='fl'>TRUE</span>, ignore.case = <span class='fl'>TRUE</span>, details = <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>lookfor</span>(<span class='no'>data</span>, <span class='no'>...</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>ignore.case</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>details</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>look_for</span>(<span class='kw'>data</span>, <span class='kw'>...</span>, labels = <span class='fl'>TRUE</span>, ignore.case = <span class='fl'>TRUE</span>, details = <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>look_for</span>(<span class='no'>data</span>, <span class='no'>...</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>ignore.case</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>details</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,38 +188,35 @@ imported with <span class="pkg">foreign</span> or
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code>query</code> in the <code>memisc</code> package</p></div>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p>François Briatte &lt;f.briatte@gmail.com&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>lookfor</span>(<span class='kw'>iris</span>)</div><div class='output co'>#&gt;       variable
+    <pre class="examples"><div class='input'><span class='fu'>lookfor</span>(<span class='no'>iris</span>)</div><div class='output co'>#&gt;       variable
 #&gt; 1 Sepal.Length
 #&gt; 2  Sepal.Width
 #&gt; 3 Petal.Length
 #&gt; 4  Petal.Width
 #&gt; 5      Species</div><div class='input'><span class='co'># Look for a single keyword.</span>
-<span class='fu'>lookfor</span>(<span class='kw'>iris</span>, <span class='st'>"petal"</span>)</div><div class='output co'>#&gt;       variable
+<span class='fu'>lookfor</span>(<span class='no'>iris</span>, <span class='st'>"petal"</span>)</div><div class='output co'>#&gt;       variable
 #&gt; 3 Petal.Length
-#&gt; 4  Petal.Width</div><div class='input'><span class='fu'>lookfor</span>(<span class='kw'>iris</span>, <span class='st'>"s"</span>)</div><div class='output co'>#&gt;       variable
+#&gt; 4  Petal.Width</div><div class='input'><span class='fu'>lookfor</span>(<span class='no'>iris</span>, <span class='st'>"s"</span>)</div><div class='output co'>#&gt;       variable
 #&gt; 1 Sepal.Length
 #&gt; 2  Sepal.Width
 #&gt; 5      Species</div><div class='input'><span class='co'># Look for with a regular expression</span>
-<span class='fu'>lookfor</span>(<span class='kw'>iris</span>, <span class='st'>"petal|species"</span>)</div><div class='output co'>#&gt;       variable
+<span class='fu'>lookfor</span>(<span class='no'>iris</span>, <span class='st'>"petal|species"</span>)</div><div class='output co'>#&gt;       variable
 #&gt; 3 Petal.Length
 #&gt; 4  Petal.Width
-#&gt; 5      Species</div><div class='input'><span class='fu'>lookfor</span>(<span class='kw'>iris</span>, <span class='st'>"s$"</span>)</div><div class='output co'>#&gt;   variable
+#&gt; 5      Species</div><div class='input'><span class='fu'>lookfor</span>(<span class='no'>iris</span>, <span class='st'>"s$"</span>)</div><div class='output co'>#&gt;   variable
 #&gt; 5  Species</div><div class='input'><span class='co'># Look for with several keywords</span>
-<span class='fu'>lookfor</span>(<span class='kw'>iris</span>, <span class='st'>"pet"</span>, <span class='st'>"sp"</span>)</div><div class='output co'>#&gt;       variable
+<span class='fu'>lookfor</span>(<span class='no'>iris</span>, <span class='st'>"pet"</span>, <span class='st'>"sp"</span>)</div><div class='output co'>#&gt;       variable
 #&gt; 3 Petal.Length
 #&gt; 4  Petal.Width
-#&gt; 5      Species</div><div class='input'><span class='fu'>lookfor</span>(<span class='kw'>iris</span>, <span class='st'>"pet"</span>, <span class='st'>"sp"</span>, <span class='st'>"width"</span>)</div><div class='output co'>#&gt;       variable
+#&gt; 5      Species</div><div class='input'><span class='fu'>lookfor</span>(<span class='no'>iris</span>, <span class='st'>"pet"</span>, <span class='st'>"sp"</span>, <span class='st'>"width"</span>)</div><div class='output co'>#&gt;       variable
 #&gt; 2  Sepal.Width
 #&gt; 3 Petal.Length
 #&gt; 4  Petal.Width
 #&gt; 5      Species</div><div class='input'><span class='co'># Labelled data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>fecondite</span>)
-<span class='fu'>lookfor</span>(<span class='kw'>femmes</span>)</div><div class='output co'>#&gt;          variable
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>fecondite</span>)
+<span class='fu'>lookfor</span>(<span class='no'>femmes</span>)</div><div class='output co'>#&gt;          variable
 #&gt; 1        id_femme
 #&gt; 2       id_menage
 #&gt; 3           poids
@@ -254,11 +251,11 @@ imported with <span class="pkg">foreign</span> or
 #&gt; 14                                              Ecoute la radio ?
 #&gt; 15                                        Regarde la télévision ?
 #&gt; 16                                         Nombre idéal d'enfants
-#&gt; 17                      A déjà fait un test de dépistage du VIH ?</div><div class='input'><span class='fu'>lookfor</span>(<span class='kw'>femmes</span>, <span class='st'>"date"</span>)</div><div class='output co'>#&gt;         variable                                                          label
+#&gt; 17                      A déjà fait un test de dépistage du VIH ?</div><div class='input'><span class='fu'>lookfor</span>(<span class='no'>femmes</span>, <span class='st'>"date"</span>)</div><div class='output co'>#&gt;         variable                                                          label
 #&gt; 4 date_entretien                             Date de passation du questionnaire
 #&gt; 5 date_naissance                                              Date de naissance
 #&gt; 6            age Âge révolu (en années) à la date de passation du questionnaire</div><div class='input'><span class='co'># Display details</span>
-<span class='fu'>lookfor</span>(<span class='kw'>femmes</span>, details = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;          variable
+<span class='fu'>lookfor</span>(<span class='no'>femmes</span>, <span class='kw'>details</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;          variable
 #&gt; 1        id_femme
 #&gt; 2       id_menage
 #&gt; 3           poids
@@ -363,7 +360,7 @@ imported with <span class="pkg">foreign</span> or
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

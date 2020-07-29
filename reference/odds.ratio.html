@@ -132,28 +132,28 @@
     <p>S3 method for odds ratio</p>
     </div>
 
-    <pre class="usage"><span class='fu'>odds.ratio</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>odds.ratio</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for glm</span>
-<span class='fu'>odds.ratio</span>(<span class='kw'>x</span>, level = <span class='fl'>0.95</span>, <span class='kw'>...</span>)
+<span class='fu'>odds.ratio</span>(<span class='no'>x</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for multinom</span>
-<span class='fu'>odds.ratio</span>(<span class='kw'>x</span>, level = <span class='fl'>0.95</span>, <span class='kw'>...</span>)
+<span class='fu'>odds.ratio</span>(<span class='no'>x</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for factor</span>
-<span class='fu'>odds.ratio</span>(<span class='kw'>x</span>, <span class='kw'>fac</span>, level = <span class='fl'>0.95</span>, <span class='kw'>...</span>)
+<span class='fu'>odds.ratio</span>(<span class='no'>x</span>, <span class='no'>fac</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for table</span>
-<span class='fu'>odds.ratio</span>(<span class='kw'>x</span>, level = <span class='fl'>0.95</span>, <span class='kw'>...</span>)
+<span class='fu'>odds.ratio</span>(<span class='no'>x</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for matrix</span>
-<span class='fu'>odds.ratio</span>(<span class='kw'>x</span>, level = <span class='fl'>0.95</span>, <span class='kw'>...</span>)
+<span class='fu'>odds.ratio</span>(<span class='no'>x</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for numeric</span>
-<span class='fu'>odds.ratio</span>(<span class='kw'>x</span>, <span class='kw'>y</span>, level = <span class='fl'>0.95</span>, <span class='kw'>...</span>)
+<span class='fu'>odds.ratio</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for odds.ratio</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>x</span>, signif.stars = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='kw'>signif.stars</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -208,26 +208,23 @@ uses <code><a href='https://rdrr.io/r/stats/fisher.test.html'>fisher.test</a></c
 <p><code><a href='https://rdrr.io/pkg/nnet/man/multinom.html'>multinom</a></code> in the <a href='https://rdrr.io/pkg/nnet/man/nnet.html'>nnet</a> package.</p>
 <p><code><a href='https://rdrr.io/r/stats/fisher.test.html'>fisher.test</a></code> in the <a href='https://rdrr.io/r/stats/stats-package.html'>stats</a> package.</p>
 <p><code><a href='https://rdrr.io/r/stats/printCoefmat.html'>printCoefmat</a></code> in the <a href='https://rdrr.io/r/stats/stats-package.html'>stats</a> package.</p></div>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p>Joseph Larmarange &lt;joseph@larmarange.net&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>hdv2003</span>)
-<span class='kw'>reg</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(<span class='kw'>cinema</span> <span class='op'>~</span> <span class='kw'>sexe</span> <span class='op'>+</span> <span class='kw'>age</span>, data=<span class='kw'>hdv2003</span>, family=<span class='kw'>binomial</span>)
-<span class='fu'>odds.ratio</span>(<span class='kw'>reg</span>)</div><div class='output co'>#&gt; <span class='message'>Waiting for profiling to be done...</span></div><div class='output co'>#&gt;                   OR    2.5 %  97.5 %      p    
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>hdv2003</span>)
+<span class='no'>reg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(<span class='no'>cinema</span> ~ <span class='no'>sexe</span> + <span class='no'>age</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>hdv2003</span>, <span class='kw'>family</span><span class='kw'>=</span><span class='no'>binomial</span>)
+<span class='fu'>odds.ratio</span>(<span class='no'>reg</span>)</div><div class='output co'>#&gt; <span class='message'>Waiting for profiling to be done...</span></div><div class='output co'>#&gt;                   OR    2.5 %  97.5 %      p    
 #&gt; (Intercept) 10.41153  7.46408 14.6374 &lt;2e-16 ***
 #&gt; sexeFemme    1.14333  0.93852  1.3934 0.1838    
 #&gt; age          0.94233  0.93591  0.9486 &lt;2e-16 ***
 #&gt; ---
-#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</div><div class='input'><span class='fu'>odds.ratio</span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>sport</span>, <span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>cuisine</span>)</div><div class='output co'>#&gt;                   OR  2.5 % 97.5 %         p    
+#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</div><div class='input'><span class='fu'>odds.ratio</span>(<span class='no'>hdv2003</span>$<span class='no'>sport</span>, <span class='no'>hdv2003</span>$<span class='no'>cuisine</span>)</div><div class='output co'>#&gt;                   OR  2.5 % 97.5 %         p    
 #&gt; Fisher's test 1.4771 1.2242 1.7829 3.646e-05 ***
 #&gt; ---
-#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</div><div class='input'><span class='fu'>odds.ratio</span>(<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>sport</span>, <span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>cuisine</span>))</div><div class='output co'>#&gt;                   OR  2.5 % 97.5 %         p    
+#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</div><div class='input'><span class='fu'>odds.ratio</span>(<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='no'>hdv2003</span>$<span class='no'>sport</span>, <span class='no'>hdv2003</span>$<span class='no'>cuisine</span>))</div><div class='output co'>#&gt;                   OR  2.5 % 97.5 %         p    
 #&gt; Fisher's test 1.4771 1.2242 1.7829 3.646e-05 ***
 #&gt; ---
-#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</div><div class='input'><span class='kw'>M</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>759</span>, <span class='fl'>360</span>, <span class='fl'>518</span>, <span class='fl'>363</span>), ncol = <span class='fl'>2</span>)
-<span class='fu'>odds.ratio</span>(<span class='kw'>M</span>)</div><div class='output co'>#&gt;                   OR  2.5 % 97.5 %         p    
+#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</div><div class='input'><span class='no'>M</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>759</span>, <span class='fl'>360</span>, <span class='fl'>518</span>, <span class='fl'>363</span>), <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+<span class='fu'>odds.ratio</span>(<span class='no'>M</span>)</div><div class='output co'>#&gt;                   OR  2.5 % 97.5 %         p    
 #&gt; Fisher's test 1.4771 1.2242 1.7829 3.646e-05 ***
 #&gt; ---
 #&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</div><div class='input'><span class='fu'>odds.ratio</span>(<span class='fl'>0.26</span>, <span class='fl'>0.42</span>)</div><div class='output co'>#&gt; [1] 0.4851995</div></pre>
@@ -246,7 +243,7 @@ uses <code><a href='https://rdrr.io/r/stats/fisher.test.html'>fisher.test</a></c
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

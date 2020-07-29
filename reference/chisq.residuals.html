@@ -132,7 +132,7 @@
     <p>Return the raw, standardized or Pearson's residuals (the default) of a chi-squared test on a two-way frequency table.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>chisq.residuals</span>(<span class='kw'>tab</span>, digits = <span class='fl'>2</span>, std = <span class='fl'>FALSE</span>, raw = <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>chisq.residuals</span>(<span class='no'>tab</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>std</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>raw</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,22 +165,22 @@ for details on the computation.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Sample table</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>Titanic</span>)
-<span class='kw'>tab</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='kw'>Titanic</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>4</span>), <span class='kw'>sum</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>Titanic</span>)
+<span class='no'>tab</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>Titanic</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>4</span>), <span class='no'>sum</span>)
 <span class='co'>## Pearson residuals</span>
-<span class='fu'>chisq.residuals</span>(<span class='kw'>tab</span>)</div><div class='output co'>#&gt;       Survived
+<span class='fu'>chisq.residuals</span>(<span class='no'>tab</span>)</div><div class='output co'>#&gt;       Survived
 #&gt; Class     No   Yes
 #&gt;   1st  -6.61  9.57
 #&gt;   2nd  -1.87  2.70
 #&gt;   3rd   2.29 -3.32
 #&gt;   Crew  3.02 -4.37</div><div class='input'><span class='co'>## Standardized residuals</span>
-<span class='fu'>chisq.residuals</span>(<span class='kw'>tab</span>, std = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;       Survived
+<span class='fu'>chisq.residuals</span>(<span class='no'>tab</span>, <span class='kw'>std</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;       Survived
 #&gt; Class      No   Yes
 #&gt;   1st  -12.59 12.59
 #&gt;   2nd   -3.52  3.52
 #&gt;   3rd    4.89 -4.89
 #&gt;   Crew   6.87 -6.87</div><div class='input'><span class='co'>## Raw residuals</span>
-<span class='fu'>chisq.residuals</span>(<span class='kw'>tab</span>, raw = <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;       Survived
+<span class='fu'>chisq.residuals</span>(<span class='no'>tab</span>, <span class='kw'>raw</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;       Survived
 #&gt; Class      No    Yes
 #&gt;   1st  -98.01  98.01
 #&gt;   2nd  -25.94  25.94
@@ -201,7 +201,7 @@ for details on the computation.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

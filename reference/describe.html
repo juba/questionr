@@ -134,28 +134,28 @@ include labels imported with haven packages." />
 include labels imported with <span class="pkg">haven</span> packages.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>describe</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>describe</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for factor</span>
-<span class='fu'>describe</span>(<span class='kw'>x</span>, n = <span class='fl'>10</span>, show.length = <span class='fl'>TRUE</span>, freq.n.max = <span class='fl'>10</span>, <span class='kw'>...</span>)
+<span class='fu'>describe</span>(<span class='no'>x</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>show.length</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>freq.n.max</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for numeric</span>
-<span class='fu'>describe</span>(<span class='kw'>x</span>, n = <span class='fl'>10</span>, show.length = <span class='fl'>TRUE</span>, freq.n.max = <span class='fl'>10</span>, <span class='kw'>...</span>)
+<span class='fu'>describe</span>(<span class='no'>x</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>show.length</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>freq.n.max</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for character</span>
-<span class='fu'>describe</span>(<span class='kw'>x</span>, n = <span class='fl'>10</span>, show.length = <span class='fl'>TRUE</span>, freq.n.max = <span class='fl'>10</span>, <span class='kw'>...</span>)
+<span class='fu'>describe</span>(<span class='no'>x</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>show.length</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>freq.n.max</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>describe</span>(<span class='kw'>x</span>, n = <span class='fl'>10</span>, show.length = <span class='fl'>TRUE</span>, freq.n.max = <span class='fl'>10</span>, <span class='kw'>...</span>)
+<span class='fu'>describe</span>(<span class='no'>x</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>show.length</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>freq.n.max</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for haven_labelled</span>
-<span class='fu'>describe</span>(<span class='kw'>x</span>, n = <span class='fl'>10</span>, show.length = <span class='fl'>TRUE</span>, freq.n.max = <span class='fl'>10</span>, <span class='kw'>...</span>)
+<span class='fu'>describe</span>(<span class='no'>x</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>show.length</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>freq.n.max</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for data.frame</span>
-<span class='fu'>describe</span>(<span class='kw'>x</span>, <span class='kw'>...</span>, n = <span class='fl'>10</span>, freq.n.max = <span class='fl'>0</span>)
+<span class='fu'>describe</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>freq.n.max</span> <span class='kw'>=</span> <span class='fl'>0</span>)
 
 <span class='co'># S3 method for description</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -193,14 +193,11 @@ The search will also take into account variable labels, if any.
 See examples.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>lookfor</code></p></div>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p>Joseph Larmarange &lt;joseph@larmarange.net&gt;</p>
+    <div class='dont-index'><p><code><a href='lookfor.html'>lookfor</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>hdv2003</span>)
-<span class='fu'>describe</span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>sexe</span>)</div><div class='output co'>#&gt; [2000 obs.] 
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>hdv2003</span>)
+<span class='fu'>describe</span>(<span class='no'>hdv2003</span>$<span class='no'>sexe</span>)</div><div class='output co'>#&gt; [2000 obs.] 
 #&gt; nominal factor: "Femme" "Femme" "Homme" "Homme" "Femme" "Femme" "Femme" "Homme" "Femme" "Homme" ...
 #&gt; 2 levels: Homme | Femme
 #&gt; NAs: 0 (0%)
@@ -208,10 +205,10 @@ See examples.</p>
 #&gt;          n   %
 #&gt; Homme  899  45
 #&gt; Femme 1101  55
-#&gt; Total 2000 100</div><div class='input'><span class='fu'>describe</span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>age</span>)</div><div class='output co'>#&gt; [2000 obs.] 
+#&gt; Total 2000 100</div><div class='input'><span class='fu'>describe</span>(<span class='no'>hdv2003</span>$<span class='no'>age</span>)</div><div class='output co'>#&gt; [2000 obs.] 
 #&gt; integer: 28 23 59 34 71 35 60 47 20 28 ...
-#&gt; min: 18 - max: 97 - NAs: 0 (0%) - 78 unique values</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>fecondite</span>)
-<span class='fu'>describe</span>(<span class='kw'>femmes</span><span class='op'>$</span><span class='kw'>milieu</span>)</div><div class='output co'>#&gt; [2000 obs.] Milieu de résidence
+#&gt; min: 18 - max: 97 - NAs: 0 (0%) - 78 unique values</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>fecondite</span>)
+<span class='fu'>describe</span>(<span class='no'>femmes</span>$<span class='no'>milieu</span>)</div><div class='output co'>#&gt; [2000 obs.] Milieu de résidence
 #&gt; labelled double: 2 2 2 2 2 2 2 2 2 2 ...
 #&gt; min: 1 - max: 2 - NAs: 0 (0%) - 2 unique values
 #&gt; 2 value labels: [1] urbain [2] rural
@@ -219,7 +216,7 @@ See examples.</p>
 #&gt;               n     %
 #&gt; [1] urbain  912  45.6
 #&gt; [2] rural  1088  54.4
-#&gt; Total      2000 100.0</div><div class='input'><span class='fu'>describe</span>(<span class='kw'>hdv2003</span>)</div><div class='output co'>#&gt; [2000 obs. x 20 variables] tbl_df tbl data.frame
+#&gt; Total      2000 100.0</div><div class='input'><span class='fu'>describe</span>(<span class='no'>hdv2003</span>)</div><div class='output co'>#&gt; [2000 obs. x 20 variables] tbl_df tbl data.frame
 #&gt; 
 #&gt; $id: 
 #&gt; integer: 1 2 3 4 5 6 7 8 9 10 ...
@@ -314,7 +311,7 @@ See examples.</p>
 #&gt; 
 #&gt; $heures.tv: 
 #&gt; numeric: 0 1 0 2 3 2 2.9 1 2 2 ...
-#&gt; min: 0 - max: 12 - NAs: 5 (0.2%) - 30 unique values</div><div class='input'><span class='fu'>describe</span>(<span class='kw'>hdv2003</span>, <span class='st'>"cuisine"</span>, <span class='st'>"heures.tv"</span>)</div><div class='output co'>#&gt; [2000 obs. x 20 variables] tbl_df tbl data.frame
+#&gt; min: 0 - max: 12 - NAs: 5 (0.2%) - 30 unique values</div><div class='input'><span class='fu'>describe</span>(<span class='no'>hdv2003</span>, <span class='st'>"cuisine"</span>, <span class='st'>"heures.tv"</span>)</div><div class='output co'>#&gt; [2000 obs. x 20 variables] tbl_df tbl data.frame
 #&gt; 
 #&gt; $cuisine: 
 #&gt; nominal factor: "Oui" "Non" "Non" "Oui" "Non" "Non" "Oui" "Oui" "Non" "Non" ...
@@ -323,7 +320,7 @@ See examples.</p>
 #&gt; 
 #&gt; $heures.tv: 
 #&gt; numeric: 0 1 0 2 3 2 2.9 1 2 2 ...
-#&gt; min: 0 - max: 12 - NAs: 5 (0.2%) - 30 unique values</div><div class='input'><span class='fu'>describe</span>(<span class='kw'>hdv2003</span>, <span class='st'>"trav*"</span>)</div><div class='output co'>#&gt; [2000 obs. x 20 variables] tbl_df tbl data.frame
+#&gt; min: 0 - max: 12 - NAs: 5 (0.2%) - 30 unique values</div><div class='input'><span class='fu'>describe</span>(<span class='no'>hdv2003</span>, <span class='st'>"trav*"</span>)</div><div class='output co'>#&gt; [2000 obs. x 20 variables] tbl_df tbl data.frame
 #&gt; 
 #&gt; $trav.imp: 
 #&gt; nominal factor: "Peu important" NA "Aussi important que le reste" "Moins important que le reste" NA "Le plus important" NA "Peu important" NA "Moins important que le reste" ...
@@ -333,22 +330,7 @@ See examples.</p>
 #&gt; $trav.satisf: 
 #&gt; nominal factor: "Insatisfaction" NA "Equilibre" "Satisfaction" NA "Equilibre" NA "Insatisfaction" NA "Satisfaction" ...
 #&gt; 3 levels: Satisfaction | Insatisfaction | Equilibre
-#&gt; NAs: 952 (47.6%)</div><div class='input'><span class='fu'>describe</span>(<span class='kw'>hdv2003</span>, <span class='st'>"trav|lecture"</span>)</div><div class='output co'>#&gt; [2000 obs. x 20 variables] tbl_df tbl data.frame
-#&gt; 
-#&gt; $trav.imp: 
-#&gt; nominal factor: "Peu important" NA "Aussi important que le reste" "Moins important que le reste" NA "Le plus important" NA "Peu important" NA "Moins important que le reste" ...
-#&gt; 4 levels: Le plus important | Aussi important que le reste | Moins important que le reste | Peu important
-#&gt; NAs: 952 (47.6%)
-#&gt; 
-#&gt; $trav.satisf: 
-#&gt; nominal factor: "Insatisfaction" NA "Equilibre" "Satisfaction" NA "Equilibre" NA "Insatisfaction" NA "Satisfaction" ...
-#&gt; 3 levels: Satisfaction | Insatisfaction | Equilibre
-#&gt; NAs: 952 (47.6%)
-#&gt; 
-#&gt; $lecture.bd: 
-#&gt; nominal factor: "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" ...
-#&gt; 2 levels: Non | Oui
-#&gt; NAs: 0 (0%)</div><div class='input'><span class='fu'>describe</span>(<span class='kw'>hdv2003</span>, <span class='st'>"trav"</span>, <span class='st'>"lecture"</span>)</div><div class='output co'>#&gt; [2000 obs. x 20 variables] tbl_df tbl data.frame
+#&gt; NAs: 952 (47.6%)</div><div class='input'><span class='fu'>describe</span>(<span class='no'>hdv2003</span>, <span class='st'>"trav|lecture"</span>)</div><div class='output co'>#&gt; [2000 obs. x 20 variables] tbl_df tbl data.frame
 #&gt; 
 #&gt; $trav.imp: 
 #&gt; nominal factor: "Peu important" NA "Aussi important que le reste" "Moins important que le reste" NA "Le plus important" NA "Peu important" NA "Moins important que le reste" ...
@@ -363,7 +345,22 @@ See examples.</p>
 #&gt; $lecture.bd: 
 #&gt; nominal factor: "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" ...
 #&gt; 2 levels: Non | Oui
-#&gt; NAs: 0 (0%)</div><div class='input'><span class='fu'>describe</span>(<span class='kw'>femmes</span>)</div><div class='output co'>#&gt; [2000 obs. x 17 variables] tbl_df tbl data.frame
+#&gt; NAs: 0 (0%)</div><div class='input'><span class='fu'>describe</span>(<span class='no'>hdv2003</span>, <span class='st'>"trav"</span>, <span class='st'>"lecture"</span>)</div><div class='output co'>#&gt; [2000 obs. x 20 variables] tbl_df tbl data.frame
+#&gt; 
+#&gt; $trav.imp: 
+#&gt; nominal factor: "Peu important" NA "Aussi important que le reste" "Moins important que le reste" NA "Le plus important" NA "Peu important" NA "Moins important que le reste" ...
+#&gt; 4 levels: Le plus important | Aussi important que le reste | Moins important que le reste | Peu important
+#&gt; NAs: 952 (47.6%)
+#&gt; 
+#&gt; $trav.satisf: 
+#&gt; nominal factor: "Insatisfaction" NA "Equilibre" "Satisfaction" NA "Equilibre" NA "Insatisfaction" NA "Satisfaction" ...
+#&gt; 3 levels: Satisfaction | Insatisfaction | Equilibre
+#&gt; NAs: 952 (47.6%)
+#&gt; 
+#&gt; $lecture.bd: 
+#&gt; nominal factor: "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" ...
+#&gt; 2 levels: Non | Oui
+#&gt; NAs: 0 (0%)</div><div class='input'><span class='fu'>describe</span>(<span class='no'>femmes</span>)</div><div class='output co'>#&gt; [2000 obs. x 17 variables] tbl_df tbl data.frame
 #&gt; 
 #&gt; $id_femme: Identifiant de l'enquêtée
 #&gt; numeric: 391 1643 85 881 1981 1072 1978 1607 738 1656 ...
@@ -444,7 +441,7 @@ See examples.</p>
 #&gt; labelled_spss double: 0 9 0 0 1 0 0 0 0 1 ...
 #&gt; min: 0 - max: 9 - NAs: 29 (1.5%) - 3 unique values
 #&gt; 3 value labels: [0] non [1] oui [9] manquant
-#&gt; user-defined na values: 9</div><div class='input'><span class='fu'>describe</span>(<span class='kw'>femmes</span>, <span class='st'>"ident"</span>)</div><div class='output co'>#&gt; [2000 obs. x 17 variables] tbl_df tbl data.frame
+#&gt; user-defined na values: 9</div><div class='input'><span class='fu'>describe</span>(<span class='no'>femmes</span>, <span class='st'>"ident"</span>)</div><div class='output co'>#&gt; [2000 obs. x 17 variables] tbl_df tbl data.frame
 #&gt; 
 #&gt; $id_femme: Identifiant de l'enquêtée
 #&gt; numeric: 391 1643 85 881 1981 1072 1978 1607 738 1656 ...
@@ -468,7 +465,7 @@ See examples.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
