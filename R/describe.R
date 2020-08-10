@@ -191,8 +191,6 @@
 #' @rdname describe
 #' @aliases describe.haven_labelled
 #' @examples 
-#' data(fecondite)
-#' describe(femmes$milieu)
 #' @export
 `describe.haven_labelled` <- 
   function(x, n = 10, show.length = TRUE, freq.n.max = 10, ...) {
@@ -240,8 +238,11 @@
 #' describe(hdv2003, "trav*")
 #' describe(hdv2003, "trav|lecture")
 #' describe(hdv2003, "trav", "lecture")
-#' describe(femmes)
-#' describe(femmes, "ident")
+#' 
+#' data(fertility)
+#' describe(women$residency)
+#' describe(women)
+#' describe(women, "id")
 #' @export
 
 `describe.data.frame` <- 
@@ -250,7 +251,7 @@
     x <- labelled::to_labelled(x)
     
     # select variables
-    s <- lookfor(x, ...)$variable
+    s <- lookfor(x, ..., details = FALSE)$variable
     
     if (is.null(s)) 
       return(NULL)
