@@ -15,7 +15,9 @@ look_for(data, ..., labels = TRUE, ignore.case = TRUE, details = FALSE)
 \arguments{
 \item{data}{a data frame}
 
-\item{...}{list of keywords, a character string (or several character strings), which can be formatted as a regular expression suitable for a \code{grep} pattern, or a vector of keywords; displays all variables if not specified}
+\item{...}{list of keywords, a character string (or several character strings), which can be
+formatted as a regular expression suitable for a \code{\link[base:grep]{base::grep()}} pattern, or a vector of keywords;
+displays all variables if not specified}
 
 \item{labels}{whether or not to search variable labels (descriptions); \code{TRUE} by default}
 

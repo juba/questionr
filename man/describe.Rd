@@ -55,15 +55,16 @@ See examples.
 data(hdv2003)
 describe(hdv2003$sexe)
 describe(hdv2003$age)
-data(fecondite)
-describe(femmes$milieu)
 describe(hdv2003)
 describe(hdv2003, "cuisine", "heures.tv")
 describe(hdv2003, "trav*")
 describe(hdv2003, "trav|lecture")
 describe(hdv2003, "trav", "lecture")
-describe(femmes)
-describe(femmes, "ident")
+
+data(fertility)
+describe(women$residency)
+describe(women)
+describe(women, "id")
 }
 \seealso{
 \code{\link{lookfor}}
