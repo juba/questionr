@@ -190,7 +190,7 @@
 
 #' @rdname describe
 #' @aliases describe.haven_labelled
-#' @examples 
+#'
 #' @export
 `describe.haven_labelled` <- 
   function(x, n = 10, show.length = TRUE, freq.n.max = 10, ...) {
