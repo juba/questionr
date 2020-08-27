@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate frequency table of missing values. — freq.na • questionr</title>
+<title>Objects exported from other packages — reexports • questionr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,13 @@
 
 
 
-<meta property="og:title" content="Generate frequency table of missing values. — freq.na" />
-<meta property="og:description" content="Generate a frequency table of missing values as raw counts and percentages." />
+<meta property="og:title" content="Objects exported from other packages — reexports" />
+<meta property="og:description" content="These objects are imported from other packages. Follow the links
+below to see their documentation.
+
+  labelledlook_for, lookfor
+
+" />
 
 
 
@@ -123,73 +128,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate frequency table of missing values.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/juba/questionr/blob/master/R/tables.R'><code>R/tables.R</code></a></small>
-    <div class="hidden name"><code>freq.na.Rd</code></div>
+    <h1>Objects exported from other packages</h1>
+    <small class="dont-index">Source: <a href='https://github.com/juba/questionr/blob/master/R/lookfor.R'><code>R/lookfor.R</code></a></small>
+    <div class="hidden name"><code>reexports.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generate a frequency table of missing values as raw counts and percentages.</p>
+    <p>These objects are imported from other packages. Follow the links
+below to see their documentation.</p>
+<dl'>
+  <dt>labelled</dt><dd><p><code><a href='https://rdrr.io/pkg/labelled/man/look_for.html'>look_for</a></code>, <code><a href='https://rdrr.io/pkg/labelled/man/look_for.html'>lookfor</a></code></p></dd>
+
+</dl>
     </div>
 
-    <pre class="usage"><span class='fu'>freq.na</span>(<span class='no'>data</span>, <span class='no'>...</span>)</pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>data</th>
-      <td><p>either a vector or a data frame object</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>if <code>x</code> is a data frame, the names of the variables to examine or keywords to search for such variables. See <code><a href='https://rdrr.io/pkg/labelled/man/look_for.html'>lookfor</a></code> for more details.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The result is an object of class data.frame.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/table.html'>table</a></code>, <code><a href='https://rdrr.io/r/base/NA.html'>is.na</a></code></p></div>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>hdv2003</span>)
-<span class='co'>## Examine a single vector.</span>
-<span class='fu'>freq.na</span>(<span class='no'>hdv2003</span>$<span class='no'>qualif</span>)</div><div class='output co'>#&gt; missing       % 
-#&gt;     347      17 </div><div class='input'><span class='co'>## Examine a data frame.</span>
-<span class='fu'>freq.na</span>(<span class='no'>hdv2003</span>)</div><div class='output co'>#&gt;               missing  %
-#&gt; trav.imp          952 48
-#&gt; trav.satisf       952 48
-#&gt; qualif            347 17
-#&gt; nivetud           112  6
-#&gt; heures.tv           5  0
-#&gt; id                  0  0
-#&gt; age                 0  0
-#&gt; sexe                0  0
-#&gt; poids               0  0
-#&gt; occup               0  0
-#&gt; freres.soeurs       0  0
-#&gt; clso                0  0
-#&gt; relig               0  0
-#&gt; hard.rock           0  0
-#&gt; lecture.bd          0  0
-#&gt; peche.chasse        0  0
-#&gt; cuisine             0  0
-#&gt; bricol              0  0
-#&gt; cinema              0  0
-#&gt; sport               0  0</div><div class='input'><span class='co'>## Examine several variables.</span>
-<span class='fu'>freq.na</span>(<span class='no'>hdv2003</span>, <span class='st'>"nivetud"</span>, <span class='st'>"trav.satisf"</span>)</div><div class='output co'>#&gt;             missing  %
-#&gt; trav.satisf     952 48
-#&gt; nivetud         112  6</div><div class='input'><span class='co'>## To see only variables with the most number of missing values</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>freq.na</span>(<span class='no'>hdv2003</span>))</div><div class='output co'>#&gt;             missing  %
-#&gt; trav.imp        952 48
-#&gt; trav.satisf     952 48
-#&gt; qualif          347 17
-#&gt; nivetud         112  6
-#&gt; heures.tv         5  0
-#&gt; id                0  0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
