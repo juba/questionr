@@ -20,7 +20,7 @@
 #' addNAstr(f)
 #' addNAstr(f, value="missing")
 #' addNAstr(f, value=NULL)
-#' @source Adapted from James (\url{http://stackoverflow.com/a/5817181}) 
+#' @source Adapted from James (\url{https://stackoverflow.com/a/5817181}) 
 #' by Joseph Larmarange <joseph@@larmarange.net>
 #' @export addNAstr
 

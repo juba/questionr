@@ -50,7 +50,7 @@
 #' @details
 #' For models calculated with \code{multinom} (nnet),
 #' p-value are calculated according to
-#' \url{http://www.ats.ucla.edu/stat/r/dae/mlogit.htm}.
+#' \url{https://stats.idre.ucla.edu/r/dae/multinomial-logistic-regression/}.
 #' @seealso 
 #' \code{\link[nnet]{multinom}} in the \link[nnet]{nnet} package.
 #' @export
@@ -60,7 +60,7 @@
     if (!inherits(x, "multinom")) stop("x must be of class 'multinom'.")
     OR <- exp(summary(x)$coefficients)
     ci <- exp(stats::confint(x,level=level))
-    ## From http://www.ats.ucla.edu/stat/r/dae/mlogit.htm
+    ## From https://stats.idre.ucla.edu/r/dae/multinomial-logistic-regression/
     s <- summary(x)
     z <- s$coefficients/s$standard.errors
     p <- p <- (1 - stats::pnorm(abs(z), 0, 1)) * 2

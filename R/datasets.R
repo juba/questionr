@@ -6,7 +6,7 @@
 #' @docType data
 #' @keywords datasets
 #' @format A data frame with 2000 rows and 20 variables
-#' @source \url{http://www.insee.fr/fr/themes/detail.asp?ref_id=fd-HDV03}
+#' @source \url{https://www.insee.fr/fr/statistiques/2532244}
 #' @name hdv2003
 NULL
 
@@ -17,7 +17,7 @@ NULL
 #' @docType data
 #' @keywords datasets
 #' @format A data frame with 301 rows and 21 variables
-#' @source \url{http://www.insee.fr/fr/bases-de-donnees/default.asp?page=recensements.htm}
+#' @source \url{https://www.insee.fr/fr/information/2008354}
 #' @name rp99
 NULL
 
@@ -28,7 +28,7 @@ NULL
 #' @docType data
 #' @keywords datasets
 #' @format A data frame with 5170 rows and 60 variables
-#' @source \url{http://www.insee.fr/fr/bases-de-donnees/default.asp?page=recensements.htm}
+#' @source \url{https://www.insee.fr/fr/information/2008354}
 #' @name rp2012
 NULL
 
