@@ -5,7 +5,7 @@ Authors@R: c(person("Julien", "Barnier", email="julien.barnier@cnrs.fr",
     email="f.briatte@gmail.com", role="aut"), person("Joseph", "Larmarange",
     email="joseph@larmarange.net", role="aut"))
 Version: 0.7.2
-Date: 2020-05-27
+Date: 2020-08-29
 License: GPL (>= 2)
 Encoding: UTF-8
 Title: Functions to Make Surveys Processing Easier
