@@ -1,8 +1,13 @@
+questionr 0.7.3
+---------------
+
+
 questionr 0.7.2
 ---------------
 
 * `look_for()` and `lookfor()` are now simply imported and reexported 
   from `labelled` (#111, @larmarange)
+
 
 questionr 0.7.1
 ---------------
