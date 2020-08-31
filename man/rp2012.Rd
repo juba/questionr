@@ -8,7 +8,7 @@
 A data frame with 5170 rows and 60 variables
 }
 \source{
-\url{http://www.insee.fr/fr/bases-de-donnees/default.asp?page=recensements.htm}
+\url{https://www.insee.fr/fr/information/2008354}
 }
 \description{
 Sample from the 2012 national french census. It contains results for every french city of more than 2000 inhabitants, and a small subset of variables, both in population counts and proportions.

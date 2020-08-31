@@ -59,7 +59,7 @@ confidence intervals with \code{exp(confint(x))}.
 
 For models calculated with \code{multinom} (nnet),
 p-value are calculated according to
-\url{http://www.ats.ucla.edu/stat/r/dae/mlogit.htm}.
+\url{https://stats.idre.ucla.edu/r/dae/multinomial-logistic-regression/}.
 
 For 2x2 \code{table}, \code{factor} or \code{matrix}, \code{odds.ratio}
 uses \code{\link[stats]{fisher.test}} to compute the odds ratio.

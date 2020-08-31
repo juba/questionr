@@ -8,7 +8,7 @@
 A data frame with 301 rows and 21 variables
 }
 \source{
-\url{http://www.insee.fr/fr/bases-de-donnees/default.asp?page=recensements.htm}
+\url{https://www.insee.fr/fr/information/2008354}
 }
 \description{
 Sample from the 1999 french census for the cities of the Rhône state.

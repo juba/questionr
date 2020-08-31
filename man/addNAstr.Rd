@@ -4,7 +4,7 @@
 \alias{addNAstr}
 \title{Transform missing values of a factor to an extra level}
 \source{
-Adapted from James (\url{http://stackoverflow.com/a/5817181}) 
+Adapted from James (\url{https://stackoverflow.com/a/5817181}) 
 by Joseph Larmarange <joseph@larmarange.net>
 }
 \usage{
