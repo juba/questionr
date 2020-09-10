@@ -213,7 +213,7 @@ irec <- function(obj = NULL, var_name = NULL) {
       out <- "<table><tbody>"
       ## List of levels
       if (is.factor(rvar())) levs <- levels(rvar())
-      else levs <- stats::na.omit(unique(rvar()))
+      else levs <- sort(stats::na.omit(unique(rvar())))
       ## Add NA level if there is any NA value
       if (any(is.na(rvar()))) levs <- c(levs, NA)
       ## Generate fields
@@ -336,7 +336,7 @@ irec <- function(obj = NULL, var_name = NULL) {
       ## List levels
       if (is.factor(rvar())) levs <- levels(rvar())
       else {
-        levs <- stats::na.omit(unique(rvar()))
+        levs <- sort(stats::na.omit(unique(rvar())))
         levs <- as.character(levs)
       }
       if (any(is.na(rvar()))) levs <- c(levs, NA)
@@ -395,7 +395,7 @@ irec <- function(obj = NULL, var_name = NULL) {
       ## List levels
       if (is.factor(rvar())) levs <- levels(rvar())
       else {
-        levs <- stats::na.omit(unique(rvar()))
+        levs <- sort(stats::na.omit(unique(rvar())))
         levs <- as.character(levs)
       }
       if (any(is.na(rvar()))) levs <- c(levs, NA)
@@ -476,7 +476,7 @@ irec <- function(obj = NULL, var_name = NULL) {
       ## List levels
       if (is.factor(rvar())) levs <- levels(rvar())
       else {
-        levs <- stats::na.omit(unique(rvar()))
+        levs <- sort(stats::na.omit(unique(rvar())))
         levs <- as.character(levs)
       }
       if (any(is.na(rvar()))) levs <- c(levs, NA)
