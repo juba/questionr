@@ -45,8 +45,7 @@ irec <- function(obj = NULL, var_name = NULL) {
     selected_recoding_style <- "forcats"
     selected_outconv <- "factor"
   }
-  
-  
+
   run_as_addin <- ifunc_run_as_addin()
 
   if (is.null(obj)) {
@@ -63,7 +62,7 @@ irec <- function(obj = NULL, var_name = NULL) {
     if (is.character(obj) && length(obj) == 1) {
       obj_name <- obj
       try({
-        obj <- get(obj_name, envir = sys.parent())
+        obj <- get(obj_name, envir = .GlobalEnv)
       }, silent = TRUE)
     }
     else {
@@ -75,7 +74,7 @@ irec <- function(obj = NULL, var_name = NULL) {
         obj_name <- gsub("^\\s*", "", s[[1]][1])
         var_name <- gsub("\\s*$", "", s[[1]][2])
         var_name <- gsub("`", "", var_name)
-        obj <- get(obj_name, envir = sys.parent())
+        obj <- get(obj_name, envir = .GlobalEnv)
     }
     if (inherits(obj, "tbl_df") || inherits(obj, "data.table")) obj <- as.data.frame(obj)
 
@@ -130,9 +129,9 @@ irec <- function(obj = NULL, var_name = NULL) {
                        gettext("Data frame or vector to recode from", domain="R-questionr"),
                        choices = Filter(
                          function(x) {
-                           inherits(get(x, envir = sys.parent()), "data.frame") ||
-                             is.vector(get(x, envir = sys.parent())) ||
-                             is.factor(get(x, envir = sys.parent()))
+                           inherits(get(x, envir = .GlobalEnv), "data.frame") ||
+                             is.vector(get(x, envir = .GlobalEnv)) ||
+                             is.factor(get(x, envir = .GlobalEnv))
                          }, ls(.GlobalEnv)),
                        selected = obj_name, multiple = FALSE)),
               column(6, uiOutput("varInput")))),
