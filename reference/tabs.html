@@ -135,17 +135,17 @@ kable(), which is found in library(knitr), is recommended for use with RMarkdown
     </div>
 
     <pre class="usage"><span class='fu'>tabs</span>(
-  <span class='no'>df</span>,
-  <span class='no'>x</span>,
-  <span class='no'>y</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"percent"</span>,
-  <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>weight</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>normwt</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>na.show</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>exclude</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>
+  <span class='kw'>df</span>,
+  <span class='kw'>x</span>,
+  <span class='kw'>y</span>,
+  type = <span class='st'>"percent"</span>,
+  percent = <span class='fl'>FALSE</span>,
+  weight = <span class='kw'>NULL</span>,
+  normwt = <span class='fl'>FALSE</span>,
+  na.rm = <span class='fl'>TRUE</span>,
+  na.show = <span class='fl'>FALSE</span>,
+  exclude = <span class='kw'>NULL</span>,
+  digits = <span class='fl'>1</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -200,10 +200,14 @@ kable(), which is found in library(knitr), is recommended for use with RMarkdown
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>tabs calls wtd.table on `<code>x</code>` and, as applicable, each variable named by `<code>y</code>`.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Pete Mohanty</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>hdv2003</span>)
-<span class='fu'>tabs</span>(<span class='no'>hdv2003</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"relig"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"qualif"</span>, <span class='st'>"trav.imp"</span>), <span class='kw'>weight</span> <span class='kw'>=</span> <span class='st'>"poids"</span>)</div><div class='output co'>#&gt;                             Overall Ouvrier specialise Ouvrier qualifie
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>hdv2003</span>) 
+<span class='fu'>tabs</span>(<span class='kw'>hdv2003</span>, x = <span class='st'>"relig"</span>, y = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"qualif"</span>, <span class='st'>"trav.imp"</span>), weight = <span class='st'>"poids"</span>)
+</div><div class='output co'>#&gt;                             Overall Ouvrier specialise Ouvrier qualifie
 #&gt; Pratiquant regulier         12.5     1.5                1.2            
 #&gt; Pratiquant occasionnel      21.8     2.1                3.2            
 #&gt; Appartenance sans pratique  37.9     4.7                7.0            
@@ -237,8 +241,9 @@ kable(), which is found in library(knitr), is recommended for use with RMarkdown
 #&gt; Appartenance sans pratique  28.0                          1.3         
 #&gt; Ni croyance ni appartenance 16.5                          1.9         
 #&gt; Rejet                        3.0                          0.4         
-#&gt; NSP ou NVPR                  0.8                          0.0         </div><div class='input'><span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>tabs</span>(<span class='no'>hdv2003</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"relig"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"qualif"</span>, <span class='st'>"trav.imp"</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"counts"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='no'>result</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt;                             Overall Ouvrier specialise Ouvrier qualifie
+#&gt; NSP ou NVPR                  0.8                          0.0         </div><div class='input'><span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='fu'>tabs</span>(<span class='kw'>hdv2003</span>, x = <span class='st'>"relig"</span>, y = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"qualif"</span>, <span class='st'>"trav.imp"</span>), type = <span class='st'>"counts"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='kw'>result</span>, digits = <span class='fl'>3</span>)
+</div><div class='output co'>#&gt;                             Overall Ouvrier specialise Ouvrier qualifie
 #&gt; Pratiquant regulier         "266"   " 33"              " 22"           
 #&gt; Pratiquant occasionnel      "442"   " 45"              " 59"           
 #&gt; Appartenance sans pratique  "760"   " 75"              "120"           
@@ -272,9 +277,9 @@ kable(), which is found in library(knitr), is recommended for use with RMarkdown
 #&gt; Appartenance sans pratique  "283"                        " 16"        
 #&gt; Ni croyance ni appartenance "160"                        " 16"        
 #&gt; Rejet                       " 35"                        "  5"        
-#&gt; NSP ou NVPR                 " 13"                        "  1"        </div><div class='input'># library(knitr)
-# xt &lt;- tabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), weight = "poids")
-# kable(format(xt))                        # to use with RMarkdown...
+#&gt; NSP ou NVPR                 " 13"                        "  1"        </div><div class='input'><span class='co'># library(knitr)</span>
+<span class='co'># xt &lt;- tabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), weight = "poids")</span>
+<span class='co'># kable(format(xt))                        # to use with RMarkdown...</span>
 
 </div></pre>
   </div>
@@ -292,7 +297,7 @@ kable(), which is found in library(knitr), is recommended for use with RMarkdown
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

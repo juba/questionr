@@ -132,42 +132,42 @@
     <p>Return the percentages of a two-way frequency table with formatting and printing options.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>prop</span>(<span class='no'>tab</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>prop</span>(<span class='kw'>tab</span>, <span class='kw'>...</span>)
 
 <span class='fu'>prop_table</span>(
-  <span class='no'>tab</span>,
-  <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
+  <span class='kw'>tab</span>,
+  digits = <span class='fl'>1</span>,
+  total = <span class='fl'>TRUE</span>,
+  percent = <span class='fl'>FALSE</span>,
+  drop = <span class='fl'>TRUE</span>,
+  n = <span class='fl'>FALSE</span>,
+  <span class='kw'>...</span>
 )
 
 <span class='co'># S3 method for data.frame</span>
 <span class='fu'>prop</span>(
-  <span class='no'>tab</span>,
-  <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
+  <span class='kw'>tab</span>,
+  digits = <span class='fl'>1</span>,
+  total = <span class='fl'>TRUE</span>,
+  percent = <span class='fl'>FALSE</span>,
+  drop = <span class='fl'>TRUE</span>,
+  n = <span class='fl'>FALSE</span>,
+  <span class='kw'>...</span>
 )
 
 <span class='co'># S3 method for matrix</span>
 <span class='fu'>prop</span>(
-  <span class='no'>tab</span>,
-  <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
+  <span class='kw'>tab</span>,
+  digits = <span class='fl'>1</span>,
+  total = <span class='fl'>TRUE</span>,
+  percent = <span class='fl'>FALSE</span>,
+  drop = <span class='fl'>TRUE</span>,
+  n = <span class='fl'>FALSE</span>,
+  <span class='kw'>...</span>
 )
 
 <span class='co'># S3 method for tabyl</span>
-<span class='fu'>prop</span>(<span class='no'>tab</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>prop</span>(<span class='kw'>tab</span>, digits = <span class='fl'>1</span>, total = <span class='fl'>TRUE</span>, percent = <span class='fl'>FALSE</span>, n = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -211,17 +211,19 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Sample table</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>Titanic</span>)
-<span class='no'>tab</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>Titanic</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>4</span>), <span class='no'>sum</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>Titanic</span>)
+<span class='kw'>tab</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='kw'>Titanic</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>4</span>), <span class='kw'>sum</span>)
 <span class='co'>## Percentages</span>
-<span class='fu'>prop</span>(<span class='no'>tab</span>)</div><div class='output co'>#&gt;        Survived
+<span class='fu'>prop</span>(<span class='kw'>tab</span>)
+</div><div class='output co'>#&gt;        Survived
 #&gt; Class   No    Yes   Total
 #&gt;   1st     5.5   9.2  14.8
 #&gt;   2nd     7.6   5.4  12.9
 #&gt;   3rd    24.0   8.1  32.1
 #&gt;   Crew   30.6   9.6  40.2
 #&gt;   Total  67.7  32.3 100.0</div><div class='input'><span class='co'>## Percentages with custom display</span>
-<span class='fu'>prop</span>(<span class='no'>tab</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>percent</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>total</span><span class='kw'>=</span><span class='fl'>FALSE</span>, <span class='kw'>n</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;       Survived
+<span class='fu'>prop</span>(<span class='kw'>tab</span>, digits=<span class='fl'>2</span>, percent=<span class='fl'>TRUE</span>, total=<span class='fl'>FALSE</span>, n=<span class='fl'>TRUE</span>)
+</div><div class='output co'>#&gt;       Survived
 #&gt; Class  No       Yes      n   
 #&gt;   1st     5.54%    9.22%  325
 #&gt;   2nd     7.59%    5.36%  285
@@ -243,7 +245,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

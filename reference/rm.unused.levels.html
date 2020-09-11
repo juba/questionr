@@ -132,7 +132,7 @@
     <p>This function removes unused levels of a factor or in a data.frame. See examples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rm.unused.levels</span>(<span class='no'>x</span>, <span class='kw'>v</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>rm.unused.levels</span>(<span class='kw'>x</span>, v = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -152,20 +152,27 @@
     <p>If <code>x</code> is a data frame, only factor variables of <code>x</code> will be impacted.
 If a list of variables is provided through <code>v</code>, only the unused levels of the
 specified variables will be removed.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Joseph Larmarange &lt;joseph@larmarange.net&gt;</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>v1</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"b"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>),<span class='kw'>v2</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x"</span>,<span class='st'>"x"</span>,<span class='st'>"y"</span>,<span class='st'>"y"</span>))
-<span class='no'>df</span>$<span class='no'>v1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='no'>df</span>$<span class='no'>v1</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"b"</span>,<span class='st'>"c"</span>))
-<span class='no'>df</span>$<span class='no'>v2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='no'>df</span>$<span class='no'>v2</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x"</span>,<span class='st'>"y"</span>,<span class='st'>"z"</span>))
-<span class='no'>df</span></div><div class='output co'>#&gt;   v1 v2
+    <pre class="examples"><div class='input'><span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(v1=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"b"</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>),v2=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x"</span>,<span class='st'>"x"</span>,<span class='st'>"y"</span>,<span class='st'>"y"</span>))
+<span class='kw'>df</span><span class='op'>$</span><span class='kw'>v1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='kw'>df</span><span class='op'>$</span><span class='kw'>v1</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"b"</span>,<span class='st'>"c"</span>))
+<span class='kw'>df</span><span class='op'>$</span><span class='kw'>v2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='kw'>df</span><span class='op'>$</span><span class='kw'>v2</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"x"</span>,<span class='st'>"y"</span>,<span class='st'>"z"</span>))
+<span class='kw'>df</span>
+</div><div class='output co'>#&gt;   v1 v2
 #&gt; 1  a  x
 #&gt; 2  b  x
 #&gt; 3  a  y
-#&gt; 4  b  y</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; 'data.frame':	4 obs. of  2 variables:
+#&gt; 4  b  y</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='kw'>df</span>)
+</div><div class='output co'>#&gt; 'data.frame':	4 obs. of  2 variables:
 #&gt;  $ v1: Factor w/ 3 levels "a","b","c": 1 2 1 2
-#&gt;  $ v2: Factor w/ 3 levels "x","y","z": 1 1 2 2</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>rm.unused.levels</span>(<span class='no'>df</span>))</div><div class='output co'>#&gt; 'data.frame':	4 obs. of  2 variables:
+#&gt;  $ v2: Factor w/ 3 levels "x","y","z": 1 1 2 2</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>rm.unused.levels</span>(<span class='kw'>df</span>))
+</div><div class='output co'>#&gt; 'data.frame':	4 obs. of  2 variables:
 #&gt;  $ v1: Factor w/ 2 levels "a","b": 1 2 1 2
-#&gt;  $ v2: Factor w/ 2 levels "x","y": 1 1 2 2</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>rm.unused.levels</span>(<span class='no'>df</span>,<span class='st'>"v1"</span>))</div><div class='output co'>#&gt; 'data.frame':	4 obs. of  2 variables:
+#&gt;  $ v2: Factor w/ 2 levels "x","y": 1 1 2 2</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>rm.unused.levels</span>(<span class='kw'>df</span>,<span class='st'>"v1"</span>))
+</div><div class='output co'>#&gt; 'data.frame':	4 obs. of  2 variables:
 #&gt;  $ v1: Factor w/ 2 levels "a","b": 1 2 1 2
 #&gt;  $ v2: Factor w/ 3 levels "x","y","z": 1 1 2 2</div></pre>
   </div>
@@ -183,7 +190,7 @@ specified variables will be removed.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

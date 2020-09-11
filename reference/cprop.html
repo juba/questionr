@@ -132,43 +132,43 @@
     <p>Return the column percentages of a two-way frequency table with formatting and printing options.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cprop</span>(<span class='no'>tab</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>cprop</span>(<span class='kw'>tab</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for table</span>
 <span class='fu'>cprop</span>(
-  <span class='no'>tab</span>,
-  <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
+  <span class='kw'>tab</span>,
+  digits = <span class='fl'>1</span>,
+  total = <span class='fl'>TRUE</span>,
+  percent = <span class='fl'>FALSE</span>,
+  drop = <span class='fl'>TRUE</span>,
+  n = <span class='fl'>FALSE</span>,
+  <span class='kw'>...</span>
 )
 
 <span class='co'># S3 method for data.frame</span>
 <span class='fu'>cprop</span>(
-  <span class='no'>tab</span>,
-  <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
+  <span class='kw'>tab</span>,
+  digits = <span class='fl'>1</span>,
+  total = <span class='fl'>TRUE</span>,
+  percent = <span class='fl'>FALSE</span>,
+  drop = <span class='fl'>TRUE</span>,
+  n = <span class='fl'>FALSE</span>,
+  <span class='kw'>...</span>
 )
 
 <span class='co'># S3 method for matrix</span>
 <span class='fu'>cprop</span>(
-  <span class='no'>tab</span>,
-  <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
+  <span class='kw'>tab</span>,
+  digits = <span class='fl'>1</span>,
+  total = <span class='fl'>TRUE</span>,
+  percent = <span class='fl'>FALSE</span>,
+  drop = <span class='fl'>TRUE</span>,
+  n = <span class='fl'>FALSE</span>,
+  <span class='kw'>...</span>
 )
 
 <span class='co'># S3 method for tabyl</span>
-<span class='fu'>cprop</span>(<span class='no'>tab</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>percent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>cprop</span>(<span class='kw'>tab</span>, digits = <span class='fl'>1</span>, total = <span class='fl'>TRUE</span>, percent = <span class='fl'>FALSE</span>, n = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -212,15 +212,17 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Sample table</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>Titanic</span>)
-<span class='no'>tab</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>Titanic</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>1</span>), <span class='no'>sum</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>Titanic</span>)
+<span class='kw'>tab</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='kw'>Titanic</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>1</span>), <span class='kw'>sum</span>)
 <span class='co'>## Column percentages</span>
-<span class='fu'>cprop</span>(<span class='no'>tab</span>)</div><div class='output co'>#&gt;         Class
+<span class='fu'>cprop</span>(<span class='kw'>tab</span>)
+</div><div class='output co'>#&gt;         Class
 #&gt; Survived 1st   2nd   3rd   Crew  All  
 #&gt;    No     37.5  58.6  74.8  76.0  67.7
 #&gt;    Yes    62.5  41.4  25.2  24.0  32.3
 #&gt;    Total 100.0 100.0 100.0 100.0 100.0</div><div class='input'><span class='co'>## Column percentages with custom display</span>
-<span class='fu'>cprop</span>(<span class='no'>tab</span>, <span class='kw'>digits</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>percent</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>total</span><span class='kw'>=</span><span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;         Class
+<span class='fu'>cprop</span>(<span class='kw'>tab</span>, digits=<span class='fl'>2</span>, percent=<span class='fl'>TRUE</span>, total=<span class='fl'>FALSE</span>)
+</div><div class='output co'>#&gt;         Class
 #&gt; Survived 1st    2nd    3rd    Crew  
 #&gt;      No  37.54% 58.60% 74.79% 76.05%
 #&gt;      Yes 62.46% 41.40% 25.21% 23.95%</div></pre>
@@ -239,7 +241,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

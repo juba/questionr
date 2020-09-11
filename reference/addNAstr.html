@@ -138,7 +138,7 @@ This version of <code>addNA</code> extends the same function provided in <span s
 allowing to specify a string name for the extra level (see examples).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>addNAstr</span>(<span class='no'>x</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='st'>"NA"</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>addNAstr</span>(<span class='kw'>x</span>, value = <span class='st'>"NA"</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,11 +172,15 @@ a string.</p>
     <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/factor.html'>addNA</a></code> (base).</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"b"</span>,<span class='fl'>NA</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
-<span class='no'>f</span></div><div class='output co'>#&gt; [1] a    b    &lt;NA&gt; a    b   
-#&gt; Levels: a b</div><div class='input'><span class='fu'>addNAstr</span>(<span class='no'>f</span>)</div><div class='output co'>#&gt; [1] a  b  NA a  b 
-#&gt; Levels: a b NA</div><div class='input'><span class='fu'>addNAstr</span>(<span class='no'>f</span>, <span class='kw'>value</span><span class='kw'>=</span><span class='st'>"missing"</span>)</div><div class='output co'>#&gt; [1] a       b       missing a       b      
-#&gt; Levels: a b missing</div><div class='input'><span class='fu'>addNAstr</span>(<span class='no'>f</span>, <span class='kw'>value</span><span class='kw'>=</span><span class='kw'>NULL</span>)</div><div class='output co'>#&gt; [1] a    b    &lt;NA&gt; a    b   
+    <pre class="examples"><div class='input'><span class='kw'>f</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>,<span class='st'>"b"</span>,<span class='fl'>NA</span>,<span class='st'>"a"</span>,<span class='st'>"b"</span>))
+<span class='kw'>f</span>
+</div><div class='output co'>#&gt; [1] a    b    &lt;NA&gt; a    b   
+#&gt; Levels: a b</div><div class='input'><span class='fu'>addNAstr</span>(<span class='kw'>f</span>)
+</div><div class='output co'>#&gt; [1] a  b  NA a  b 
+#&gt; Levels: a b NA</div><div class='input'><span class='fu'>addNAstr</span>(<span class='kw'>f</span>, value=<span class='st'>"missing"</span>)
+</div><div class='output co'>#&gt; [1] a       b       missing a       b      
+#&gt; Levels: a b missing</div><div class='input'><span class='fu'>addNAstr</span>(<span class='kw'>f</span>, value=<span class='kw'>NULL</span>)
+</div><div class='output co'>#&gt; [1] a    b    &lt;NA&gt; a    b   
 #&gt; Levels: a b &lt;NA&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -193,7 +197,7 @@ a string.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

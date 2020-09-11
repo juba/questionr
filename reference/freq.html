@@ -133,15 +133,15 @@
     </div>
 
     <pre class="usage"><span class='fu'>freq</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>digits</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>cum</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>exclude</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sort</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>valid</span> <span class='kw'>=</span> !(<span class='fl'>NA</span> <span class='kw'>%in%</span> <span class='no'>exclude</span>),
-  <span class='kw'>levels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"prefixed"</span>, <span class='st'>"labels"</span>, <span class='st'>"values"</span>),
-  <span class='kw'>na.last</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>x</span>,
+  digits = <span class='fl'>1</span>,
+  cum = <span class='fl'>FALSE</span>,
+  total = <span class='fl'>FALSE</span>,
+  exclude = <span class='kw'>NULL</span>,
+  sort = <span class='st'>""</span>,
+  valid = <span class='op'>!</span>(<span class='fl'>NA</span> <span class='op'>%in%</span> <span class='kw'>exclude</span>),
+  levels = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"prefixed"</span>, <span class='st'>"labels"</span>, <span class='st'>"values"</span>),
+  na.last = <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -196,8 +196,9 @@ must be installed): "labels" for value labels, "values" for values or
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># factor</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>hdv2003</span>)
-<span class='fu'>freq</span>(<span class='no'>hdv2003</span>$<span class='no'>qualif</span>)</div><div class='output co'>#&gt;                            n    % val%
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>hdv2003</span>)
+<span class='fu'>freq</span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>qualif</span>)
+</div><div class='output co'>#&gt;                            n    % val%
 #&gt; Ouvrier specialise       203 10.2 12.3
 #&gt; Ouvrier qualifie         292 14.6 17.7
 #&gt; Technicien                86  4.3  5.2
@@ -205,7 +206,8 @@ must be installed): "labels" for value labels, "values" for values or
 #&gt; Cadre                    260 13.0 15.7
 #&gt; Employe                  594 29.7 35.9
 #&gt; Autre                     58  2.9  3.5
-#&gt; NA                       347 17.3   NA</div><div class='input'><span class='fu'>freq</span>(<span class='no'>hdv2003</span>$<span class='no'>qualif</span>, <span class='kw'>cum</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;                             n     %  val%  %cum val%cum
+#&gt; NA                       347 17.3   NA</div><div class='input'><span class='fu'>freq</span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>qualif</span>, cum = <span class='fl'>TRUE</span>, total = <span class='fl'>TRUE</span>)
+</div><div class='output co'>#&gt;                             n     %  val%  %cum val%cum
 #&gt; Ouvrier specialise        203  10.2  12.3  10.2    12.3
 #&gt; Ouvrier qualifie          292  14.6  17.7  24.8    29.9
 #&gt; Technicien                 86   4.3   5.2  29.0    35.1
@@ -214,7 +216,8 @@ must be installed): "labels" for value labels, "values" for values or
 #&gt; Employe                   594  29.7  35.9  79.8    96.5
 #&gt; Autre                      58   2.9   3.5  82.7   100.0
 #&gt; NA                        347  17.3    NA 100.0      NA
-#&gt; Total                    2000 100.0 100.0 100.0   100.0</div><div class='input'><span class='fu'>freq</span>(<span class='no'>hdv2003</span>$<span class='no'>qualif</span>, <span class='kw'>cum</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>total</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>sort</span> <span class='kw'>=</span><span class='st'>"dec"</span>)</div><div class='output co'>#&gt;                             n     %  val%  %cum val%cum
+#&gt; Total                    2000 100.0 100.0 100.0   100.0</div><div class='input'><span class='fu'>freq</span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>qualif</span>, cum = <span class='fl'>TRUE</span>, total = <span class='fl'>TRUE</span>, sort =<span class='st'>"dec"</span>)
+</div><div class='output co'>#&gt;                             n     %  val%  %cum val%cum
 #&gt; Employe                   594  29.7  35.9  29.7    35.9
 #&gt; Ouvrier qualifie          292  14.6  17.7  44.3    53.6
 #&gt; Cadre                     260  13.0  15.7  57.3    69.3
@@ -225,16 +228,19 @@ must be installed): "labels" for value labels, "values" for values or
 #&gt; NA                        347  17.3    NA 100.0      NA
 #&gt; Total                    2000 100.0 100.0 100.0   100.0</div><div class='input'>
 <span class='co'># labelled data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>fecondite</span>)
-<span class='fu'>freq</span>(<span class='no'>femmes</span>$<span class='no'>region</span>)</div><div class='output co'>#&gt;             n    % val%
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>fecondite</span>)
+<span class='fu'>freq</span>(<span class='kw'>femmes</span><span class='op'>$</span><span class='kw'>region</span>)
+</div><div class='output co'>#&gt;             n    % val%
 #&gt; [1] Nord  707 35.4 35.4
 #&gt; [2] Est   324 16.2 16.2
 #&gt; [3] Sud   407 20.3 20.3
-#&gt; [4] Ouest 562 28.1 28.1</div><div class='input'><span class='fu'>freq</span>(<span class='no'>femmes</span>$<span class='no'>region</span>, <span class='kw'>levels</span> <span class='kw'>=</span> <span class='st'>"l"</span>)</div><div class='output co'>#&gt;         n    % val%
+#&gt; [4] Ouest 562 28.1 28.1</div><div class='input'><span class='fu'>freq</span>(<span class='kw'>femmes</span><span class='op'>$</span><span class='kw'>region</span>, levels = <span class='st'>"l"</span>)
+</div><div class='output co'>#&gt;         n    % val%
 #&gt; Nord  707 35.4 35.4
 #&gt; Est   324 16.2 16.2
 #&gt; Sud   407 20.3 20.3
-#&gt; Ouest 562 28.1 28.1</div><div class='input'><span class='fu'>freq</span>(<span class='no'>femmes</span>$<span class='no'>region</span>, <span class='kw'>levels</span> <span class='kw'>=</span> <span class='st'>"v"</span>)</div><div class='output co'>#&gt;     n    % val%
+#&gt; Ouest 562 28.1 28.1</div><div class='input'><span class='fu'>freq</span>(<span class='kw'>femmes</span><span class='op'>$</span><span class='kw'>region</span>, levels = <span class='st'>"v"</span>)
+</div><div class='output co'>#&gt;     n    % val%
 #&gt; 1 707 35.4 35.4
 #&gt; 2 324 16.2 16.2
 #&gt; 3 407 20.3 20.3
@@ -254,7 +260,7 @@ must be installed): "labels" for value labels, "values" for values or
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
