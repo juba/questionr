@@ -1,6 +1,9 @@
 questionr 0.7.3
 ---------------
 
+* Fix name conflicts when `irec`, `icut` or `iorder` are called with a data frame with the same name as a function (113, thanks @nalimilan)
+* Sort level names in `irec` and `iorder` instead of relying on `unique` (thanks @nalimilan)
+
 
 questionr 0.7.2
 ---------------
