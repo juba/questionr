@@ -194,7 +194,7 @@ iorder <- function(obj = NULL, var_name = NULL) {
       out <- "<ol id='sortable' class='sortable'>"
       ## List of levels
       if (is.factor(rvar())) levs <- levels(rvar())
-      else levs <- stats::na.omit(unique(rvar()))
+      else levs <- sort(stats::na.omit(unique(rvar())))
       ## Generate fields
       for (l in levs) out <- paste0(out,
                                     '<li><span class="glyphicon glyphicon-move"> </span>&nbsp; <span class="level">',
