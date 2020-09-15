@@ -1,6 +1,8 @@
 questionr 0.7.3
 ---------------
 
+* Fix `forcats` and `dplyr` detection in `irec` (thanks @matthias-studer)
+* Fix R.cache blocking message in `irec`, `icut` or `iorder` (thanks @matthias-studer)
 * Fix name conflicts when `irec`, `icut` or `iorder` are called with a data frame with the same name as a function (113, thanks @nalimilan)
 * Sort level names in `irec` and `iorder` instead of relying on `unique` (thanks @nalimilan)
 
