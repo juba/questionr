@@ -25,6 +25,10 @@
 
 
 iorder <- function(obj = NULL, var_name = NULL) {
+  
+  # Deactivate styler cache to avoid blocking message at
+  # first launch
+  styler::cache_deactivate(verbose = FALSE)
 
   run_as_addin <- ifunc_run_as_addin()
 

@@ -27,7 +27,11 @@
 
 
 irec <- function(obj = NULL, var_name = NULL) {
-
+  
+  # Deactivate styler cache to avoid blocking message at
+  # first launch
+  styler::cache_deactivate(verbose = FALSE)
+  
   recoding_styles <- c("Character - minimal" = "charmin", 
                        "Character - complete" = "charcomp",
                        "fct_recode (forcats)" = "forcats",
