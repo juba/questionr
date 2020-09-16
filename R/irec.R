@@ -524,6 +524,7 @@ irec <- function(obj = NULL, var_name = NULL) {
     output$tableOut <- renderTable({
       ## Generate the recoding code with a temporary variable
       code <- generate_code(check = TRUE)
+      if (!exists("fct_recode") && input$recstyle == "forcats") return(NULL)
       if (code != "") {
           ## Eval generated code
           eval(parse(text = code), envir = .GlobalEnv)
