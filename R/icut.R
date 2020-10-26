@@ -137,9 +137,10 @@ icut <- function(obj = NULL, var_name = NULL) {
                         selectizeInput("cutMethod", gettext('Cutting method',domain='R-questionr'), choices=c("Manual" = "fixed", "Standard deviation" = "sd", "Equal width" = "equal", "Pretty" = "pretty", "Quantile" = "quantile", "K-means" = "kmeans", "Hierarchical cluster" = "hclust", "Bagged clustering" = "bclust", "Fisher algorithm" = "fisher", "Jenks algorithm" = "jenks")),
                         uiOutput("ui"),
                         textInput("breaks", "Breaks"),
-                        checkboxInput("right", HTML(gettext("Right-closed intervals (<tt>right</tt>)", domain="R-questionr")), TRUE),
+                        checkboxInput("right", HTML(gettext("Right-closed intervals (<tt>right</tt>)", domain="R-questionr")), FALSE),
                         checkboxInput("inclowest", HTML(gettext("Include extreme (<tt>include.lowest</tt>)", domain="R-questionr")), FALSE),
-                        checkboxInput("addext", gettext("Append extreme values if necessary", domain="R-questionr"), FALSE)),
+                        checkboxInput("addext", gettext("Append extreme values if necessary", domain="R-questionr"), FALSE),
+                        numericInput("diglab", HTML(gettext("Label digits (<tt>dig.lab</tt>)", domain="R-questionr")), min = 0, max = 10, value = 4)),
                     column(6,
                         wellPanel(plotOutput("histOut")))
 
@@ -312,7 +313,7 @@ icut <- function(obj = NULL, var_name = NULL) {
             if (check) dest_var <- ".icut_tmp"
 
           out <- sprintf(gettextf("## Cutting %s into %s\n", src_var(), dest_var, domain="R-questionr"))
-          out <- paste0(out, sprintf("%s <- cut(%s,\n include.lowest=%s,\n right=%s,\n", dest_var, src_var(), input$inclowest, input$right))
+          out <- paste0(out, sprintf("%s <- cut(%s,\n include.lowest=%s,\n right=%s,\n dig.lab=%s,\n", dest_var, src_var(), input$inclowest, input$right, input$diglab))
           breaks <- paste0(utils::capture.output(dput(get_breaks(input$breaks))), collapse="")
           out <- paste0(out, sprintf("breaks=%s)\n", breaks))
           out
