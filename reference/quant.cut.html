@@ -134,7 +134,7 @@ one by breaking it into classes with the same frequencies." />
 one by breaking it into classes with the same frequencies.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>quant.cut</span>(<span class='kw'>var</span>, <span class='kw'>nbclass</span>, include.lowest = <span class='fl'>TRUE</span>, right = <span class='fl'>FALSE</span>, dig.lab = <span class='fl'>5</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>quant.cut</span><span class='op'>(</span><span class='va'>var</span>, <span class='va'>nbclass</span>, include.lowest <span class='op'>=</span> <span class='cn'>TRUE</span>, right <span class='op'>=</span> <span class='cn'>FALSE</span>, dig.lab <span class='op'>=</span> <span class='fl'>5</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -177,9 +177,9 @@ functions.</p>
     <div class='dont-index'><p><code><a href='https://rdrr.io/r/base/cut.html'>cut</a></code>, <code><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>iris</span>)
-<span class='kw'>sepal.width3cl</span> <span class='op'>&lt;-</span> <span class='fu'>quant.cut</span>(<span class='kw'>iris</span><span class='op'>$</span><span class='kw'>Sepal.Width</span>,<span class='fl'>3</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='kw'>sepal.width3cl</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+<span class='va'>sepal.width3cl</span> <span class='op'>&lt;-</span> <span class='fu'>quant.cut</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>,<span class='fl'>3</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span><span class='op'>(</span><span class='va'>sepal.width3cl</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; sepal.width3cl
 #&gt;   [2,2.9) [2.9,3.2) [3.2,4.4] 
 #&gt;        47        47        56 </div></pre>

@@ -132,16 +132,16 @@
     <p>Generate weighted frequency tables, both for one-way and two-way tables.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>wtd.table</span>(
-  <span class='kw'>x</span>,
-  y = <span class='kw'>NULL</span>,
-  weights = <span class='kw'>NULL</span>,
-  digits = <span class='fl'>3</span>,
-  normwt = <span class='fl'>FALSE</span>,
-  na.rm = <span class='fl'>TRUE</span>,
-  na.show = <span class='fl'>FALSE</span>,
-  exclude = <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>wtd.table</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  y <span class='op'>=</span> <span class='cn'>NULL</span>,
+  weights <span class='op'>=</span> <span class='cn'>NULL</span>,
+  digits <span class='op'>=</span> <span class='fl'>3</span>,
+  normwt <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  na.show <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  exclude <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -193,16 +193,16 @@ of <code>x</code>. Otherwise, returns a weighted two-way frequency table of
     <div class='dont-index'><p><code>wtd.table</code>, <code class='command'><a href='https://rdrr.io/r/base/table.html'>table</a></code>, and the <code>survey</code> package.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>hdv2003</span>)
-<span class='fu'>wtd.table</span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>sexe</span>, weights=<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>poids</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>hdv2003</span><span class='op'>)</span>
+<span class='fu'>wtd.table</span><span class='op'>(</span><span class='va'>hdv2003</span><span class='op'>$</span><span class='va'>sexe</span>, weights<span class='op'>=</span><span class='va'>hdv2003</span><span class='op'>$</span><span class='va'>poids</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   Homme   Femme 
-#&gt; 5149382 5921844 </div><div class='input'><span class='fu'>wtd.table</span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>sexe</span>, weights=<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>poids</span>, normwt=<span class='fl'>TRUE</span>)
+#&gt; 5149382 5921844 </div><div class='input'><span class='fu'>wtd.table</span><span class='op'>(</span><span class='va'>hdv2003</span><span class='op'>$</span><span class='va'>sexe</span>, weights<span class='op'>=</span><span class='va'>hdv2003</span><span class='op'>$</span><span class='va'>poids</span>, normwt<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    Homme    Femme 
-#&gt;  930.228 1069.772 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>sexe</span>, <span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>hard.rock</span>)
+#&gt;  930.228 1069.772 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/table.html'>table</a></span><span class='op'>(</span><span class='va'>hdv2003</span><span class='op'>$</span><span class='va'>sexe</span>, <span class='va'>hdv2003</span><span class='op'>$</span><span class='va'>hard.rock</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;        
 #&gt;          Non  Oui
 #&gt;   Homme  892    7
-#&gt;   Femme 1094    7</div><div class='input'><span class='fu'>wtd.table</span>(<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>sexe</span>, <span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>hard.rock</span>, weights=<span class='kw'>hdv2003</span><span class='op'>$</span><span class='kw'>poids</span>)
+#&gt;   Femme 1094    7</div><div class='input'><span class='fu'>wtd.table</span><span class='op'>(</span><span class='va'>hdv2003</span><span class='op'>$</span><span class='va'>sexe</span>, <span class='va'>hdv2003</span><span class='op'>$</span><span class='va'>hard.rock</span>, weights<span class='op'>=</span><span class='va'>hdv2003</span><span class='op'>$</span><span class='va'>poids</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;              Non        Oui
 #&gt; Homme 5109366.41   40016.02
 #&gt; Femme 5872596.42   49247.49</div></pre>

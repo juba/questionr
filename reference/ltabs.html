@@ -134,13 +134,13 @@ value labels for labelled vectors if labelled package eis installed." />
 value labels for labelled vectors if <span class="pkg">labelled</span> package eis installed.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ltabs</span>(
-  <span class='kw'>formula</span>,
-  <span class='kw'>data</span>,
-  levels = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"prefixed"</span>, <span class='st'>"labels"</span>, <span class='st'>"values"</span>),
-  variable_label = <span class='fl'>TRUE</span>,
-  <span class='kw'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ltabs</span><span class='op'>(</span>
+  <span class='va'>formula</span>,
+  <span class='va'>data</span>,
+  levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"prefixed"</span>, <span class='st'>"labels"</span>, <span class='st'>"values"</span><span class='op'>)</span>,
+  variable_label <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,23 +173,23 @@ value labels for labelled vectors if <span class="pkg">labelled</span> package e
     <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/xtabs.html'>xtabs</a></code>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>fecondite</span>)
-<span class='fu'>ltabs</span>(<span class='op'>~</span><span class='kw'>radio</span>, <span class='kw'>femmes</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>fecondite</span><span class='op'>)</span>
+<span class='fu'>ltabs</span><span class='op'>(</span><span class='op'>~</span><span class='va'>radio</span>, <span class='va'>femmes</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; radio: Ecoute la radio ?
 #&gt; [0] non [1] oui 
-#&gt;    1085     915 </div><div class='input'><span class='fu'>ltabs</span>(<span class='op'>~</span><span class='kw'>radio</span><span class='op'>+</span><span class='kw'>tv</span>, <span class='kw'>femmes</span>)
+#&gt;    1085     915 </div><div class='input'><span class='fu'>ltabs</span><span class='op'>(</span><span class='op'>~</span><span class='va'>radio</span><span class='op'>+</span><span class='va'>tv</span>, <span class='va'>femmes</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;                         tv: Regarde la télévision ?
 #&gt; radio: Ecoute la radio ? [0] non [1] oui
 #&gt;                  [0] non     593     492
-#&gt;                  [1] oui     168     747</div><div class='input'><span class='fu'>ltabs</span>(<span class='op'>~</span><span class='kw'>radio</span><span class='op'>+</span><span class='kw'>tv</span>, <span class='kw'>femmes</span>, <span class='st'>"l"</span>)
+#&gt;                  [1] oui     168     747</div><div class='input'><span class='fu'>ltabs</span><span class='op'>(</span><span class='op'>~</span><span class='va'>radio</span><span class='op'>+</span><span class='va'>tv</span>, <span class='va'>femmes</span>, <span class='st'>"l"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;                         tv: Regarde la télévision ?
 #&gt; radio: Ecoute la radio ? non oui
 #&gt;                      non 593 492
-#&gt;                      oui 168 747</div><div class='input'><span class='fu'>ltabs</span>(<span class='op'>~</span><span class='kw'>radio</span><span class='op'>+</span><span class='kw'>tv</span>, <span class='kw'>femmes</span>, <span class='st'>"v"</span>)
+#&gt;                      oui 168 747</div><div class='input'><span class='fu'>ltabs</span><span class='op'>(</span><span class='op'>~</span><span class='va'>radio</span><span class='op'>+</span><span class='va'>tv</span>, <span class='va'>femmes</span>, <span class='st'>"v"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;                         tv: Regarde la télévision ?
 #&gt; radio: Ecoute la radio ?   0   1
 #&gt;                        0 593 492
-#&gt;                        1 168 747</div><div class='input'><span class='fu'>ltabs</span>(<span class='op'>~</span><span class='kw'>radio</span><span class='op'>+</span><span class='kw'>tv</span><span class='op'>+</span><span class='kw'>journal</span>, <span class='kw'>femmes</span>)
+#&gt;                        1 168 747</div><div class='input'><span class='fu'>ltabs</span><span class='op'>(</span><span class='op'>~</span><span class='va'>radio</span><span class='op'>+</span><span class='va'>tv</span><span class='op'>+</span><span class='va'>journal</span>, <span class='va'>femmes</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; , , journal: Lit la presse ? = [0] non
 #&gt; 
 #&gt;                         tv: Regarde la télévision ?
@@ -203,7 +203,7 @@ value labels for labelled vectors if <span class="pkg">labelled</span> package e
 #&gt; radio: Ecoute la radio ? [0] non [1] oui
 #&gt;                  [0] non       7      50
 #&gt;                  [1] oui       8     255
-#&gt; </div><div class='input'><span class='fu'>ltabs</span>(<span class='op'>~</span><span class='kw'>radio</span><span class='op'>+</span><span class='kw'>tv</span>, <span class='kw'>femmes</span>, variable_label = <span class='fl'>FALSE</span>)
+#&gt; </div><div class='input'><span class='fu'>ltabs</span><span class='op'>(</span><span class='op'>~</span><span class='va'>radio</span><span class='op'>+</span><span class='va'>tv</span>, <span class='va'>femmes</span>, variable_label <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;          tv
 #&gt; radio     [0] non [1] oui
 #&gt;   [0] non     593     492

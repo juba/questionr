@@ -132,43 +132,43 @@
     <p>Return the column percentages of a two-way frequency table with formatting and printing options.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cprop</span>(<span class='kw'>tab</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>cprop</span><span class='op'>(</span><span class='va'>tab</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for table</span>
-<span class='fu'>cprop</span>(
-  <span class='kw'>tab</span>,
-  digits = <span class='fl'>1</span>,
-  total = <span class='fl'>TRUE</span>,
-  percent = <span class='fl'>FALSE</span>,
-  drop = <span class='fl'>TRUE</span>,
-  n = <span class='fl'>FALSE</span>,
-  <span class='kw'>...</span>
-)
+<span class='fu'>cprop</span><span class='op'>(</span>
+  <span class='va'>tab</span>,
+  digits <span class='op'>=</span> <span class='fl'>1</span>,
+  total <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  percent <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  drop <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  n <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for data.frame</span>
-<span class='fu'>cprop</span>(
-  <span class='kw'>tab</span>,
-  digits = <span class='fl'>1</span>,
-  total = <span class='fl'>TRUE</span>,
-  percent = <span class='fl'>FALSE</span>,
-  drop = <span class='fl'>TRUE</span>,
-  n = <span class='fl'>FALSE</span>,
-  <span class='kw'>...</span>
-)
+<span class='fu'>cprop</span><span class='op'>(</span>
+  <span class='va'>tab</span>,
+  digits <span class='op'>=</span> <span class='fl'>1</span>,
+  total <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  percent <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  drop <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  n <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for matrix</span>
-<span class='fu'>cprop</span>(
-  <span class='kw'>tab</span>,
-  digits = <span class='fl'>1</span>,
-  total = <span class='fl'>TRUE</span>,
-  percent = <span class='fl'>FALSE</span>,
-  drop = <span class='fl'>TRUE</span>,
-  n = <span class='fl'>FALSE</span>,
-  <span class='kw'>...</span>
-)
+<span class='fu'>cprop</span><span class='op'>(</span>
+  <span class='va'>tab</span>,
+  digits <span class='op'>=</span> <span class='fl'>1</span>,
+  total <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  percent <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  drop <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  n <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
 <span class='co'># S3 method for tabyl</span>
-<span class='fu'>cprop</span>(<span class='kw'>tab</span>, digits = <span class='fl'>1</span>, total = <span class='fl'>TRUE</span>, percent = <span class='fl'>FALSE</span>, n = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'>cprop</span><span class='op'>(</span><span class='va'>tab</span>, digits <span class='op'>=</span> <span class='fl'>1</span>, total <span class='op'>=</span> <span class='cn'>TRUE</span>, percent <span class='op'>=</span> <span class='cn'>FALSE</span>, n <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -212,16 +212,16 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Sample table</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>Titanic</span>)
-<span class='kw'>tab</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='kw'>Titanic</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>4</span>,<span class='fl'>1</span>), <span class='kw'>sum</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>Titanic</span><span class='op'>)</span>
+<span class='va'>tab</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>Titanic</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>,<span class='fl'>1</span><span class='op'>)</span>, <span class='va'>sum</span><span class='op'>)</span>
 <span class='co'>## Column percentages</span>
-<span class='fu'>cprop</span>(<span class='kw'>tab</span>)
+<span class='fu'>cprop</span><span class='op'>(</span><span class='va'>tab</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;         Class
 #&gt; Survived 1st   2nd   3rd   Crew  All  
 #&gt;    No     37.5  58.6  74.8  76.0  67.7
 #&gt;    Yes    62.5  41.4  25.2  24.0  32.3
 #&gt;    Total 100.0 100.0 100.0 100.0 100.0</div><div class='input'><span class='co'>## Column percentages with custom display</span>
-<span class='fu'>cprop</span>(<span class='kw'>tab</span>, digits=<span class='fl'>2</span>, percent=<span class='fl'>TRUE</span>, total=<span class='fl'>FALSE</span>)
+<span class='fu'>cprop</span><span class='op'>(</span><span class='va'>tab</span>, digits<span class='op'>=</span><span class='fl'>2</span>, percent<span class='op'>=</span><span class='cn'>TRUE</span>, total<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;         Class
 #&gt; Survived 1st    2nd    3rd    Crew  
 #&gt;      No  37.54% 58.60% 74.79% 76.05%
