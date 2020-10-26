@@ -30,6 +30,14 @@ iorder <- function(obj = NULL, var_name = NULL) {
   # first launch
   styler::cache_deactivate(verbose = FALSE)
 
+  recoding_styles <- c("factor" = "factor", 
+                       "fct_recode (forcats)" = "forcats")
+  selected_recoding_style <- "factor"
+  ## If forcats is loaded
+  if (exists("fct_relevel")) {
+    selected_recoding_style <- "forcats"
+  }
+
   run_as_addin <- ifunc_run_as_addin()
 
   if (is.null(obj)) {
@@ -131,9 +139,13 @@ iorder <- function(obj = NULL, var_name = NULL) {
           tags$h4(icon("sliders"), gettext("Recoding settings", domain="R-questionr")),
           wellPanel(
             fluidRow(
-              column(4, uiOutput("newvarInput"))
+              column(4, uiOutput("newvarInput")),
+              column(4,selectInput("recstyle", gettext("Recoding style", domain="R-questionr"),
+                                   recoding_styles,
+                                   selected = selected_recoding_style)),
             )),
-          uiOutput("alreadyexistsAlert")
+          uiOutput("alreadyexistsAlert"),
+          uiOutput("loadedforcatsAlert")          
           )),
 
       ## Second panel : recoding fields, dynamically generated
@@ -244,6 +256,14 @@ iorder <- function(obj = NULL, var_name = NULL) {
       }
     })
     
+    output$loadedforcatsAlert <- renderUI({
+      if (input$recstyle == "forcats" && !exists("fct_recode")) {
+        div(class = "alert alert-warning alert-dismissible",
+            HTML('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'),
+            HTML(gettext("<strong>Warning :</strong> The <tt>forcats</tt> package must be installed and loaded for the generated code to be run.", domain="R-questionr")))
+      }
+    })    
+    
     output$alreadyexistsAlert <- renderUI({
       exists <- FALSE
       if (is.data.frame(robj()) && req(input$newvar_name) %in% names(robj())) {
@@ -261,6 +281,20 @@ iorder <- function(obj = NULL, var_name = NULL) {
       }
     })
 
+    
+    ## Code generation for base::factor
+    generate_code_factor <- function(dest_var) {
+      newlevels <- paste0(utils::capture.output(dput(input$sortable)), collapse = "\n")
+      sprintf("%s <- factor(%s,\n levels=%s)", dest_var, src_var(), newlevels)
+    }
+    
+    ## Code generation for forcats::fct_relevel
+    generate_code_forcats <- function(dest_var) {
+      newlevels <- paste0(utils::capture.output(dput(input$sortable)), collapse = "\n")
+      newlevels <- gsub("(^c\\(|\\)$)", "", newlevels)
+      sprintf("%s <- fct_relevel(%s,\n %s)", dest_var, src_var(), newlevels)
+    }
+    
     ## Generate reordering code
     generate_code <- function(check=FALSE) {
       if (is.data.frame(robj())) {
@@ -273,12 +307,17 @@ iorder <- function(obj = NULL, var_name = NULL) {
       }
       ## if check, create temporary variable for check table
       if (check) dest_var <- ".iorder_tmp"
-      newlevels <- paste0(utils::capture.output(dput(input$sortable)), collapse = "\n")
+      
       out <- gettextf("## Reordering %s", src_var(), domain = "R-questionr")
       if (src_var() != dest_var) out <- paste0(out, gettextf(" into %s", dest_var, domain="R-questionr"))
-      out <- paste0(out, sprintf("\n%s <- factor(%s,\n levels=", dest_var, src_var()))
-      out <- paste0(out, newlevels, ')')
-      out
+      out <- paste0(out, "\n")
+      
+      ## Invoke recoding code generation function
+      recstyle <- input$recstyle
+      if (recstyle == "factor") out <- paste0(out, generate_code_factor(dest_var))
+      if (recstyle == "forcats") out <- paste0(out, generate_code_forcats(dest_var))
+
+      return(out)
     }
 
     ## Generate the code in the interface
@@ -328,6 +367,7 @@ iorder <- function(obj = NULL, var_name = NULL) {
     output$tableOut <- renderTable({
       ## Generate the recoding code with a temporary variable
       code <- generate_code(check = TRUE)
+      if (!exists("fct_relevel") && input$recstyle == "forcats") return(NULL)
       ## Eval generated code
       eval(parse(text = code), envir = .GlobalEnv)
       ## Display table
