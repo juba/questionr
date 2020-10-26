@@ -184,7 +184,7 @@ wtd.var <- function() {
     result <- 100 * result
   }
   
-  colnames(result)[1] <- gettext("Overall", domain = "R-questionr")
+  colnames(result)[1] <- "Overall"
   class(result) <- c("proptab", class(result))
 
   attr(result, "percent") <- percent

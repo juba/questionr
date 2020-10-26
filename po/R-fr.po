@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: questionr\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2017-03-21 09:56\n"
-"PO-Revision-Date: 2017-03-21 09:56+0100\n"
+"POT-Creation-Date: 2020-10-26 18:21\n"
+"PO-Revision-Date: 2020-10-26 18:19+0100\n"
 "Last-Translator: Julien Barnier <julien@nozav.org>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.3\n"
 
 msgid "no method specified for this kind of object."
 msgstr "pas de méthode spécifiée pour ce type d'objet."
@@ -54,6 +54,9 @@ msgstr "Inclure la valeur extrême  (<tt>include.lowest</tt>)"
 msgid "Append extreme values if necessary"
 msgstr "Ajouter les valeurs extrêmes si nécessaire"
 
+msgid "Label digits (<tt>dig.lab</tt>)"
+msgstr "Nombre de chiffres pour les labels (<tt>dig.lab</tt>)"
+
 msgid "Code and result"
 msgstr "Code et résultat"
 
@@ -82,7 +85,7 @@ msgid "<strong>Warning :</strong> This new variable already exists."
 msgstr "<strong>Attention :</strong> Cette nouvelle variable existe déjà."
 
 msgid "invalid number of intervals"
-msgstr "Nombre d'intervalles invalide"
+msgstr "nombre d'intervalles invalide"
 
 msgid "## Cutting %s into %s"
 msgstr "## Recodage de %s en %s"
@@ -99,6 +102,9 @@ msgstr "--------- Fin du code ---------"
 msgid "Interactive levels ordering"
 msgstr "Réordonnancement interactif"
 
+msgid "Recoding style"
+msgstr "Style de recodage"
+
 msgid "Ordering"
 msgstr "Réordonner"
 
@@ -106,7 +112,7 @@ msgid "Check"
 msgstr "Vérification"
 
 msgid "Old variable as rows, new variable as columns."
-msgstr "Ancienne variable en ligne, variable recodée en colonne"
+msgstr "Ancienne variable en ligne, variable recodée en colonne."
 
 msgid ""
 "<strong>Warning :</strong> The variable to be recoded has more than 50 "
@@ -114,6 +120,13 @@ msgid ""
 msgstr ""
 "<strong>Attention :</strong> La variable à recoder comporte plus de 50 "
 "valeurs distinctes."
+
+msgid ""
+"<strong>Warning :</strong> The <tt>forcats</tt> package must be installed "
+"and loaded for the generated code to be run."
+msgstr ""
+"<strong>Attention :</strong> Le package <tt>forcats</tt> doit être installé "
+"et chargé pour pouvoir exécuter le code généré."
 
 msgid "## Reordering %s"
 msgstr "## Réordonnancement de %s"
@@ -135,14 +148,11 @@ msgstr ""
 msgid "Interactive recoding"
 msgstr "Recodage interactif"
 
-msgid "Recoding style"
-msgstr "Style de recodage"
+msgid "Recoding"
+msgstr "Recodage"
 
 msgid "Output type"
 msgstr "Type de variable recodée"
-
-msgid "Recoding"
-msgstr "Recodage"
 
 msgid "## Recoding %s into %s"
 msgstr "## Recodage de %s en %s"
@@ -159,13 +169,6 @@ msgstr ""
 
 msgid "<p class='header'>Recoding <tt>%s</tt> of class <tt>%s</tt>.</p>"
 msgstr "<p class='header'>Recodage de <tt>%s</tt> de classe <tt>%s</tt>.</p>"
-
-msgid "there are no names to search in that object"
-msgstr ""
-"il n'y a aucun nom dans lesquels effectuer une recherche pour cet objet"
-
-msgid "Nothing found. Sorry."
-msgstr "Désolé, aucun résultat n'a été trouvé."
 
 msgid "x must be of class 'glm'."
 msgstr "x doit être de classe 'glm'."
@@ -208,7 +211,7 @@ msgid "x must be of class 'odds.ratio'"
 msgstr "x doit être de classe 'odds.ratio'."
 
 msgid "Recoded"
-msgstr "Recodage de "
+msgstr "Recodage de"
 
 msgid "values to NA."
 msgstr "valeurs en NA."
@@ -250,7 +253,7 @@ msgid "x must be of class 'proptab'"
 msgstr "x doit être de classe 'proptab'"
 
 msgid "Object is not of class proptab"
-msgstr "l'objet doit être de la classe proptab"
+msgstr "L'objet doit être de la classe proptab"
 
 msgid "x must be a factor or a data.frame."
 msgstr "x doit être un facteur ou un data frame."
@@ -270,12 +273,24 @@ msgstr "x et weights doivent être de la même taille"
 msgid "x and y lengths must be the same"
 msgstr "x et y doivent être de la même taille"
 
-#~ msgid ""
-#~ "<strong>Warning :</strong> The <tt>forcats</tt> package must be installed "
-#~ "and loaded for the generated code to be run."
+msgid "questionr::wtd.var has been removed. Please use Hmisc::wtd.var instead."
+msgstr "questionr::wtd.var a été supprimé. Merci d'utiliser Hmisc::wtd.var."
+
+msgid "type must either be 'percent', 'proportion', or 'counts'."
+msgstr "type doit être 'percent', 'proportion', ou 'counts'."
+
+msgid "df must be a data.frame"
+msgstr "df doit être un data frame"
+
+msgid "not found in data frame."
+msgstr "non trouvé dans le data frame."
+
+#~ msgid "there are no names to search in that object"
 #~ msgstr ""
-#~ "<strong>Attention :</strong> Le package <tt>forcats</tt> doit être "
-#~ "installé et chargé pour pouvoir exécuter le code généré."
+#~ "il n'y a aucun nom dans lesquels effectuer une recherche pour cet objet"
+
+#~ msgid "Nothing found. Sorry."
+#~ msgstr "Désolé, aucun résultat n'a été trouvé."
 
 #~ msgid "No variables specified; showing top five results."
 #~ msgstr ""
@@ -283,9 +298,6 @@ msgstr "x et y doivent être de la même taille"
 
 #~ msgid "must not be an object named \"dfobject\"."
 #~ msgstr "ne doit pas s'appeler \"dfobject\"."
-
-#~ msgid "must be a data frame."
-#~ msgstr "doit être un data frame."
 
 #~ msgid "New variable"
 #~ msgstr "Nouvelle variable"

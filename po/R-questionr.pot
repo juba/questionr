@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: questionr 0.6.0\n"
-"POT-Creation-Date: 2017-03-21 09:56\n"
+"Project-Id-Version: questionr 0.7.4\n"
+"POT-Creation-Date: 2020-10-26 18:21\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,6 +52,9 @@ msgstr ""
 msgid "Append extreme values if necessary"
 msgstr ""
 
+msgid "Label digits (<tt>dig.lab</tt>)"
+msgstr ""
+
 msgid "Code and result"
 msgstr ""
 
@@ -97,6 +100,9 @@ msgstr ""
 msgid "Interactive levels ordering"
 msgstr ""
 
+msgid "Recoding style"
+msgstr ""
+
 msgid "Ordering"
 msgstr ""
 
@@ -107,6 +113,9 @@ msgid "Old variable as rows, new variable as columns."
 msgstr ""
 
 msgid "<strong>Warning :</strong> The variable to be recoded has more than 50 levels."
+msgstr ""
+
+msgid "<strong>Warning :</strong> The <tt>forcats</tt> package must be installed and loaded for the generated code to be run."
 msgstr ""
 
 msgid "## Reordering %s"
@@ -124,13 +133,10 @@ msgstr ""
 msgid "Interactive recoding"
 msgstr ""
 
-msgid "Recoding style"
+msgid "Recoding"
 msgstr ""
 
 msgid "Output type"
-msgstr ""
-
-msgid "Recoding"
 msgstr ""
 
 msgid "## Recoding %s into %s"
@@ -143,12 +149,6 @@ msgid "<p class='header'>Recoding <tt>%s</tt> from <tt>%s</tt> of class <tt>%s</
 msgstr ""
 
 msgid "<p class='header'>Recoding <tt>%s</tt> of class <tt>%s</tt>.</p>"
-msgstr ""
-
-msgid "there are no names to search in that object"
-msgstr ""
-
-msgid "Nothing found. Sorry."
 msgstr ""
 
 msgid "x must be of class 'glm'."
@@ -242,4 +242,16 @@ msgid "x and weights lengths must be the same"
 msgstr ""
 
 msgid "x and y lengths must be the same"
+msgstr ""
+
+msgid "questionr::wtd.var has been removed. Please use Hmisc::wtd.var instead."
+msgstr ""
+
+msgid "type must either be 'percent', 'proportion', or 'counts'."
+msgstr ""
+
+msgid "df must be a data.frame"
+msgstr ""
+
+msgid "not found in data frame."
 msgstr ""
