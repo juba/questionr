@@ -108,7 +108,7 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, na.rm = TRUE,
 
 ##' @export
 
-wtd.var <- function() {
+wtd.var <- function(...) {
   stop("questionr::wtd.var has been removed. Please use Hmisc::wtd.var instead.")
 }
 
