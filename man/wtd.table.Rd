@@ -10,6 +10,7 @@ wtd.table(
   weights = NULL,
   digits = 3,
   normwt = FALSE,
+  useNA = c("no", "ifany", "always"),
   na.rm = TRUE,
   na.show = FALSE,
   exclude = NULL
@@ -26,9 +27,11 @@ wtd.table(
 
 \item{normwt}{if TRUE, normalize weights so that the total weighted count is the same as the unweighted one}
 
-\item{na.rm}{if TRUE, remove NA values before computation}
+\item{useNA}{wether to include NA values in the table}
 
-\item{na.show}{if TRUE, show NA count in table output}
+\item{na.rm}{(deprecated) if TRUE, remove NA values before computation}
+
+\item{na.show}{(deprecated) if TRUE, show NA count in table output}
 
 \item{exclude}{values to remove from x and y. To exclude NA, use na.rm argument.}
 }

@@ -1,6 +1,7 @@
 questionr 0.7.4
 ---------------
 
+* Add `useNA` and deprecate `na.rm` and `na.show` arguments to `wtd.table` (thanks @nalimilan)
 * Add `fct_relevel` method to `iorder` (thanks @nalimilan)
 
 
