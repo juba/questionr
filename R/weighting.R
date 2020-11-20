@@ -6,8 +6,6 @@
 ##' @aliases wtd.var
 ##' @param x Numeric data vector 
 ##' @param weights Numeric weights vector. Must be the same length as \code{x}
-##' @param normwt Only for \code{wtd.var}, if \code{TRUE} then weights are normalized 
-##' for the weighted count to be the same as the non-weighted one
 ##' @param na.rm if \code{TRUE}, delete \code{NA} values.
 ##' @details
 ##' If \code{weights} is \code{NULL}, then an uniform weighting is applied.
@@ -25,7 +23,7 @@
 ##' @export wtd.mean
 
 `wtd.mean` <-
-function (x, weights = NULL, normwt = "ignored", na.rm = TRUE) 
+function (x, weights = NULL, na.rm = TRUE) 
 {
     if (!length(weights)) 
         return(mean(x, na.rm = na.rm))
@@ -116,8 +114,8 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, useNA = c("no
   result[is.na(result)] <- 0
   tab <- as.table(result)
   if (useNA == "ifany") {
-    if (sum(tab[,is.na(colnames(tab))]) == 0) tab <- tab[,!is.na(colnames(tab))]
-    if (sum(tab[is.na(rownames(tab)),]) == 0) tab <- tab[!is.na(rownames(tab)),]
+      if (sum(tab[,is.na(colnames(tab))]) == 0) tab <- tab[,!is.na(colnames(tab))]
+      if (sum(tab[is.na(rownames(tab)),]) == 0) tab <- tab[!is.na(rownames(tab)),]
   }
   tab
 }

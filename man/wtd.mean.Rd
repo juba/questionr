@@ -5,15 +5,12 @@
 \alias{wtd.var}
 \title{Weighted mean and variance of a vector}
 \usage{
-wtd.mean(x, weights = NULL, normwt = "ignored", na.rm = TRUE)
+wtd.mean(x, weights = NULL, na.rm = TRUE)
 }
 \arguments{
 \item{x}{Numeric data vector}
 
 \item{weights}{Numeric weights vector. Must be the same length as \code{x}}
-
-\item{normwt}{Only for \code{wtd.var}, if \code{TRUE} then weights are normalized 
-for the weighted count to be the same as the non-weighted one}
 
 \item{na.rm}{if \code{TRUE}, delete \code{NA} values.}
 }
