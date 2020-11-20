@@ -77,6 +77,10 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, useNA = c("no
   miss.usena <- missing(useNA)
   useNA <- match.arg(useNA)
 
+  if (normwt) {
+    weights <- weights * length(x)/sum(weights)
+  }
+
   if (!missing(na.show) || !missing(na.rm)) {
     if (miss.usena) warning("'na.rm' and 'na.show' are deprecated. Use 'useNA' instead.")
     else warning("'na.rm' and 'na.show' are ignored when 'useNA' is provided.")
@@ -102,9 +106,6 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, useNA = c("no
     if (!is.null(y)) y <- factor(y[s, drop = FALSE])
     weights <- weights[s]
   }
-  if (normwt) {
-    weights <- weights * length(x)/sum(weights)
-  }
   if (is.null(y)) {
     result <- tapply(weights, x, sum, simplify=TRUE)
   }
@@ -114,8 +115,12 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, useNA = c("no
   result[is.na(result)] <- 0
   tab <- as.table(result)
   if (useNA == "ifany") {
+    if (!is.null(y)) {
       if (sum(tab[,is.na(colnames(tab))]) == 0) tab <- tab[,!is.na(colnames(tab))]
       if (sum(tab[is.na(rownames(tab)),]) == 0) tab <- tab[!is.na(rownames(tab)),]
+    } else {
+      if (tab[is.na(names(tab))] == 0) tab <- tab[!is.na(names(tab))]
+    }
   }
   tab
 }
