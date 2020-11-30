@@ -44,6 +44,7 @@ reference:
     contents:
     - wtd.table
     - wtd.mean
+    - ggsurvey
   - title: "Data manipulation helpers"
     desc: "Function helping for common data manipulation tasks."
     contents:
