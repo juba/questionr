@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggsurvey.R
 \name{ggsurvey}
 \alias{ggsurvey}
-\title{Easy ggplot2 with survey object}
+\title{Easy ggplot2 with survey objects}
 \usage{
 ggsurvey(design = NULL, mapping = NULL, ...)
 }

@@ -1,4 +1,4 @@
-#' Easy ggplot2 with survey object
+#' Easy ggplot2 with survey objects
 #'
 #' A function to facilitate \code{ggplot2} graphs using a survey object.
 #' It will initiate a ggplot and map survey weights to the
