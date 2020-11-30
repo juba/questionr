@@ -3,8 +3,8 @@ questionr
 
 R package to make surveys processing easier
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version-ago/questionr)](http://cran.r-project.org/package=questionr)
-![CRAN Downloads](http://cranlogs.r-pkg.org/badges/last-month/questionr)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version-ago/questionr)](https://cran.r-project.org/package=questionr)
+![CRAN Downloads](https://cranlogs.r-pkg.org/badges/last-month/questionr)
 [![R build status](https://github.com/juba/questionr/workflows/R-CMD-check/badge.svg)](https://github.com/juba/questionr/actions?query=workflow%3AR-CMD-check)
 
 ## Installation
