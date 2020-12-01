@@ -31,7 +31,7 @@ iorder <- function(obj = NULL, var_name = NULL) {
   styler::cache_deactivate(verbose = FALSE)
 
   recoding_styles <- c("factor" = "factor", 
-                       "fct_recode (forcats)" = "forcats")
+                       "fct_relevel (forcats)" = "forcats")
   selected_recoding_style <- "factor"
   ## If forcats is loaded
   if (exists("fct_relevel")) {
