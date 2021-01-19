@@ -92,12 +92,20 @@
     if (length(x) > n) obs <- paste(obs, "...")
     res <- paste0(res, obs, "\n")
     
-    res <- paste0(
-      res, 
-      "min: ", min(x, na.rm = T),
-      " - max: ", max(x, na.rm = T), 
-      " - "
-    )
+    if (all(is.na(x))) {
+      res <- paste0(
+        res, 
+        "min: NA - max: NA - "
+      )
+    } else {
+      res <- paste0(
+        res, 
+        "min: ", min(x, na.rm = T),
+        " - max: ", max(x, na.rm = T), 
+        " - "
+      )
+    }
+    
     nNA <- sum(is.na(x))
     res <- paste0(res, "NAs: ", nNA, " (", round((nNA / length(x)) * 100, digits = 1), "%)")
     res <- paste0(res, " - ", length(unique(x)), " unique values")
