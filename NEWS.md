@@ -1,6 +1,7 @@
 questionr 0.7.5
 ---------------
 
+* bug fix in `describe()` (#126)
 
 
 
