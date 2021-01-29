@@ -51,7 +51,13 @@ function (x, weights = NULL, na.rm = TRUE)
 #' @param digits Number of significant digits.
 #' @param exclude values to remove from x and y. To exclude NA, use na.rm argument.
 #' @details
-#' If \code{weights} is not provided, an uniform weghting is used.
+#' If \code{weights} is not provided, an uniform weghting is used. 
+#' 
+#' If some weights are missing (`NA`), they are converted to zero. In case of missing weights 
+#' with `normwt=TRUE`, the observations with missing weights are still counted in the unweighted 
+#' count. You have to filter them out before using this function if you don't want them to be 
+#' taken into account when using `normwt`.
+#' 
 #' @return
 #' If \code{y} is not provided, returns a weighted one-way frequency table
 #' of \code{x}. Otherwise, returns a weighted two-way frequency table of
