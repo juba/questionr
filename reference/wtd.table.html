@@ -193,6 +193,10 @@ of <code>x</code>. Otherwise, returns a weighted two-way frequency table of
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If <code>weights</code> is not provided, an uniform weghting is used.</p>
+<p>If some weights are missing (`NA`), they are converted to zero. In case of missing weights 
+with `normwt=TRUE`, the observations with missing weights are still counted in the unweighted 
+count. You have to filter them out before using this function if you don't want them to be 
+taken into account when using `normwt`.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/Hmisc/man/wtd.stats.html'>wtd.table</a></code>, <code class='command'><a href='https://rdrr.io/r/base/table.html'>table</a></code>, and the <code>survey</code> package.</p></div>
