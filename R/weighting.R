@@ -69,14 +69,14 @@ function (x, weights = NULL, na.rm = TRUE)
 
 
 `wtd.table` <-
-function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, useNA = c("no", "ifany", "always"), na.rm = TRUE, na.show = FALSE, exclude = NULL) 
+function(x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, useNA = c("no", "ifany", "always"), na.rm = TRUE, na.show = FALSE, exclude = NULL) 
 {
   if (is.null(weights)) weights <- rep(1, length(x))  
   if (length(x) != length(weights)) stop("x and weights lengths must be the same")
   if (!is.null(y) & (length(x) != length(y))) stop("x and y lengths must be the same")
   miss.usena <- missing(useNA)
   useNA <- match.arg(useNA)
-
+  weights[is.na(weights)] <- 0
   if (normwt) {
     weights <- weights * length(x)/sum(weights)
   }
@@ -107,10 +107,10 @@ function (x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, useNA = c("no
     weights <- weights[s]
   }
   if (is.null(y)) {
-    result <- tapply(weights, x, sum, simplify=TRUE)
+    result <- tapply(weights, x, sum, simplify = TRUE)
   }
   else {
-    result <- tapply(weights, list(x,y), sum, simplify=TRUE)
+    result <- tapply(weights, list(x,y), sum, simplify = TRUE)
   }
   result[is.na(result)] <- 0
   tab <- as.table(result)
