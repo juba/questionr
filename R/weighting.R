@@ -25,8 +25,10 @@
 `wtd.mean` <-
 function (x, weights = NULL, na.rm = TRUE) 
 {
-    if (!length(weights)) 
-        return(mean(x, na.rm = na.rm))
+    if (!length(weights)) {
+      warning("no weights argument given, computing unweighted mean")
+      return(mean(x, na.rm = na.rm)) 
+    }
     if (na.rm) {
         s <- !is.na(x + weights)
         x <- x[s]
@@ -77,7 +79,10 @@ function (x, weights = NULL, na.rm = TRUE)
 `wtd.table` <-
 function(x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, useNA = c("no", "ifany", "always"), na.rm = TRUE, na.show = FALSE, exclude = NULL) 
 {
-  if (is.null(weights)) weights <- rep(1, length(x))  
+  if (is.null(weights)) {
+    warning("no weights argument given, using uniform weights of 1")
+    weights <- rep(1, length(x))  
+  }
   if (length(x) != length(weights)) stop("x and weights lengths must be the same")
   if (!is.null(y) & (length(x) != length(y))) stop("x and y lengths must be the same")
   miss.usena <- missing(useNA)
