@@ -93,7 +93,6 @@ function(x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, useNA = c("no"
   }
 
   if (!missing(na.show) || !missing(na.rm)) {
-    if (miss.usena) warning("'na.rm' and 'na.show' are deprecated. Use 'useNA' instead.")
     else warning("'na.rm' and 'na.show' are ignored when 'useNA' is provided.")
   }
   if (useNA != "no" || (na.show && miss.usena)) {
