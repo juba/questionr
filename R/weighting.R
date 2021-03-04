@@ -93,7 +93,7 @@ function(x, y = NULL, weights = NULL, digits = 3, normwt = FALSE, useNA = c("no"
   }
 
   if (!missing(na.show) || !missing(na.rm)) {
-    else warning("'na.rm' and 'na.show' are ignored when 'useNA' is provided.")
+    warning("'na.rm' and 'na.show' are ignored when 'useNA' is provided.")
   }
   if (useNA != "no" || (na.show && miss.usena)) {
     if (match(NA, exclude, nomatch = 0L)) {
