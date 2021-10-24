@@ -151,7 +151,7 @@ icut <- function(obj = NULL, var_name = NULL) {
               uiOutput("ui"),
               textInput("breaks", "Breaks"),
               checkboxInput("right", HTML(gettext("Right-closed intervals (<tt>right</tt>)", domain = "R-questionr")), FALSE),
-              checkboxInput("inclowest", HTML(gettext("Include extreme (<tt>include.lowest</tt>)", domain = "R-questionr")), FALSE),
+              checkboxInput("inclowest", HTML(gettext("Include extreme (<tt>include.lowest</tt>)", domain = "R-questionr")), TRUE),
               checkboxInput("addext", gettext("Append extreme values if necessary", domain = "R-questionr"), FALSE),
               numericInput("diglab", HTML(gettext("Label digits (<tt>dig.lab</tt>)", domain = "R-questionr")), min = 0, max = 10, value = 4)
             ),
