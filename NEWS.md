@@ -1,5 +1,6 @@
 # questionr (development version)
 
+* include.lowest default value is now TRUE in icut() (#129, @nalimilan)
 
 # questionr 0.7.5
 
