@@ -120,7 +120,7 @@ irec <- function(obj = NULL, var_name = NULL) {
     miniUI::miniTabstripPanel(
       miniUI::miniTabPanel(
         value = "settings",
-        gettext("Variable and settings", domain = "R-questionr"), icon = icon("sliders"),
+        gettext("Variable and settings", domain = "R-questionr"), icon = icon("sliders-h"),
         miniUI::miniContentPanel(
           ifunc_show_alert(run_as_addin),
 
@@ -147,7 +147,7 @@ irec <- function(obj = NULL, var_name = NULL) {
             )
           ),
           uiOutput("nblevelsAlert"),
-          tags$h4(icon("sliders"), gettext("Recoding settings", domain = "R-questionr")),
+          tags$h4(icon("sliders-h"), gettext("Recoding settings", domain = "R-questionr")),
           wellPanel(
             fluidRow(
               column(4, uiOutput("newvarInput")),
