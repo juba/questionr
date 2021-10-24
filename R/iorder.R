@@ -292,7 +292,7 @@ iorder <- function(obj = NULL, var_name = NULL) {
     generate_code_forcats <- function(dest_var) {
       newlevels <- paste0(utils::capture.output(dput(input$sortable)), collapse = "\n")
       newlevels <- gsub("(^c\\(|\\)$)", "", newlevels)
-      sprintf("%s <- fct_relevel(%s,\n %s)", dest_var, src_var(), newlevels)
+      sprintf("%s <- %s %%>%%\n  fct_relevel(\n    %s\n  )", dest_var, src_var(), newlevels)
     }
     
     ## Generate reordering code
