@@ -1,5 +1,6 @@
 # questionr (development version)
 
+* Better tidyverse styling in irec and iorder (#125, @larmarange)
 * include.lowest default value is now TRUE in icut() (#129, @nalimilan)
 
 # questionr 0.7.5
