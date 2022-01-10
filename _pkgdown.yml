@@ -37,14 +37,15 @@ reference:
       - households
       - happy
       - hdv2003
-      - rp99
       - rp2012
+      - rp2018
   - title: "Weighted variables"
     desc: "Functions to deal with weighted variables"
     contents:
     - wtd.table
     - wtd.mean
     - ggsurvey
+    - tabs
   - title: "Data manipulation helpers"
     desc: "Function helping for common data manipulation tasks."
     contents:
@@ -70,9 +71,5 @@ reference:
     - qload
     - qscan
     - escape_regex
-    exclude:
-    - ifunc_get_css
-    - ifunc_run_as_addin
-    - ifunc_show_alert
 
 
