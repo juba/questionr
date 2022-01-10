@@ -71,5 +71,10 @@ reference:
     - qload
     - qscan
     - escape_regex
+  - title: internal
+    contents:
+    - ifunc_get_css
+    - ifunc_run_as_addin
+    - ifunc_show_alert 
 
 

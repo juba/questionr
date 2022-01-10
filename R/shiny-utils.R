@@ -1,5 +1,6 @@
 #' Check if we are currently running as an rstudio addin
 #' @import rstudioapi
+#' @noRd
 
 ifunc_run_as_addin <- function() {
   rstudioapi::isAvailable() && rstudioapi::getActiveDocumentContext()$id != "#console"
@@ -8,6 +9,7 @@ ifunc_run_as_addin <- function() {
 
 #' Display an alert, only on first launch for the current session
 #' @param run_as_addin TRUE if the function is running as an rstudio addin
+#' @noRd
 
 ifunc_show_alert <- function(run_as_addin) {
   ## Display the alert only on first time launch
@@ -26,6 +28,7 @@ ifunc_show_alert <- function(run_as_addin) {
 }
 
 #' Returns custom CSS content
+#' @noRd
 
 ifunc_get_css <- function() {
   css.file <- system.file(file.path("shiny", "css", "ifuncs.css"), package = "questionr")
