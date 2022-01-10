@@ -2,6 +2,8 @@
 
 * Better tidyverse styling in irec and iorder (#125, @larmarange)
 * include.lowest default value is now TRUE in icut() (#129, @nalimilan)
+* Add `rp2018` dataset
+* Remove `rp99` datset
 
 # questionr 0.7.5
 

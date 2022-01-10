@@ -9,11 +9,12 @@ iorder(obj = NULL, var_name = NULL)
 \arguments{
 \item{obj}{vector to recode or data frame to operate on}
 
-\item{var_name}{if obj is a data frame, name of the column to be recoded, as a character string (possibly without quotes)}
+\item{var_name}{if obj is a data frame, name of the column to be recoded,
+as a character string possibly without quotes)}
 }
 \value{
-The function launches a shiny app in the system web browser. The reordering code is returned in the console
-when the app is closed with the "Done" button.
+The function launches a shiny app in the system web browser. The reordering
+code is returned in he console when the app is closed with the "Done" button.
 }
 \description{
 This function launches a shiny app in a web browser in order to do
@@ -21,7 +22,8 @@ interactive reordering of the levels of a categorical variable (character
 or factor).
 }
 \details{
-The generated convert the variable into a factor, as only those allow for levels ordering.
+The generated convert the variable into a factor, as only those allow for
+levels ordering.
 }
 \examples{
 \dontrun{

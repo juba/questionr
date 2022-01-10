@@ -10,17 +10,6 @@
 #' @name hdv2003
 NULL
 
-#' 1999 French Census - Cities from the Rhône state
-#' 
-#' Sample from the 1999 french census for the cities of the Rhône state.
-#' 
-#' @docType data
-#' @keywords datasets
-#' @format A data frame with 301 rows and 21 variables
-#' @source \url{https://www.insee.fr/fr/information/2008354}
-#' @name rp99
-NULL
-
 #' 2012 French Census - French cities of more than 2000 inhabitants
 #' 
 #' Sample from the 2012 national french census. It contains results for every french city of more than 2000 inhabitants, and a small subset of variables, both in population counts and proportions.
@@ -31,6 +20,19 @@ NULL
 #' @source \url{https://www.insee.fr/fr/information/2008354}
 #' @name rp2012
 NULL
+
+#' 2018 French Census - French cities of more than 2000 inhabitants
+#' 
+#' Sample from the 2018 national french census. It contains results for every french city of more than 2000 inhabitants, and a small subset of variables, both in population counts and proportions.
+#' 
+#' @docType data
+#' @keywords datasets
+#' @format A data frame with 5417 rows and 62 variables
+#' @source \url{https://www.insee.fr/fr/information/5369871}
+#' @name rp2018
+NULL
+
+
 
 #' A fertility survey
 #' 

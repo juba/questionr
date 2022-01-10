@@ -9,10 +9,12 @@ irec(obj = NULL, var_name = NULL)
 \arguments{
 \item{obj}{vector to recode or data frame to operate on}
 
-\item{var_name}{if obj is a data frame, name of the column to be recoded, as a character string (possibly without quotes)}
+\item{var_name}{if obj is a data frame, name of the column to be recoded,
+as a character string possibly without quotes)}
 }
 \value{
-The function launches a shiny app in the system web browser. The recoding code is returned in the console
+The function launches a shiny app in the system web browser. The recoding
+code is returned in the onsole
 when the app is closed with the "Done" button.
 }
 \description{
@@ -23,7 +25,7 @@ interactive recoding of a categorical variable (character or factor).
 \dontrun{
 data(hdv2003)
 irec()
-v <- sample(c("Red","Green","Blue"), 50, replace=TRUE)
+v <- sample(c("Red", "Green", "Blue"), 50, replace = TRUE)
 irec(v)
 irec(hdv2003, "qualif")
 irec(hdv2003, sexe) ## this also works
