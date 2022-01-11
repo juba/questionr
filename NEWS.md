@@ -1,4 +1,4 @@
-# questionr (development version)
+# questionr 0.7.6
 
 * Better tidyverse styling in irec and iorder (#125, @larmarange)
 * include.lowest default value is now TRUE in icut() (#129, @nalimilan)
@@ -14,7 +14,7 @@
 
 * Add `useNA` and deprecate `na.rm` and `na.show` arguments to `wtd.table` (thanks @nalimilan)
 * Add `fct_relevel` method to `iorder` (thanks @nalimilan)
-* New function `ggsurvey()` for easy plots with `survey` objects and 
+* New function `ggsurvey()` for easy plots with `survey` objects and
   `ggplot2` (#123, @larmarange)
 
 # questionr 0.7.3
@@ -27,7 +27,7 @@
 
 # questionr 0.7.2
 
-* `look_for()` and `lookfor()` are now simply imported and reexported 
+* `look_for()` and `lookfor()` are now simply imported and reexported
   from `labelled` (#111, @larmarange)
 
 # questionr 0.7.1
@@ -96,15 +96,15 @@
 
 # questionr 0.4.3
 
-* cross.multi.table() now accept a `tfreq` argument to display row percentages 
+* cross.multi.table() now accept a `tfreq` argument to display row percentages
   based on the (potentially weighted) contingency table of respondants.
 * Fix : i* interactive functions now work with data.table and dplyr's tbl_df
 
 # questionr 0.4.2
 
-* cross.multi.table() now accept a `freq` argument to display column percentages 
-  based on the (potentially weighted) contingency table of crossvar on respondants. 
-* multi.table() now accept a `freq` argument to compute percentages based on 
+* cross.multi.table() now accept a `freq` argument to display column percentages
+  based on the (potentially weighted) contingency table of crossvar on respondants.
+* multi.table() now accept a `freq` argument to compute percentages based on
   (potentially weighted) number of repondants. Note that `freq` is set to TRUE
   by default
 * Fix : wrong HTML() call in clipcopy()
@@ -124,7 +124,7 @@
 * "Ensemble" and "Total" strings in cprop and rprop are now localized
 * Bugfixes on irec : encoding on windows and empty strings in factor levels
 * `freq` now displays, by default, a column of percentage based on
-  non-missing values 
+  non-missing values
 
 # questionr 0.3.1
 
