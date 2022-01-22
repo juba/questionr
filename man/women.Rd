@@ -5,8 +5,9 @@
 \alias{women}
 \title{A fertility survey - "women" table}
 \format{
-a data frame containing the questionnaire administered to all 15-49 years old women 
-       living in the selected households for the \link{fertility} survey.
+a data frame containing the questionnaire administered to all
+15-49 years old women living in the selected households for the
+\link{fertility} survey.
 }
 \description{
 Some fictive results from a fecondity survey.

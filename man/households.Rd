@@ -5,7 +5,8 @@
 \alias{households}
 \title{A fertility survey - "households" table}
 \format{
-a data frame containing some information from the households selected for the \link{fertility} survey.
+a data frame containing some information from the households
+selected for the \link{fertility} survey.
 }
 \description{
 Some fictive results from a fecondity survey.

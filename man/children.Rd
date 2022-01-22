@@ -5,7 +5,8 @@
 \alias{children}
 \title{A fertility survey - "children" table}
 \format{
-a data frame containing one record for each child of the surveyed women in the \link{fertility} survey.
+a data frame containing one record for each child of the surveyed
+women in the \link{fertility} survey.
 }
 \description{
 Some fictive results from a fecondity survey.

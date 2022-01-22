@@ -11,6 +11,8 @@ A data frame with 5417 rows and 62 variables
 \url{https://www.insee.fr/fr/information/5369871}
 }
 \description{
-Sample from the 2018 national french census. It contains results for every french city of more than 2000 inhabitants, and a small subset of variables, both in population counts and proportions.
+Sample from the 2018 national french census. It contains results for every
+french city of more than 2000 inhabitants, and a small subset of variables,
+both in population counts and proportions.
 }
 \keyword{datasets}
