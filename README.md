@@ -18,8 +18,7 @@ install.packages("questionr")
 Latest version from GitHub :
 
 ```r
-library(devtools)
-install_github("juba/questionr")
+remotes::install_github("juba/questionr")
 ```
 
 ## Documentation
