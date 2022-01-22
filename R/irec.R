@@ -476,7 +476,7 @@ irec <- function(obj = NULL, var_name = NULL) {
         }
         ## Input conversion if numeric
         if (is.numeric(rvar())) {
-          out <- paste0(sprintf("%s <- %s %%>%%\n  as.character()\n  %%>%% fct_recode(\n", dest_var, source), out)
+          out <- paste0(sprintf("%s <- %s %%>%%\n  as.character() %%>%%\n fct_recode(\n", dest_var, source), out)
         } else {
           out <- paste0(sprintf("%s <- %s %%>%%\n  fct_recode(\n", dest_var, source), out)
         }

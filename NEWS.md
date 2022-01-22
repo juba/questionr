@@ -1,5 +1,6 @@
 # questionr (development version)
 
+* Fix error in `irec` when recoding a numeric variable with `forcats` (#131, @bassam-abulnoor)
 
 # questionr 0.7.6
 
