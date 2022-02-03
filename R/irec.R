@@ -40,12 +40,9 @@ irec <- function(obj = NULL, var_name = NULL) {
     "fct_recode (forcats)" = "forcats"
   )
   selected_recoding_style <- "charmin"
-  selected_outconv <- "character"
-
   ## If forcats is loaded
   if (exists("fct_recode")) {
     selected_recoding_style <- "forcats"
-    selected_outconv <- "factor"
   }
 
   run_as_addin <- ifunc_run_as_addin()
