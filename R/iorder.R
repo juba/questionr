@@ -400,14 +400,13 @@ iorder <- function(obj = NULL, var_name = NULL) {
       out <- paste(out, collapse = "\n")
       if (run_as_addin) {
         rstudioapi::insertText(text = out)
-      } else {
-        out <- paste0(
-          gettext("\n-------- Start recoding code --------\n\n", domain = "R-questionr"),
-          out,
-          gettext("\n--------- End recoding code ---------\n", domain = "R-questionr")
-        )
-        cat(out)
       }
+     out <- paste0(
+        gettext("\n-------- Start recoding code --------\n\n", domain = "R-questionr"),
+        out,
+        gettext("\n--------- End recoding code ---------\n", domain = "R-questionr")
+      )
+      cat(out)
       stopApp()
     })
 
