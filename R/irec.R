@@ -333,10 +333,11 @@ irec <- function(obj = NULL, var_name = NULL) {
     src_var <- reactive({
       if (is.data.frame(robj())) {
         ## Formatted source variable name
-        result <- ifelse(grepl(" ", req(input$var_name)),
-          sprintf("%s$`%s`", req(input$obj_name), req(input$var_name)),
-          sprintf("%s$%s", req(input$obj_name), req(input$var_name))
-        )
+        var_name <- req(input$var_name)
+        if (make.names(var_name) != var_name) {
+          var_name <- paste0('`', var_name, '`')
+        }
+        result <- sprintf("%s$%s", req(input$obj_name), var_name)
       }
       if (is.vector(robj()) || is.factor(robj())) {
         result <- req(input$obj_name)
@@ -513,10 +514,11 @@ irec <- function(obj = NULL, var_name = NULL) {
     ## Call recoding code generation function based on style
     generate_code <- function(check = FALSE) {
       if (is.data.frame(robj())) {
-        dest_var <- ifelse(grepl(" ", req(input$newvar_name)),
-          sprintf("%s$`%s`", req(input$obj_name), req(input$newvar_name)),
-          sprintf("%s$%s", req(input$obj_name), req(input$newvar_name))
-        )
+        dest_var <- req(input$newvar_name)
+        if (make.names(dest_var) != dest_var) {
+          dest_var <- paste0('`', dest_var, '`')
+        }
+        dest_var <- sprintf("%s$%s", req(input$obj_name), dest_var)
       }
       if (is.vector(robj()) || is.factor(robj())) {
         dest_var <- req(input$newvar_name)
