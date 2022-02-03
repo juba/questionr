@@ -1,5 +1,6 @@
 # questionr (development version)
 
+* Fix error in `iorder`, `icut` and `irec` when variable name is not syntactically valid (#133, @bassam-abulnoor)
 
 # questionr 0.7.7
 
