@@ -10,3 +10,4 @@ resources
 ^_pkgdown\.yml$
 \.github/
 ^\.github$
+^\.lintr$
