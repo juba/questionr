@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -63,65 +63,80 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rprop</span><span class="op">(</span><span class="va">tab</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for table</span>
-<span class="fu">rprop</span><span class="op">(</span>
-  <span class="va">tab</span>,
-  digits <span class="op">=</span> <span class="fl">1</span>,
-  total <span class="op">=</span> <span class="cn">TRUE</span>,
-  percent <span class="op">=</span> <span class="cn">FALSE</span>,
-  drop <span class="op">=</span> <span class="cn">TRUE</span>,
-  n <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for data.frame</span>
-<span class="fu">rprop</span><span class="op">(</span>
-  <span class="va">tab</span>,
-  digits <span class="op">=</span> <span class="fl">1</span>,
-  total <span class="op">=</span> <span class="cn">TRUE</span>,
-  percent <span class="op">=</span> <span class="cn">FALSE</span>,
-  drop <span class="op">=</span> <span class="cn">TRUE</span>,
-  n <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for matrix</span>
-<span class="fu">rprop</span><span class="op">(</span>
-  <span class="va">tab</span>,
-  digits <span class="op">=</span> <span class="fl">1</span>,
-  total <span class="op">=</span> <span class="cn">TRUE</span>,
-  percent <span class="op">=</span> <span class="cn">FALSE</span>,
-  drop <span class="op">=</span> <span class="cn">TRUE</span>,
-  n <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for tabyl</span>
-<span class="fu">rprop</span><span class="op">(</span><span class="va">tab</span>, digits <span class="op">=</span> <span class="fl">1</span>, total <span class="op">=</span> <span class="cn">TRUE</span>, percent <span class="op">=</span> <span class="cn">FALSE</span>, n <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rprop</span><span class="op">(</span><span class="va">tab</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for table</span></span>
+<span><span class="fu">rprop</span><span class="op">(</span></span>
+<span>  <span class="va">tab</span>,</span>
+<span>  digits <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  total <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  percent <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  drop <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  n <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for data.frame</span></span>
+<span><span class="fu">rprop</span><span class="op">(</span></span>
+<span>  <span class="va">tab</span>,</span>
+<span>  digits <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  total <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  percent <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  drop <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  n <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for matrix</span></span>
+<span><span class="fu">rprop</span><span class="op">(</span></span>
+<span>  <span class="va">tab</span>,</span>
+<span>  digits <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  total <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  percent <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  drop <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  n <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for tabyl</span></span>
+<span><span class="fu">rprop</span><span class="op">(</span><span class="va">tab</span>, digits <span class="op">=</span> <span class="fl">1</span>, total <span class="op">=</span> <span class="cn">TRUE</span>, percent <span class="op">=</span> <span class="cn">FALSE</span>, n <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>tab</dt>
 <dd><p>frequency table</p></dd>
+
+
 <dt>...</dt>
 <dd><p>parameters passed to other methods.</p></dd>
+
+
 <dt>digits</dt>
 <dd><p>number of digits to display</p></dd>
+
+
 <dt>total</dt>
 <dd><p>if <code>TRUE</code>, add a column with the sum of percentages and a row with global percentages</p></dd>
+
+
 <dt>percent</dt>
 <dd><p>if <code>TRUE</code>, add a percent sign after the values when printing</p></dd>
+
+
 <dt>drop</dt>
 <dd><p>if <code>TRUE</code>, lines or columns with a sum of zero, which would generate <code>NaN</code> percentages, are dropped.</p></dd>
+
+
 <dt>n</dt>
 <dd><p>if <code>TRUE</code>, display number of observations per row.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The result is an object of class <code>table</code> and <code>proptab</code>.</p>
+    
+
+<p>The result is an object of class <code>table</code> and <code>proptab</code>.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -130,11 +145,11 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Sample table</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">Titanic</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>, <span class="va">sum</span><span class="op">)</span></span>
-<span class="r-in"><span class="co">## Column percentages</span></span>
-<span class="r-in"><span class="fu">rprop</span><span class="op">(</span><span class="va">tab</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Sample table</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">Titanic</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span>, <span class="va">sum</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## Column percentages</span></span></span>
+<span class="r-in"><span><span class="fu">rprop</span><span class="op">(</span><span class="va">tab</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       Survived</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Class  No    Yes   Total</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   1st   37.5  62.5 100.0</span>
@@ -142,8 +157,8 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>   3rd   74.8  25.2 100.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Crew  76.0  24.0 100.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   All   67.7  32.3 100.0</span>
-<span class="r-in"><span class="co">## Column percentages with custom display</span></span>
-<span class="r-in"><span class="fu">rprop</span><span class="op">(</span><span class="va">tab</span>, digits<span class="op">=</span><span class="fl">2</span>, percent<span class="op">=</span><span class="cn">TRUE</span>, total<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co">## Column percentages with custom display</span></span></span>
+<span class="r-in"><span><span class="fu">rprop</span><span class="op">(</span><span class="va">tab</span>, digits<span class="op">=</span><span class="fl">2</span>, percent<span class="op">=</span><span class="cn">TRUE</span>, total<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       Survived</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Class  No     Yes   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   1st  37.54% 62.46%</span>
@@ -164,7 +179,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

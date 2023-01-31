@@ -27,7 +27,7 @@ value labels for labelled vectors if labelled package eis installed."><!-- mathj
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -65,28 +65,37 @@ value labels for labelled vectors if <span class="pkg">labelled</span> package e
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ltabs</span><span class="op">(</span>
-  <span class="va">formula</span>,
-  <span class="va">data</span>,
-  levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"prefixed"</span>, <span class="st">"labels"</span>, <span class="st">"values"</span><span class="op">)</span>,
-  variable_label <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ltabs</span><span class="op">(</span></span>
+<span>  <span class="va">formula</span>,</span>
+<span>  <span class="va">data</span>,</span>
+<span>  levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"prefixed"</span>, <span class="st">"labels"</span>, <span class="st">"values"</span><span class="op">)</span>,</span>
+<span>  variable_label <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>formula</dt>
 <dd><p>a formula object (see <code><a href="https://rdrr.io/r/stats/xtabs.html" class="external-link">xtabs</a></code>)</p></dd>
+
+
 <dt>data</dt>
 <dd><p>a data frame</p></dd>
+
+
 <dt>levels</dt>
 <dd><p>the desired levels in case of labelled vector: 
 "labels" for value labels, "values" for values or "prefixed" for labels prefixed with values</p></dd>
+
+
 <dt>variable_label</dt>
 <dd><p>display variable label if available?</p></dd>
+
+
 <dt>...</dt>
 <dd><p>additional arguments passed to <code><a href="https://rdrr.io/r/stats/xtabs.html" class="external-link">xtabs</a></code></p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -95,27 +104,27 @@ value labels for labelled vectors if <span class="pkg">labelled</span> package e
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">fecondite</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span><span class="va">radio</span>, <span class="va">femmes</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">fecondite</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span><span class="va">radio</span>, <span class="va">femmes</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> radio: Ecoute la radio ?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [0] non [1] oui </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    1085     915 </span>
-<span class="r-in"><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span><span class="va">radio</span><span class="op">+</span><span class="va">tv</span>, <span class="va">femmes</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span><span class="va">radio</span><span class="op">+</span><span class="va">tv</span>, <span class="va">femmes</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         tv: Regarde la télévision ?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> radio: Ecoute la radio ? [0] non [1] oui</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  [0] non     593     492</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  [1] oui     168     747</span>
-<span class="r-in"><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span><span class="va">radio</span><span class="op">+</span><span class="va">tv</span>, <span class="va">femmes</span>, <span class="st">"l"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span><span class="va">radio</span><span class="op">+</span><span class="va">tv</span>, <span class="va">femmes</span>, <span class="st">"l"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         tv: Regarde la télévision ?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> radio: Ecoute la radio ? non oui</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      non 593 492</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      oui 168 747</span>
-<span class="r-in"><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span><span class="va">radio</span><span class="op">+</span><span class="va">tv</span>, <span class="va">femmes</span>, <span class="st">"v"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span><span class="va">radio</span><span class="op">+</span><span class="va">tv</span>, <span class="va">femmes</span>, <span class="st">"v"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         tv: Regarde la télévision ?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> radio: Ecoute la radio ?   0   1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        0 593 492</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        1 168 747</span>
-<span class="r-in"><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span><span class="va">radio</span><span class="op">+</span><span class="va">tv</span><span class="op">+</span><span class="va">journal</span>, <span class="va">femmes</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span><span class="va">radio</span><span class="op">+</span><span class="va">tv</span><span class="op">+</span><span class="va">journal</span>, <span class="va">femmes</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> , , journal: Lit la presse ? = [0] non</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         tv: Regarde la télévision ?</span>
@@ -130,7 +139,7 @@ value labels for labelled vectors if <span class="pkg">labelled</span> package e
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  [0] non       7      50</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  [1] oui       8     255</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span><span class="va">radio</span><span class="op">+</span><span class="va">tv</span>, <span class="va">femmes</span>, variable_label <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span><span class="va">radio</span><span class="op">+</span><span class="va">tv</span>, <span class="va">femmes</span>, variable_label <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          tv</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> radio     [0] non [1] oui</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [0] non     593     492</span>
@@ -149,7 +158,7 @@ value labels for labelled vectors if <span class="pkg">labelled</span> package e
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

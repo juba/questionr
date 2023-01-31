@@ -43,7 +43,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -75,13 +75,14 @@
 
       
 
-      </header><script src="recoding_addins_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Recoding addins</h1>
-                        <h4 data-toc-skip class="author">Julien Barnier</h4>
+                        <h4 data-toc-skip class="author">Julien
+Barnier</h4>
             
-            <h4 data-toc-skip class="date">2022-02-11</h4>
+            <h4 data-toc-skip class="date">2023-01-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/juba/questionr/blob/HEAD/vignettes/recoding_addins.Rmd" class="external-link"><code>vignettes/recoding_addins.Rmd</code></a></small>
       <div class="hidden name"><code>recoding_addins.Rmd</code></div>
@@ -90,8 +91,14 @@
 
     
     
-<p>The <code>questionr</code> packages provides addins for several recoding operations : recoding the levels of a factor or character variable, reordering the levels of a factor or character variable, dividing the range of a numeric variable into intervals.</p>
-<p>The goal of these addins is to generate the recoding code with a small graphical interface. The code can then be inserted into a script and run (by design, nothing is executed by the addin in the global environment).</p>
+<p>The <code>questionr</code> packages provides addins for several
+recoding operations : recoding the levels of a factor or character
+variable, reordering the levels of a factor or character variable,
+dividing the range of a numeric variable into intervals.</p>
+<p>The goal of these addins is to generate the recoding code with a
+small graphical interface. The code can then be inserted into a script
+and run (by design, nothing is executed by the addin in the global
+environment).</p>
 <div class="section level2">
 <h2 id="launching-an-addin">Launching an addin<a class="anchor" aria-label="anchor" href="#launching-an-addin"></a>
 </h2>
@@ -99,21 +106,31 @@
 <ul>
 <li>by clicking on its name in the <em>Addins</em> menu</li>
 <li>by launching its function name in the Console</li>
-<li>by selecting a variable name in a script and then clicking on its name in the <em>Addins</em> menu</li>
-<li>by launching its function name in the Console with a variable as argument</li>
+<li>by selecting a variable name in a script and then clicking on its
+name in the <em>Addins</em> menu</li>
+<li>by launching its function name in the Console with a variable as
+argument</li>
 </ul>
-<p>In the first two cases, you will have to select the variable to be recoded manually, in the two last it will be done automatically for you.</p>
-<p>Note that if your cursor is in a script when you launch an addin with the <em>Addins</em> menu, the generated code will be automatically inserted at you cursor position when clicking on <em>Done</em>.</p>
+<p>In the first two cases, you will have to select the variable to be
+recoded manually, in the two last it will be done automatically for
+you.</p>
+<p>Note that if your cursor is in a script when you launch an addin with
+the <em>Addins</em> menu, the generated code will be automatically
+inserted at you cursor position when clicking on <em>Done</em>.</p>
 </div>
 <div class="section level2">
 <h2 id="levels-recoding-irec">Levels recoding (<code>irec</code>)<a class="anchor" aria-label="anchor" href="#levels-recoding-irec"></a>
 </h2>
-<p>The <code>irec</code> addin function can be launched with the <em>Levels recoding</em> entry of the <em>Addins</em> menu.</p>
+<p>The <code>irec</code> addin function can be launched with the
+<em>Levels recoding</em> entry of the <em>Addins</em> menu.</p>
 <div class="section level3">
 <h3 id="variable-and-settings">Variable and settings<a class="anchor" aria-label="anchor" href="#variable-and-settings"></a>
 </h3>
-<p>The first tab of the interface is called <em>Variable and setings</em>. Here you can select an object in you current environment, or a column in a data frame.</p>
-<p>You can also select the name of the new object/data frame column, choose a recoding style, and the output object class.</p>
+<p>The first tab of the interface is called <em>Variable and
+setings</em>. Here you can select an object in you current environment,
+or a column in a data frame.</p>
+<p>You can also select the name of the new object/data frame column,
+choose a recoding style, and the output object class.</p>
 <div class="figure">
 <img src="https://raw.githubusercontent.com/juba/questionr/master/resources/screenshots/irec_1.png" alt=""><p class="caption">Variable and settings tab</p>
 </div>
@@ -121,7 +138,9 @@
 <div class="section level3">
 <h3 id="recoding">Recoding<a class="anchor" aria-label="anchor" href="#recoding"></a>
 </h3>
-<p>The <em>Recoding</em> tab is where you can make the correspondance between old and new values. If you want to recode an existing level to <code>NA</code>, just type NA in the recoding field.</p>
+<p>The <em>Recoding</em> tab is where you can make the correspondance
+between old and new values. If you want to recode an existing level to
+<code>NA</code>, just type NA in the recoding field.</p>
 <div class="figure">
 <img src="https://raw.githubusercontent.com/juba/questionr/master/resources/screenshots/irec_2.png" alt=""><p class="caption">Recoding tab</p>
 </div>
@@ -129,7 +148,12 @@
 <div class="section level3">
 <h3 id="code-and-result">Code and result<a class="anchor" aria-label="anchor" href="#code-and-result"></a>
 </h3>
-<p>Finally, the <em>Code and result</em> tab lets you see the generated code, and a cross tabulation between the original and recoded variables, to check if everything seems correct. When your recoding is good, you can click on the <em>Done</em> button : the generated code will then be inserted in your script (if the cursor was in the script window when launching the addin) and pasted into the Console window.</p>
+<p>Finally, the <em>Code and result</em> tab lets you see the generated
+code, and a cross tabulation between the original and recoded variables,
+to check if everything seems correct. When your recoding is good, you
+can click on the <em>Done</em> button : the generated code will then be
+inserted in your script (if the cursor was in the script window when
+launching the addin) and pasted into the Console window.</p>
 <div class="figure">
 <img src="https://raw.githubusercontent.com/juba/questionr/master/resources/screenshots/irec_3.png" alt=""><p class="caption">Code and result tab</p>
 </div>
@@ -138,11 +162,16 @@
 <div class="section level2">
 <h2 id="levels-ordering-iorder">Levels ordering (<code>iorder</code>)<a class="anchor" aria-label="anchor" href="#levels-ordering-iorder"></a>
 </h2>
-<p>The <code>iorder</code> addin function can be launched with the <em>Levels ordering</em> entry of the <em>Addins</em> menu.</p>
+<p>The <code>iorder</code> addin function can be launched with the
+<em>Levels ordering</em> entry of the <em>Addins</em> menu.</p>
 <div class="section level3">
 <h3 id="variable-and-settings-1">Variable and settings<a class="anchor" aria-label="anchor" href="#variable-and-settings-1"></a>
 </h3>
-<p>The first tab of the interface is called <em>Variable and setings</em>. Here you can select an object in you current environment, or a column in a data frame. You can also select the name of the new object/data frame column which will get the reordered variable (by default it will just replace the original object).</p>
+<p>The first tab of the interface is called <em>Variable and
+setings</em>. Here you can select an object in you current environment,
+or a column in a data frame. You can also select the name of the new
+object/data frame column which will get the reordered variable (by
+default it will just replace the original object).</p>
 <div class="figure">
 <img src="https://raw.githubusercontent.com/juba/questionr/master/resources/screenshots/iorder_1.png" alt=""><p class="caption">Variable and settings tab</p>
 </div>
@@ -150,7 +179,8 @@
 <div class="section level3">
 <h3 id="ordering">Ordering<a class="anchor" aria-label="anchor" href="#ordering"></a>
 </h3>
-<p>The <em>Ordering</em> tab is where you can reorder your levels. Just drag and drop them with your mouse.</p>
+<p>The <em>Ordering</em> tab is where you can reorder your levels. Just
+drag and drop them with your mouse.</p>
 <div class="figure">
 <img src="https://raw.githubusercontent.com/juba/questionr/master/resources/screenshots/iorder_2.png" alt=""><p class="caption">Ordering tab</p>
 </div>
@@ -158,7 +188,11 @@
 <div class="section level3">
 <h3 id="code-and-result-1">Code and result<a class="anchor" aria-label="anchor" href="#code-and-result-1"></a>
 </h3>
-<p>Finally, the <em>Code and result</em> tab lets you see the generated code, and a contingency table of the resulting factor. When your result is good, you can click on the <em>Done</em> button : the generated code will then be inserted in your script (if the cursor was in the script window when launching the addin) and pasted into the Console window.</p>
+<p>Finally, the <em>Code and result</em> tab lets you see the generated
+code, and a contingency table of the resulting factor. When your result
+is good, you can click on the <em>Done</em> button : the generated code
+will then be inserted in your script (if the cursor was in the script
+window when launching the addin) and pasted into the Console window.</p>
 <div class="figure">
 <img src="https://raw.githubusercontent.com/juba/questionr/master/resources/screenshots/iorder_3.png" alt=""><p class="caption">Code and result tab</p>
 </div>
@@ -167,11 +201,15 @@
 <div class="section level2">
 <h2 id="numeric-range-dividing-icut">Numeric range dividing (<code>icut</code>)<a class="anchor" aria-label="anchor" href="#numeric-range-dividing-icut"></a>
 </h2>
-<p>The <code>iorder</code> addin function can be launched with the <em>Numeric range dividing</em> entry of the <em>Addins</em> menu.</p>
+<p>The <code>iorder</code> addin function can be launched with the
+<em>Numeric range dividing</em> entry of the <em>Addins</em> menu.</p>
 <div class="section level3">
 <h3 id="variable-and-settings-2">Variable and settings<a class="anchor" aria-label="anchor" href="#variable-and-settings-2"></a>
 </h3>
-<p>The first tab of the interface is called <em>Variable and setings</em>. Here you can select an object in you current environment, or a column in a data frame. You can also select the name of the new object/data frame column which will get the new variable.</p>
+<p>The first tab of the interface is called <em>Variable and
+setings</em>. Here you can select an object in you current environment,
+or a column in a data frame. You can also select the name of the new
+object/data frame column which will get the new variable.</p>
 <div class="figure">
 <img src="https://raw.githubusercontent.com/juba/questionr/master/resources/screenshots/icut_1.png" alt=""><p class="caption">Variable and settings tab</p>
 </div>
@@ -179,7 +217,11 @@
 <div class="section level3">
 <h3 id="cutting">Cutting<a class="anchor" aria-label="anchor" href="#cutting"></a>
 </h3>
-<p>The <em>Cutting</em> tab is where you will define the way to divide the variable range. First select a cutting method (the <code>Manual</code> method is the one used with the base <code>cut</code> function) and modify the options as you like. A dynamic histogram will show the class boundaries positions.</p>
+<p>The <em>Cutting</em> tab is where you will define the way to divide
+the variable range. First select a cutting method (the
+<code>Manual</code> method is the one used with the base
+<code>cut</code> function) and modify the options as you like. A dynamic
+histogram will show the class boundaries positions.</p>
 <div class="figure">
 <img src="https://raw.githubusercontent.com/juba/questionr/master/resources/screenshots/icut_2.png" alt=""><p class="caption">Cutting tab</p>
 </div>
@@ -187,7 +229,12 @@
 <div class="section level3">
 <h3 id="code-and-result-2">Code and result<a class="anchor" aria-label="anchor" href="#code-and-result-2"></a>
 </h3>
-<p>Finally, the <em>Code and result</em> tab lets you see the generated code, and a contingency table and a barplot of the resulting factor. When your result is good, you can click on the <em>Done</em> button : the generated code will then be inserted in your script (if the cursor was in the script window when launching the addin) and pasted into the Console window.</p>
+<p>Finally, the <em>Code and result</em> tab lets you see the generated
+code, and a contingency table and a barplot of the resulting factor.
+When your result is good, you can click on the <em>Done</em> button :
+the generated code will then be inserted in your script (if the cursor
+was in the script window when launching the addin) and pasted into the
+Console window.</p>
 <div class="figure">
 <img src="https://raw.githubusercontent.com/juba/questionr/master/resources/screenshots/icut_3.png" alt=""><p class="caption">Code and result tab</p>
 </div>
@@ -212,7 +259,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

@@ -27,7 +27,7 @@ include labels imported with haven packages."><!-- mathjax --><script src="https
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -65,46 +65,57 @@ include labels imported with <span class="pkg">haven</span> packages.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">describe</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for factor</span>
-<span class="fu">describe</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">10</span>, show.length <span class="op">=</span> <span class="cn">TRUE</span>, freq.n.max <span class="op">=</span> <span class="fl">10</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for numeric</span>
-<span class="fu">describe</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">10</span>, show.length <span class="op">=</span> <span class="cn">TRUE</span>, freq.n.max <span class="op">=</span> <span class="fl">10</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for character</span>
-<span class="fu">describe</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">10</span>, show.length <span class="op">=</span> <span class="cn">TRUE</span>, freq.n.max <span class="op">=</span> <span class="fl">10</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for default</span>
-<span class="fu">describe</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">10</span>, show.length <span class="op">=</span> <span class="cn">TRUE</span>, freq.n.max <span class="op">=</span> <span class="fl">10</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for haven_labelled</span>
-<span class="fu">describe</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">10</span>, show.length <span class="op">=</span> <span class="cn">TRUE</span>, freq.n.max <span class="op">=</span> <span class="fl">10</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for data.frame</span>
-<span class="fu">describe</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, n <span class="op">=</span> <span class="fl">10</span>, freq.n.max <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-
-<span class="co"># S3 method for description</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">describe</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for factor</span></span>
+<span><span class="fu">describe</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">10</span>, show.length <span class="op">=</span> <span class="cn">TRUE</span>, freq.n.max <span class="op">=</span> <span class="fl">10</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for numeric</span></span>
+<span><span class="fu">describe</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">10</span>, show.length <span class="op">=</span> <span class="cn">TRUE</span>, freq.n.max <span class="op">=</span> <span class="fl">10</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for character</span></span>
+<span><span class="fu">describe</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">10</span>, show.length <span class="op">=</span> <span class="cn">TRUE</span>, freq.n.max <span class="op">=</span> <span class="fl">10</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for default</span></span>
+<span><span class="fu">describe</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">10</span>, show.length <span class="op">=</span> <span class="cn">TRUE</span>, freq.n.max <span class="op">=</span> <span class="fl">10</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for haven_labelled</span></span>
+<span><span class="fu">describe</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">10</span>, show.length <span class="op">=</span> <span class="cn">TRUE</span>, freq.n.max <span class="op">=</span> <span class="fl">10</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for data.frame</span></span>
+<span><span class="fu">describe</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, n <span class="op">=</span> <span class="fl">10</span>, freq.n.max <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for description</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>object to describe</p></dd>
+
+
 <dt>...</dt>
 <dd><p>further arguments passed to or from other methods, see details</p></dd>
+
+
 <dt>n</dt>
 <dd><p>number of first values to display</p></dd>
+
+
 <dt>show.length</dt>
 <dd><p>display length of the vector?</p></dd>
+
+
 <dt>freq.n.max</dt>
 <dd><p>display a frequency table if the number of unique values is less than this value, 0 to hide</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>an object of class <code>description</code>.</p>
+    
+
+<p>an object of class <code>description</code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -124,8 +135,8 @@ See examples.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">hdv2003</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">describe</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">$</span><span class="va">sexe</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">hdv2003</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">describe</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">$</span><span class="va">sexe</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2000 obs.] </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nominal factor: "Femme" "Femme" "Homme" "Homme" "Femme" "Femme" "Femme" "Homme" "Femme" "Homme" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 levels: Homme | Femme</span>
@@ -135,11 +146,11 @@ See examples.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Homme  899  45</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Femme 1101  55</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total 2000 100</span>
-<span class="r-in"><span class="fu">describe</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">$</span><span class="va">age</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">describe</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">$</span><span class="va">age</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2000 obs.] </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> integer: 28 23 59 34 71 35 60 47 20 28 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> min: 18 - max: 97 - NAs: 0 (0%) - 78 unique values</span>
-<span class="r-in"><span class="fu">describe</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">describe</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2000 obs. x 20 variables] tbl_df tbl data.frame</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $id: </span>
@@ -236,7 +247,7 @@ See examples.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $heures.tv: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> numeric: 0 1 0 2 3 2 2.9 1 2 2 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> min: 0 - max: 12 - NAs: 5 (0.2%) - 30 unique values</span>
-<span class="r-in"><span class="fu">describe</span><span class="op">(</span><span class="va">hdv2003</span>, <span class="st">"cuisine"</span>, <span class="st">"heures.tv"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">describe</span><span class="op">(</span><span class="va">hdv2003</span>, <span class="st">"cuisine"</span>, <span class="st">"heures.tv"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2000 obs. x 20 variables] tbl_df tbl data.frame</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $cuisine: </span>
@@ -247,7 +258,7 @@ See examples.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $heures.tv: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> numeric: 0 1 0 2 3 2 2.9 1 2 2 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> min: 0 - max: 12 - NAs: 5 (0.2%) - 30 unique values</span>
-<span class="r-in"><span class="fu">describe</span><span class="op">(</span><span class="va">hdv2003</span>, <span class="st">"trav*"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">describe</span><span class="op">(</span><span class="va">hdv2003</span>, <span class="st">"trav*"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2000 obs. x 20 variables] tbl_df tbl data.frame</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $occup: </span>
@@ -264,7 +275,7 @@ See examples.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nominal factor: "Insatisfaction" NA "Equilibre" "Satisfaction" NA "Equilibre" NA "Insatisfaction" NA "Satisfaction" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3 levels: Satisfaction | Insatisfaction | Equilibre</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NAs: 952 (47.6%)</span>
-<span class="r-in"><span class="fu">describe</span><span class="op">(</span><span class="va">hdv2003</span>, <span class="st">"trav|lecture"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">describe</span><span class="op">(</span><span class="va">hdv2003</span>, <span class="st">"trav|lecture"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2000 obs. x 20 variables] tbl_df tbl data.frame</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $trav.imp: </span>
@@ -281,7 +292,7 @@ See examples.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nominal factor: "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 levels: Non | Oui</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NAs: 0 (0%)</span>
-<span class="r-in"><span class="fu">describe</span><span class="op">(</span><span class="va">hdv2003</span>, <span class="st">"trav"</span>, <span class="st">"lecture"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">describe</span><span class="op">(</span><span class="va">hdv2003</span>, <span class="st">"trav"</span>, <span class="st">"lecture"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2000 obs. x 20 variables] tbl_df tbl data.frame</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $trav.imp: </span>
@@ -298,9 +309,9 @@ See examples.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nominal factor: "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" "Non" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 levels: Non | Oui</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NAs: 0 (0%)</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">fertility</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">describe</span><span class="op">(</span><span class="va">women</span><span class="op">$</span><span class="va">residency</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">fertility</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">describe</span><span class="op">(</span><span class="va">women</span><span class="op">$</span><span class="va">residency</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2000 obs.] Urban / rural residency</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> labelled double: 2 2 2 2 2 2 2 2 2 2 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> min: 1 - max: 2 - NAs: 0 (0%) - 2 unique values</span>
@@ -310,7 +321,7 @@ See examples.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] urban  912  45.6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2] rural 1088  54.4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total     2000 100.0</span>
-<span class="r-in"><span class="fu">describe</span><span class="op">(</span><span class="va">women</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">describe</span><span class="op">(</span><span class="va">women</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2000 obs. x 17 variables] tbl_df tbl data.frame</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $id_woman: Woman Id</span>
@@ -393,7 +404,7 @@ See examples.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> min: 0 - max: 9 - NAs: 29 (1.5%) - 3 unique values</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3 value labels: [0] no [1] yes [9] missing</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> user-defined na values: 9</span>
-<span class="r-in"><span class="fu">describe</span><span class="op">(</span><span class="va">women</span>, <span class="st">"id"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">describe</span><span class="op">(</span><span class="va">women</span>, <span class="st">"id"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2000 obs. x 17 variables] tbl_df tbl data.frame</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $id_woman: Woman Id</span>
@@ -427,7 +438,7 @@ See examples.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

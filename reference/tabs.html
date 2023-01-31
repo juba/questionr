@@ -27,7 +27,7 @@ kable(), which is found in library(knitr), is recommended for use with RMarkdown
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -65,45 +65,66 @@ kable(), which is found in library(knitr), is recommended for use with RMarkdown
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">tabs</span><span class="op">(</span>
-  <span class="va">df</span>,
-  <span class="va">x</span>,
-  <span class="va">y</span>,
-  type <span class="op">=</span> <span class="st">"percent"</span>,
-  percent <span class="op">=</span> <span class="cn">FALSE</span>,
-  weight <span class="op">=</span> <span class="cn">NULL</span>,
-  normwt <span class="op">=</span> <span class="cn">FALSE</span>,
-  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,
-  na.show <span class="op">=</span> <span class="cn">FALSE</span>,
-  exclude <span class="op">=</span> <span class="cn">NULL</span>,
-  digits <span class="op">=</span> <span class="fl">1</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tabs</span><span class="op">(</span></span>
+<span>  <span class="va">df</span>,</span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">y</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"percent"</span>,</span>
+<span>  percent <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  weight <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  normwt <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  na.show <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  exclude <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  digits <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>A data.frame that contains <code>x</code> and (optionally) <code>y</code> and <code>weight</code>.</p></dd>
+
+
 <dt>x</dt>
 <dd><p>variable name (found in <code>df</code>). tabs(my.data, x = 'q1').</p></dd>
+
+
 <dt>y</dt>
 <dd><p>one (or more) variable names. tabs(my.data, x = 'q1', y = c('sex', 'job')).</p></dd>
+
+
 <dt>type</dt>
 <dd><p>'percent' (default ranges 0-100), 'proportion', or 'counts' (type of table returned).</p></dd>
+
+
 <dt>percent</dt>
 <dd><p>if <code>TRUE</code>, add a percent sign after the values when printing</p></dd>
+
+
 <dt>weight</dt>
 <dd><p>variable name for weight (found in <code>df</code>).</p></dd>
+
+
 <dt>normwt</dt>
 <dd><p>if TRUE, normalize weights so that the total weighted count is the same as the unweighted one</p></dd>
+
+
 <dt>na.rm</dt>
 <dd><p>if TRUE, remove NA values before computation</p></dd>
+
+
 <dt>na.show</dt>
 <dd><p>if TRUE, show NA count in table output</p></dd>
+
+
 <dt>exclude</dt>
 <dd><p>values to remove from x and y. To exclude NA, use na.rm argument.</p></dd>
+
+
 <dt>digits</dt>
 <dd><p>Number of digits to display; ?format.proptab for formatting details.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -116,8 +137,8 @@ kable(), which is found in library(knitr), is recommended for use with RMarkdown
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">hdv2003</span><span class="op">)</span> </span>
-<span class="r-in"><span class="fu">tabs</span><span class="op">(</span><span class="va">hdv2003</span>, x <span class="op">=</span> <span class="st">"relig"</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"qualif"</span>, <span class="st">"trav.imp"</span><span class="op">)</span>, weight <span class="op">=</span> <span class="st">"poids"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">hdv2003</span><span class="op">)</span> </span></span>
+<span class="r-in"><span><span class="fu">tabs</span><span class="op">(</span><span class="va">hdv2003</span>, x <span class="op">=</span> <span class="st">"relig"</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"qualif"</span>, <span class="st">"trav.imp"</span><span class="op">)</span>, weight <span class="op">=</span> <span class="st">"poids"</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'na.rm' and 'na.show' are ignored when 'useNA' is provided.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'na.rm' and 'na.show' are ignored when 'useNA' is provided.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'na.rm' and 'na.show' are ignored when 'useNA' is provided.</span>
@@ -156,14 +177,14 @@ kable(), which is found in library(knitr), is recommended for use with RMarkdown
 <span class="r-out co"><span class="r-pr">#&gt;</span> Ni croyance ni appartenance 16.5                          1.9         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Rejet                        3.0                          0.4         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NSP ou NVPR                  0.8                          0.0         </span>
-<span class="r-in"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">tabs</span><span class="op">(</span><span class="va">hdv2003</span>, x <span class="op">=</span> <span class="st">"relig"</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"qualif"</span>, <span class="st">"trav.imp"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"counts"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">tabs</span><span class="op">(</span><span class="va">hdv2003</span>, x <span class="op">=</span> <span class="st">"relig"</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"qualif"</span>, <span class="st">"trav.imp"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"counts"</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no weights argument given, using uniform weights of 1</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'na.rm' and 'na.show' are ignored when 'useNA' is provided.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no weights argument given, using uniform weights of 1</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'na.rm' and 'na.show' are ignored when 'useNA' is provided.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>no weights argument given, using uniform weights of 1</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'na.rm' and 'na.show' are ignored when 'useNA' is provided.</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">result</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">result</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             Overall Ouvrier specialise Ouvrier qualifie</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Pratiquant regulier         "266"   " 33"              " 22"           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Pratiquant occasionnel      "442"   " 45"              " 59"           </span>
@@ -199,10 +220,10 @@ kable(), which is found in library(knitr), is recommended for use with RMarkdown
 <span class="r-out co"><span class="r-pr">#&gt;</span> Ni croyance ni appartenance "160"                        " 16"        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Rejet                       " 35"                        "  5"        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NSP ou NVPR                 " 13"                        "  1"        </span>
-<span class="r-in"><span class="co"># library(knitr)</span></span>
-<span class="r-in"><span class="co"># xt &lt;- tabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), weight = "poids")</span></span>
-<span class="r-in"><span class="co"># kable(format(xt))                        # to use with RMarkdown...</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="co"># library(knitr)</span></span></span>
+<span class="r-in"><span><span class="co"># xt &lt;- tabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), weight = "poids")</span></span></span>
+<span class="r-in"><span><span class="co"># kable(format(xt))                        # to use with RMarkdown...</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -217,7 +238,7 @@ kable(), which is found in library(knitr), is recommended for use with RMarkdown
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

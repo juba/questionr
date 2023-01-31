@@ -27,7 +27,7 @@ interactive conversion of a numeric variable into a categorical one."><!-- mathj
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -65,32 +65,37 @@ interactive conversion of a numeric variable into a categorical one.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">icut</span><span class="op">(</span>obj <span class="op">=</span> <span class="cn">NULL</span>, var_name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">icut</span><span class="op">(</span>obj <span class="op">=</span> <span class="cn">NULL</span>, var_name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>obj</dt>
 <dd><p>vector to recode or data frame to operate on</p></dd>
+
+
 <dt>var_name</dt>
 <dd><p>if obj is a data frame, name of the column to be recoded, as a 
 character string (possibly without quotes)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The function launches a shiny app in the system web browser. The recoding code is 
+    
+
+<p>The function launches a shiny app in the system web browser. The recoding code is 
 returned in the console
 when the app is closed with the "Done" button.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">hdv2003</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">icut</span><span class="op">(</span><span class="va">hdv2003</span>, <span class="st">"age"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="irec.html">irec</a></span><span class="op">(</span><span class="va">hdv2003</span>, <span class="va">heures.tv</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">hdv2003</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">icut</span><span class="op">(</span><span class="va">hdv2003</span>, <span class="st">"age"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="irec.html">irec</a></span><span class="op">(</span><span class="va">hdv2003</span>, <span class="va">heures.tv</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -105,7 +110,7 @@ when the app is closed with the "Done" button.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

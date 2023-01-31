@@ -27,7 +27,7 @@ one by breaking it into classes with the same frequencies."><!-- mathjax --><scr
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -65,27 +65,40 @@ one by breaking it into classes with the same frequencies.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">quant.cut</span><span class="op">(</span><span class="va">var</span>, <span class="va">nbclass</span>, include.lowest <span class="op">=</span> <span class="cn">TRUE</span>, right <span class="op">=</span> <span class="cn">FALSE</span>, dig.lab <span class="op">=</span> <span class="fl">5</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">quant.cut</span><span class="op">(</span><span class="va">var</span>, <span class="va">nbclass</span>, include.lowest <span class="op">=</span> <span class="cn">TRUE</span>, right <span class="op">=</span> <span class="cn">FALSE</span>, dig.lab <span class="op">=</span> <span class="fl">5</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>var</dt>
 <dd><p>variable to transform</p></dd>
+
+
 <dt>nbclass</dt>
 <dd><p>number of classes</p></dd>
+
+
 <dt>include.lowest</dt>
 <dd><p>argument passed to the <code>cut</code> function</p></dd>
+
+
 <dt>right</dt>
 <dd><p>argument passed to the <code>cut</code> function</p></dd>
+
+
 <dt>dig.lab</dt>
 <dd><p>argument passed to the <code>cut</code> function</p></dd>
+
+
 <dt>...</dt>
 <dd><p>arguments passed to the <code>cut</code> function</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The result is a factor.</p>
+    
+
+<p>The result is a factor.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -99,9 +112,9 @@ functions.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">sepal.width3cl</span> <span class="op">&lt;-</span> <span class="fu">quant.cut</span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>,<span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">sepal.width3cl</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sepal.width3cl</span> <span class="op">&lt;-</span> <span class="fu">quant.cut</span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>,<span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">sepal.width3cl</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sepal.width3cl</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [2,2.9) [2.9,3.2) [3.2,4.4] </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        47        47        56 </span>
@@ -119,7 +132,7 @@ functions.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

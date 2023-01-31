@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -63,19 +63,24 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">freq.na</span><span class="op">(</span><span class="va">data</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">freq.na</span><span class="op">(</span><span class="va">data</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>either a vector or a data frame object</p></dd>
+
+
 <dt>...</dt>
 <dd><p>if <code>x</code> is a data frame, the names of the variables to examine or keywords to search for such variables. See <code><a href="http://larmarange.github.io/labelled/reference/look_for.html" class="external-link">lookfor</a></code> for more details.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The result is an object of class data.frame.</p>
+    
+
+<p>The result is an object of class data.frame.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -84,13 +89,13 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">hdv2003</span><span class="op">)</span></span>
-<span class="r-in"><span class="co">## Examine a single vector.</span></span>
-<span class="r-in"><span class="fu">freq.na</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">$</span><span class="va">qualif</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">hdv2003</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## Examine a single vector.</span></span></span>
+<span class="r-in"><span><span class="fu">freq.na</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">$</span><span class="va">qualif</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> missing       % </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     347      17 </span>
-<span class="r-in"><span class="co">## Examine a data frame.</span></span>
-<span class="r-in"><span class="fu">freq.na</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co">## Examine a data frame.</span></span></span>
+<span class="r-in"><span><span class="fu">freq.na</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               missing  %</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> trav.imp          952 48</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> trav.satisf       952 48</span>
@@ -112,13 +117,13 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> bricol              0  0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> cinema              0  0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sport               0  0</span>
-<span class="r-in"><span class="co">## Examine several variables.</span></span>
-<span class="r-in"><span class="fu">freq.na</span><span class="op">(</span><span class="va">hdv2003</span>, <span class="st">"nivetud"</span>, <span class="st">"trav.satisf"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co">## Examine several variables.</span></span></span>
+<span class="r-in"><span><span class="fu">freq.na</span><span class="op">(</span><span class="va">hdv2003</span>, <span class="st">"nivetud"</span>, <span class="st">"trav.satisf"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             missing  %</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> trav.satisf     952 48</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> nivetud         112  6</span>
-<span class="r-in"><span class="co">## To see only variables with the most number of missing values</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">freq.na</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co">## To see only variables with the most number of missing values</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">freq.na</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             missing  %</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> trav.imp        952 48</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> trav.satisf     952 48</span>
@@ -140,7 +145,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
