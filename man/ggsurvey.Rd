@@ -7,7 +7,7 @@
 ggsurvey(design = NULL, mapping = NULL, ...)
 }
 \arguments{
-\item{design}{A survey design object, usually created with 
+\item{design}{A survey design object, usually created with
 \code{\link[survey:svydesign]{survey::svydesign()}}}
 
 \item{mapping}{Default list of aesthetic mappings to use for plot,
@@ -23,7 +23,7 @@ corresponding aesthetic.
 \details{
 Graphs will be correct as long as only weights are required
 to compute the graph. However, statistic or geometry requiring
-correct variance computation (like 
+correct variance computation (like
 \code{\link[ggplot2:geom_smooth]{ggplot2::geom_smooth()}}) will
 be statistically incorrect.
 }
@@ -41,8 +41,8 @@ if (require(survey) & require(ggplot2)) {
 
   d <- as.data.frame(Titanic)
   dw <- svydesign(ids = ~1, weights = ~Freq, data = d)
-  ggsurvey(dw) + 
-    aes(x = Class, fill = Survived) + 
+  ggsurvey(dw) +
+    aes(x = Class, fill = Survived) +
     geom_bar(position = "fill")
 }
 }
