@@ -91,6 +91,8 @@ test_that("lprop results are correct", {
 })
 
 test_that("prop, cprop and lprop tabyl versions are correct", {
+  # Skip if janitor 2.1.0 due to a bug in adorn_percentages()
+  skip_if_not_installed("janitor", minimum_version = "2.2.0")
   ## lprop
   ltabl <- hdv2003 %>%
     tabyl(qualif, sexe) %>%
