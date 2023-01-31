@@ -60,72 +60,71 @@ test_that("freq with exclude is correct", {
   expect_equal(tab$`%`, round(vtab / sum(vtab) * 100, 1))
 })
 
-test_that("cprop results are correct" , {
+test_that("cprop results are correct", {
   tab <- table(hdv2003$qualif, hdv2003$clso, exclude = NULL)
-  etab <- tab[,apply(tab, 2, sum)>0]
+  etab <- tab[, apply(tab, 2, sum) > 0]
   ctab <- cprop(tab, n = TRUE)
-  expect_equal(colnames(ctab), c(levels(hdv2003$clso), gettext("All", domain="R-questionr")))
-  expect_equal(rownames(ctab), c(levels(hdv2003$qualif), NA, gettext("Total", domain="R-questionr"), "n"))
+  expect_equal(colnames(ctab), c(levels(hdv2003$clso), gettext("All", domain = "R-questionr")))
+  expect_equal(rownames(ctab), c(levels(hdv2003$qualif), NA, gettext("Total", domain = "R-questionr"), "n"))
   m <- base::prop.table(etab, 2) * 100
   expect_equal(ctab[seq_len(nrow(m)), seq_len(ncol(m))], m)
   margin <- margin.table(etab, 1)
   margin <- as.numeric(round(margin / sum(margin) * 100, 2))
-  expect_equal(unname(ctab[seq_len(length(margin)), gettext("All", domain="R-questionr")]), margin) 
+  expect_equal(unname(ctab[seq_len(length(margin)), gettext("All", domain = "R-questionr")]), margin)
   n <- apply(etab, 2, sum)
-  expect_equal(ctab["n",][seq_len(length(n))], n)
+  expect_equal(ctab["n", ][seq_len(length(n))], n)
 })
 
-test_that("lprop results are correct" , {
+test_that("lprop results are correct", {
   tab <- table(hdv2003$qualif, hdv2003$clso, exclude = NULL)
-  etab <- tab[,apply(tab, 2, sum)>0]
+  etab <- tab[, apply(tab, 2, sum) > 0]
   ltab <- lprop(tab, n = TRUE)
-  expect_equal(colnames(ltab), c(levels(hdv2003$clso), gettext("Total", domain="R-questionr"), "n"))
-  expect_equal(rownames(ltab), c(levels(hdv2003$qualif), NA, gettext("All", domain="R-questionr")))
+  expect_equal(colnames(ltab), c(levels(hdv2003$clso), gettext("Total", domain = "R-questionr"), "n"))
+  expect_equal(rownames(ltab), c(levels(hdv2003$qualif), NA, gettext("All", domain = "R-questionr")))
   m <- base::prop.table(etab, 1) * 100
   expect_equal(ltab[seq_len(nrow(m)), seq_len(ncol(m))], m)
   margin <- margin.table(etab, 2)
   margin <- as.numeric(round(margin / sum(margin) * 100, 2))
-  expect_equal(unname(ltab[gettext("All", domain="R-questionr"), seq_len(length(margin))]), margin) 
+  expect_equal(unname(ltab[gettext("All", domain = "R-questionr"), seq_len(length(margin))]), margin)
   n <- apply(etab, 1, sum)
-  expect_equal(ltab[,"n"][seq_len(length(n))], n)
+  expect_equal(ltab[, "n"][seq_len(length(n))], n)
 })
 
-test_that("prop, cprop and lprop tabyl versions are correct" , {
+test_that("prop, cprop and lprop tabyl versions are correct", {
   ## lprop
-  ltabl <- hdv2003 %>% 
-    tabyl(qualif, sexe) %>% 
-    lprop %>% 
-    as.data.frame %>% 
-    gather(Var2, Freq, -1)
-  ltab <- table(hdv2003$qualif, hdv2003$sexe, useNA = "always") %>% 
-    lprop %>% 
-    round(1) %>% 
-    as.data.frame %>% 
+  ltabl <- hdv2003 %>%
+    tabyl(qualif, sexe) %>%
+    lprop() %>%
+    as.data.frame() %>%
+    tidyr::pivot_longer(-`qualif/sexe`, names_to = "Var2", values_to = "Freq")
+  ltab <- table(hdv2003$qualif, hdv2003$sexe, useNA = "always") %>%
+    lprop() %>%
+    round(1) %>%
+    as.data.frame() %>%
     mutate(Freq = format(Freq, nsmall = 1, trim = TRUE))
-  expect_equal(ltabl$Freq, ltab$Freq) 
+  expect_equal(sort(ltabl$Freq), sort(ltab$Freq))
   ## cprop
-  ctabl <- hdv2003 %>% 
-    tabyl(qualif, sexe) %>% 
-    cprop %>% 
-    as.data.frame %>% 
-    gather(Var2, Freq, -1)
-  ctab <- table(hdv2003$qualif, hdv2003$sexe, useNA = "always") %>% 
-    cprop %>% 
-    round(1) %>% 
-    as.data.frame %>% 
+  ctabl <- hdv2003 %>%
+    tabyl(qualif, sexe) %>%
+    cprop() %>%
+    as.data.frame() %>%
+    tidyr::pivot_longer(-`qualif/sexe`, names_to = "Var2", values_to = "Freq")
+  ctab <- table(hdv2003$qualif, hdv2003$sexe, useNA = "always") %>%
+    cprop() %>%
+    round(1) %>%
+    as.data.frame() %>%
     mutate(Freq = format(Freq, nsmall = 1, trim = TRUE))
-  expect_equal(ctabl$Freq, ctab$Freq) 
+  expect_equal(sort(ctabl$Freq), sort(ctab$Freq))
   ## prop
-  tabl <- hdv2003 %>% 
-    tabyl(qualif, sexe) %>% 
-    prop(digits = 2) %>% 
-    as.data.frame %>% 
-    gather(Var2, Freq, -1)
-  tab <- table(hdv2003$qualif, hdv2003$sexe, useNA = "always") %>% 
-    prop %>% 
-    round(2) %>% 
-    as.data.frame %>% 
+  tabl <- hdv2003 %>%
+    tabyl(qualif, sexe) %>%
+    prop(digits = 2) %>%
+    as.data.frame() %>%
+    tidyr::pivot_longer(-`qualif/sexe`, names_to = "Var2", values_to = "Freq")
+  tab <- table(hdv2003$qualif, hdv2003$sexe, useNA = "always") %>%
+    prop() %>%
+    round(2) %>%
+    as.data.frame() %>%
     mutate(Freq = format(Freq, nsmall = 1, trim = TRUE))
-  expect_equal(tabl$Freq, tab$Freq) 
+  expect_equal(sort(tabl$Freq), sort(tab$Freq))
 })
-
