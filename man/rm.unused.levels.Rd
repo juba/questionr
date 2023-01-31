@@ -20,13 +20,13 @@ If a list of variables is provided through \code{v}, only the unused levels of t
 specified variables will be removed.
 }
 \examples{
-df <- data.frame(v1=c("a","b","a","b"),v2=c("x","x","y","y"))
-df$v1 <- factor(df$v1,c("a","b","c"))
-df$v2 <- factor(df$v2,c("x","y","z"))
+df <- data.frame(v1 = c("a", "b", "a", "b"), v2 = c("x", "x", "y", "y"))
+df$v1 <- factor(df$v1, c("a", "b", "c"))
+df$v2 <- factor(df$v2, c("x", "y", "z"))
 df
 str(df)
 str(rm.unused.levels(df))
-str(rm.unused.levels(df,"v1"))
+str(rm.unused.levels(df, "v1"))
 }
 \author{
 Joseph Larmarange <joseph@larmarange.net>

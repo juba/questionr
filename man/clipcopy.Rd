@@ -47,8 +47,8 @@ clipcopy(obj, ...)
 \code{NULL}
 }
 \description{
-This function transforms its argument to HTML with knitr::kable and 
-then copy it to the clipboard or to a file for later use in an 
+This function transforms its argument to HTML with knitr::kable and
+then copy it to the clipboard or to a file for later use in an
 external application.
 }
 \details{
@@ -57,10 +57,14 @@ installed on the system to copy to the clipboard.
 }
 \examples{
 data(iris)
-tab <- table(cut(iris$Sepal.Length,8),cut(iris$Sepal.Width,4))
-\dontrun{copie(tab)}
-ptab <- rprop(tab, percent=TRUE)
-\dontrun{clipcopy(ptab)}
+tab <- table(cut(iris$Sepal.Length, 8), cut(iris$Sepal.Width, 4))
+\dontrun{
+copie(tab)
+}
+ptab <- rprop(tab, percent = TRUE)
+\dontrun{
+clipcopy(ptab)
+}
 }
 \seealso{
 \code{\link[knitr]{kable}}, \code{\link[questionr]{format.proptab}}

@@ -17,16 +17,16 @@ variables to take into account.
 }
 \details{
 If \code{v} is not specified, the result of \code{na.rm} will be the same as
-\link{na.omit}. If a list of variables is specified through \code{v}, only 
-observations with a missing value (\code{NA}) for one of the specified 
+\link{na.omit}. If a list of variables is specified through \code{v}, only
+observations with a missing value (\code{NA}) for one of the specified
 variables will be removed from \code{x}. See examples.
 }
 \examples{
-df <- data.frame(x = c(1, 2, 3), y = c(0, 10, NA), z= c("a",NA,"b"))
+df <- data.frame(x = c(1, 2, 3), y = c(0, 10, NA), z = c("a", NA, "b"))
 df
 na.omit(df)
 na.rm(df)
-na.rm(df, c("x","y"))
+na.rm(df, c("x", "y"))
 na.rm(df, "z")
 }
 \seealso{
