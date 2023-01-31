@@ -67,12 +67,12 @@ test_that("cprop results are correct" , {
   expect_equal(colnames(ctab), c(levels(hdv2003$clso), gettext("All", domain="R-questionr")))
   expect_equal(rownames(ctab), c(levels(hdv2003$qualif), NA, gettext("Total", domain="R-questionr"), "n"))
   m <- base::prop.table(etab, 2) * 100
-  expect_equal(ctab[1:nrow(m), 1:ncol(m)], m)
+  expect_equal(ctab[seq_len(nrow(m)), seq_len(ncol(m))], m)
   margin <- margin.table(etab, 1)
   margin <- as.numeric(round(margin / sum(margin) * 100, 2))
-  expect_equal(unname(ctab[1:length(margin), gettext("All", domain="R-questionr")]), margin) 
+  expect_equal(unname(ctab[seq_len(length(margin)), gettext("All", domain="R-questionr")]), margin) 
   n <- apply(etab, 2, sum)
-  expect_equal(ctab["n",][1:length(n)], n)
+  expect_equal(ctab["n",][seq_len(length(n))], n)
 })
 
 test_that("lprop results are correct" , {
@@ -82,12 +82,12 @@ test_that("lprop results are correct" , {
   expect_equal(colnames(ltab), c(levels(hdv2003$clso), gettext("Total", domain="R-questionr"), "n"))
   expect_equal(rownames(ltab), c(levels(hdv2003$qualif), NA, gettext("All", domain="R-questionr")))
   m <- base::prop.table(etab, 1) * 100
-  expect_equal(ltab[1:nrow(m), 1:ncol(m)], m)
+  expect_equal(ltab[seq_len(nrow(m)), seq_len(ncol(m))], m)
   margin <- margin.table(etab, 2)
   margin <- as.numeric(round(margin / sum(margin) * 100, 2))
-  expect_equal(unname(ltab[gettext("All", domain="R-questionr"), 1:length(margin)]), margin) 
+  expect_equal(unname(ltab[gettext("All", domain="R-questionr"), seq_len(length(margin))]), margin) 
   n <- apply(etab, 1, sum)
-  expect_equal(ltab[,"n"][1:length(n)], n)
+  expect_equal(ltab[,"n"][seq_len(length(n))], n)
 })
 
 test_that("prop, cprop and lprop tabyl versions are correct" , {
