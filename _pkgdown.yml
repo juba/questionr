@@ -2,7 +2,7 @@ reference:
   - title: "Recoding addins"
     desc: >
       RStudio addins for variables manipulation.
-    contents: 
+    contents:
       - irec
       - iorder
       - icut
@@ -27,7 +27,7 @@ reference:
   - title: "Datasets"
     desc: "Example datasets."
     contents:
-      - fecondite    
+      - fecondite
       - enfants
       - femmes
       - menages
@@ -42,39 +42,32 @@ reference:
   - title: "Weighted variables"
     desc: "Functions to deal with weighted variables"
     contents:
-    - wtd.table
-    - wtd.mean
-    - ggsurvey
-    - tabs
+      - wtd.table
+      - wtd.mean
+      - ggsurvey
+      - tabs
   - title: "Data manipulation helpers"
     desc: "Function helping for common data manipulation tasks."
     contents:
-    - addNAstr
-    - duplicated2
-    - first_non_null
-    - freq.na
-    - na.rm
-    - quant.cut
-    - recode.na
-    - rename.variable
-    - rm.unused.levels
+      - addNAstr
+      - duplicated2
+      - first_non_null
+      - freq.na
+      - na.rm
+      - quant.cut
+      - recode.na
+      - rename.variable
+      - rm.unused.levels
   - title: "Odds ratio"
     desc: "Functions to compute and deal with odds ratio."
     contents:
-    - odds.ratio
+      - odds.ratio
   - title: "Utils"
     desc: "Utility functions."
     contents:
-    - clipcopy
-    - describe
-    - lookfor
-    - qload
-    - qscan
-    - escape_regex
-  - title: internal
-    contents:
-    - ifunc_get_css
-    - ifunc_run_as_addin
-    - ifunc_show_alert 
-
-
+      - clipcopy
+      - describe
+      - lookfor
+      - qload
+      - qscan
+      - escape_regex
