@@ -130,3 +130,52 @@ test_that("prop, cprop and lprop tabyl versions are correct", {
     mutate(Freq = format(Freq, nsmall = 1, trim = TRUE))
   expect_equal(sort(tabl$Freq), sort(tab$Freq))
 })
+
+test_that("freqtable results are correct", {
+    skip_if_not_installed("dplyr")
+    data(hdv2003)
+    expect_error(freqtable(hdv2003))
+    expect_error(freqtable(hdv2003, weights=poids))
+    expect_equal(freqtable(hdv2003, nivetud),
+                 xtabs(~ nivetud, hdv2003),
+                 check.attributes=FALSE)
+    expect_equal(freqtable(hdv2003, nivetud, sport),
+                 xtabs(~ nivetud + sport, hdv2003),
+                 check.attributes=FALSE)
+    expect_equal(freqtable(hdv2003, starts_with("niv")),
+                 xtabs(~ nivetud, hdv2003),
+                 check.attributes=FALSE)
+
+    expect_equal(freqtable(hdv2003, nivetud, weights=poids),
+                 xtabs(poids ~ nivetud, hdv2003),
+                 check.attributes=FALSE)
+    expect_equal(freqtable(hdv2003, nivetud, sport, weights=poids),
+                 xtabs(poids ~ nivetud + sport, hdv2003),
+                 check.attributes=FALSE)
+    expect_equal(freqtable(hdv2003, starts_with("niv"), weights=ends_with("oids")),
+                 xtabs(poids ~ nivetud, hdv2003),
+                 check.attributes=FALSE)
+
+    skip_if_not_installed("survey")
+    library(survey)
+    hdv2003_wtd <- svydesign(ids=~ 1, weights=~ poids, data=hdv2003)
+    expect_equal(freqtable(hdv2003_wtd, nivetud),
+                 xtabs(poids ~ nivetud, hdv2003),
+                 check.attributes=FALSE)
+    expect_equal(freqtable(hdv2003_wtd, nivetud, sport),
+                 xtabs(poids ~ nivetud + sport, hdv2003),
+                 check.attributes=FALSE)
+    expect_equal(freqtable(hdv2003_wtd, nivetud, sport),
+                 xtabs(poids ~ nivetud + sport, hdv2003),
+                 check.attributes=FALSE)
+    expect_equal(freqtable(hdv2003_wtd, nivetud, weights=TRUE),
+                 xtabs(poids ~ nivetud, hdv2003),
+                 check.attributes=FALSE)
+    expect_equal(freqtable(hdv2003_wtd, nivetud, weights=FALSE),
+                 xtabs(~ nivetud, hdv2003),
+                 check.attributes=FALSE)
+    expect_equal(freqtable(hdv2003_wtd, nivetud, weights=NULL),
+                 xtabs(~ nivetud, hdv2003),
+                 check.attributes=FALSE)
+    expect_error(freqtable(hdv2003_wtd, nivetud, weights=age))
+})
