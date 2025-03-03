@@ -587,6 +587,7 @@ ltabs <- function(formula, data, levels = c("prefixed", "labels", "values"), var
 #' @param .data a data frame or `survey.design` object
 #' @param ... one or more expressions accepted by \code{\link[dplyr]{select}}
 #' selecting at least one variable
+#' @param na.rm Whether to remove missing values in the variables.
 #' @param weights If `.data` is a data frame, an optional expression
 #' selecting a weighting variable.
 #' If `.data` is a survey design, either `TRUE` (the default) to
@@ -615,15 +616,15 @@ freqtable <-
 
 #' @rdname freqtable
 #' @export
-freqtable.default <- function(.data, ..., weights = NULL) {
+freqtable.default <- function(.data, ..., na.rm = FALSE, weights = NULL) {
     d <- .data |> dplyr::select(..., .weights = {{ weights }})
     if (!".weights" %in% colnames(d)) d$.weights <- 1L
-    xtabs(.weights ~ ., data = d)
+    xtabs(.weights ~ ., data=d, addNA=!na.rm)
 }
 
 #' @rdname freqtable
 #' @export
-freqtable.survey.design <- function(.data, ..., weights = TRUE) {
+freqtable.survey.design <- function(.data, ..., na.rm = FALSE, weights = TRUE) {
     newdata <- .data$variables
     if(isTRUE(weights)) {
         newdata$.weights <- weights(.data)
@@ -632,5 +633,5 @@ freqtable.survey.design <- function(.data, ..., weights = TRUE) {
     else {
         wtsvar <- NULL
     }
-    freqtable(newdata, ..., weights={{ wtsvar }})
+    freqtable(newdata, ..., na.rm=na.rm, weights={{ wtsvar }})
 }

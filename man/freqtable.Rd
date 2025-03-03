@@ -8,15 +8,17 @@
 \usage{
 freqtable(.data, ...)
 
-\method{freqtable}{default}(.data, ..., weights = NULL)
+\method{freqtable}{default}(.data, ..., na.rm = FALSE, weights = NULL)
 
-\method{freqtable}{survey.design}(.data, ..., weights = TRUE)
+\method{freqtable}{survey.design}(.data, ..., na.rm = FALSE, weights = TRUE)
 }
 \arguments{
 \item{.data}{a data frame or `survey.design` object}
 
 \item{...}{one or more expressions accepted by \code{\link[dplyr]{select}}
 selecting at least one variable}
+
+\item{na.rm}{Whether to remove missing values in the variables.}
 
 \item{weights}{If `.data` is a data frame, an optional expression
 selecting a weighting variable.
