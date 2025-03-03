@@ -619,7 +619,7 @@ freqtable <-
 freqtable.default <- function(.data, ..., na.rm = FALSE, weights = NULL) {
     d <- .data |> dplyr::select(..., .weights = {{ weights }})
     if (!".weights" %in% colnames(d)) d$.weights <- 1L
-    xtabs(.weights ~ ., data=d, addNA=!na.rm)
+    xtabs(.weights ~ ., data = d, addNA = !na.rm)
 }
 
 #' @rdname freqtable
@@ -633,5 +633,5 @@ freqtable.survey.design <- function(.data, ..., na.rm = FALSE, weights = TRUE) {
     else {
         wtsvar <- NULL
     }
-    freqtable(newdata, ..., na.rm=na.rm, weights={{ wtsvar }})
+    freqtable(newdata, ..., na.rm = na.rm, weights = {{ wtsvar }})
 }
