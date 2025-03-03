@@ -604,9 +604,15 @@ ltabs <- function(formula, data, levels = c("prefixed", "labels", "values"), var
 #' freqtable(hdv2003, nivetud, sport, weights=poids)
 #' freqtable(hdv2003, starts_with("trav"))
 #' 
+#' # Using survey design objects
 #' library(survey)
 #' hdv2003_wtd <- svydesign(ids=~1, weights=~poids, data=hdv2003)
 #' freqtable(hdv2003_wtd, nivetud, sport)
+#' 
+#' # Compute percentages based on frequencies
+#' hdv2003 |> freqtable(sport) |> freq()
+#' hdv2003 |> freqtable(sport, sexe) |> prop()
+#' hdv2003 |> freqtable(sport, sexe) |> cprop()
 #' @export
 
 freqtable <-
