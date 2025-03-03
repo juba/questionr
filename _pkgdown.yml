@@ -10,6 +10,7 @@ reference:
     desc: "Functions to help working with one-way and two-way frequency tables."
     contents:
       - freq
+      - freqtable
       - rprop
       - cprop
       - prop
