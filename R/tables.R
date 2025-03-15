@@ -578,3 +578,66 @@ ltabs <- function(formula, data, levels = c("prefixed", "labels", "values"), var
     return(tab)
   }
 
+#' Frequency table of variables
+#' 
+#' Generate frequency tables for one or more variables in a data frame
+#' or a survey design.
+#' 
+#' @aliases freqtable.default freqtable.survey.design
+#' @param .data a data frame or `survey.design` object
+#' @param ... one or more expressions accepted by \code{\link[dplyr]{select}}
+#' selecting at least one variable
+#' @param na.rm Whether to remove missing values in the variables.
+#' @param weights If `.data` is a data frame, an optional expression
+#' selecting a weighting variable.
+#' If `.data` is a survey design, either `TRUE` (the default) to
+#' to use survey weights, or `FALSE` or `NULL` to return unweighted
+#' frequencies.
+#' 
+#' @return The result is an array of class `table`.
+#' @seealso \code{\link{freq}}, \code{\link{wtd.table}},
+#'          \code{\link{xtabs}}, \code{\link{table}}.
+#' @examples 
+#' data(hdv2003)
+#' freqtable(hdv2003, nivetud, sport)
+#' freqtable(hdv2003, nivetud, sport, sexe)
+#' freqtable(hdv2003, nivetud, sport, weights=poids)
+#' freqtable(hdv2003, starts_with("trav"))
+#' 
+#' # Using survey design objects
+#' library(survey)
+#' hdv2003_wtd <- svydesign(ids=~1, weights=~poids, data=hdv2003)
+#' freqtable(hdv2003_wtd, nivetud, sport)
+#' 
+#' # Compute percentages based on frequencies
+#' hdv2003 |> freqtable(sport) |> freq()
+#' hdv2003 |> freqtable(sport, sexe) |> prop()
+#' hdv2003 |> freqtable(sport, sexe) |> cprop()
+#' @export
+
+freqtable <-
+    function(.data, ...) {
+        UseMethod("freqtable")
+    }
+
+#' @rdname freqtable
+#' @export
+freqtable.default <- function(.data, ..., na.rm = FALSE, weights = NULL) {
+    d <- .data |> dplyr::select(..., .weights = {{ weights }})
+    if (!".weights" %in% colnames(d)) d$.weights <- 1L
+    xtabs(.weights ~ ., data = d, addNA = !na.rm)
+}
+
+#' @rdname freqtable
+#' @export
+freqtable.survey.design <- function(.data, ..., na.rm = FALSE, weights = TRUE) {
+    newdata <- .data$variables
+    if(isTRUE(weights)) {
+        newdata$.weights <- weights(.data)
+        wtsvar <- ".weights"
+    }
+    else {
+        wtsvar <- NULL
+    }
+    freqtable(newdata, ..., na.rm = na.rm, weights = {{ wtsvar }})
+}
