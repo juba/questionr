@@ -224,7 +224,7 @@ iorder <- function(obj = NULL, var_name = NULL) {
         if (make.names(var_name) != var_name) {
           var_name <- paste0('`', var_name, '`')
         }
-        result <- sprintf("%s$%s", req(input$obj_name), var_name)        
+        result <- sprintf("%s$%s", req(input$obj_name), var_name)
       }
       if (is.vector(robj()) || is.factor(robj())) {
         result <- req(input$obj_name)
@@ -333,9 +333,9 @@ iorder <- function(obj = NULL, var_name = NULL) {
 
     ## Code generation for forcats::fct_relevel
     generate_code_forcats <- function(dest_var) {
-      out <- sprintf("%s <- %s %%>%%\n  ", dest_var, src_var())
+      out <- sprintf("%s <- %s  |>\n  ", dest_var, src_var())
       if (is.numeric(rvar())) {
-          out <- paste0(out, "as.character() %>%\n  ")
+          out <- paste0(out, "as.character() |>\n  ")
       }
       newlevels <- paste0(utils::capture.output(dput(input$sortable)), collapse = "\n")
       newlevels <- gsub("(^c\\(|\\)$)", "", newlevels)
@@ -349,7 +349,7 @@ iorder <- function(obj = NULL, var_name = NULL) {
         if (make.names(dest_var) != dest_var) {
           dest_var <- paste0('`', dest_var, '`')
         }
-        dest_var <- sprintf("%s$%s", req(input$obj_name), dest_var)        
+        dest_var <- sprintf("%s$%s", req(input$obj_name), dest_var)
       }
       if (is.vector(robj()) || is.factor(robj())) {
         dest_var <- req(input$newvar_name)
