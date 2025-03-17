@@ -474,25 +474,25 @@ irec <- function(obj = NULL, var_name = NULL) {
         }
         ## Input conversion if numeric
         if (is.numeric(rvar())) {
-          out <- paste0(sprintf("%s <- %s %%>%%\n  as.character() %%>%%\n fct_recode(\n", dest_var, source), out)
+          out <- paste0(sprintf("%s <- %s  |>\n  as.character() |>\n fct_recode(\n", dest_var, source), out)
         } else {
-          out <- paste0(sprintf("%s <- %s %%>%%\n  fct_recode(\n", dest_var, source), out)
+          out <- paste0(sprintf("%s <- %s  |>\n  fct_recode(\n", dest_var, source), out)
         }
         out <- paste0(out, ")")
       }
 
-      ## fct_explicit_na
+      ## fct_na_value_to_level
       if (na_recode != "") {
         if (out != "" && !has_recode_to_na) {
-          out <- paste0(out, sprintf(" %%>%%\n  fct_explicit_na(%s)", na_recode))
+          out <- paste0(out, sprintf("  |>\n  fct_na_value_to_level(%s)", na_recode))
         } else {
-          out <- paste0(sprintf("%s <- %s %%>%%\n  fct_explicit_na(%s)\n", dest_var, src_var(), na_recode), out)
+          out <- paste0(sprintf("%s <- %s  |>\n  fct_na_value_to_level(%s)\n", dest_var, src_var(), na_recode), out)
         }
       }
 
       ## Optional output conversion
-      if (input$outconv == "character") out <- paste0(out, " %>%\n  as.character()\n")
-      if (input$outconv == "numeric") out <- paste0(out, " %>%\n  as.character() %>%\n  as.numeric()\n")
+      if (input$outconv == "character") out <- paste0(out, "  |>\n  as.character()\n")
+      if (input$outconv == "numeric") out <- paste0(out, " |>\n  as.character()  |>\n  as.numeric()\n")
 
       ## Initial comment
       comment <- ""

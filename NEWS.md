@@ -1,5 +1,6 @@
 # questionr (development version)
 
+* `irec()` and `iorder()` have been updated to use the native pipe and `fct_na_value_to_level()` instead of `fct_explicit_na()` (#141)
 
 # questionr 0.7.8
 
