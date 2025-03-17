@@ -186,11 +186,11 @@ freq.na <- function(data, ...) {
 ##' @export
 
 cprop.table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n = FALSE, ...) {
-  # 3 dimension or more
+  # 3 dimensions or more
   if (length(dim(tab)) > 2) {
     res <- apply(
       tab,
-      seq_len(length(dim(tab)) - 2 ),
+      seq_len(length(dim(tab)) - 2),
       cprop,
       simplify = FALSE,
       digits = digits,
@@ -296,11 +296,11 @@ lprop <- rprop
 ##' @aliases rprop.table
 ##' @export
 rprop.table <- function(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n = FALSE, ...) {
-  # 3 dimension or more
+  # 3 dimensions or more
   if (length(dim(tab)) > 2) {
     res <- apply(
       tab,
-      seq_len(length(dim(tab)) - 2 ),
+      seq_len(length(dim(tab)) - 2),
       rprop,
       simplify = FALSE,
       digits = digits,
@@ -408,11 +408,11 @@ prop <- function(tab, ...) {
 ##' @export
 
 prop_table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n = FALSE, ...) {
-  # 3 dimension or more
+  # 3 dimensions or more
   if (length(dim(tab)) > 2) {
     res <- apply(
       tab,
-      seq_len(length(dim(tab)) - 2 ),
+      seq_len(length(dim(tab)) - 2),
       prop_table,
       simplify = FALSE,
       digits = digits,
