@@ -10,20 +10,20 @@
 #' @param sort if specified, allow to sort the table by increasing ("inc") or decreasing ("dec") frequencies
 #' @param valid if TRUE, display valid percentages
 #' @param levels the desired levels for the factor in case of labelled vector (\pkg{labelled} package
-#'    must be installed): "labels" for value labels, "values" for values or 
+#'    must be installed): "labels" for value labels, "values" for values or
 #'    "prefixed" for labels prefixed with values
 #' @param na.last if TRUE, NA values are always be last table row
 #' @return
 #' The result is an object of class data.frame.
 #' @seealso
 #' \code{\link{table}}, \code{\link[questionr]{prop}}, \code{\link[questionr]{cprop}}, \code{\link[questionr]{rprop}}
-#' @examples 
+#' @examples
 #' # factor
 #' data(hdv2003)
 #' freq(hdv2003$qualif)
 #' freq(hdv2003$qualif, cum = TRUE, total = TRUE)
 #' freq(hdv2003$qualif, cum = TRUE, total = TRUE, sort ="dec")
-#' 
+#'
 #' # labelled data
 #' data(fecondite)
 #' freq(femmes$region)
@@ -31,22 +31,22 @@
 #' freq(femmes$region, levels = "v")
 #' @export
 
-freq <- function(x, digits = 1, cum = FALSE, total = FALSE, exclude = NULL, sort = "", 
+freq <- function(x, digits = 1, cum = FALSE, total = FALSE, exclude = NULL, sort = "",
          valid = !(NA %in% exclude), levels = c("prefixed", "labels", "values"),
          na.last = TRUE) {
-  
+
   levels <- match.arg(levels)
-  
+
   if (is.table(x)) {
     tab <- x
   } else {
     tab <- table(labelled::to_factor(x, levels), exclude = exclude)
   }
-  
+
   effectifs <- as.vector(tab)
   pourc <- as.vector(effectifs / sum(effectifs) * 100)
   result <- data.frame(n = effectifs, pourc = pourc)
-  
+
   if (valid) {
     user_na <- unique(as.character(labelled::to_factor(x, levels)[is.na(x)]))
     NA.position <- which(is.na(names(tab)) | names(tab) %in% user_na)
@@ -55,24 +55,24 @@ freq <- function(x, digits = 1, cum = FALSE, total = FALSE, exclude = NULL, sort
     valid.pourc[NA.position] <- 0 # temporary 0 for cumsum
     result <- cbind(result, valid.pourc)
   }
-  
+
   ## Avoid duplicate row names if both NA and "NA" in tab
   if ("NA" %in% names(tab)) {
     names(tab)[names(tab) == "NA"] <- "\"NA\""
   }
   rownames(result) <- ifelse(is.na(names(tab)), "NA", names(tab))
-  
+
   if (sort == "inc") result <- result[order(result$n),]
   if (sort == "dec") result <- result[order(result$n, decreasing = TRUE),]
-  
+
   if (na.last && "NA" %in% rownames(result)) {
     result <- rbind(result[-which(rownames(result) == "NA"), ], result["NA", ])
   }
-  
+
   if (total) result <- rbind(result, Total = apply(result,2,sum))
-  if (total & valid) 
+  if (total & valid)
     result[length(result$pourc),"valid.pourc"] <- 100
-  
+
   if (cum) {
     pourc.cum <- cumsum(result$pourc)
     if (total) pourc.cum[length(pourc.cum)] <- 100
@@ -83,21 +83,21 @@ freq <- function(x, digits = 1, cum = FALSE, total = FALSE, exclude = NULL, sort
       result <- cbind(result, valid.pourc.cum)
     }
   }
-  
+
   if (valid) {
     NA.position <- which(rownames(result) == "NA" | rownames(result) %in% user_na)
     result[NA.position, "valid.pourc"] <- NA
     if (cum)
       result[NA.position, "valid.pourc.cum"] <- NA
   }
-  
+
   names(result)[names(result) == "pourc"] <- "%"
   names(result)[names(result) == "valid.pourc"] <- "val%"
   names(result)[names(result) == "pourc.cum"] <- "%cum"
   names(result)[names(result) == "valid.pourc.cum"] <- "val%cum"
-  
+
   class(result) <- c("freqtab", class(result))
-  
+
   round(result, digits = digits)
 }
 
@@ -133,10 +133,10 @@ freq.na <- function(data, ...) {
     d = as.data.frame(data)
   }
   if (is.null(dim(d))) {
-    c = length(d)  
+    c = length(d)
   }
   else {
-    c = nrow(d)    
+    c = nrow(d)
   }
   d = is.na(as.matrix(d))
   d = as.matrix(colSums(d))
@@ -147,7 +147,7 @@ freq.na <- function(data, ...) {
     names(d) = n
   else
     colnames(d) = n
-  
+
   return(d)
 }
 
@@ -185,7 +185,28 @@ freq.na <- function(data, ...) {
 ##' @aliases cprop.table
 ##' @export
 
-cprop.table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE, ...) {
+cprop.table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n = FALSE, ...) {
+  # 3 dimension or more
+  if (length(dim(tab)) > 2) {
+    res <- apply(
+      tab,
+      seq_len(length(dim(tab)) - 2 ),
+      cprop,
+      simplify = FALSE,
+      digits = digits,
+      total = total,
+      percent = percent,
+      drop = drop,
+      n = n,
+      ...
+    )
+    dn <- dimnames(res)
+    for (v in names(dn))
+      dn[[v]] <- paste(v, "=", dn[[v]])
+    dimnames(res) <- dn
+    return(purrr::array_tree(res))
+  }
+
   # subset to non-empty rows/columns
   if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop=FALSE]
   dn <- names(dimnames(tab))
@@ -214,11 +235,11 @@ cprop.table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = 
 
 ##' @rdname cprop
 ##' @aliases cprop.data.frame
-##' @export 
+##' @export
 cprop.data.frame <- cprop.table
 ##' @rdname cprop
 ##' @aliases cprop.matrix
-##' @export 
+##' @export
 cprop.matrix <- cprop.table
 
 ##' @rdname cprop
@@ -273,8 +294,29 @@ lprop <- rprop
 
 ##' @rdname rprop
 ##' @aliases rprop.table
-##' @export 
-rprop.table <- function(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE, ...) {
+##' @export
+rprop.table <- function(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n = FALSE, ...) {
+  # 3 dimension or more
+  if (length(dim(tab)) > 2) {
+    res <- apply(
+      tab,
+      seq_len(length(dim(tab)) - 2 ),
+      rprop,
+      simplify = FALSE,
+      digits = digits,
+      total = total,
+      percent = percent,
+      drop = drop,
+      n = n,
+      ...
+    )
+    dn <- dimnames(res)
+    for (v in names(dn))
+      dn[[v]] <- paste(v, "=", dn[[v]])
+    dimnames(res) <- dn
+    return(purrr::array_tree(res))
+  }
+
   # subset to non-empty rows/columns
   if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop=FALSE]
   dn <- names(dimnames(tab))
@@ -302,11 +344,11 @@ rprop.table <- function(tab, digits = 1, total = TRUE, percent = FALSE, drop = T
 }
 ##' @rdname rprop
 ##' @aliases rprop.data.frame
-##' @export 
+##' @export
 rprop.data.frame <- rprop.table
 ##' @rdname rprop
 ##' @aliases rprop.matrix
-##' @export 
+##' @export
 rprop.matrix <- rprop.table
 
 ##' @rdname rprop
@@ -325,7 +367,7 @@ rprop.tabyl <- function(tab, digits = 1, total = TRUE, percent = FALSE, n = FALS
   tab <- janitor::adorn_title(tab, "combined")
   return(tab)
 }
- 
+
 
 
 #' Global percentages of a two-way frequency table.
@@ -363,9 +405,30 @@ prop <- function(tab, ...) {
 
 ##' @rdname prop
 ##' @aliases prop_table
-##' @export 
+##' @export
 
-prop_table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n=FALSE, ...) {
+prop_table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n = FALSE, ...) {
+  # 3 dimension or more
+  if (length(dim(tab)) > 2) {
+    res <- apply(
+      tab,
+      seq_len(length(dim(tab)) - 2 ),
+      prop_table,
+      simplify = FALSE,
+      digits = digits,
+      total = total,
+      percent = percent,
+      drop = drop,
+      n = n,
+      ...
+    )
+    dn <- dimnames(res)
+    for (v in names(dn))
+      dn[[v]] <- paste(v, "=", dn[[v]])
+    dimnames(res) <- dn
+    return(purrr::array_tree(res))
+  }
+
   # subset to non-empty rows/columns
   if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop=FALSE]
   dn <- names(dimnames(tab))
@@ -400,11 +463,11 @@ prop_table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = T
 
 ##' @rdname prop
 ##' @aliases prop.data.frame
-##' @export 
+##' @export
 prop.data.frame <- prop_table
 ##' @rdname prop
 ##' @aliases prop.matrix
-##' @export 
+##' @export
 prop.matrix <- prop_table
 
 ##' @rdname prop
@@ -428,7 +491,7 @@ prop.tabyl <- function(tab, digits = 1, total = TRUE, percent = FALSE, n = FALSE
 
 #' Return the chi-squared residuals of a two-way frequency table.
 #'
-#' Return the raw, standardized or Pearson's residuals (the default) of a chi-squared test on a two-way frequency table. 
+#' Return the raw, standardized or Pearson's residuals (the default) of a chi-squared test on a two-way frequency table.
 #'
 #' @aliases residus
 #' @param tab frequency table
@@ -532,19 +595,19 @@ print.proptab <- function (x, digits=NULL, percent=NULL, justify="right", ...) {
 
 
 #' Cross tabulation with labelled variables
-#' 
+#'
 #' This function is a wrapper around \code{\link[stats]{xtabs}}, adding automatically
 #' value labels for labelled vectors if \pkg{labelled} package eis installed.
-#' 
+#'
 #' @param formula a formula object (see \code{\link[stats]{xtabs}})
 #' @param data a data frame
-#' @param levels the desired levels in case of labelled vector: 
+#' @param levels the desired levels in case of labelled vector:
 #'    "labels" for value labels, "values" for values or "prefixed" for labels prefixed with values
 #' @param variable_label display variable label if available?
 #' @param ... additional arguments passed to \code{\link[stats]{xtabs}}
-#' 
+#'
 #' @seealso \code{\link[stats]{xtabs}}.
-#' @examples 
+#' @examples
 #' data(fecondite)
 #' ltabs(~radio, femmes)
 #' ltabs(~radio+tv, femmes)
@@ -555,34 +618,34 @@ print.proptab <- function (x, digits=NULL, percent=NULL, justify="right", ...) {
 #' @export
 #' @importFrom stats as.formula
 #' @importFrom stats terms
-#' @importFrom stats xtabs 
+#' @importFrom stats xtabs
 
 ltabs <- function(formula, data, levels = c("prefixed", "labels", "values"), variable_label = TRUE, ...){
     levels <- match.arg(levels)
     formula <- stats::as.formula(formula)
     if (!is.data.frame(data))
       data <- as.data.frame(data)
-    
+
     vars <- attr(stats::terms(formula), "term.labels")
-    
+
     dn <- vars
     for (i in 1:length(vars))
       if (!is.null(labelled::var_label(data[[vars[i]]])) & variable_label)
         dn[i] <- paste(vars[i], labelled::var_label(data[[vars[i]]]), sep = ": ")
-    
-    for (v in vars) 
+
+    for (v in vars)
       data[[v]] <- labelled::to_factor(data[[v]], levels = levels)
-    
+
     tab <- stats::xtabs(formula, data, ...)
     names(dimnames(tab)) <- dn
     return(tab)
   }
 
 #' Frequency table of variables
-#' 
+#'
 #' Generate frequency tables for one or more variables in a data frame
 #' or a survey design.
-#' 
+#'
 #' @aliases freqtable.default freqtable.survey.design
 #' @param .data a data frame or `survey.design` object
 #' @param ... one or more expressions accepted by \code{\link[dplyr]{select}}
@@ -593,22 +656,22 @@ ltabs <- function(formula, data, levels = c("prefixed", "labels", "values"), var
 #' If `.data` is a survey design, either `TRUE` (the default) to
 #' to use survey weights, or `FALSE` or `NULL` to return unweighted
 #' frequencies.
-#' 
+#'
 #' @return The result is an array of class `table`.
 #' @seealso \code{\link{freq}}, \code{\link{wtd.table}},
 #'          \code{\link{xtabs}}, \code{\link{table}}.
-#' @examples 
+#' @examples
 #' data(hdv2003)
 #' freqtable(hdv2003, nivetud, sport)
 #' freqtable(hdv2003, nivetud, sport, sexe)
 #' freqtable(hdv2003, nivetud, sport, weights=poids)
 #' freqtable(hdv2003, starts_with("trav"))
-#' 
+#'
 #' # Using survey design objects
 #' library(survey)
 #' hdv2003_wtd <- svydesign(ids=~1, weights=~poids, data=hdv2003)
 #' freqtable(hdv2003_wtd, nivetud, sport)
-#' 
+#'
 #' # Compute percentages based on frequencies
 #' hdv2003 |> freqtable(sport) |> freq()
 #' hdv2003 |> freqtable(sport, sexe) |> prop()

@@ -27,7 +27,8 @@ Imports:
     stats,
     utils,
     rlang,
-    labelled (>= 2.6.0)
+    labelled (>= 2.6.0),
+    purrr
 Suggests:
     testthat,
     roxygen2,
