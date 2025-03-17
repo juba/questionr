@@ -14,7 +14,7 @@ Description: Set of functions to make the processing and analysis of
     contingency tables, dataset metadata handling, and several convenience
     functions.
 Depends:
-    R (>= 3.5.0)
+    R (>= 4.1.0)
 Imports:
     shiny (>= 1.0.5),
     miniUI,
@@ -35,7 +35,7 @@ Suggests:
     ggplot2,
     tidyr,
     janitor,
-    forcats,
+    forcats (>= 1.0.0),
     knitr,
     rmarkdown,
     survey,
