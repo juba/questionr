@@ -53,7 +53,7 @@ cprop(tab, ...)
 
 \item{percent}{if \code{TRUE}, add a percent sign after the values when printing}
 
-\item{drop}{if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped.}
+\item{drop}{if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped.  Unused for tables of 3 dimensions ore more (always `FALSE`).}
 
 \item{n}{if \code{TRUE}, display number of observations per column.}
 }
@@ -71,6 +71,8 @@ tab <- apply(Titanic, c(4,1), sum)
 cprop(tab)
 ## Column percentages with custom display
 cprop(tab, digits=2, percent=TRUE, total=FALSE)
+## Could be applied to a table of 3 dimensions or more
+cprop(Titanic)
 }
 \seealso{
 \code{\link[questionr]{rprop}}, \code{\link[questionr]{prop}}, \code{\link{table}}, \code{\link{prop.table}}
