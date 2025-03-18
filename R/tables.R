@@ -204,8 +204,8 @@ cprop.table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = 
     )
     res <- array(
       unlist(r),
-      dim = c(dim(r[[1]]), dim(r)),
-      dimnames = append(dimnames(r[[1]]), dimnames(r))
+      dim = c(dim(r[[1]]), dim(tab)[-2:-1]),
+      dimnames = append(dimnames(r[[1]]), dimnames(tab)[-2:-1])
     )
     class(res) <- class(r[[1]])
     attr(res, "percent") <- attr(r[[1]], "percent")
@@ -322,8 +322,8 @@ rprop.table <- function(tab, digits = 1, total = TRUE, percent = FALSE, drop = T
     )
     res <- array(
       unlist(r),
-      dim = c(dim(r[[1]]), dim(r)),
-      dimnames = append(dimnames(r[[1]]), dimnames(r))
+      dim = c(dim(r[[1]]), dim(tab)[-2:-1]),
+      dimnames = append(dimnames(r[[1]]), dimnames(tab)[-2:-1])
     )
     class(res) <- class(r[[1]])
     attr(res, "percent") <- attr(r[[1]], "percent")
@@ -442,8 +442,8 @@ prop_table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = T
     )
     res <- array(
       unlist(r),
-      dim = c(dim(r[[1]]), dim(r)),
-      dimnames = append(dimnames(r[[1]]), dimnames(r))
+      dim = c(dim(r[[1]]), dim(tab)[-2:-1]),
+      dimnames = append(dimnames(r[[1]]), dimnames(tab)[-2:-1])
     )
     class(res) <- class(r[[1]])
     attr(res, "percent") <- attr(r[[1]], "percent")
