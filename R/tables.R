@@ -188,9 +188,9 @@ freq.na <- function(data, ...) {
 cprop.table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n = FALSE, ...) {
   # 3 dimensions or more
   if (length(dim(tab)) > 2) {
-    res <- apply(
+    r <- apply(
       tab,
-      seq_len(length(dim(tab)) - 2),
+      3:length(dim(tab)),
       cprop,
       simplify = FALSE,
       digits = digits,
@@ -200,11 +200,17 @@ cprop.table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = 
       n = n,
       ...
     )
-    dn <- dimnames(res)
-    for (v in names(dn))
-      dn[[v]] <- paste(v, "=", dn[[v]])
-    dimnames(res) <- dn
-    return(purrr::array_tree(res))
+    res <- array(
+      unlist(r),
+      dim = c(dim(r[[1]]), dim(r)),
+      dimnames = append(dimnames(r[[1]]), dimnames(r))
+    )
+    class(res) <- class(r[[1]])
+    attr(res, "percent") <- attr(r[[1]], "percent")
+    attr(res, "digits") <- attr(r[[1]], "digits")
+    attr(res, "total") <- attr(r[[1]], "total")
+    attr(res, "row.n") <- attr(r[[1]], "row.n")
+    return(res)
   }
 
   # subset to non-empty rows/columns
@@ -298,9 +304,9 @@ lprop <- rprop
 rprop.table <- function(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n = FALSE, ...) {
   # 3 dimensions or more
   if (length(dim(tab)) > 2) {
-    res <- apply(
+    r <- apply(
       tab,
-      seq_len(length(dim(tab)) - 2),
+      3:length(dim(tab)),
       rprop,
       simplify = FALSE,
       digits = digits,
@@ -310,11 +316,17 @@ rprop.table <- function(tab, digits = 1, total = TRUE, percent = FALSE, drop = T
       n = n,
       ...
     )
-    dn <- dimnames(res)
-    for (v in names(dn))
-      dn[[v]] <- paste(v, "=", dn[[v]])
-    dimnames(res) <- dn
-    return(purrr::array_tree(res))
+    res <- array(
+      unlist(r),
+      dim = c(dim(r[[1]]), dim(r)),
+      dimnames = append(dimnames(r[[1]]), dimnames(r))
+    )
+    class(res) <- class(r[[1]])
+    attr(res, "percent") <- attr(r[[1]], "percent")
+    attr(res, "digits") <- attr(r[[1]], "digits")
+    attr(res, "total") <- attr(r[[1]], "total")
+    attr(res, "row.n") <- attr(r[[1]], "row.n")
+    return(res)
   }
 
   # subset to non-empty rows/columns
@@ -410,9 +422,9 @@ prop <- function(tab, ...) {
 prop_table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n = FALSE, ...) {
   # 3 dimensions or more
   if (length(dim(tab)) > 2) {
-    res <- apply(
+    r <- apply(
       tab,
-      seq_len(length(dim(tab)) - 2),
+      3:length(dim(tab)),
       prop_table,
       simplify = FALSE,
       digits = digits,
@@ -422,11 +434,17 @@ prop_table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = T
       n = n,
       ...
     )
-    dn <- dimnames(res)
-    for (v in names(dn))
-      dn[[v]] <- paste(v, "=", dn[[v]])
-    dimnames(res) <- dn
-    return(purrr::array_tree(res))
+    res <- array(
+      unlist(r),
+      dim = c(dim(r[[1]]), dim(r)),
+      dimnames = append(dimnames(r[[1]]), dimnames(r))
+    )
+    class(res) <- class(r[[1]])
+    attr(res, "percent") <- attr(r[[1]], "percent")
+    attr(res, "digits") <- attr(r[[1]], "digits")
+    attr(res, "total") <- attr(r[[1]], "total")
+    attr(res, "row.n") <- attr(r[[1]], "row.n")
+    return(res)
   }
 
   # subset to non-empty rows/columns
