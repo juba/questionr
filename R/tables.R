@@ -151,9 +151,9 @@ freq.na <- function(data, ...) {
   return(d)
 }
 
-#' Column percentages of a two-way frequency table.
+#' Column percentages of a cross-tabulation table (dimension 2 or more).
 #'
-#' Return the column percentages of a two-way frequency table with formatting and printing options.
+#' Return the column percentages of a cross-tabulation table (dimension 2 or more) with formatting and printing options.
 #'
 #' @param tab frequency table
 #' @param digits number of digits to display
@@ -268,9 +268,9 @@ cprop.tabyl <- function(tab, digits = 1, total = TRUE, percent = FALSE, n = FALS
 }
 
 
-#' Row percentages of a two-way frequency table.
+#' Row percentages of a cross-tabulation table (dimension 2 or more).
 #'
-#' Return the row percentages of a two-way frequency table with formatting and printing options.
+#' Return the row percentages of a cross-tabulation table (dimension 2 or more) with formatting and printing options.
 #'
 #' @aliases lprop
 #' @param tab frequency table
@@ -329,7 +329,7 @@ rprop.table <- function(tab, digits = 1, total = TRUE, percent = FALSE, drop = T
     attr(res, "percent") <- attr(r[[1]], "percent")
     attr(res, "digits") <- attr(r[[1]], "digits")
     attr(res, "total") <- attr(r[[1]], "total")
-    attr(res, "row.n") <- attr(r[[1]], "row.n")
+    attr(res, "col.n") <- attr(r[[1]], "col.n")
     return(res)
   }
 
@@ -386,9 +386,9 @@ rprop.tabyl <- function(tab, digits = 1, total = TRUE, percent = FALSE, n = FALS
 
 
 
-#' Global percentages of a two-way frequency table.
+#' Global percentages of a cross-tabulation table (dimension 2 or more).
 #'
-#' Return the percentages of a two-way frequency table with formatting and printing options.
+#' Return the percentages of a cross-tabulation table (dimension 2 or more) with formatting and printing options.
 #'
 #' @param tab frequency table
 #' @param digits number of digits to display
@@ -450,6 +450,7 @@ prop_table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = T
     attr(res, "digits") <- attr(r[[1]], "digits")
     attr(res, "total") <- attr(r[[1]], "total")
     attr(res, "row.n") <- attr(r[[1]], "row.n")
+    attr(res, "col.n") <- attr(r[[1]], "col.n")
     return(res)
   }
 
@@ -583,18 +584,27 @@ format.proptab <- function (x, digits=NULL, percent=NULL, justify="right", ...) 
   row.n <- attr(x, "row.n"); if (is.null(row.n)) row.n <- FALSE
   col.n <- attr(x, "col.n"); if (is.null(col.n)) col.n <- FALSE
   tmp <- format.default(round(x,0), ...)
-  if (row.n) rn <- tmp[nrow(x),]
-  if (col.n) cn <- tmp[,ncol(x)]
+  if (row.n) {
+    posr <- dim(x)[1] * 1:(length(x) / dim(x)[1]) # positions of the n for rows
+    rn <- tmp[posr]
+  }
+  if (col.n) {
+    posc1 <- dim(x)[1] * (dim(x)[2] - 1) + seq_len(dim(x)[1]) # first table
+    ntable <- length(x) / (dim(x)[1] * dim(x)[2]) # number of tables
+    posc <- c() # positions of the n for cols
+    for (i in seq_len(ntable)) posc <- c(posc, posc1 + (i - 1) * dim(x)[1] * dim(x)[2])
+    cn <- tmp[posc]
+  }
   if (percent) {
     fmt <- paste("%.",digits,"f%%",sep="")
-    x[,] <- sprintf(x, fmt=fmt)
+    x[] <- sprintf(x, fmt=fmt)
     result <- format.default(x,justify=justify, ...)
   }
   else
     result <- format.default(round(x,digits), ...)
-  if (row.n) result[nrow(x),] <- rn
-  if (col.n) result[,ncol(x)] <- cn
-  if (total & row.n & col.n) result[nrow(x),ncol(x)] <- ""
+  if (row.n) result[posr] <- rn
+  if (col.n) result[posc] <- cn
+  if (total && row.n && col.n) result[intersect(posc, posr)] <- ""
   return(result)
 }
 

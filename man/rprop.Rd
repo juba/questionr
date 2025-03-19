@@ -7,7 +7,7 @@
 \alias{rprop.data.frame}
 \alias{rprop.matrix}
 \alias{rprop.tabyl}
-\title{Row percentages of a two-way frequency table.}
+\title{Row percentages of a cross-tabulation table (dimension 2 or more).}
 \usage{
 rprop(tab, ...)
 
@@ -62,7 +62,7 @@ rprop(tab, ...)
 The result is an object of class \code{table} and \code{proptab}.
 }
 \description{
-Return the row percentages of a two-way frequency table with formatting and printing options.
+Return the row percentages of a cross-tabulation table (dimension 2 or more) with formatting and printing options.
 }
 \examples{
 ## Sample table

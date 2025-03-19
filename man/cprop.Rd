@@ -6,7 +6,7 @@
 \alias{cprop.data.frame}
 \alias{cprop.matrix}
 \alias{cprop.tabyl}
-\title{Column percentages of a two-way frequency table.}
+\title{Column percentages of a cross-tabulation table (dimension 2 or more).}
 \usage{
 cprop(tab, ...)
 
@@ -61,7 +61,7 @@ cprop(tab, ...)
 The result is an object of class \code{table} and \code{proptab}.
 }
 \description{
-Return the column percentages of a two-way frequency table with formatting and printing options.
+Return the column percentages of a cross-tabulation table (dimension 2 or more) with formatting and printing options.
 }
 \examples{
 ## Sample table

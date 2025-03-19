@@ -6,7 +6,7 @@
 \alias{prop.data.frame}
 \alias{prop.matrix}
 \alias{prop.tabyl}
-\title{Global percentages of a two-way frequency table.}
+\title{Global percentages of a cross-tabulation table (dimension 2 or more).}
 \usage{
 prop(tab, ...)
 
@@ -61,7 +61,7 @@ prop_table(
 The result is an object of class \code{table} and \code{proptab}.
 }
 \description{
-Return the percentages of a two-way frequency table with formatting and printing options.
+Return the percentages of a cross-tabulation table (dimension 2 or more) with formatting and printing options.
 }
 \examples{
 ## Sample table
