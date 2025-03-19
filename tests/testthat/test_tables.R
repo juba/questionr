@@ -217,5 +217,15 @@ test_that("cprop, rprop and prop works with table of 3+ dimensions", {
     t["2nd", "Male", "Adult", "Yes"] / 100,
     Titanic["2nd", "Male", "Adult", "Yes"] / sum(Titanic["2nd", , "Adult", "Yes"])
   )
+
+  expect_no_error(
+    rprop(Titanic, total = FALSE, n = TRUE, digits = 2, percent = TRUE)
+  )
+  expect_no_error(
+    cprop(Titanic, total = FALSE, n = TRUE, digits = 2, percent = TRUE)
+  )
+  expect_no_error(
+    prop(Titanic, total = FALSE, n = TRUE, digits = 2, percent = TRUE)
+  )
 })
 
