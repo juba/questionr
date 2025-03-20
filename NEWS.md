@@ -2,6 +2,7 @@
 
 * `irec()` and `iorder()` have been updated to use the native pipe and `fct_na_value_to_level()` instead of `fct_explicit_na()` (#141)
 * `prop()`, `cprop()` and `rprop()` could now be applied on tables of 3 dimensions or more (#38)
+* new function `freqtable()` (#139, @nalimilan)
 
 # questionr 0.7.8
 
