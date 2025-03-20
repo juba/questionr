@@ -151,9 +151,9 @@ freq.na <- function(data, ...) {
   return(d)
 }
 
-#' Column percentages of a cross-tabulation table (dimension 2 or more).
+#' Column percentages of a cross-tabulation table (2 dimensions or more).
 #'
-#' Return the column percentages of a cross-tabulation table (dimension 2 or more) with formatting and printing options.
+#' Return the column percentages of a cross-tabulation table (2 dimensions or more) with formatting and printing options.
 #'
 #' @param tab frequency table
 #' @param digits number of digits to display
@@ -268,9 +268,9 @@ cprop.tabyl <- function(tab, digits = 1, total = TRUE, percent = FALSE, n = FALS
 }
 
 
-#' Row percentages of a cross-tabulation table (dimension 2 or more).
+#' Row percentages of a cross-tabulation table (2 dimensions or more).
 #'
-#' Return the row percentages of a cross-tabulation table (dimension 2 or more) with formatting and printing options.
+#' Return the row percentages of a cross-tabulation table (2 dimensions or more) with formatting and printing options.
 #'
 #' @aliases lprop
 #' @param tab frequency table
@@ -386,9 +386,9 @@ rprop.tabyl <- function(tab, digits = 1, total = TRUE, percent = FALSE, n = FALS
 
 
 
-#' Global percentages of a cross-tabulation table (dimension 2 or more).
+#' Global percentages of a cross-tabulation table (2 dimensions or more).
 #'
-#' Return the percentages of a cross-tabulation table (dimension 2 or more) with formatting and printing options.
+#' Return the percentages of a cross-tabulation table (2 dimensions or more) with formatting and printing options.
 #'
 #' @param tab frequency table
 #' @param digits number of digits to display

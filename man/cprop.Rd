@@ -6,7 +6,7 @@
 \alias{cprop.data.frame}
 \alias{cprop.matrix}
 \alias{cprop.tabyl}
-\title{Column percentages of a cross-tabulation table (dimension 2 or more).}
+\title{Column percentages of a cross-tabulation table (2 dimensions or more).}
 \usage{
 cprop(tab, ...)
 
@@ -53,7 +53,7 @@ cprop(tab, ...)
 
 \item{percent}{if \code{TRUE}, add a percent sign after the values when printing}
 
-\item{drop}{if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped.  Unused for tables of 3 dimensions ore more (always `FALSE`).}
+\item{drop}{if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped.  Unused for tables of 3 dimensions or more (always `FALSE`).}
 
 \item{n}{if \code{TRUE}, display number of observations per column.}
 }
@@ -61,7 +61,7 @@ cprop(tab, ...)
 The result is an object of class \code{table} and \code{proptab}.
 }
 \description{
-Return the column percentages of a cross-tabulation table (dimension 2 or more) with formatting and printing options.
+Return the column percentages of a cross-tabulation table (2 dimensions or more) with formatting and printing options.
 }
 \examples{
 ## Sample table
