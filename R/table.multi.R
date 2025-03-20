@@ -2,12 +2,12 @@
 ##'
 ##' This function allows to generate a frequency table from a multiple choices question.
 ##' The question's answers must be stored in a series of binary variables.
-##' 
+##'
 ##' @param df data frame with the binary variables
 ##' @param true.codes optional list of values considered as 'true' for the tabulation
 ##' @param weights optional weighting vector
 ##' @param digits number of digits to keep in the output
-##' @param freq add a percentage column 
+##' @param freq add a percentage column
 ##' @details
 ##' The function is applied to a series of binary variables, each one corresponding to a
 ##' choice of the question. For example, if the question is about seen movies among a movies
@@ -18,7 +18,7 @@
 ##' and counted in the frequency table. It is possible to specify other values to be counted
 ##' with the \code{true.codes} argument. Note than '1' and 'TRUE' are always considered as
 ##' true values even if \code{true.codes} is provided.
-##' 
+##'
 ##' If \code{freq} is set to TRUE, a percentage column is added to the resulting table. This
 ##' percentage is computed by dividing the number of TRUE answers for each value by the total
 ##' number of (potentially weighted) observations. Thus, these percentages sum can be greater
@@ -43,7 +43,7 @@
 ##' multi.table(df[,c("jazz", "rock","electronic")], true.codes=list("Y"), freq=FALSE)
 ##' @export
 
-multi.table <- function(df, true.codes=NULL, weights=NULL, digits=1, freq=TRUE) {
+multi.table <- function(df, true.codes = NULL, weights = NULL, digits = 1, freq = TRUE) {
   true.codes <- c(as.list(true.codes), TRUE, 1)
   res <- as.table(sapply(df, function(v) {
     sel <- as.numeric(v %in% true.codes)
@@ -51,11 +51,14 @@ multi.table <- function(df, true.codes=NULL, weights=NULL, digits=1, freq=TRUE) 
     sum(sel)
   }))
   if (freq) {
-    if (!is.null(weights)) total <- sum(weights)
-    else total <- nrow(df)
+    if (!is.null(weights)) {
+      total <- sum(weights)
+    } else {
+      total <- nrow(df)
+    }
     pourc <- res / total * 100
     res <- cbind(res, pourc)
-    colnames(res) <- c("n","%multi")
+    colnames(res) <- c("n", "%multi")
   }
   if (!is.null(digits)) res <- round(res, digits)
   return(res)
@@ -66,12 +69,12 @@ multi.table <- function(df, true.codes=NULL, weights=NULL, digits=1, freq=TRUE) 
 ##' This function allows to generate a two-way frequency table from a multiple
 ##' choices question and a factor. The question's answers must be stored in a
 ##' series of binary variables.
-##' 
+##'
 ##' @param df data frame with the binary variables
 ##' @param crossvar factor to cross the multiple choices question with
 ##' @param weights optional weighting vector
 ##' @param digits number of digits to keep in the output
-##' @param freq display percentages 
+##' @param freq display percentages
 ##' @param tfreq type of percentages to compute ("row" or "col")
 ##' @param n if \code{TRUE}, and freq is \code{TRUE}, display number of observations per row or column
 ##' @param na.rm Remove any NA values in \code{crossvar}
@@ -79,7 +82,7 @@ multi.table <- function(df, true.codes=NULL, weights=NULL, digits=1, freq=TRUE) 
 ##' @details
 ##' See the \code{multi.table} help page for details on handling of the multiple
 ##' choices question and corresponding binary variables.
-##' 
+##'
 ##' If \code{freq} is set to TRUE, the resulting table gives the columns percentages
 ##' based on the contingency table of crossvar in the respondants population.
 ##'
@@ -99,29 +102,32 @@ multi.table <- function(df, true.codes=NULL, weights=NULL, digits=1, freq=TRUE) 
 ##' ## Column percentages based on respondants
 ##' cross.multi.table(df[,c("jazz", "rock","electronic")], df$sex, true.codes=list("Y"), freq=TRUE)
 ##' ## Row percentages based on respondants
-##' cross.multi.table(df[,c("jazz", "rock","electronic")], 
+##' cross.multi.table(df[,c("jazz", "rock","electronic")],
 ##'                   df$sex, true.codes=list("Y"), freq=TRUE, tfreq="row", n=TRUE)
 ##' @export
- 
+
 cross.multi.table <- function(df, crossvar, weights = NULL, digits = 1, freq = FALSE, tfreq = "col", n = FALSE, na.rm = TRUE, ...) {
   exclude <- if (na.rm) NA else NULL
   tmp <- factor(crossvar, exclude = exclude)
-  if (is.null(weights))
-      res <- simplify2array(by(df, tmp, multi.table, freq = FALSE, digits = NULL, ...))
-  else {
-      ## (Not very elegant) fix when weights is provided
-      df <- cbind(weights, df)
-      res <- by(df, tmp, function(d) {
-          tmpw <- d[,1]
-          tmpd <- d[,-1]
-          multi.table(tmpd, weights = tmpw, freq = FALSE, digits = NULL, ...)
-      })
-      res <- simplify2array(res)
+  if (is.null(weights)) {
+    res <- simplify2array(by(df, tmp, multi.table, freq = FALSE, digits = NULL, ...))
+  } else {
+    ## (Not very elegant) fix when weights is provided
+    df <- cbind(weights, df)
+    res <- by(df, tmp, function(d) {
+      tmpw <- d[, 1]
+      tmpd <- d[, -1]
+      multi.table(tmpd, weights = tmpw, freq = FALSE, digits = NULL, ...)
+    })
+    res <- simplify2array(res)
   }
   ## Column percentages
   if (freq && tfreq != "row") {
-    if (is.null(weights)) totals <- table(tmp)
-    else totals <- wtd.table(tmp, weights = weights)
+    if (is.null(weights)) {
+      totals <- table(tmp)
+    } else {
+      totals <- wtd.table(tmp, weights = weights)
+    }
     totals <- totals[names(totals) %in% colnames(res) | is.na(names(totals))]
     res <- sweep(res, 2, totals, FUN = "/") * 100
     if (n) res <- rbind(res, n = totals)
@@ -129,12 +135,12 @@ cross.multi.table <- function(df, crossvar, weights = NULL, digits = 1, freq = F
   ## Row percentages
   if (freq && tfreq == "row") {
     if (na.rm) {
-      df <- df[!is.na(crossvar),]
+      df <- df[!is.na(crossvar), ]
       weights <- weights[!is.na(crossvar)]
     }
     totals <- multi.table(df, weights = weights, freq = FALSE, digits = NULL, ...)
     totals <- totals[rownames(res)]
-    if (n) eff <- apply(res,1,sum)    
+    if (n) eff <- apply(res, 1, sum)
     res <- sweep(res, 1, totals, FUN = "/") * 100
     if (n) res <- cbind(res, n = eff)
   }
@@ -143,7 +149,7 @@ cross.multi.table <- function(df, crossvar, weights = NULL, digits = 1, freq = F
 
 ##' Split a multiple choices variable in a series of binary variables
 ##'
-##' 
+##'
 ##' @param var variable to split
 ##' @param split.char character to split at
 ##' @param mnames names to give to the produced variabels. If NULL, the name are computed from the original variable name and the answers.
@@ -163,17 +169,19 @@ cross.multi.table <- function(df, crossvar, weights = NULL, digits = 1, freq = F
 ##' multi.table(multi.split(v))
 ##' @export
 
-multi.split <- function(var, split.char="/", mnames = NULL) {
+multi.split <- function(var, split.char = "/", mnames = NULL) {
   vname <- deparse(substitute(var))
   lev <- levels(factor(var))
   lev <- unique(unlist(strsplit(lev, split.char, fixed = TRUE)))
   split.char <- escape_regex(split.char)
-  if (is.null(mnames)) 
+  if (is.null(mnames)) {
     mnames <- gsub(" ", "_", paste(vname, lev, sep = "."))
-  else mnames <- paste(vname, mnames, sep = ".")
+  } else {
+    mnames <- paste(vname, mnames, sep = ".")
+  }
   result <- matrix(data = 0, nrow = length(var), ncol = length(lev))
   char.var <- as.character(var)
-  for (i in 1:length(lev)) {
+  for (i in seq_along(lev)) {
     pattern <- sprintf("(^|%s)%s(%s|$)", split.char, escape_regex(lev[i]), split.char)
     result[grep(pattern, char.var), i] <- 1
   }
@@ -190,5 +198,3 @@ multi.split <- function(var, split.char="/", mnames = NULL) {
 escape_regex <- function(s) {
   gsub("([.|()\\^{}+$*?]|\\[|\\])", "\\\\\\1", s)
 }
-
-

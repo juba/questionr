@@ -200,12 +200,12 @@ renomme.variable <- rename.variable
 
 `rm.unused.levels` <-
   function(x, v = NULL) {
-    if (!is.data.frame(x) & !is.factor(x)) stop("x must be a factor or a data.frame.")
+    if (!is.data.frame(x) && !is.factor(x)) stop("x must be a factor or a data.frame.")
     if (is.factor(x)) x <- factor(x)
     if (is.data.frame(x)) {
       if (is.null(v)) v <- names(x)
-      for (i in 1:length(x)) {
-        if (is.factor(x[[i]]) & names(x)[i] %in% v) {
+      for (i in seq_along(x)) {
+        if (is.factor(x[[i]]) && names(x)[i] %in% v) {
           x[[i]] <- factor(x[[i]])
         }
       }
