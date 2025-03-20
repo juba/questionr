@@ -11,3 +11,4 @@ resources
 \.github/
 ^\.github$
 ^\.lintr$
+^revdep$
