@@ -17,7 +17,7 @@ ltabs(
 
 \item{data}{a data frame}
 
-\item{levels}{the desired levels in case of labelled vector: 
+\item{levels}{the desired levels in case of labelled vector:
 "labels" for value labels, "values" for values or "prefixed" for labels prefixed with values}
 
 \item{variable_label}{display variable label if available?}

@@ -6,7 +6,7 @@
 \alias{prop.data.frame}
 \alias{prop.matrix}
 \alias{prop.tabyl}
-\title{Global percentages of a two-way frequency table.}
+\title{Global percentages of a cross-tabulation table (2 dimensions or more).}
 \usage{
 prop(tab, ...)
 
@@ -53,7 +53,7 @@ prop_table(
 
 \item{percent}{if \code{TRUE}, add a percent sign after the values when printing}
 
-\item{drop}{if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped.}
+\item{drop}{if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped. Unused for tables of 3 dimensions or more (always `FALSE`).}
 
 \item{n}{if \code{TRUE}, display number of observations per row and per column.}
 }
@@ -61,7 +61,7 @@ prop_table(
 The result is an object of class \code{table} and \code{proptab}.
 }
 \description{
-Return the percentages of a two-way frequency table with formatting and printing options.
+Return the percentages of a cross-tabulation table (2 dimensions or more) with formatting and printing options.
 }
 \examples{
 ## Sample table
@@ -71,6 +71,8 @@ tab <- apply(Titanic, c(1,4), sum)
 prop(tab)
 ## Percentages with custom display
 prop(tab, digits=2, percent=TRUE, total=FALSE, n=TRUE)
+## Could be applied to a table of 3 dimensions or more
+prop(Titanic)
 }
 \seealso{
 \code{\link[questionr]{rprop}}, \code{\link[questionr]{cprop}}, \code{\link{table}}, \code{\link{prop.table}}

@@ -145,7 +145,7 @@ test_that("freqtable results are correct", {
     expect_equal(freqtable(hdv2003, starts_with("niv")),
                  xtabs(~ nivetud, hdv2003, addNA = TRUE),
                  check.attributes = FALSE)
-    
+
     expect_equal(freqtable(hdv2003, nivetud, na.rm = FALSE),
                  xtabs(~ nivetud, hdv2003, addNA = TRUE),
                  check.attributes = FALSE)
@@ -192,3 +192,40 @@ test_that("freqtable results are correct", {
                  check.attributes = FALSE)
     expect_error(freqtable(hdv2003_wtd, nivetud, weights = age))
 })
+
+test_that("cprop, rprop and prop works with table of 3+ dimensions", {
+  expect_no_error(
+    t <- prop(Titanic)
+  )
+  expect_equal(
+    t["2nd", "Male", "Adult", "Yes"] / 100,
+    Titanic["2nd", "Male", "Adult", "Yes"] / sum(Titanic[, , "Adult", "Yes"])
+  )
+
+  expect_no_error(
+    t <- cprop(Titanic)
+  )
+  expect_equal(
+    t["2nd", "Male", "Adult", "Yes"] / 100,
+    Titanic["2nd", "Male", "Adult", "Yes"] / sum(Titanic[, "Male", "Adult", "Yes"])
+  )
+
+  expect_no_error(
+    t <- rprop(Titanic)
+  )
+  expect_equal(
+    t["2nd", "Male", "Adult", "Yes"] / 100,
+    Titanic["2nd", "Male", "Adult", "Yes"] / sum(Titanic["2nd", , "Adult", "Yes"])
+  )
+
+  expect_no_error(
+    rprop(Titanic, total = FALSE, n = TRUE, digits = 2, percent = TRUE)
+  )
+  expect_no_error(
+    cprop(Titanic, total = FALSE, n = TRUE, digits = 2, percent = TRUE)
+  )
+  expect_no_error(
+    prop(Titanic, total = FALSE, n = TRUE, digits = 2, percent = TRUE)
+  )
+})
+

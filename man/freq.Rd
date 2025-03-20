@@ -32,7 +32,7 @@ freq(
 \item{valid}{if TRUE, display valid percentages}
 
 \item{levels}{the desired levels for the factor in case of labelled vector (\pkg{labelled} package
-must be installed): "labels" for value labels, "values" for values or 
+must be installed): "labels" for value labels, "values" for values or
 "prefixed" for labels prefixed with values}
 
 \item{na.last}{if TRUE, NA values are always be last table row}

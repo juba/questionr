@@ -7,7 +7,7 @@
 \alias{rprop.data.frame}
 \alias{rprop.matrix}
 \alias{rprop.tabyl}
-\title{Row percentages of a two-way frequency table.}
+\title{Row percentages of a cross-tabulation table (2 dimensions or more).}
 \usage{
 rprop(tab, ...)
 
@@ -54,7 +54,7 @@ rprop(tab, ...)
 
 \item{percent}{if \code{TRUE}, add a percent sign after the values when printing}
 
-\item{drop}{if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped.}
+\item{drop}{if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped. Unused for tables of 3 dimensions or more (always `FALSE`).}
 
 \item{n}{if \code{TRUE}, display number of observations per row.}
 }
@@ -62,7 +62,7 @@ rprop(tab, ...)
 The result is an object of class \code{table} and \code{proptab}.
 }
 \description{
-Return the row percentages of a two-way frequency table with formatting and printing options.
+Return the row percentages of a cross-tabulation table (2 dimensions or more) with formatting and printing options.
 }
 \examples{
 ## Sample table
@@ -72,6 +72,8 @@ tab <- apply(Titanic, c(1,4), sum)
 rprop(tab)
 ## Column percentages with custom display
 rprop(tab, digits=2, percent=TRUE, total=FALSE)
+## Could be applied to a table of 3 dimensions or more
+rprop(Titanic)
 }
 \seealso{
 \code{\link[questionr]{cprop}}, \code{\link[questionr]{prop}}, \code{\link{table}}, \code{\link{prop.table}}

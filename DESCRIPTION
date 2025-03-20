@@ -27,7 +27,8 @@ Imports:
     stats,
     utils,
     rlang,
-    labelled (>= 2.6.0)
+    labelled (>= 2.6.0),
+    purrr
 Suggests:
     testthat,
     roxygen2,
@@ -44,4 +45,4 @@ SystemRequirements: xclip (Linux)
 VignetteBuilder: knitr
 URL: https://juba.github.io/questionr/
 BugReports: https://github.com/juba/questionr/issues
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
