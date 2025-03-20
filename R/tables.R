@@ -277,7 +277,7 @@ cprop.tabyl <- function(tab, digits = 1, total = TRUE, percent = FALSE, n = FALS
 #' @param digits number of digits to display
 #' @param total if \code{TRUE}, add a column with the sum of percentages and a row with global percentages
 #' @param percent if \code{TRUE}, add a percent sign after the values when printing
-#' @param drop if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped. Unused for tables of 3 dimensions ore more (always `FALSE`).
+#' @param drop if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped. Unused for tables of 3 dimensions or more (always `FALSE`).
 #' @param n if \code{TRUE}, display number of observations per row.
 #' @param ... parameters passed to other methods.
 #' @return
@@ -394,7 +394,7 @@ rprop.tabyl <- function(tab, digits = 1, total = TRUE, percent = FALSE, n = FALS
 #' @param digits number of digits to display
 #' @param total if \code{TRUE}, add a column with the sum of percentages and a row with global percentages
 #' @param percent if \code{TRUE}, add a percent sign after the values when printing
-#' @param drop if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped. Unused for tables of 3 dimensions ore more (always `FALSE`).
+#' @param drop if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped. Unused for tables of 3 dimensions or more (always `FALSE`).
 #' @param n if \code{TRUE}, display number of observations per row and per column.
 #' @param ... parameters passed to other methods
 #' @return
