@@ -159,7 +159,7 @@ freq.na <- function(data, ...) {
 #' @param digits number of digits to display
 #' @param total if \code{TRUE}, add a row with the sum of percentages and a column with global percentages
 #' @param percent if \code{TRUE}, add a percent sign after the values when printing
-#' @param drop if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped.  Unused for tables of 3 dimensions ore more (always `FALSE`).
+#' @param drop if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped.  Unused for tables of 3 dimensions or more (always `FALSE`).
 #' @param n if \code{TRUE}, display number of observations per column.
 #' @param ... parameters passed to other methods.
 #' @return
