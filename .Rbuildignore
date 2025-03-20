@@ -11,5 +11,6 @@ resources
 \.github/
 ^\.github$
 ^\.lintr$
+^\.vscode$
 ^revdep$
 ^cran-comments\.md$
