@@ -12,3 +12,4 @@ resources
 ^\.github$
 ^\.lintr$
 ^revdep$
+^cran-comments\.md$
