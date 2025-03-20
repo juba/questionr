@@ -53,7 +53,7 @@ prop_table(
 
 \item{percent}{if \code{TRUE}, add a percent sign after the values when printing}
 
-\item{drop}{if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped. Unused for tables of 3 dimensions ore more (always `FALSE`).}
+\item{drop}{if \code{TRUE}, lines or columns with a sum of zero, which would generate \code{NaN} percentages, are dropped. Unused for tables of 3 dimensions or more (always `FALSE`).}
 
 \item{n}{if \code{TRUE}, display number of observations per row and per column.}
 }
