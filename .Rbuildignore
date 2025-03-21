@@ -14,3 +14,4 @@ resources
 ^\.vscode$
 ^revdep$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
