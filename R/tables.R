@@ -22,7 +22,7 @@
 #' data(hdv2003)
 #' freq(hdv2003$qualif)
 #' freq(hdv2003$qualif, cum = TRUE, total = TRUE)
-#' freq(hdv2003$qualif, cum = TRUE, total = TRUE, sort ="dec")
+#' freq(hdv2003$qualif, cum = TRUE, total = TRUE, sort = "dec")
 #'
 #' # labelled data
 #' data(fecondite)
@@ -32,9 +32,8 @@
 #' @export
 
 freq <- function(x, digits = 1, cum = FALSE, total = FALSE, exclude = NULL, sort = "",
-         valid = !(NA %in% exclude), levels = c("prefixed", "labels", "values"),
-         na.last = TRUE) {
-
+                 valid = !(NA %in% exclude), levels = c("prefixed", "labels", "values"),
+                 na.last = TRUE) {
   levels <- match.arg(levels)
 
   if (is.table(x)) {
@@ -62,16 +61,17 @@ freq <- function(x, digits = 1, cum = FALSE, total = FALSE, exclude = NULL, sort
   }
   rownames(result) <- ifelse(is.na(names(tab)), "NA", names(tab))
 
-  if (sort == "inc") result <- result[order(result$n),]
-  if (sort == "dec") result <- result[order(result$n, decreasing = TRUE),]
+  if (sort == "inc") result <- result[order(result$n), ]
+  if (sort == "dec") result <- result[order(result$n, decreasing = TRUE), ]
 
   if (na.last && "NA" %in% rownames(result)) {
     result <- rbind(result[-which(rownames(result) == "NA"), ], result["NA", ])
   }
 
-  if (total) result <- rbind(result, Total = apply(result,2,sum))
-  if (total & valid)
-    result[length(result$pourc),"valid.pourc"] <- 100
+  if (total) result <- rbind(result, Total = apply(result, 2, sum))
+  if (total && valid) {
+    result[length(result$pourc), "valid.pourc"] <- 100
+  }
 
   if (cum) {
     pourc.cum <- cumsum(result$pourc)
@@ -87,8 +87,9 @@ freq <- function(x, digits = 1, cum = FALSE, total = FALSE, exclude = NULL, sort
   if (valid) {
     NA.position <- which(rownames(result) == "NA" | rownames(result) %in% user_na)
     result[NA.position, "valid.pourc"] <- NA
-    if (cum)
+    if (cum) {
       result[NA.position, "valid.pourc.cum"] <- NA
+    }
   }
 
   names(result)[names(result) == "pourc"] <- "%"
@@ -124,29 +125,28 @@ freq <- function(x, digits = 1, cum = FALSE, total = FALSE, exclude = NULL, sort
 #' @export
 
 freq.na <- function(data, ...) {
-  d = NULL
+  d <- NULL
   if (inherits(data, "data.frame")) {
     s <- lookfor(data, ...)$variable
-    d = data[, c(s)]
-  }
-  else {
-    d = as.data.frame(data)
+    d <- data[, c(s)]
+  } else {
+    d <- as.data.frame(data)
   }
   if (is.null(dim(d))) {
-    c = length(d)
+    c <- length(d)
+  } else {
+    c <- nrow(d)
   }
-  else {
-    c = nrow(d)
+  d <- is.na(as.matrix(d))
+  d <- as.matrix(colSums(d))
+  d <- cbind(d, 100 * round(d / c, 2))
+  d <- d[order(d[, 1], decreasing = TRUE), ]
+  n <- c("missing", "%")
+  if (is.null(dim(d))) {
+    names(d) <- n
+  } else {
+    colnames(d) <- n
   }
-  d = is.na(as.matrix(d))
-  d = as.matrix(colSums(d))
-  d = cbind(d, 100 * round(d / c, 2))
-  d = d[order(d[, 1], decreasing = TRUE), ]
-  n = c("missing", "%")
-  if(is.null(dim(d)))
-    names(d) = n
-  else
-    colnames(d) = n
 
   return(d)
 }
@@ -169,11 +169,11 @@ freq.na <- function(data, ...) {
 #' @examples
 #' ## Sample table
 #' data(Titanic)
-#' tab <- apply(Titanic, c(4,1), sum)
+#' tab <- apply(Titanic, c(4, 1), sum)
 #' ## Column percentages
 #' cprop(tab)
 #' ## Column percentages with custom display
-#' cprop(tab, digits=2, percent=TRUE, total=FALSE)
+#' cprop(tab, digits = 2, percent = TRUE, total = FALSE)
 #' ## Could be applied to a table of 3 dimensions or more
 #' cprop(Titanic)
 #' @export
@@ -187,7 +187,7 @@ freq.na <- function(data, ...) {
 ##' @aliases cprop.table
 ##' @export
 
-cprop.table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n = FALSE, ...) {
+cprop.table <- function(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n = FALSE, ...) {
   # 3 dimensions or more
   if (length(dim(tab)) > 2) {
     r <- apply(
@@ -216,19 +216,19 @@ cprop.table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = 
   }
 
   # subset to non-empty rows/columns
-  if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop=FALSE]
+  if (drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop = FALSE]
   dn <- names(dimnames(tab))
   if (total) {
     .tmp.colnames <- colnames(tab)
     tab <- cbind(tab, apply(tab, 1, sum))
-    colnames(tab) <- c(.tmp.colnames, gettext("All", domain="R-questionr"))
+    colnames(tab) <- c(.tmp.colnames, gettext("All", domain = "R-questionr"))
   }
   if (n) effectifs <- apply(tab, 2, sum)
   tab <- base::prop.table(tab, 2) * 100
   if (total) {
     .tmp.rownames <- rownames(tab)
     tab <- rbind(tab, Total = apply(tab, 2, sum))
-    rownames(tab) <- c(.tmp.rownames, gettext("Total", domain="R-questionr"))
+    rownames(tab) <- c(.tmp.rownames, gettext("Total", domain = "R-questionr"))
   }
   if (n) tab <- rbind(tab, n = effectifs)
   result <- as.table(tab)
@@ -287,11 +287,11 @@ cprop.tabyl <- function(tab, digits = 1, total = TRUE, percent = FALSE, n = FALS
 #' @examples
 #' ## Sample table
 #' data(Titanic)
-#' tab <- apply(Titanic, c(1,4), sum)
+#' tab <- apply(Titanic, c(1, 4), sum)
 #' ## Column percentages
 #' rprop(tab)
 #' ## Column percentages with custom display
-#' rprop(tab, digits=2, percent=TRUE, total=FALSE)
+#' rprop(tab, digits = 2, percent = TRUE, total = FALSE)
 #' ## Could be applied to a table of 3 dimensions or more
 #' rprop(Titanic)
 #' @export rprop lprop
@@ -334,19 +334,19 @@ rprop.table <- function(tab, digits = 1, total = TRUE, percent = FALSE, drop = T
   }
 
   # subset to non-empty rows/columns
-  if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop=FALSE]
+  if (drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop = FALSE]
   dn <- names(dimnames(tab))
   if (total) {
     .tmp.rownames <- rownames(tab)
     tab <- rbind(tab, apply(tab, 2, sum))
-    rownames(tab) <- c(.tmp.rownames, gettext("All", domain="R-questionr"))
+    rownames(tab) <- c(.tmp.rownames, gettext("All", domain = "R-questionr"))
   }
   if (n) effectifs <- apply(tab, 1, sum)
   tab <- base::prop.table(tab, 1) * 100
   if (total) {
     .tmp.colnames <- colnames(tab)
     tab <- cbind(tab, Total = apply(tab, 1, sum))
-    colnames(tab) <- c(.tmp.colnames, gettext("Total", domain="R-questionr"))
+    colnames(tab) <- c(.tmp.colnames, gettext("Total", domain = "R-questionr"))
   }
   if (n) tab <- cbind(tab, n = effectifs)
   result <- as.table(tab)
@@ -404,11 +404,11 @@ rprop.tabyl <- function(tab, digits = 1, total = TRUE, percent = FALSE, n = FALS
 #' @examples
 #' ## Sample table
 #' data(Titanic)
-#' tab <- apply(Titanic, c(1,4), sum)
+#' tab <- apply(Titanic, c(1, 4), sum)
 #' ## Percentages
 #' prop(tab)
 #' ## Percentages with custom display
-#' prop(tab, digits=2, percent=TRUE, total=FALSE, n=TRUE)
+#' prop(tab, digits = 2, percent = TRUE, total = FALSE, n = TRUE)
 #' ## Could be applied to a table of 3 dimensions or more
 #' prop(Titanic)
 #' @export
@@ -425,7 +425,7 @@ prop <- function(tab, ...) {
 ##' @aliases prop_table
 ##' @export
 
-prop_table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n = FALSE, ...) {
+prop_table <- function(tab, digits = 1, total = TRUE, percent = FALSE, drop = TRUE, n = FALSE, ...) {
   # 3 dimensions or more
   if (length(dim(tab)) > 2) {
     r <- apply(
@@ -455,25 +455,25 @@ prop_table <- function (tab, digits = 1, total = TRUE, percent = FALSE, drop = T
   }
 
   # subset to non-empty rows/columns
-  if(drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop=FALSE]
+  if (drop) tab <- tab[rowSums(tab) > 0, colSums(tab) > 0, drop = FALSE]
   dn <- names(dimnames(tab))
   if (n) {
-    l.effectifs <- apply(tab,1,sum)
-    r.effectifs <- apply(tab,2,sum)
+    l.effectifs <- apply(tab, 1, sum)
+    r.effectifs <- apply(tab, 2, sum)
   }
-  tmp <- tab/sum(tab)*100
+  tmp <- tab / sum(tab) * 100
   if (total) {
-    tmp <- rbind(tmp,Total=apply(tmp,2,sum))
-    tmp <- cbind(tmp,Total=apply(tmp,1,sum))
+    tmp <- rbind(tmp, Total = apply(tmp, 2, sum))
+    tmp <- cbind(tmp, Total = apply(tmp, 1, sum))
   }
   if (n) {
     ntot <- sum(tab)
     if (total) {
-      l.effectifs <- c(l.effectifs,ntot)
-      r.effectifs <- c(r.effectifs,ntot)
+      l.effectifs <- c(l.effectifs, ntot)
+      r.effectifs <- c(r.effectifs, ntot)
     }
-    tmp <- cbind(tmp, n=l.effectifs)
-    tmp <- rbind(tmp, n=c(r.effectifs,ntot))
+    tmp <- cbind(tmp, n = l.effectifs)
+    tmp <- rbind(tmp, n = c(r.effectifs, ntot))
   }
   result <- as.table(tmp)
   names(dimnames(result)) <- dn
@@ -532,28 +532,26 @@ prop.tabyl <- function(tab, digits = 1, total = TRUE, percent = FALSE, n = FALSE
 #' @examples
 #' ## Sample table
 #' data(Titanic)
-#' tab <- apply(Titanic, c(1,4), sum)
+#' tab <- apply(Titanic, c(1, 4), sum)
 #' ## Pearson residuals
 #' chisq.residuals(tab)
 #' ## Standardized residuals
 #' chisq.residuals(tab, std = TRUE)
 #' ## Raw residuals
 #' chisq.residuals(tab, raw = TRUE)
-
-chisq.residuals <- function (tab, digits = 2, std = FALSE, raw = FALSE) {
-  if(all(std, raw))
+chisq.residuals <- function(tab, digits = 2, std = FALSE, raw = FALSE) {
+  if (all(std, raw)) {
     stop("Choose between standardized and raw residuals.")
+  }
 
-  k = stats::chisq.test(tab)
+  k <- stats::chisq.test(tab)
   if (raw) {
     # raw residuals
     res <- k$observed - k$expected
-  }
-  else if (std) {
+  } else if (std) {
     # standardized residuals
     res <- k$stdres
-  }
-  else {
+  } else {
     # Pearson residuals
     res <- k$residuals
   }
@@ -576,14 +574,17 @@ residus <- chisq.residuals
 #' \code{\link{format.default}}, \code{\link[questionr]{print.proptab}}
 #' @export
 
-format.proptab <- function (x, digits=NULL, percent=NULL, justify="right", ...) {
+format.proptab <- function(x, digits = NULL, percent = NULL, justify = "right", ...) {
   if (!inherits(x, "proptab")) stop("x must be of class 'proptab'")
   if (is.null(digits)) digits <- attr(x, "digits")
   if (is.null(percent)) percent <- attr(x, "percent")
-  total <- attr(x, "total"); if (is.null(total)) total <- FALSE
-  row.n <- attr(x, "row.n"); if (is.null(row.n)) row.n <- FALSE
-  col.n <- attr(x, "col.n"); if (is.null(col.n)) col.n <- FALSE
-  tmp <- format.default(round(x,0), ...)
+  total <- attr(x, "total")
+  if (is.null(total)) total <- FALSE
+  row.n <- attr(x, "row.n")
+  if (is.null(row.n)) row.n <- FALSE
+  col.n <- attr(x, "col.n")
+  if (is.null(col.n)) col.n <- FALSE
+  tmp <- format.default(round(x, 0), ...)
   if (row.n) {
     posr <- dim(x)[1] * 1:(length(x) / dim(x)[1]) # positions of the n for rows
     rn <- tmp[posr]
@@ -596,12 +597,12 @@ format.proptab <- function (x, digits=NULL, percent=NULL, justify="right", ...) 
     cn <- tmp[posc]
   }
   if (percent) {
-    fmt <- paste("%.",digits,"f%%",sep="")
-    x[] <- sprintf(x, fmt=fmt)
-    result <- format.default(x,justify=justify, ...)
+    fmt <- paste("%.", digits, "f%%", sep = "")
+    x[] <- sprintf(x, fmt = fmt)
+    result <- format.default(x, justify = justify, ...)
+  } else {
+    result <- format.default(round(x, digits), ...)
   }
-  else
-    result <- format.default(round(x,digits), ...)
   if (row.n) result[posr] <- rn
   if (col.n) result[posc] <- cn
   if (total && row.n && col.n) result[intersect(posc, posr)] <- ""
@@ -621,9 +622,9 @@ format.proptab <- function (x, digits=NULL, percent=NULL, justify="right", ...) 
 #' \code{\link[questionr]{format.proptab}}
 #' @export
 
-print.proptab <- function (x, digits=NULL, percent=NULL, justify="right", ...) {
+print.proptab <- function(x, digits = NULL, percent = NULL, justify = "right", ...) {
   if (!inherits(x, "proptab")) stop("x must be of class 'proptab'")
-  x <- format.proptab(x, digits=digits, percent=percent, justify=justify)
+  x <- format.proptab(x, digits = digits, percent = percent, justify = justify)
   print.table(x, ...)
 }
 
@@ -644,36 +645,40 @@ print.proptab <- function (x, digits=NULL, percent=NULL, justify="right", ...) {
 #' @examples
 #' data(fecondite)
 #' ltabs(~radio, femmes)
-#' ltabs(~radio+tv, femmes)
-#' ltabs(~radio+tv, femmes, "l")
-#' ltabs(~radio+tv, femmes, "v")
-#' ltabs(~radio+tv+journal, femmes)
-#' ltabs(~radio+tv, femmes, variable_label = FALSE)
+#' ltabs(~ radio + tv, femmes)
+#' ltabs(~ radio + tv, femmes, "l")
+#' ltabs(~ radio + tv, femmes, "v")
+#' ltabs(~ radio + tv + journal, femmes)
+#' ltabs(~ radio + tv, femmes, variable_label = FALSE)
 #' @export
 #' @importFrom stats as.formula
 #' @importFrom stats terms
 #' @importFrom stats xtabs
 
-ltabs <- function(formula, data, levels = c("prefixed", "labels", "values"), variable_label = TRUE, ...){
-    levels <- match.arg(levels)
-    formula <- stats::as.formula(formula)
-    if (!is.data.frame(data))
-      data <- as.data.frame(data)
-
-    vars <- attr(stats::terms(formula), "term.labels")
-
-    dn <- vars
-    for (i in 1:length(vars))
-      if (!is.null(labelled::var_label(data[[vars[i]]])) & variable_label)
-        dn[i] <- paste(vars[i], labelled::var_label(data[[vars[i]]]), sep = ": ")
-
-    for (v in vars)
-      data[[v]] <- labelled::to_factor(data[[v]], levels = levels)
-
-    tab <- stats::xtabs(formula, data, ...)
-    names(dimnames(tab)) <- dn
-    return(tab)
+ltabs <- function(formula, data, levels = c("prefixed", "labels", "values"), variable_label = TRUE, ...) {
+  levels <- match.arg(levels)
+  formula <- stats::as.formula(formula)
+  if (!is.data.frame(data)) {
+    data <- as.data.frame(data)
   }
+
+  vars <- attr(stats::terms(formula), "term.labels")
+
+  dn <- vars
+  for (i in seq_along(vars)) {
+    if (!is.null(labelled::var_label(data[[vars[i]]])) && variable_label) {
+      dn[i] <- paste(vars[i], labelled::var_label(data[[vars[i]]]), sep = ": ")
+    }
+  }
+
+  for (v in vars) {
+    data[[v]] <- labelled::to_factor(data[[v]], levels = levels)
+  }
+
+  tab <- stats::xtabs(formula, data, ...)
+  names(dimnames(tab)) <- dn
+  return(tab)
+}
 
 #' Frequency table of variables
 #'
@@ -698,43 +703,48 @@ ltabs <- function(formula, data, levels = c("prefixed", "labels", "values"), var
 #' data(hdv2003)
 #' freqtable(hdv2003, nivetud, sport)
 #' freqtable(hdv2003, nivetud, sport, sexe)
-#' freqtable(hdv2003, nivetud, sport, weights=poids)
+#' freqtable(hdv2003, nivetud, sport, weights = poids)
 #' freqtable(hdv2003, starts_with("trav"))
 #'
 #' # Using survey design objects
 #' library(survey)
-#' hdv2003_wtd <- svydesign(ids=~1, weights=~poids, data=hdv2003)
+#' hdv2003_wtd <- svydesign(ids = ~1, weights = ~poids, data = hdv2003)
 #' freqtable(hdv2003_wtd, nivetud, sport)
 #'
 #' # Compute percentages based on frequencies
-#' hdv2003 |> freqtable(sport) |> freq()
-#' hdv2003 |> freqtable(sport, sexe) |> prop()
-#' hdv2003 |> freqtable(sport, sexe) |> cprop()
+#' hdv2003 |>
+#'   freqtable(sport) |>
+#'   freq()
+#' hdv2003 |>
+#'   freqtable(sport, sexe) |>
+#'   prop()
+#' hdv2003 |>
+#'   freqtable(sport, sexe) |>
+#'   cprop()
 #' @export
 
 freqtable <-
-    function(.data, ...) {
-        UseMethod("freqtable")
-    }
+  function(.data, ...) {
+    UseMethod("freqtable")
+  }
 
 #' @rdname freqtable
 #' @export
 freqtable.default <- function(.data, ..., na.rm = FALSE, weights = NULL) {
-    d <- .data |> dplyr::select(..., .weights = {{ weights }})
-    if (!".weights" %in% colnames(d)) d$.weights <- 1L
-    xtabs(.weights ~ ., data = d, addNA = !na.rm)
+  d <- .data |> dplyr::select(..., .weights = {{ weights }})
+  if (!".weights" %in% colnames(d)) d$.weights <- 1L
+  xtabs(.weights ~ ., data = d, addNA = !na.rm)
 }
 
 #' @rdname freqtable
 #' @export
 freqtable.survey.design <- function(.data, ..., na.rm = FALSE, weights = TRUE) {
-    newdata <- .data$variables
-    if(isTRUE(weights)) {
-        newdata$.weights <- weights(.data)
-        wtsvar <- ".weights"
-    }
-    else {
-        wtsvar <- NULL
-    }
-    freqtable(newdata, ..., na.rm = na.rm, weights = {{ wtsvar }})
+  newdata <- .data$variables
+  if (isTRUE(weights)) {
+    newdata$.weights <- weights(.data)
+    wtsvar <- ".weights"
+  } else {
+    wtsvar <- NULL
+  }
+  freqtable(newdata, ..., na.rm = na.rm, weights = {{ wtsvar }})
 }
