@@ -67,6 +67,7 @@ test_that("cprop results are correct", {
   expect_equal(colnames(ctab), c(levels(hdv2003$clso), gettext("All", domain = "R-questionr")))
   expect_equal(rownames(ctab), c(levels(hdv2003$qualif), NA, gettext("Total", domain = "R-questionr"), "n"))
   m <- base::prop.table(etab, 2) * 100
+  class(m) <- c("proptab", class(m))
   expect_equal(ctab[seq_len(nrow(m)), seq_len(ncol(m))], m)
   margin <- margin.table(etab, 1)
   margin <- as.numeric(round(margin / sum(margin) * 100, 2))
@@ -82,6 +83,7 @@ test_that("lprop results are correct", {
   expect_equal(colnames(ltab), c(levels(hdv2003$clso), gettext("Total", domain = "R-questionr"), "n"))
   expect_equal(rownames(ltab), c(levels(hdv2003$qualif), NA, gettext("All", domain = "R-questionr")))
   m <- base::prop.table(etab, 1) * 100
+  class(m) <- c("proptab", class(m))
   expect_equal(ltab[seq_len(nrow(m)), seq_len(ncol(m))], m)
   margin <- margin.table(etab, 2)
   margin <- as.numeric(round(margin / sum(margin) * 100, 2))
