@@ -48,7 +48,7 @@ Generate and format frequency tables from a variable or a table, with percentage
 data(hdv2003)
 freq(hdv2003$qualif)
 freq(hdv2003$qualif, cum = TRUE, total = TRUE)
-freq(hdv2003$qualif, cum = TRUE, total = TRUE, sort ="dec")
+freq(hdv2003$qualif, cum = TRUE, total = TRUE, sort = "dec")
 
 # labelled data
 data(fecondite)

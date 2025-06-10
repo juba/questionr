@@ -49,7 +49,7 @@ kable(), which is found in library(knitr), is recommended for use with RMarkdown
 tabs calls wtd.table on `\code{x}` and, as applicable, each variable named by `\code{y}`.
 }
 \examples{
-data(hdv2003) 
+data(hdv2003)
 tabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), weight = "poids")
 result <- tabs(hdv2003, x = "relig", y = c("qualif", "trav.imp"), type = "counts")
 format(result, digits = 3)

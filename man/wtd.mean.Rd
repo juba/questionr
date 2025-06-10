@@ -15,7 +15,7 @@ wtd.mean(x, weights = NULL, na.rm = TRUE)
 \item{na.rm}{if \code{TRUE}, delete \code{NA} values.}
 }
 \description{
-Compute the weighted mean or weighted variance of a vector. Exact copies of Hmisc 
+Compute the weighted mean or weighted variance of a vector. Exact copies of Hmisc
 functions.
 }
 \details{
@@ -31,7 +31,7 @@ wtd.mean(hdv2003$age, weights=hdv2003$poids)
 }
 \author{
 These functions are exact copies of the \code{wtd.mean} and \code{wtd.var}
-function from the \link[Hmisc]{wtd.stats} package. They have been created by 
-Frank Harrell, Department of Biostatistics, Vanderbilt University School of 
+function from the \link[Hmisc]{wtd.stats} package. They have been created by
+Frank Harrell, Department of Biostatistics, Vanderbilt University School of
 Medicine, <f.harrell@vanderbilt.edu>.
 }

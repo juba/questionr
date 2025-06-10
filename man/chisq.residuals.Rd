@@ -26,7 +26,7 @@ for details on the computation.
 \examples{
 ## Sample table
 data(Titanic)
-tab <- apply(Titanic, c(1,4), sum)
+tab <- apply(Titanic, c(1, 4), sum)
 ## Pearson residuals
 chisq.residuals(tab)
 ## Standardized residuals

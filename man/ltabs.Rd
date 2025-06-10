@@ -31,11 +31,11 @@ value labels for labelled vectors if \pkg{labelled} package eis installed.
 \examples{
 data(fecondite)
 ltabs(~radio, femmes)
-ltabs(~radio+tv, femmes)
-ltabs(~radio+tv, femmes, "l")
-ltabs(~radio+tv, femmes, "v")
-ltabs(~radio+tv+journal, femmes)
-ltabs(~radio+tv, femmes, variable_label = FALSE)
+ltabs(~ radio + tv, femmes)
+ltabs(~ radio + tv, femmes, "l")
+ltabs(~ radio + tv, femmes, "v")
+ltabs(~ radio + tv + journal, femmes)
+ltabs(~ radio + tv, femmes, variable_label = FALSE)
 }
 \seealso{
 \code{\link[stats]{xtabs}}.

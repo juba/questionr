@@ -44,19 +44,19 @@ of \code{x}. Otherwise, returns a weighted two-way frequency table of
 Generate weighted frequency tables, both for one-way and two-way tables.
 }
 \details{
-If \code{weights} is not provided, an uniform weghting is used. 
+If \code{weights} is not provided, an uniform weghting is used.
 
-If some weights are missing (`NA`), they are converted to zero. In case of missing weights 
-with `normwt=TRUE`, the observations with missing weights are still counted in the unweighted 
-count. You have to filter them out before using this function if you don't want them to be 
+If some weights are missing (`NA`), they are converted to zero. In case of missing weights
+with `normwt=TRUE`, the observations with missing weights are still counted in the unweighted
+count. You have to filter them out before using this function if you don't want them to be
 taken into account when using `normwt`.
 }
 \examples{
 data(hdv2003)
-wtd.table(hdv2003$sexe, weights=hdv2003$poids)
-wtd.table(hdv2003$sexe, weights=hdv2003$poids, normwt=TRUE)
+wtd.table(hdv2003$sexe, weights = hdv2003$poids)
+wtd.table(hdv2003$sexe, weights = hdv2003$poids, normwt = TRUE)
 table(hdv2003$sexe, hdv2003$hard.rock)
-wtd.table(hdv2003$sexe, hdv2003$hard.rock, weights=hdv2003$poids)
+wtd.table(hdv2003$sexe, hdv2003$hard.rock, weights = hdv2003$poids)
 }
 \seealso{
 \code{\link[Hmisc]{wtd.table}}, \command{\link{table}}, and the \code{survey} package.

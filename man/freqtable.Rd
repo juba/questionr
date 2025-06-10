@@ -37,18 +37,24 @@ or a survey design.
 data(hdv2003)
 freqtable(hdv2003, nivetud, sport)
 freqtable(hdv2003, nivetud, sport, sexe)
-freqtable(hdv2003, nivetud, sport, weights=poids)
+freqtable(hdv2003, nivetud, sport, weights = poids)
 freqtable(hdv2003, starts_with("trav"))
 
 # Using survey design objects
 library(survey)
-hdv2003_wtd <- svydesign(ids=~1, weights=~poids, data=hdv2003)
+hdv2003_wtd <- svydesign(ids = ~1, weights = ~poids, data = hdv2003)
 freqtable(hdv2003_wtd, nivetud, sport)
 
 # Compute percentages based on frequencies
-hdv2003 |> freqtable(sport) |> freq()
-hdv2003 |> freqtable(sport, sexe) |> prop()
-hdv2003 |> freqtable(sport, sexe) |> cprop()
+hdv2003 |>
+  freqtable(sport) |>
+  freq()
+hdv2003 |>
+  freqtable(sport, sexe) |>
+  prop()
+hdv2003 |>
+  freqtable(sport, sexe) |>
+  cprop()
 }
 \seealso{
 \code{\link{freq}}, \code{\link{wtd.table}},

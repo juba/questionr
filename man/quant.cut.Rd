@@ -32,7 +32,7 @@ functions.
 }
 \examples{
 data(iris)
-sepal.width3cl <- quant.cut(iris$Sepal.Width,3)
+sepal.width3cl <- quant.cut(iris$Sepal.Width, 3)
 table(sepal.width3cl)
 }
 \seealso{

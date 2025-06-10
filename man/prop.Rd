@@ -66,11 +66,11 @@ Return the percentages of a cross-tabulation table (2 dimensions or more) with f
 \examples{
 ## Sample table
 data(Titanic)
-tab <- apply(Titanic, c(1,4), sum)
+tab <- apply(Titanic, c(1, 4), sum)
 ## Percentages
 prop(tab)
 ## Percentages with custom display
-prop(tab, digits=2, percent=TRUE, total=FALSE, n=TRUE)
+prop(tab, digits = 2, percent = TRUE, total = FALSE, n = TRUE)
 ## Could be applied to a table of 3 dimensions or more
 prop(Titanic)
 }

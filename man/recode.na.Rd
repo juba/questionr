@@ -27,11 +27,11 @@ variable by matching its levels to exact or regular expression matches.
 \examples{
 data(hdv2003)
 ## With exact string matches.
-hdv2003$nivetud = recode.na(hdv2003$nivetud, "Inconnu")
+hdv2003$nivetud <- recode.na(hdv2003$nivetud, "Inconnu")
 ## With regular expressions.
-hdv2003$relig = recode.na(hdv2003$relig, "[A|a]ppartenance", "Rejet|NSP")
-## Showing missing values. 
-hdv2003$clso = recode.na(hdv2003$clso, "Ne sait pas", verbose = TRUE)
+hdv2003$relig <- recode.na(hdv2003$relig, "[A|a]ppartenance", "Rejet|NSP")
+## Showing missing values.
+hdv2003$clso <- recode.na(hdv2003$clso, "Ne sait pas", verbose = TRUE)
 ## Test results with freq.
 freq(recode.na(hdv2003$trav.satisf, "Equilibre"))
 ## Truncate a count variable (recommends numeric conversion).
