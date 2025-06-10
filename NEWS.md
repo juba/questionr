@@ -1,4 +1,4 @@
-# questionr (development version)
+# questionr 0.8.1
 
 - Fix failing tests in R-devel due to table subset class attribution modifications
 
