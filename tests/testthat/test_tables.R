@@ -67,8 +67,11 @@ test_that("cprop results are correct", {
   expect_equal(colnames(ctab), c(levels(hdv2003$clso), gettext("All", domain = "R-questionr")))
   expect_equal(rownames(ctab), c(levels(hdv2003$qualif), NA, gettext("Total", domain = "R-questionr"), "n"))
   m <- base::prop.table(etab, 2) * 100
-  class(m) <- c("proptab", class(m))
-  expect_equal(ctab[seq_len(nrow(m)), seq_len(ncol(m))], m)
+  comp_tab <- ctab[seq_len(nrow(m)), seq_len(ncol(m))]
+  # Manually set classes to fix failing tests during 4.5.0 -> 4.6.0
+  class(m) <- c("proptab", "table")
+  class(comp_tab) <- c("proptab", "table")
+  expect_equal(comp_tab, m)
   margin <- margin.table(etab, 1)
   margin <- as.numeric(round(margin / sum(margin) * 100, 2))
   expect_equal(unname(ctab[seq_len(length(margin)), gettext("All", domain = "R-questionr")]), margin)
@@ -83,8 +86,11 @@ test_that("lprop results are correct", {
   expect_equal(colnames(ltab), c(levels(hdv2003$clso), gettext("Total", domain = "R-questionr"), "n"))
   expect_equal(rownames(ltab), c(levels(hdv2003$qualif), NA, gettext("All", domain = "R-questionr")))
   m <- base::prop.table(etab, 1) * 100
-  class(m) <- c("proptab", class(m))
-  expect_equal(ltab[seq_len(nrow(m)), seq_len(ncol(m))], m)
+  comp_tab <- ltab[seq_len(nrow(m)), seq_len(ncol(m))]
+  # Manually set classes to fix failing tests during 4.5.0 -> 4.6.0
+  class(m) <- c("proptab", "table")
+  class(comp_tab) <- c("proptab", "table")
+  expect_equal(comp_tab, m)
   margin <- margin.table(etab, 2)
   margin <- as.numeric(round(margin / sum(margin) * 100, 2))
   expect_equal(unname(ltab[gettext("All", domain = "R-questionr"), seq_len(length(margin))]), margin)
@@ -134,65 +140,81 @@ test_that("prop, cprop and lprop tabyl versions are correct", {
 })
 
 test_that("freqtable results are correct", {
-    skip_if_not_installed("dplyr")
-    data(hdv2003)
-    expect_error(freqtable(hdv2003))
-    expect_error(freqtable(hdv2003, weights = poids))
-    expect_equal(freqtable(hdv2003, nivetud),
-                 xtabs(~ nivetud, hdv2003, addNA = TRUE),
-                 check.attributes = FALSE)
-    expect_equal(freqtable(hdv2003, nivetud, sport),
-                 xtabs(~ nivetud + sport, hdv2003, addNA = TRUE),
-                 check.attributes = FALSE)
-    expect_equal(freqtable(hdv2003, starts_with("niv")),
-                 xtabs(~ nivetud, hdv2003, addNA = TRUE),
-                 check.attributes = FALSE)
+  skip_if_not_installed("dplyr")
+  data(hdv2003)
+  expect_error(freqtable(hdv2003))
+  expect_error(freqtable(hdv2003, weights = poids))
+  expect_equal(freqtable(hdv2003, nivetud),
+    xtabs(~nivetud, hdv2003, addNA = TRUE),
+    check.attributes = FALSE
+  )
+  expect_equal(freqtable(hdv2003, nivetud, sport),
+    xtabs(~ nivetud + sport, hdv2003, addNA = TRUE),
+    check.attributes = FALSE
+  )
+  expect_equal(freqtable(hdv2003, starts_with("niv")),
+    xtabs(~nivetud, hdv2003, addNA = TRUE),
+    check.attributes = FALSE
+  )
 
-    expect_equal(freqtable(hdv2003, nivetud, na.rm = FALSE),
-                 xtabs(~ nivetud, hdv2003, addNA = TRUE),
-                 check.attributes = FALSE)
-    expect_equal(freqtable(hdv2003, nivetud, na.rm = TRUE),
-                 xtabs(~ nivetud, hdv2003),
-                 check.attributes = FALSE)
+  expect_equal(freqtable(hdv2003, nivetud, na.rm = FALSE),
+    xtabs(~nivetud, hdv2003, addNA = TRUE),
+    check.attributes = FALSE
+  )
+  expect_equal(freqtable(hdv2003, nivetud, na.rm = TRUE),
+    xtabs(~nivetud, hdv2003),
+    check.attributes = FALSE
+  )
 
-    expect_equal(freqtable(hdv2003, nivetud, weights = poids),
-                 xtabs(poids ~ nivetud, hdv2003, addNA = TRUE),
-                 check.attributes = FALSE)
-    expect_equal(freqtable(hdv2003, nivetud, sport, weights = poids),
-                 xtabs(poids ~ nivetud + sport, hdv2003, addNA = TRUE),
-                 check.attributes = FALSE)
-    expect_equal(freqtable(hdv2003, starts_with("niv"), weights = ends_with("oids")),
-                 xtabs(poids ~ nivetud, hdv2003, addNA = TRUE),
-                 check.attributes = FALSE)
+  expect_equal(freqtable(hdv2003, nivetud, weights = poids),
+    xtabs(poids ~ nivetud, hdv2003, addNA = TRUE),
+    check.attributes = FALSE
+  )
+  expect_equal(freqtable(hdv2003, nivetud, sport, weights = poids),
+    xtabs(poids ~ nivetud + sport, hdv2003, addNA = TRUE),
+    check.attributes = FALSE
+  )
+  expect_equal(freqtable(hdv2003, starts_with("niv"), weights = ends_with("oids")),
+    xtabs(poids ~ nivetud, hdv2003, addNA = TRUE),
+    check.attributes = FALSE
+  )
 
-    skip_if_not_installed("survey")
-    library(survey)
-    hdv2003_wtd <- svydesign(ids = ~ 1, weights = ~ poids, data = hdv2003)
-    expect_equal(freqtable(hdv2003_wtd, nivetud),
-                 xtabs(poids ~ nivetud, hdv2003, addNA = TRUE),
-                 check.attributes = FALSE)
-    expect_equal(freqtable(hdv2003_wtd, nivetud, sport),
-                 xtabs(poids ~ nivetud + sport, hdv2003, addNA = TRUE),
-                 check.attributes = FALSE)
-    expect_equal(freqtable(hdv2003_wtd, nivetud, sport),
-                 xtabs(poids ~ nivetud + sport, hdv2003, addNA = TRUE),
-                 check.attributes = FALSE)
-    expect_equal(freqtable(hdv2003_wtd, nivetud, weights = TRUE),
-                 xtabs(poids ~ nivetud, hdv2003, addNA = TRUE),
-                 check.attributes = FALSE)
-    expect_equal(freqtable(hdv2003_wtd, nivetud, weights = FALSE),
-                 xtabs(~ nivetud, hdv2003, addNA = TRUE),
-                 check.attributes = FALSE)
-    expect_equal(freqtable(hdv2003_wtd, nivetud, weights = NULL),
-                 xtabs(~ nivetud, hdv2003, addNA = TRUE),
-                 check.attributes = FALSE)
-    expect_equal(freqtable(hdv2003_wtd, nivetud, weights = NULL, na.rm = FALSE),
-                 xtabs(~ nivetud, hdv2003, addNA = TRUE),
-                 check.attributes = FALSE)
-    expect_equal(freqtable(hdv2003_wtd, nivetud, weights = NULL, na.rm = TRUE),
-                 xtabs(~ nivetud, hdv2003),
-                 check.attributes = FALSE)
-    expect_error(freqtable(hdv2003_wtd, nivetud, weights = age))
+  skip_if_not_installed("survey")
+  library(survey)
+  hdv2003_wtd <- svydesign(ids = ~1, weights = ~poids, data = hdv2003)
+  expect_equal(freqtable(hdv2003_wtd, nivetud),
+    xtabs(poids ~ nivetud, hdv2003, addNA = TRUE),
+    check.attributes = FALSE
+  )
+  expect_equal(freqtable(hdv2003_wtd, nivetud, sport),
+    xtabs(poids ~ nivetud + sport, hdv2003, addNA = TRUE),
+    check.attributes = FALSE
+  )
+  expect_equal(freqtable(hdv2003_wtd, nivetud, sport),
+    xtabs(poids ~ nivetud + sport, hdv2003, addNA = TRUE),
+    check.attributes = FALSE
+  )
+  expect_equal(freqtable(hdv2003_wtd, nivetud, weights = TRUE),
+    xtabs(poids ~ nivetud, hdv2003, addNA = TRUE),
+    check.attributes = FALSE
+  )
+  expect_equal(freqtable(hdv2003_wtd, nivetud, weights = FALSE),
+    xtabs(~nivetud, hdv2003, addNA = TRUE),
+    check.attributes = FALSE
+  )
+  expect_equal(freqtable(hdv2003_wtd, nivetud, weights = NULL),
+    xtabs(~nivetud, hdv2003, addNA = TRUE),
+    check.attributes = FALSE
+  )
+  expect_equal(freqtable(hdv2003_wtd, nivetud, weights = NULL, na.rm = FALSE),
+    xtabs(~nivetud, hdv2003, addNA = TRUE),
+    check.attributes = FALSE
+  )
+  expect_equal(freqtable(hdv2003_wtd, nivetud, weights = NULL, na.rm = TRUE),
+    xtabs(~nivetud, hdv2003),
+    check.attributes = FALSE
+  )
+  expect_error(freqtable(hdv2003_wtd, nivetud, weights = age))
 })
 
 test_that("cprop, rprop and prop works with table of 3+ dimensions", {
@@ -230,4 +252,3 @@ test_that("cprop, rprop and prop works with table of 3+ dimensions", {
     prop(Titanic, total = FALSE, n = TRUE, digits = 2, percent = TRUE)
   )
 })
-
