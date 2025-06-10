@@ -111,22 +111,22 @@ value labels for labelled vectors if <span class="pkg">labelled</span> package e
 <span class="r-out co"><span class="r-pr">#&gt;</span> radio: Ecoute la radio ?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [0] non [1] oui </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    1085     915 </span>
-<span class="r-in"><span><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span><span class="va">radio</span><span class="op">+</span><span class="va">tv</span>, <span class="va">femmes</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span> <span class="va">radio</span> <span class="op">+</span> <span class="va">tv</span>, <span class="va">femmes</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         tv: Regarde la télévision ?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> radio: Ecoute la radio ? [0] non [1] oui</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  [0] non     593     492</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  [1] oui     168     747</span>
-<span class="r-in"><span><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span><span class="va">radio</span><span class="op">+</span><span class="va">tv</span>, <span class="va">femmes</span>, <span class="st">"l"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span> <span class="va">radio</span> <span class="op">+</span> <span class="va">tv</span>, <span class="va">femmes</span>, <span class="st">"l"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         tv: Regarde la télévision ?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> radio: Ecoute la radio ? non oui</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      non 593 492</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      oui 168 747</span>
-<span class="r-in"><span><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span><span class="va">radio</span><span class="op">+</span><span class="va">tv</span>, <span class="va">femmes</span>, <span class="st">"v"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span> <span class="va">radio</span> <span class="op">+</span> <span class="va">tv</span>, <span class="va">femmes</span>, <span class="st">"v"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         tv: Regarde la télévision ?</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> radio: Ecoute la radio ?   0   1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        0 593 492</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        1 168 747</span>
-<span class="r-in"><span><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span><span class="va">radio</span><span class="op">+</span><span class="va">tv</span><span class="op">+</span><span class="va">journal</span>, <span class="va">femmes</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span> <span class="va">radio</span> <span class="op">+</span> <span class="va">tv</span> <span class="op">+</span> <span class="va">journal</span>, <span class="va">femmes</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> , , journal: Lit la presse ? = [0] non</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         tv: Regarde la télévision ?</span>
@@ -141,7 +141,7 @@ value labels for labelled vectors if <span class="pkg">labelled</span> package e
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  [0] non       7      50</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  [1] oui       8     255</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span><span class="va">radio</span><span class="op">+</span><span class="va">tv</span>, <span class="va">femmes</span>, variable_label <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">ltabs</span><span class="op">(</span><span class="op">~</span> <span class="va">radio</span> <span class="op">+</span> <span class="va">tv</span>, <span class="va">femmes</span>, variable_label <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          tv</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> radio     [0] non [1] oui</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [0] non     593     492</span>

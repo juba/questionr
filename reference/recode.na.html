@@ -109,13 +109,13 @@ variable by matching its levels to exact or regular expression matches.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">hdv2003</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co">## With exact string matches.</span></span></span>
-<span class="r-in"><span><span class="va">hdv2003</span><span class="op">$</span><span class="va">nivetud</span> <span class="op">=</span> <span class="fu">recode.na</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">$</span><span class="va">nivetud</span>, <span class="st">"Inconnu"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">hdv2003</span><span class="op">$</span><span class="va">nivetud</span> <span class="op">&lt;-</span> <span class="fu">recode.na</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">$</span><span class="va">nivetud</span>, <span class="st">"Inconnu"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Recoded 0 values to NA.</span>
 <span class="r-in"><span><span class="co">## With regular expressions.</span></span></span>
-<span class="r-in"><span><span class="va">hdv2003</span><span class="op">$</span><span class="va">relig</span> <span class="op">=</span> <span class="fu">recode.na</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">$</span><span class="va">relig</span>, <span class="st">"[A|a]ppartenance"</span>, <span class="st">"Rejet|NSP"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">hdv2003</span><span class="op">$</span><span class="va">relig</span> <span class="op">&lt;-</span> <span class="fu">recode.na</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">$</span><span class="va">relig</span>, <span class="st">"[A|a]ppartenance"</span>, <span class="st">"Rejet|NSP"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Recoded 1292 values to NA.</span>
-<span class="r-in"><span><span class="co">## Showing missing values. </span></span></span>
-<span class="r-in"><span><span class="va">hdv2003</span><span class="op">$</span><span class="va">clso</span> <span class="op">=</span> <span class="fu">recode.na</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">$</span><span class="va">clso</span>, <span class="st">"Ne sait pas"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## Showing missing values.</span></span></span>
+<span class="r-in"><span><span class="va">hdv2003</span><span class="op">$</span><span class="va">clso</span> <span class="op">&lt;-</span> <span class="fu">recode.na</span><span class="op">(</span><span class="va">hdv2003</span><span class="op">$</span><span class="va">clso</span>, <span class="st">"Ne sait pas"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Recoded 27 values to NA.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              n</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Ne sait pas 27</span>
