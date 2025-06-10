@@ -15,3 +15,4 @@ resources
 ^revdep$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
+Dockerfile
