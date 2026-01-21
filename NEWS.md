@@ -1,4 +1,6 @@
-# questionr (development version)
+# questionr 0.8.2
+
+- Fix failing tests in R-devel due to change in NA naming in tables
 
 # questionr 0.8.1
 
